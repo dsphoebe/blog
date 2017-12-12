@@ -78,3 +78,6 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
+  repo: https://git.coding.net/dsphoebe/dsphoebe.git
+  branch: coding-pages
+  message: themes changed
