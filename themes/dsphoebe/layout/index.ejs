@@ -1,0 +1,24 @@
+<!doctype html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>dsphoebe的theme</title>
+  </head>
+  <body>
+    <section class="posts">
+  <% page.posts.each(function (post) { %>
+    <article class="post">
+      <div class="post-title">
+        <a class="post-title-link" href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </div>
+      <div class="post-meta">
+        <span class="post-time"><%- date(post.date, "YYYY-MM-DD") %></span>
+      </div>
+      <div class="post-content">
+        <%- post.content %>
+      </div>
+    </article>
+  <% }) %>
+  </section>
+  <%- partial('_partial/paginator') %>
+  </body>
+</html>

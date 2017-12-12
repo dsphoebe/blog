@@ -1,0 +1,29 @@
+<article class="post">
+  <div class="post-title">
+    <h2 class="title"><%= page.title %></h2>
+  </div>
+   <div class="post-meta">
+    <span class="post-time"><%- date(page.date, "YYYY-MM-DD") %></span>
+    <span class="post-tags">
+      <% if (post.tags && post.tags.length){ %>
+        <%- list_tags(post.tags, {
+          show_count: false,
+          class: 'article-tag'
+        }) %>
+      <% } %>
+    </span>
+    <% if (post.categories && post.categories.length){ %>
+      <div class="article-category">
+        <%- list_categories(post.categories, {
+          show_count: false,
+          class: 'article-category',
+          style: 'none',
+          separator: '►'
+        }) %>
+      </div>
+    <% } %>
+  </div>
+  <div class="post-content">
+    <%- page.content %>
+  </div>
+</article>
