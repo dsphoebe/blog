@@ -3,6 +3,7 @@ title: vue-build-when-file-didnot-update-to-git-server
 date: 2017-12-14 14:33:45
 tags: [vue, build, vscode, rsync]
 ---
+汗了，又无法重现了...
 遇到一个奇怪的问题
 为了方便开发
 我在本地开发vue时，用rsync一类的vscode插件同步代码到服务器了
