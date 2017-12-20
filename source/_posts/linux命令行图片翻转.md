@@ -10,6 +10,16 @@ tags: [linux, 图片, imagemagick]
 ImageMagick图片翻转
 convert example.jpg -rotate 90 example-rotated.jpg
 
+[Linux图片软件](https://linux.cn/article-21-1.html)安装了gpicview，这个软件应该是在Linux GUI里面用的。
+[移除 apt-get remove --purge gpicview](http://blog.csdn.net/get_set/article/details/51276609)
+
+最后居然还是ImageMagick
+
+安排ImageMagick问题：
+- display.im6: unable to open X server `' @ error/display.c/DisplayImageCommand/428. 没找到解决的办法
+
+
 相关文章：
 - [Linux下图像压缩、格式转换、缩放、旋转](http://blog.csdn.net/zrools/article/details/51347471)
 - [ImageMagick](https://www.imagemagick.org/script/index.php)
+- [How can I open an image file from the Linux terminal?](https://www.computerhope.com/issues/ch001720.htm)
