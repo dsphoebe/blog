@@ -18,6 +18,9 @@ convert example.jpg -rotate 90 example-rotated.jpg
 安排ImageMagick问题：
 - display.im6: unable to open X server `' @ error/display.c/DisplayImageCommand/428. 没找到解决的办法
 
+转移另一个方案：
+虽然图片翻转了，可是hexo里面的图片样式的设置也是个麻烦的事。iPhone直接rsync的图片也有点大了，每次请求都好慢。（还是想再研究下ImageMagick的其他方法，也许能找到合适的。）
+转战本地修饰好了，改好宽高，压缩了大小，美化了照片再上传。
 
 相关文章：
 - [Linux下图像压缩、格式转换、缩放、旋转](http://blog.csdn.net/zrools/article/details/51347471)
