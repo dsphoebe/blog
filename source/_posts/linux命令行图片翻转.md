@@ -22,7 +22,11 @@ convert example.jpg -rotate 90 example-rotated.jpg
 虽然图片翻转了，可是hexo里面的图片样式的设置也是个麻烦的事。iPhone直接rsync的图片也有点大了，每次请求都好慢。（还是想再研究下ImageMagick的其他方法，也许能找到合适的。）
 转战本地修饰好了，改好宽高，压缩了大小，美化了照片再上传。
 
+2017-12-21 updated
+照片是在太大了，随便都是几兆。压缩下
+
 相关文章：
 - [Linux下图像压缩、格式转换、缩放、旋转](http://blog.csdn.net/zrools/article/details/51347471)
 - [ImageMagick](https://www.imagemagick.org/script/index.php)
 - [How can I open an image file from the Linux terminal?](https://www.computerhope.com/issues/ch001720.htm)
+- [mac 命令行批量处理照片](http://www.jianshu.com/p/05bdcbe320f6)
