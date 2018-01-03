@@ -12,3 +12,6 @@ date: 2018-01-02 15:49:05
     ```
     rsync -v --rsync-path="sudo rsync" file.conf aa:/etc/nginx/sites-available/
     ```
+
+### 相关链接
+- [Rsync中文手册](http://www.cnblogs.com/f-ck-need-u/p/7221713.html)

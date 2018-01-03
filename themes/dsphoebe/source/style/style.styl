@@ -1,9 +1,86 @@
-@import '_partial/reset'
-@import '_partial/layout'
-@import '_partial/header'
-@import '_partial/post'
-@import '_partial/archive'
+color=#569cd6
+
+body,
+p,
+h1,
+h2
+    margin: 0
+    padding: 0
+
+body
+    background: #252526
+    font-size: 1rem
+    line-height: 2
+    font-family: monospace
+    color: #fff
+
+a
+    text-decoration: none
+    color: color
+    &:hover
+        text-decoration: underline
 
 .header,
+.post-meta
+    ul,
+    li
+        list-style: none
+        padding: 0
+        margin: 0
+
+.header
+    h1
+        width: 1000px
+        margin: 3rem auto
+        text-align: center
+        color: color
+        font-weight: normal
+    
+.navbar
+    background: #2d2d2d
+    margin: 0 0 1rem
+    .menu
+        width: 1000px
+        margin: 0 auto
+        border-left: 1px solid #252525
+        
+    li
+        display: inline-block
+        padding: 0 2rem
+        border-right: 1px solid #252525
+        &, a
+            color: #999
+            
+
 .main
-    {wrap}
+    width: 1000px
+    margin: 0 auto 5rem
+
+    .post
+        margin: 0 0 3rem
+        padding: .5rem 2rem 2rem
+        background: #1e1e1e
+        color: #ccc
+    .post-meta
+        margin: 0 0 .5rem
+    .post-time
+        color: #555
+    .post-title
+        font-size: 1.25rem
+        a
+            color: inherit
+    .article-tag-list
+        display: inline-block
+    .article-tag-list-item
+        display: inline-block
+        padding: 0 .5rem 0 0
+
+footer
+    background: color
+    color: #fff
+    font-size: .25rem
+    p
+        width: 1000px
+        margin: 0 auto
+    a
+        color: #fff

@@ -3,6 +3,7 @@ title: 比较cookie，localStorage和sessionStorage
 date: 2017-12-17
 tags: [cookie, sessionStorage, localStroage]
 ---
+### 前言
 cookie, sessionStorage, localStroage都是存储在客户端本地机器上的数据。设置完后，可整站调用，是真正意义上的“全局变量”。
 
 ### cookie
@@ -35,7 +36,7 @@ sessionStorage，session这个词，大概就能知道它的时效性了。它�
 ##### sessionStorage场景？
 调查问卷
 
-相关文章
+### 相关文章
 - [HTTP cookies 详解](http://blog.csdn.net/lijing198997/article/details/9378047)
 - [Document.cookie](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie)
 - [详说 cookie, LocalStorage 与 SessionStorage](http://jerryzou.com/posts/cookie-and-web-storage/)
