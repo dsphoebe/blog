@@ -2,6 +2,8 @@
 title: Fabric使用
 tags:
   - Fabric
+  - Python
+  - 自动部署
 date: 2018-01-03 14:48:03
 ---
 

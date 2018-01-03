@@ -3,6 +3,7 @@ title: rsync同步
 tags:
   - rsync
   - 权限
+  - linux
 date: 2018-01-02 15:49:05
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Git笔记
 date: 2017-12-19 23:22:30
-tags: [Git]
+tags: [git]
 ---
 ### git commit时，文件名中文是乱码：
 git config --global core.quotepath false 
