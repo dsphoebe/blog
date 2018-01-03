@@ -9,20 +9,24 @@ date: 2018-01-03 14:48:03
 
 ### 安装
 pip install fabric
+
 ### Start
 - 新建fabfile.py
 touch fabfile.py
-def hello(name='world'):
-    print('Hello %s' % name)
+```python
+  def hello(name='world'):
+      print('Hello %s' % name)
+```
 - 执行fab
+```
 fab hello:dsphoebe
 out: Hello dsphoebe
 
      Done.
-
+```
 ### 总结
 - 完全python语法
-- 省了if __name__ == "__main__"
+- 省了```if __name__ == "__main__"```
 - local测试本地
 - settings修改env变量
 - 失败的处理
