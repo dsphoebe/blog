@@ -81,3 +81,11 @@ deploy:
   repo: https://git.coding.net/dsphoebe/dsphoebe.git
   branch: coding-pages
   message: themes changed
+
+plugins:
+  hexo-generator-robotstxt
+
+robotstxt:
+  user-agent: '*'
+  disallow: /
+
