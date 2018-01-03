@@ -1,5 +1,5 @@
 ---
-title: 没有提交git，vue无法打包成功。
+title: 没有提交git，vue无法打包成功。[无法重现]
 date: 2017-12-14 14:33:45
 tags: [vue, build, vscode, rsync]
 ---
