@@ -1,3 +1,7 @@
 menu:
   Home: /
   About: /about
+
+post_asset_folder: true
+
+favicon: /images/favico.png
