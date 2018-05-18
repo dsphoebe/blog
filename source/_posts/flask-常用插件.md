@@ -1,7 +1,9 @@
 ---
-title: flask常用插件
+title: flask 常用插件
 date: 2018-01-16 10:17:44
-tags: [python, flask]
+tags: 
+  - python
+  - flask
 ---
 - flask-cache
 - flask-login
