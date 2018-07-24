@@ -1,0 +1,66 @@
+<!Doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Mac 下安装 virtualenv | FE notebook.</title>
+  
+    <link rel="icon" href="/images/favico.png">
+  
+  <link rel="stylesheet" href="/style/style.css">
+</head>
+  <body>
+    <header class="header">
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">首页</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about" class="menu-item-link">👣</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <h1>a[herf=&#34;code.dsphoebe.com&#34;]{FE notebook}</h1>
+</header>
+    <main class="main">
+      <article class="post">
+  <div class="post-title">
+    <h2 class="title">Mac 下安装 virtualenv</h2>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2018-05-18</span>
+    <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualenv/">virtualenv</a></li></ul>
+      
+    </span>
+    
+  </div>
+  <div class="post-content">
+    <h3 id="第一步-pip-运行安装："><a href="#第一步-pip-运行安装：" class="headerlink" title="第一步 pip 运行安装："></a>第一步 pip 运行安装：</h3><p><code>sudo pip install virtualenv</code><br><code>sudo pip install virtualenvwrapper</code></p>
+<p>如果报错：<br>matplotlib 1.3.1 requires nose, which is not installed.<br>matplotlib 1.3.1 requires tornado, which is not installed.<br>如果不想安装 matplotlib，可以：<br><code>sudo -H pip install --ignore-install matplotlib virtualenv</code><br><code>sudo -H pip install --ignore-install matplotlib virtualenvwrapper</code></p>
+<h3 id="第二步-找到virtaulenvwrapper-sh的位置"><a href="#第二步-找到virtaulenvwrapper-sh的位置" class="headerlink" title="第二步 找到virtaulenvwrapper.sh的位置"></a>第二步 找到virtaulenvwrapper.sh的位置</h3><p><code>which virtualenvwrapper.sh</code></p>
+<h3 id="第三步-修改bash启动文件-bash-profile"><a href="#第三步-修改bash启动文件-bash-profile" class="headerlink" title="第三步 修改bash启动文件.bash_profile"></a>第三步 修改bash启动文件.bash_profile</h3><p>在.bash_profile的最后加入：<br><code>export WORKON_HOME=$HOME/.virtaulenvs
+source /user/local/bin/virtualenvwrapper.sh</code></p>
+<h3 id="题外："><a href="#题外：" class="headerlink" title="题外："></a>题外：</h3><p>如果bash安装了oh my zsh，把上面俩行代码写入到 .zshrc</p>
+<ul>
+<li>.bash_profile 是用户登录会被读的</li>
+<li>.bashrc 是用户不登录也会被读的</li>
+<li>.zshrc 是用户登录、不登录都会被读的</li>
+</ul>
+<h2 id="相关文字："><a href="#相关文字：" class="headerlink" title="相关文字："></a>相关文字：</h2><p><a href="https://www.binss.me/blog/install-virtualenv-and-virtualenvwrapper-on-mac/" target="_blank" rel="noopener">Mac 下安装 virtualenv</a><br><a href="https://ruby-china.org/topics/20381" target="_blank" rel="noopener">.bashrc、.bash_profile 和 .zshrc</a></p>
+
+  </div>
+</article>
+    </main>
+    <footer>
+    <p>&copy;2017-2018 <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a> <strong>dsphoebe.com</strong> |
+    Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!Doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>服务器迁移相关知识点 | FE notebook.</title>
+  
+    <link rel="icon" href="/images/favico.png">
+  
+  <link rel="stylesheet" href="/style/style.css">
+</head>
+  <body>
+    <header class="header">
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">首页</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about" class="menu-item-link">👣</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <h1>a[herf=&#34;code.dsphoebe.com&#34;]{FE notebook}</h1>
+</header>
+    <main class="main">
+      <article class="post">
+  <div class="post-title">
+    <h2 class="title">服务器迁移相关知识点</h2>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2018-01-10</span>
+    <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器迁移/">服务器迁移</a></li></ul>
+      
+    </span>
+    
+  </div>
+  <div class="post-content">
+    <h3 id="服务器进程"><a href="#服务器进程" class="headerlink" title="服务器进程"></a>服务器进程</h3><ul>
+<li>pstree<ul>
+<li>tmux</li>
+<li>crontab</li>
+<li>nginx</li>
+<li>supervisor</li>
+</ul>
+</li>
+</ul>
+<h3 id="rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path"><a href="#rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path" class="headerlink" title="rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/"></a>rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/</h3><h3 id="aws"><a href="#aws" class="headerlink" title="aws"></a>aws</h3><ul>
+<li>安全组 ssh登录22端口没开</li>
+<li>ssh -vvv ssh log</li>
+</ul>
+<h3 id="bash-read-file"><a href="#bash-read-file" class="headerlink" title="bash read file"></a>bash read file</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in `cat file.txt`</span><br><span class="line">  do</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>mysqldump databases a &gt; a.sql</li>
+<li>mysql &lt; a.sql</li>
+<li>mysqldump –all-database &gt; all.sql</li>
+</ul>
+
+  </div>
+</article>
+    </main>
+    <footer>
+    <p>&copy;2017-2018 <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a> <strong>dsphoebe.com</strong> |
+    Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+</footer>
+  </body>
+</html>

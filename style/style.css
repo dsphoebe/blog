@@ -1,0 +1,117 @@
+body,
+p,
+h1,
+h2,
+pre {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+}
+body {
+  background: #252526;
+  font-size: 1rem;
+  line-height: 2;
+  font-family: monospace;
+  color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #569cd6;
+}
+a:hover {
+  text-decoration: underline;
+}
+.header ul,
+.post-meta ul,
+.header li,
+.post-meta li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.header h1 {
+  width: 1000px;
+  margin: 3rem auto;
+  text-align: center;
+  color: #569cd6;
+  font-weight: normal;
+}
+.navbar {
+  background: #2d2d2d;
+  margin: 0 0 1rem;
+}
+.navbar .menu {
+  width: 1000px;
+  margin: 0 auto;
+  border-left: 1px solid #252525;
+}
+.navbar li {
+  display: inline-block;
+  padding: 0 2rem;
+  border-right: 1px solid #252525;
+}
+.navbar li,
+.navbar li a {
+  color: #999;
+}
+.main {
+  width: 1000px;
+  margin: 0 auto 5rem;
+  min-height: calc(100vh - 279px);
+}
+.main .post {
+  margin: 0 0 3rem;
+  padding: 0.5rem 2rem 2rem;
+  background: #1e1e1e;
+  color: #ccc;
+}
+.main .post-meta {
+  margin: 0 0 0.5rem;
+}
+.main .post-time {
+  color: #555;
+}
+.main .post-title {
+  font-size: 1.25rem;
+}
+.main .post-title a {
+  color: inherit;
+}
+.main .article-tag-list {
+  display: inline-block;
+}
+.main .article-tag-list-item {
+  display: inline-block;
+  padding: 0 0.5rem 0 0;
+}
+footer {
+  background: #569cd6;
+  color: #fff;
+  font-size: 0.25rem;
+}
+footer p {
+  width: 1000px;
+  margin: 0 auto;
+}
+footer a {
+  color: #fff;
+}
+code,
+.highlight table {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-width: 1px 0;
+}
+code {
+  padding: 0.5rem;
+}
+.highlight table .gutter {
+  background: rgba(255,255,255,0.3);
+  padding: 0 0.5rem;
+}
+.highlight table .code {
+  background: rgba(255,255,255,0.2);
+  padding: 0 0.5rem;
+}
