@@ -31,12 +31,16 @@ a:hover {
   padding: 0;
   margin: 0;
 }
-.header h1 {
+.header h1,
+.header h2 {
   width: 1000px;
   margin: 3rem auto;
   text-align: center;
   color: #569cd6;
   font-weight: normal;
+}
+.header h2 {
+  font-size: 0.5em;
 }
 .navbar {
   background: #2d2d2d;
