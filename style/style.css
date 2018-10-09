@@ -18,7 +18,7 @@ body {
 }
 a {
   text-decoration: none;
-  color: #569cd6;
+  color: #1e73cf;
 }
 a:hover {
   text-decoration: underline;
@@ -31,16 +31,12 @@ a:hover {
   padding: 0;
   margin: 0;
 }
-.header h1,
-.header h2 {
+.header h1 {
   width: 1000px;
   margin: 3rem auto;
   text-align: center;
-  color: #569cd6;
+  color: #1e73cf;
   font-weight: normal;
-}
-.header h2 {
-  font-size: 0.5em;
 }
 .navbar {
   background: #2d2d2d;
@@ -91,7 +87,7 @@ a:hover {
   padding: 0 0.5rem 0 0;
 }
 footer {
-  background: #569cd6;
+  background: #1e73cf;
   color: #fff;
   font-size: 0.25rem;
 }
