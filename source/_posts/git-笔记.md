@@ -1,5 +1,5 @@
 ---
-title: Git笔记
+title: Git 笔记
 date: 2017-12-19 23:22:30
 tags: [git]
 ---
