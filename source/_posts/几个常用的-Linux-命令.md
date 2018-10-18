@@ -1,7 +1,8 @@
 ---
-title: 几个常用的 Linux 命令
+title: 【入门系列】几个常用的 Linux 命令
 date: 2018-10-09 17:08:09
 tags: 
+  - Linux
   - ls
   - cat
   - mv
