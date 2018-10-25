@@ -24,9 +24,8 @@ th {
 }
 body {
   background: #252526;
-  line-height: 2;
-  font-weight: 100;
-  color: #fff;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
 }
 a {
   text-decoration: none;
@@ -79,6 +78,9 @@ a:hover {
   background: #1e1e1e;
   color: #ccc;
 }
+.main .post img {
+  margin: 1.5rem 0 1rem;
+}
 .main .post-meta {
   margin: 0 0 0.5rem;
 }
@@ -104,7 +106,7 @@ a:hover {
 }
 footer {
   background: #1e73cf;
-  color: #fff;
+  color: inherit;
   font-size: 0.25rem;
 }
 footer p {
@@ -112,7 +114,7 @@ footer p {
   margin: 0 auto;
 }
 footer a {
-  color: #fff;
+  color: inherit;
 }
 code,
 .highlight table {
@@ -130,4 +132,9 @@ code {
 .highlight table .code {
   background: rgba(255,255,255,0.2);
   padding: 0 0.5rem;
+}
+blockquote {
+  opacity: 0.5;
+  border-left: 3px solid rgba(255,255,255,0.5);
+  padding-left: 1.5rem;
 }
