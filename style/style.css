@@ -16,6 +16,7 @@ h3 {
 table {
   border-collapse: collapse;
   margin: 0.5rem 0;
+  width: 100%;
 }
 td,
 th {
@@ -79,7 +80,8 @@ a:hover {
   color: #ccc;
 }
 .main .post img {
-  margin: 1.5rem 0 1rem;
+  display: block;
+  margin: 1.5rem auto;
 }
 .main .post-meta {
   margin: 0 0 0.5rem;
@@ -126,11 +128,12 @@ code {
   padding: 0.5rem;
 }
 .highlight table .gutter {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.2);
   padding: 0 0.5rem;
+  width: 1.2rem;
 }
 .highlight table .code {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
   padding: 0 0.5rem;
 }
 blockquote {
