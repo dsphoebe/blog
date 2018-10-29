@@ -77,9 +77,13 @@ theme: dsphoebe
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+- type: git
   repo: https://git.coding.net/dsphoebe/dsphoebe.git
   branch: coding-pages
+  message: themes changed
+- type: git
+  repo: git@github.com:dsphoebe/blog.git
+  branch: master
   message: themes changed
 
 plugins:

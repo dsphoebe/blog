@@ -1,3 +1,4 @@
+
 color=#1e73cf
 
 body,
@@ -17,7 +18,11 @@ h3
 table
     border-collapse: collapse
     margin: .5rem 0
-    width: 100%;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    width: calc(100% - 2em - 40px)
 td, th
     border: 1px solid #363b40
     padding: .5rem 1rem
@@ -105,23 +110,25 @@ footer
     a
         color: inherit 
 
+figure
+    margin: 0
+
 code,
 .highlight table
-    background: rgba(255,255,255,.2)
-    border: 1px solid rgba(255,255,255,.4)
-    border-width: 1px 0
+    background: rgba(0,0,0,.3)
 code
     padding: .5rem
 .highlight table
     .gutter
-        background: rgba(255,255,255,.2)
         padding: 0 .5rem
         width: 1.2rem
     .code
-        background: rgba(255,255,255,.1)
         padding: 0 .5rem
 
 blockquote 
     opacity: .5
     border-left: 3px solid rgba(255,255,255,.5)
     padding-left: 1.5rem
+
+@import "_variables"
+@import "_highlight"
