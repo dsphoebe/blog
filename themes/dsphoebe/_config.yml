@@ -1,6 +1,7 @@
 menu:
   Home: /
   About: /about
+  Tools: /tools
 
 post_asset_folder: true
 
