@@ -43,7 +43,11 @@
   </div>
   <div class="post-content">
     <h2 id="哈希-Hash"><a href="#哈希-Hash" class="headerlink" title="哈希 Hash"></a>哈希 Hash</h2><p>Hash 就是 哈希。所有满足一个健（key）对应一个值（value）的形式的结构就是 hash，比如 HTTP 请求和 HTTP 响应的第二段。其实数组也是 hash，因为它也符合一个健一个值的定义。数组跟对象没有区别，数组就是对象。</p>
-<p>哈希的应用：计数排序，基数排序，桶排序。</p>
+<h3 id="哈希的应用"><a href="#哈希的应用" class="headerlink" title="哈希的应用"></a>哈希的应用</h3><ul>
+<li>计数排序</li>
+<li>基数排序</li>
+<li>桶排序</li>
+</ul>
 <h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>与之对应的比较排序，比较排序必须是两个数比较，它的过程中至少是遍历一次然后比较一次，最快的排序时间是 O(nlogn)。对应的排序快排，随机快排的时间复杂度就是 O(nlogn)。</p>
 <h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><ol>
 <li>把数组的值（假设数组项有 0）作为 hash 的 key，hash 的 value 记录每个值出现了多少次。</li>
