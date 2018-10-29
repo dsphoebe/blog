@@ -9,9 +9,13 @@ tags:
 
 CSS 全称 Cascading Style Sheets 层叠样式表，是一种样式表的语言，用来描述 HTML 或 XML 文档的呈现。CSS 描述了在屏幕、纸质、音频等媒体上的元素应该如何渲染。
 
+## 历史
 
+- 94 年由哈肯&middot;唯姆&middot;莱提出并展示
+- 95 年 W3C 组织 CSS 讨论会
+- 96 年 12 月哈肯&middot;唯姆&middot;莱与伯特&middot;波斯发布 CSS 规范第 1 版
 
-### 优势
+## 优势
 
 - 避免重复
 - 更容易维护
