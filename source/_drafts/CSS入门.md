@@ -1,6 +1,6 @@
 ---
 
-title: 【入门系列】CSS 入门
+title: CSS 入门
 tags: 
   - CSS
 ---

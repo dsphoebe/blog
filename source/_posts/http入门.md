@@ -1,6 +1,6 @@
 ---
 date: 2018-10-11
-title: 【入门系列】HTTP 入门
+title: HTTP 入门
 tags: 
   - HTTP
   - cURL
@@ -32,7 +32,7 @@ HTTP 全称 HyperText Transfer Protocol，中文超文本传输协议。超文�
 
 其中包含默认带的键值对： 
 
-- Host: [xxx.com](http://xxx.com) 是指请求的目的地 
+- Host: xxx.com 是指请求的目的地 
 - User-Agent: xxx 服务器端和客户端都能访问它，客户端是通过浏览器访问时，User-Agent 用于浏览器类型检测，它由客户端浏览器定义，并在每次请求中都自动发送 
 - Content-Type: xxx 描述了请求中的第四部分的格式 
 

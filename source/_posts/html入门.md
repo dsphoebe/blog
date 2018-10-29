@@ -1,6 +1,6 @@
 ---
 date: 2018-10-15
-title: 【入门系列】HTML 入门
+title: HTML 入门
 tags: 
   - W3C
   - HTML

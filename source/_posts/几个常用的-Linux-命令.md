@@ -1,5 +1,5 @@
 ---
-title: 【入门系列】几个常用的 Linux 命令
+title: Linux 命令：cat，ls，mv，touch
 date: 2018-10-09 17:08:09
 tags: 
   - Linux
