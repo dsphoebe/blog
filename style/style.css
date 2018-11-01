@@ -21,6 +21,7 @@ body {
   background: #252526;
   line-height: 1.8;
   color: rgba(255,255,255,0.9);
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
 }
 a {
   text-decoration: none;
