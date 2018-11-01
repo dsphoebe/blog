@@ -8,25 +8,31 @@ date: 2018-05-18 12:06:06
 
 ### 第一步 pip 运行安装：
 
-`sudo pip install virtualenv`
-`sudo pip install virtualenvwrapper`
+```
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+```
 
 如果报错：
 matplotlib 1.3.1 requires nose, which is not installed.
 matplotlib 1.3.1 requires tornado, which is not installed.
 如果不想安装 matplotlib，可以：
-`sudo -H pip install --ignore-install matplotlib virtualenv`
-`sudo -H pip install --ignore-install matplotlib virtualenvwrapper`
+```
+sudo -H pip install --ignore-install matplotlib virtualenv
+sudo -H pip install --ignore-install matplotlib virtualenvwrapper
+```
 
 ### 第二步 找到virtaulenvwrapper.sh的位置
-`which virtualenvwrapper.sh`
+```
+which virtualenvwrapper.sh
+```
 
 ### 第三步 修改bash启动文件.bash_profile
 在.bash_profile的最后加入：
-`
+```
 export WORKON_HOME=$HOME/.virtaulenvs
 source /user/local/bin/virtualenvwrapper.sh
-`
+```
 
 ### 题外：
 如果bash安装了oh my zsh，把上面俩行代码写入到 .zshrc
