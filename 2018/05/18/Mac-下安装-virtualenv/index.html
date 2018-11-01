@@ -49,11 +49,10 @@
     
   </div>
   <div class="post-content">
-    <h3 id="第一步-pip-运行安装："><a href="#第一步-pip-运行安装：" class="headerlink" title="第一步 pip 运行安装："></a>第一步 pip 运行安装：</h3><p><code>sudo pip install virtualenv</code><br><code>sudo pip install virtualenvwrapper</code></p>
-<p>如果报错：<br>matplotlib 1.3.1 requires nose, which is not installed.<br>matplotlib 1.3.1 requires tornado, which is not installed.<br>如果不想安装 matplotlib，可以：<br><code>sudo -H pip install --ignore-install matplotlib virtualenv</code><br><code>sudo -H pip install --ignore-install matplotlib virtualenvwrapper</code></p>
-<h3 id="第二步-找到virtaulenvwrapper-sh的位置"><a href="#第二步-找到virtaulenvwrapper-sh的位置" class="headerlink" title="第二步 找到virtaulenvwrapper.sh的位置"></a>第二步 找到virtaulenvwrapper.sh的位置</h3><p><code>which virtualenvwrapper.sh</code></p>
-<h3 id="第三步-修改bash启动文件-bash-profile"><a href="#第三步-修改bash启动文件-bash-profile" class="headerlink" title="第三步 修改bash启动文件.bash_profile"></a>第三步 修改bash启动文件.bash_profile</h3><p>在.bash_profile的最后加入：<br><code>export WORKON_HOME=$HOME/.virtaulenvs
-source /user/local/bin/virtualenvwrapper.sh</code></p>
+    <h3 id="第一步-pip-运行安装："><a href="#第一步-pip-运行安装：" class="headerlink" title="第一步 pip 运行安装："></a>第一步 pip 运行安装：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenv</span><br><span class="line">sudo pip install virtualenvwrapper</span><br></pre></td></tr></table></figure>
+<p>如果报错：<br>matplotlib 1.3.1 requires nose, which is not installed.<br>matplotlib 1.3.1 requires tornado, which is not installed.<br>如果不想安装 matplotlib，可以：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -H pip install --ignore-install matplotlib virtualenv</span><br><span class="line">sudo -H pip install --ignore-install matplotlib virtualenvwrapper</span><br></pre></td></tr></table></figure></p>
+<h3 id="第二步-找到virtaulenvwrapper-sh的位置"><a href="#第二步-找到virtaulenvwrapper-sh的位置" class="headerlink" title="第二步 找到virtaulenvwrapper.sh的位置"></a>第二步 找到virtaulenvwrapper.sh的位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which virtualenvwrapper.sh</span><br></pre></td></tr></table></figure>
+<h3 id="第三步-修改bash启动文件-bash-profile"><a href="#第三步-修改bash启动文件-bash-profile" class="headerlink" title="第三步 修改bash启动文件.bash_profile"></a>第三步 修改bash启动文件.bash_profile</h3><p>在.bash_profile的最后加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export WORKON_HOME=$HOME/.virtaulenvs</span><br><span class="line">source /user/local/bin/virtualenvwrapper.sh</span><br></pre></td></tr></table></figure></p>
 <h3 id="题外："><a href="#题外：" class="headerlink" title="题外："></a>题外：</h3><p>如果bash安装了oh my zsh，把上面俩行代码写入到 .zshrc</p>
 <ul>
 <li>.bash_profile 是用户登录会被读的</li>
