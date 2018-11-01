@@ -39,7 +39,7 @@
   <div class="post-title">
     <h2 class="title">块状元素的宽高如何确定</h2>
   </div>
-   <div class="post-meta">
+  <div class="post-meta">
     <span class="post-time">2018-11-01</span>
     <span class="post-tags">
       
@@ -49,7 +49,7 @@
     
   </div>
   <div class="post-content">
-    <p>块状元素的宽度很好确定，就是父级的宽度，那父级的宽度了，如果没有设置 <code>width</code>，那么就是浏览器的窗口的宽度了。如果是 <code>float</code> 元素，就是内部容所占的宽度。那高度了，高度的情况复杂点，比如如果块状元素内部是文本。</p>
+    <p>块状元素的宽度很好确定，就是父级的宽度，那父级的宽度了，如果没有设置 <code>width</code>，那么就是浏览器的窗口的宽度了。如果是 <code>float</code> 或者定位或者 <code>flex</code> 元素，就是内部容所占的宽度。那高度了，高度的情况复杂点，比如如果块状元素内部是文本。</p>
 <h2 id="内部是单行文本"><a href="#内部是单行文本" class="headerlink" title="内部是单行文本"></a>内部是单行文本</h2><p>单行文字高度由字体的行高决定。字体设计师会在字体文件里写一个建议行高，所以如果开发者没有设置 <code>line-height</code>，则这个块状元素内部的元素行高就是字体设计师定的建议行高。</p>
 <p>因为 HTML 会把文本之间的空格，包括 enter 回车（不是<code>&lt;br /&gt;</code>），多个 space 空格都合并显示为 一个空格。所以 HTML 回车实现的换行文本其实就是单行文本。这时候的高度同上，也是由字体的行高决定的。</p>
 <p>多个空格会被合并成一个空格，在 HTML 里面，我们实现多个空格用<code>&amp;nbsp;</code> 全称 no break space 来实现。虽然可以用 <code>&amp;nbsp;</code> 来实现多个空格，但是它是用来排版的，不要用来它来实现布局。</p>
@@ -78,6 +78,33 @@
 
   </div>
 </article>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+<script type="text/javascript">
+  var gitment = new Gitment({
+    id: window.location.pathname, 
+    owner: 'dsphoebe',
+    repo: 'blog',
+    oauth: {
+      client_secret: '084085dd19e45face89cf7c91ce181bdcb3701f1',
+      client_id: 'b94e1eb800b49bebf90b'
+    }
+  });
+  gitment.render('gitment-container');
+</script>
+
+<div id="gitment-container">
+  <span class="post-comments-count">
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    <a href="/2018/11/01/块状元素的宽高如何确定/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count gitment-comments-count" data-xid="/2018/11/01/块状元素的宽高如何确定/" itemprop="commentsCount"></span>
+    </a>
+  </span>
+</div>
     </main>
     <footer>
     <p>&copy; 2017-2018 <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a> 「 知道吗？困住你的从来都是你自己！」</p>
