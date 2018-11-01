@@ -11,23 +11,23 @@ date: 2018-11-01 16:16:06
 
 ## 堆叠顺序
 
-`background` 在 `border` 层下面，就像 Photoshop 里面，新建一个文件，默认的第一个图层而且是不可编辑图层就是带背景的图层，想通的可以这样理解为，设计 CSS 的人也是认为背景是最下面的，这大概是个常识吧。
-
-从下面这些例子里面可以看出来，
+从下面这些例子里面可以看出来，各属性及元素的堆叠顺序。
 
 `background` 高于负 `z-index` :
 
 <p data-height="263" data-theme-id="dark" data-slug-hash="VEorav" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: background vs negative z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/VEorav/">The stacking order: background vs negative z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
+`background` 在 `border` 层下面，就像 Photoshop 里面，新建一个文件，默认的第一个图层而且是不可编辑图层就是带背景的图层，想通的可以这样理解为，设计 CSS 的人也是认为背景是最下面的，这大概是个常识吧。
+
 `border` 高于 `background` ：
 
-<p data-height="414" data-theme-id="dark" data-slug-hash="YJmrXd" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJmrXd/">The stacking order</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="200" data-theme-id="dark" data-slug-hash="YJmrXd" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJmrXd/">The stacking order</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 内联元素高于 `border`：
 
-<p data-height="216" data-theme-id="dark" data-slug-hash="xyvXOj" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs inline/text" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXOj/">The stacking order: border vs inline/text</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="300" data-theme-id="dark" data-slug-hash="xyvXOj" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs inline/text" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXOj/">The stacking order: border vs inline/text</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 浮动元素高于 `border`：
