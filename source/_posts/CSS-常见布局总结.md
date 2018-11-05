@@ -171,10 +171,10 @@ BFC 是 形成一个独立区域，此区域的子元素不会受到此区域外
 ### 形成 BFC 区域的条件：
 
 - 根元素 （HTML 元素），最大的 BFC，它也不可能存在外部的元素。😄 就跟全局闭包一样。
-- float left，float right
-- overflow scorll，overflow hidden，overflow auto
-- position absolute，position fixed，position sticky 难道不是？
-- display inline-block，table-cell（是 th，td 的默认的 display 样式），table（是 table 的默认的 display 样式），table-row（是 tr 的默认的 display 样式），table-row-group（是 tbody 的默认的 display 样式），table-header-group（是 thead 的默认的 display 样式），table-footer-group（是 tfoot 的默认的 display 样式），inline-table，flow-root（用于清除浮动）、flex、inline-flex、grid、inline-grid、
+- float left、float right
+- overflow scorll、overflow hidden、overflow auto
+- position absolute、position fixed、position sticky 难道不是？
+- display inline-block、table-cell（是 th，td 的默认的 display 样式）、table（是 table 的默认的 display 样式）、table-row（是 tr 的默认的 display 样式）、table-row-group（是 tbody 的默认的 display 样式）、table-header-group（是 thead 的默认的 display 样式）、table-footer-group（是 tfoot 的默认的 display 样式）、inline-table、flow-root、flex、inline-flex、grid、inline-grid
 - **contain layout、content、strict** 没用过
 - column-count 或 column-width 不为 auto，column-count 不为 1
 - column-span 为 all
