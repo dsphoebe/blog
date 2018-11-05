@@ -1,1 +1,4 @@
-<%- partial('archive') %>
+<% page.posts.each(function (post) { %>
+  <%- partial('post', {page: post}) %>
+<% }) %>
+<%- partial('_partial/paginator') %>

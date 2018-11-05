@@ -1,7 +1,6 @@
 menu:
   Home: /
-  About: /about
-  Tools: /tools
+  Archives: /archives
 
 post_asset_folder: true
 
