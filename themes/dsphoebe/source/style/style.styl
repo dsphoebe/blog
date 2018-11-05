@@ -1,6 +1,8 @@
 
-color=#00a0fc
+color = #00a0fc
 color2 = #424242
+code-color = #f5f2f0
+code-color2 = #dddbcc
 
 body,
 pre
@@ -16,6 +18,7 @@ table
     width: calc(100% - 2em - 40px)
 td, th
     padding: .5rem 1rem
+    border: 1px solid code-color2
 body
     line-height: 1.8
     color: color2
@@ -107,8 +110,8 @@ figure
     table
         width 100%
     pre
-        background: #f5f2f0
-        border: 1px solid #dddbcc
+        background: code-color
+        border: 1px solid code-color2
         border-radius: 3px
         font-size: 1.1rem
         line-height: 1.8
