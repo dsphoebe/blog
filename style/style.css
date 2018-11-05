@@ -21,14 +21,19 @@ body {
   color: #424242;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
 }
+h2,
+h3 {
+  padding-top: 1rem;
+  line-height: 1.2;
+}
 a {
   text-decoration: none;
   color: #00a0fc;
-  outline: 2px dashed transparent;
+  border-bottom: 2px dashed transparent;
 }
 a:hover {
-  transition: all 2s;
-  outline: 1px dashed;
+  transition: all 1.5s;
+  border-bottom: 2px dashed;
 }
 .header ul,
 .post-meta ul,
@@ -57,7 +62,6 @@ a:hover {
 .navbar .menu {
   width: 1000px;
   margin: 0 auto;
-  font-size: 1.5rem;
 }
 .navbar li {
   display: inline-block;
@@ -121,15 +125,29 @@ footer p {
 footer a {
   color: inherit;
 }
-figure {
+figure,
+figure table,
+figure td {
   margin: 0;
+  padding: 0;
 }
 .highlight table {
+  width: 100%;
+}
+.highlight pre {
   background: #f5f2f0;
+  border: 1px solid #dddbcc;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 0.8rem 0;
+  padding: 0.8rem;
+  white-space: pre-wrap;
 }
 blockquote {
   opacity: 0.5;
   padding-left: 1.5rem;
+  border-left: 0.2rem solid;
 }
 .article-entry pre,
 .article-entry .highlight {
