@@ -25,9 +25,9 @@ date: 2018-11-05 18:48:38
 
 ```html
 <span class="share-2-wechat">
-	<img src="icon-wechat.png" alt="微信" title="分享到微信" width="25" height="25" aria-hidden="true" />
-	<img src="icon-wechat-hover.png" alt="微信" title="分享到微信" width="25" height="25" aria-hidden="true" />
-	分享到微信
+  <img src="icon-wechat.png" alt="微信" title="分享到微信" width="25" height="25" aria-hidden="true" />
+  <img src="icon-wechat-hover.png" alt="微信" title="分享到微信" width="25" height="25" aria-hidden="true" />
+  分享到微信
 </span>
 ```
 
@@ -36,10 +36,10 @@ date: 2018-11-05 18:48:38
   display: none;
 }
 .share-2-wechat:hover img:nth-child(2) {
- 	display: initial;
+  display: initial;
 }
 .share-2-wechat:hover img:nth-child(1) {
- 	display: none;
+  display: none;
 }
 ```
 
@@ -59,7 +59,7 @@ date: 2018-11-05 18:48:38
 
 ```html
 <span class="share-2-wechat">
-	分享到微信
+  分享到微信
 </span>
 ```
 
