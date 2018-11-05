@@ -15,39 +15,39 @@ date: 2018-11-01 16:16:06
 
 `background` 高于负 `z-index` :
 
-<p data-height="263" data-theme-id="dark" data-slug-hash="VEorav" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: background vs negative z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/VEorav/">The stacking order: background vs negative z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="263" data-theme-id="light" data-slug-hash="VEorav" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: background vs negative z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/VEorav/">The stacking order: background vs negative z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 `background` 在 `border` 层下面，就像 Photoshop 里面，新建一个文件，默认的第一个图层而且是不可编辑图层就是带背景的图层，想通的可以这样理解为，设计 CSS 的人也是认为背景是最下面的，这大概是个常识吧。
 
 `border` 高于 `background` ：
 
-<p data-height="200" data-theme-id="dark" data-slug-hash="YJmrXd" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJmrXd/">The stacking order</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="200" data-theme-id="light" data-slug-hash="YJmrXd" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJmrXd/">The stacking order</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 内联元素高于 `border`：
 
-<p data-height="300" data-theme-id="dark" data-slug-hash="xyvXOj" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs inline/text" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXOj/">The stacking order: border vs inline/text</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="300" data-theme-id="light" data-slug-hash="xyvXOj" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs inline/text" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXOj/">The stacking order: border vs inline/text</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 浮动元素高于 `border`：
 
-<p data-height="251" data-theme-id="dark" data-slug-hash="yRmzQp" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs float" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/yRmzQp/">The stacking order: border vs float</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="251" data-theme-id="light" data-slug-hash="yRmzQp" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs float" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/yRmzQp/">The stacking order: border vs float</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 内嵌元素高于浮动元素：
 
-<p data-height="239" data-theme-id="dark" data-slug-hash="xyvXdJ" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: multiple inline VS float" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXdJ/">The stacking order: multiple inline VS float</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="239" data-theme-id="light" data-slug-hash="xyvXdJ" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: multiple inline VS float" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXdJ/">The stacking order: multiple inline VS float</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 浮动元素高于块级元素：
 
-<p data-height="265" data-theme-id="dark" data-slug-hash="gBVGob" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: float vs block" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/gBVGob/">The stacking order: float vs block</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="light" data-slug-hash="gBVGob" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: float vs block" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/gBVGob/">The stacking order: float vs block</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 定位元素高于浮动元素。
 
-<p data-height="236" data-theme-id="dark" data-slug-hash="PyMJyN" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: float vs position" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/PyMJyN/">The stacking order: float vs position</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="236" data-theme-id="light" data-slug-hash="PyMJyN" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: float vs position" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/PyMJyN/">The stacking order: float vs position</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 
@@ -90,7 +90,7 @@ date: 2018-11-01 16:16:06
 
 多个堆叠上下文间，`z-index` 父级越大的小子级大于小父级的大子级。
 
-<p data-height="540" data-theme-id="dark" data-slug-hash="xyvPrK" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking context: z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvPrK/">The stacking context: z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="540" data-theme-id="light" data-slug-hash="xyvPrK" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking context: z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvPrK/">The stacking context: z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 son2 的 z-index 值大于 son1，但是 son1 却显示在 son2 上面一层，因为 father1 的 z-index 值大于 father2 的 z-index 值。

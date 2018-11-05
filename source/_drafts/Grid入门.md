@@ -15,7 +15,7 @@ Grid 布局的使用，需要两层元素，父级容器元素和子级项目元
 
 举个简单的两列例子：
 
-<p data-height="300" data-theme-id="0" data-slug-hash="YJeNMo" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="YJeNMo" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJeNMo/">YJeNMo</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="300" data-theme-id="light" data-slug-hash="YJeNMo" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="YJeNMo" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJeNMo/">YJeNMo</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 把 container 分成 4 份，第一个儿子继承的部分是从 第 1 份 到 第 3 份，红色背景部分，而第二个儿子继承的部分是从第 3 份到第 4 份。两个儿子之间还有 30px 的间距。
