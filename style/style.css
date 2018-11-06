@@ -129,6 +129,10 @@ figure td {
 .highlight table {
   width: 100%;
 }
+.highlight th,
+.highlight td {
+  border: none;
+}
 .highlight pre {
   background: #f5f2f0;
   border: 1px solid #dddbcc;
