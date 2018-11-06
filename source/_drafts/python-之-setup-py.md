@@ -1,6 +1,5 @@
 ---
-title: Python之setup.py
-date: 2018-01-08 17:17:42
+title: Python 之 setup.py
 tags: [Python, setup]
 ---
 ### setup.py的packages 与 requirements.txt

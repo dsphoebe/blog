@@ -1,5 +1,5 @@
 ---
-title: vscode使用
+title: VSCode 使用技巧
 tags:
 ---
 ## 多光标

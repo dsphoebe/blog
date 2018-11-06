@@ -1,5 +1,5 @@
 ---
-title: 理解JavaScript作用域
+title: 理解 JavaScript 作用域
 date: 2017-12-06 22:11:59
 tags: [JavaScript, 作用域]
 ---
