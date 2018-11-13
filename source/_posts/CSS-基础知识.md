@@ -110,7 +110,7 @@ CSS 全称 Cascading Style Sheets 层叠样式表，是一种样式表的语言�
 | `:root`                               | 文档的根元素，优先级比 `html` 选择器高                       |
 | `:first`                              | `@page` 打印文档的第一页样式                                 |
 | `:scope`                              | CSS 作用域，可以给 `<style>` 定义 scope 来定义新的参考点， Vue ❓ |
-| `:target`                             | 代表一个唯一的页面元素，其 ID 与当前 URL 片段匹配  ❕ 很有意思的一个伪类，可以用它来实现无 JavaScript 的弹窗 [DEMO 》]() |
+| `:target`                             | 代表一个唯一的页面元素，其 ID 与当前 URL 片段匹配  ❕ 很有意思的一个伪类，可以用它来实现无 JavaScript 的弹窗 |
 | `:valid` `:invalid`                   | 通过验证 未通过验证的 `<input>`或者 `<form>` 元素            |
 | `:only-child`                         | 独生子元素，等效于 `:first-child:last-child` 或者 `:nth-child(1):nth-lastchild(1)`，只是 `:only-child`  优先级更高 |
 | :not()                                | 可以将一个或多个以逗号分隔的选择器作为其参数，选择器中不得包含另一个否定选择符或者伪元素 |
