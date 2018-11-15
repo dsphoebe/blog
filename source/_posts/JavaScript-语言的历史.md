@@ -1,14 +1,15 @@
 ---
-title: 读 JavaScript 导论
+title: JavaScript 导论
 tags:
   - JavaScript
   - ECMAScript
 date: 2018-11-15 16:30:18
 ---
 
-
 > 原文：[JavaScript 语言的历史](https://wangdoc.com/javascript/basic/history.html)
 > 作者：阮一峰老师
+
+这是读阮一峰老师的《JavaScript 教程》系列笔记第二篇
 
 ## 诞生
 
