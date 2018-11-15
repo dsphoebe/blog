@@ -1,5 +1,5 @@
 ---
-title: JavaScript 导论
+title: JavaScript 语言的历史
 tags:
   - JavaScript
   - ECMAScript
