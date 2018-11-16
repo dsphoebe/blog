@@ -37,7 +37,7 @@
     <h2 class="title">JavaScript 的数据类型概述</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-16 13:58:19</span>
+    <span class="post-time">2018-11-16 14:45:49</span>
     <span class="post-tags">
       
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据类型/">数据类型</a></li></ul>
@@ -46,7 +46,11 @@
     
   </div>
   <div class="post-content">
-    <h2 id="JavaScript-的数据类型"><a href="#JavaScript-的数据类型" class="headerlink" title="JavaScript 的数据类型"></a>JavaScript 的数据类型</h2><p>JavaScript 语言的每一个值，都属于某一种数据类型。JavaScript 的数据类型有 7 种：</p>
+    <blockquote>
+<p>原文：<a href="https://wangdoc.com/javascript/types/general.html" target="_blank" rel="noopener">数据类型概述</a><br>作者：阮一峰老师</p>
+</blockquote>
+<p>这是读阮一峰老师的《JavaScript 教程》系列笔记第四篇《JavaScript 的数据类型概述》</p>
+<h2 id="JavaScript-的数据类型"><a href="#JavaScript-的数据类型" class="headerlink" title="JavaScript 的数据类型"></a>JavaScript 的数据类型</h2><p>JavaScript 语言的每一个值，都属于某一种数据类型。JavaScript 的数据类型有 7 种：</p>
 <ul>
 <li>数值 number</li>
 <li>字符串 string</li>
@@ -82,7 +86,8 @@
 <p>null 的数据类型是 object</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> <span class="comment">// 'object'</span></span><br></pre></td></tr></table></figure>
 <p>null 的数据类型是 object，是最初 JavaScript 设计遗留的 bug。95 年 JavaScript 语言的第一版，只设计了 5 种数据类型：对象、整数、浮点数、字符串、布尔值，没考虑到 null，只把它当作 object 的一种特殊值。后来 null 独立出来，作为一种单独的数据类型，为了兼容一起的代码，typeof null 返回 object 就没法改变了… </p>
-
+<p>很简单确认值是不是 null 类型 <a href="https://underscorejs.org/docs/underscore.html#section-155" target="_blank" rel="noopener">underscore 实现 isNull</a></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNull</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj === <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </div>
 </article>
     </main>
