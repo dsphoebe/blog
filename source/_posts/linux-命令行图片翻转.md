@@ -25,7 +25,7 @@ convert example.jpg -rotate 90 example-rotated.jpg
 2017-12-21 updated
 照片是在太大了，随便都是几兆。压缩下
 
-相关文章：
+参考链接：
 - [Linux下图像压缩、格式转换、缩放、旋转](http://blog.csdn.net/zrools/article/details/51347471)
 - [ImageMagick](https://www.imagemagick.org/script/index.php)
 - [How can I open an image file from the Linux terminal?](https://www.computerhope.com/issues/ch001720.htm)

@@ -32,6 +32,6 @@ out: Hello dsphoebe
 - 失败的处理
 - 其他api：prefix，run，sudo等
 
-### 相关链接：
+### 参考链接：
 - [概览 & 教程](http://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html)
 - [项目代码](https://github.com/dsphoebe/flask-fabric)

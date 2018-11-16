@@ -9,7 +9,7 @@ date: 2018-11-15 12:38:13
 > 原文：[JavaScript 教程 -- 导论](https://wangdoc.com/javascript/basic/introduction.html)
 > 作者：阮一峰老师
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第一篇
+这是读阮一峰老师的《JavaScript 教程》系列笔记第一篇《JavaScript 导论》
 
 ## JavaScript 是一种轻量级的脚本语言
 

@@ -41,6 +41,6 @@ source /user/local/bin/virtualenvwrapper.sh
 - .zshrc 是用户登录、不登录都会被读的
 
 
-## 相关文字：
+## 参考链接：
 [Mac 下安装 virtualenv](https://www.binss.me/blog/install-virtualenv-and-virtualenvwrapper-on-mac/)
 [.bashrc、.bash_profile 和 .zshrc](https://ruby-china.org/topics/20381)

@@ -9,7 +9,7 @@ date: 2018-11-15 16:30:18
 > 原文：[JavaScript 语言的历史](https://wangdoc.com/javascript/basic/history.html)
 > 作者：阮一峰老师
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第二篇
+这是读阮一峰老师的《JavaScript 教程》系列笔记第二篇《JavaScript 语言的历史》
 
 ## 诞生
 
@@ -34,7 +34,7 @@ Netscape 公司很快发现 Navigator 需要一个可嵌入网页的脚本语言
 - 正则：借鉴 Perl
 - 字符串和数组处理：借鉴 Python
 
-就像 王银 说的
+就像 [王银](http://www.yinwang.org/blog-cn/2013/03/29/scripting-language) 说的
 
 > 其实“脚本语言”与“非脚本语言”并没有语义上，或者执行方式上的区别。它们的区别只在于它们设计的初衷：脚本语言的设计，往往是作为一种临时的“补丁”。它的设计者并没有考虑把它作为一种“通用程序语言”，没有考虑用它构建大型的软件。
 

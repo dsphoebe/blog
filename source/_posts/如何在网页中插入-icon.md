@@ -207,7 +207,7 @@ SVG Sprite 是把所有的 icons 放到 一个SVG 文件里，一个 icon 对应
 
 还有其他有意思的 [cssicon.space](http://cssicon.space)，作者用 CSS 实现了各种图标。
 
-## 相关链接
+## 参考链接
 
 [Markup-free icon fonts using unicode-range](http://nimbupani.com/markup-free-icon-fonts-with-unicode-range.html)
 [Creating an Icon Webfont](https://glyphsapp.com/tutorials/creating-an-icon-webfont)
