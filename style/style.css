@@ -22,8 +22,14 @@ th {
   border: 1px solid #dddbcc;
 }
 body {
-  line-height: 1.8;
+  font: 1.13rem/1.8 Georgia, Times, "Times New Roman", serif;
   color: #424242;
+}
+h1,
+h2,
+h3,
+nav,
+footer {
   font-family: PingFang SC, Microsoft YaHei, -apple-system, BlinkMacSystemFont, Helvetica Neue, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
 }
 h2,
@@ -120,6 +126,7 @@ footer {
   background: #00a0fc;
   color: #fff;
   text-align: center;
+  font-size: 1rem;
 }
 footer a {
   color: inherit;
@@ -148,9 +155,18 @@ figure td {
   white-space: pre-wrap;
 }
 blockquote {
-  opacity: 0.5;
   padding-left: 1.5rem;
   border-left: 0.2rem solid;
+  color: #888;
+}
+code {
+  color: #00a0fc;
+  white-space: nowrap;
+  margin: 0 2px;
+  padding: 0 5px;
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+  border-radius: 3px;
 }
 .article-entry pre,
 .article-entry .highlight {
