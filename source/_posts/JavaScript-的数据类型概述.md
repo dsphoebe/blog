@@ -79,3 +79,11 @@ typeof null // 'object'
 ```
 
 null 的数据类型是 object，是最初 JavaScript 设计遗留的 bug。95 年 JavaScript 语言的第一版，只设计了 5 种数据类型：对象、整数、浮点数、字符串、布尔值，没考虑到 null，只把它当作 object 的一种特殊值。后来 null 独立出来，作为一种单独的数据类型，为了兼容一起的代码，typeof null 返回 object 就没法改变了... 
+
+很简单确认值是不是 null 类型 [underscore 实现 isNull](https://underscorejs.org/docs/underscore.html#section-155)
+
+```js
+function isNull(obj) {
+  return obj === null;
+}
+```
