@@ -23,8 +23,9 @@ td, th
     padding: .5rem 1rem
     border: 1px solid code-color2
 body
-    line-height: 1.8
+    font: 1.13rem / 1.8 Georgia,Times,"Times New Roman",serif
     color: color2
+h1, h2, h3, nav, footer
     font-family: PingFang SC, Microsoft YaHei, -apple-system, BlinkMacSystemFont, Helvetica Neue, Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif
 h2, h3
     padding-top 1rem
@@ -102,6 +103,7 @@ footer
     background: color
     color: white 
     text-align: center
+    font-size: 1rem
     a
         color: inherit 
 
@@ -125,9 +127,18 @@ figure
         white-space: pre-wrap
 
 blockquote 
-    opacity: .5
     padding-left: 1.5rem
     border-left: .2rem solid
+    color: #888
+
+code
+    color: color;
+    white-space: nowrap;
+    margin: 0 2px;
+    padding: 0 5px;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    border-radius: 3px;
 
 @import "_variables"
 @import "_highlight"
