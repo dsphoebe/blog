@@ -8,12 +8,9 @@ tags:
   - 标签
   - 循环
   - 三元表达式
+  - JavaScript 教程 - 笔记
 date: 2018-11-16 12:49:17
 ---
-
-
-> 原文：[JavaScript 的基本语法](https://wangdoc.com/javascript/basic/grammar.html)
-> 作者：阮一峰老师
 
 这是读阮一峰老师的《JavaScript 教程》系列笔记第三篇《JavaScript 的基本语法》
 

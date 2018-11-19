@@ -3,11 +3,9 @@ title: JavaScript 的数据类型概述
 tags:
   - JavaScript
   - 数据类型
+  - JavaScript 教程 - 笔记
 date: 2018-11-16 13:58:19
 ---
-
-> 原文：[数据类型概述](https://wangdoc.com/javascript/types/general.html)
-> 作者：阮一峰老师
 
 这是读阮一峰老师的《JavaScript 教程》系列笔记第四篇《JavaScript 的数据类型概述》
 

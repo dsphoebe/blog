@@ -5,12 +5,9 @@ tags:
   - undefined
   - 布尔值
   - boolean
+  - JavaScript 教程 - 笔记
 date: 2018-11-16 14:28:22
 ---
-
-
-> 原文：[null, undefined 和布尔值](https://wangdoc.com/javascript/types/null-undefined-boolean.html)
-> 作者：阮一峰老师
 
 这是读阮一峰老师的《JavaScript 教程》系列笔记第五篇《null、undefined 和布尔值》
 
