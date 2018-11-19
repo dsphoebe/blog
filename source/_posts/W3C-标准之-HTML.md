@@ -267,4 +267,4 @@ Web 组件式中近似 HTML 的技术，这使得它能够，从本质上说，�
 ## 可替代标签参考文章
 
 [Replaced Elements in HTML: Myths and Realities](https://www.sitepoint.com/replaced-elements-html-myths-realities/)
-[我用我的憋足英文汉化了下](/2018/10/15/HTML-中的可替代元素-神化与真实/)😄
+[我用我的憋足英文汉化了下](/2018/10/15/HTML-中的可替代标签-神化与真实/)😄
