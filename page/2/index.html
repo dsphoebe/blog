@@ -11,7 +11,9 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
   <link rel="stylesheet" href="/style/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 </head>
   <body>
     <header class="header">
@@ -110,6 +112,20 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> base64encode = <span class="function"><span class="params">str</span> =&gt;</span> btoa(<span class="built_in">encodeURIComponent</span>(str))</span><br><span class="line"><span class="keyword">const</span> base64Decode = <span class="function"><span class="params">str</span> =&gt;</span> <span class="built_in">decodeURIComponent</span>(atob(str))</span><br><span class="line">base64encode(<span class="string">'胖达'</span>) <span class="comment">// "JUU4JTgzJTk2JUU4JUJFJUJF"</span></span><br><span class="line">base64Decode(<span class="string">'JUU4JTgzJTk2JUU4JUJFJUJF'</span>) <span class="comment">// 胖达</span></span><br></pre></td></tr></table></figure>
 
   </div>
+  <div id="gitalk-container"></div>
+  <script>
+  var gitalk = new Gitalk({
+    clientID: 'ef15f4504260877defa7',
+    clientSecret: 'fec978ac841d76e9177c1a8cadd5092de489dc0e',
+    repo: 'git@github.com:dsphoebe/blog.git',
+    owner: 'dsphoebe',
+    admin: ['dsphoebe'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: true  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+  </script>
 </article>
 
 

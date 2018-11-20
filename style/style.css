@@ -348,3 +348,14 @@ pre .javascript .function {
     display: block;
   }
 }
+.gt-container .gt-header-controls-tip {
+  color: #00a0fc;
+}
+.gt-container .gt-btn {
+  background-color: #00a0fc;
+  border-color: #00a0fc;
+}
+.gt-container .gt-btn-preview {
+  background-color: #fff;
+  color: #00a0fc;
+}
