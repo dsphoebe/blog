@@ -28,7 +28,7 @@
       
     </ul>
   </nav>
-  <h1>a[herf=&#34;code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1>a[herf=&#34;code.dsphoebe.com&#34;]\n{FE NOTEBOOK}</h1>
   <em>「 困住你的从来都是你自己！」</em>
 </header>
     <main class="main">
@@ -63,8 +63,7 @@
 </tr>
 <tr>
 <td>按位或</td>
-<td>a \</td>
-<td>b</td>
+<td>a &#124; b</td>
 <td>a 或者 b 是 1 时，返回 1 否则 0</td>
 </tr>
 <tr>
@@ -80,17 +79,17 @@
 <tr>
 <td>左移</td>
 <td>a &lt;&lt; b</td>
-<td>a 的二进制形式向左移动 b 个比特位，右边用 0 填充，b &lt; 32</td>
+<td>a 向左移动 b 位，右边用 0 填充，b &lt; 32</td>
 </tr>
 <tr>
 <td>有符号右移</td>
 <td>a &gt;&gt; b</td>
-<td>a 的二进制形式向右移动 b 个比特位，丢弃被移出的位，b &lt; 32</td>
+<td>a 向右移动 b 位，丢弃被移出的位，b &lt; 32</td>
 </tr>
 <tr>
 <td>无符号右移</td>
 <td>a &gt;&gt;&gt; b</td>
-<td>a 的二进制形式向右移动 b 个比特位，丢弃被移出的位，并使用 0 在左侧填充，b &lt; 32</td>
+<td>a 向右移动 b 位，丢弃被移出的位，并使用 0 在左侧填充，b &lt; 32</td>
 </tr>
 </tbody>
 </table>
@@ -104,7 +103,7 @@
 <p>可以看出补码保证了当一个数是正数时，最左边的比特位是 0，当是一个负数时，最左边的比特位是 1。最左边的比特位被称为符号位。</p>
 <p>原码容易被人脑直接识别并用于计算，但是对与计算机来说并不友好。所以计算机系统中，数值一律用补码来表示、运算和存储。使用补码，可以将符号位和数值域同意处理，将加法和减法统一处理。</p>
 <h2 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h2><p>计算机中存储数字都是补码形式，运算也是用的补码，得到的结果也是补码</p>
-<p><img src="https://segmentfault.com/img/bVp6Ux" alt=""></p>
+<p><img src="/images/bit-calc.png" alt=""></p>
 <h2 id="开发中的使用场景"><a href="#开发中的使用场景" class="headerlink" title="开发中的使用场景"></a>开发中的使用场景</h2><h3 id="交换两个数"><a href="#交换两个数" class="headerlink" title="交换两个数"></a>交换两个数</h3><p>原理是用位运算的异或运算</p>
 <ul>
 <li>0^a = a</li>
@@ -120,7 +119,7 @@
 </article>
     </main>
     <footer>
-  <p>&copy; 2017-2018 code.dsphoebe.com <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
+  <p>&copy; 2017-2018 code.dsphoebe.com <wbr> <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
 </footer>
   </body>
 </html>
