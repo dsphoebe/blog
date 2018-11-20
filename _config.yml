@@ -3,7 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: a[herf="code.dsphoebe.com"]\n{FE NOTEBOOK}
+title: a[href="code.dsphoebe.com"]{FE NOTEBOOK}
+pc_title: a[href="code.dsphoebe.com"]{FE NOTEBOOK}
+mobile_title: FE NOTEBOOK 🚀
 tabtitle: FE NOTEBOOK
 subtitle: 「 困住你的从来都是你自己！」
 description:

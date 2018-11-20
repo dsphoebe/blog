@@ -19,6 +19,8 @@ table
     margin-inline-start: 40px;
     margin-inline-end: 40px;
     width: calc(100% - 2em - 80px)
+.mobile
+    display: none
 td, th
     padding: .5rem 1rem
     border: 1px solid code-color2
@@ -51,7 +53,7 @@ a
     color: color2
     margin-bottom: 4rem
     h1
-        font-size: 3rem
+        font-size: 3rem    
     em
         font-style normal
     
@@ -142,3 +144,11 @@ code
 
 @import "_variables"
 @import "_highlight"
+
+@media screen and (max-width: 425px)
+    html
+        font-size: 14px
+    .pc
+        display: none
+    .mobile
+        display: block
