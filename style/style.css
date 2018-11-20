@@ -16,6 +16,9 @@ table {
   margin-inline-end: 40px;
   width: calc(100% - 2em - 80px);
 }
+.mobile {
+  display: none;
+}
 td,
 th {
   padding: 0.5rem 1rem;
@@ -333,4 +336,15 @@ pre .coffeescript .title {
 pre .keyword,
 pre .javascript .function {
   color: #c9c;
+}
+@media screen and (max-width: 425px) {
+  html {
+    font-size: 14px;
+  }
+  .pc {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
 }
