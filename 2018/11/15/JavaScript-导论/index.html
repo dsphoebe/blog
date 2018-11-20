@@ -82,7 +82,7 @@
     repo: 'blog-comment',
     owner: 'dsphoebe',
     admin: ['dsphoebe'],
-    id: ''
+    id: location.pathname.substr(0, 50)
   })
 
   gitalk.render('gitalk-container')
