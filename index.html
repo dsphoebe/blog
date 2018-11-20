@@ -73,6 +73,7 @@
 <li><code>\&quot;</code> 双引号 <code>\u0022</code></li>
 <li><code>\\</code> 反斜杆  <code>\u005C</code></li>
 </ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1\t2'</span>) <span class="comment">// 1	2</span></span><br></pre></td></tr></table></figure>
 <p>反斜杆后跟 3 个八进制数，代表一个字符。八进制数对应该字符的 Unicode 码点，比如 <code>\251</code> 表示版权符号。这种方法只能输出 265 种字符</p>
 <p>反斜杆后跟 x 再接着 2 个十六进制数，也代表一个字符。十六进制数对应的是这个字符的 Unicode 码点，比如 <code>\xA9</code> 表示版权符号。这种也只能显示 256 种字符。</p>
 <p>反斜杆后跟 u 再接着 4 个十六进制数，代表一个字符。十六进制是对应的这个字符的 Unicode 码点，比如 <code>\u00A9</code> 表示版权符号。</p>
