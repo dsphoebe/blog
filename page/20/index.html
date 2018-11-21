@@ -633,7 +633,7 @@
     repo: 'blog-comment',
     owner: 'dsphoebe',
     admin: ['dsphoebe'],
-    id: location.pathname.substr(0, 50)
+    id: Date.now()
   })
 
   gitalk.render('gitalk-container')
