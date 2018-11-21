@@ -74,21 +74,23 @@
 <p>JavaScript 的核心算法只包括两部分：基本语法构造 和标准库。除此之外，各种宿主环境提供额外的 API，比如浏览器提供的额外的 API 分为三大类：浏览器控制类用于操作浏览器， DOM 类用于操作网页的各种元素，Web 类用于实现互联网的各种功能。</p>
 
   </div>
-  <div id="gitalk-container"></div>
-  <script>
-  var gitalk = new Gitalk({
-    clientID: 'ef15f4504260877defa7',
-    clientSecret: 'fec978ac841d76e9177c1a8cadd5092de489dc0e',
-    repo: 'blog-comment',
-    owner: 'dsphoebe',
-    admin: ['dsphoebe'],
-    id: '2018-11-15 12:38:13',
-    title: document.title.slice(0, -14),
-    enableHotKey: true
-  })
+  
+    <div id="gitalk-container"></div>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: 'ef15f4504260877defa7',
+        clientSecret: 'fec978ac841d76e9177c1a8cadd5092de489dc0e',
+        repo: 'blog',
+        owner: 'dsphoebe',
+        admin: ['dsphoebe'],
+        id: '2018-11-15 12:38:13',
+        title: document.title.slice(0, -14),
+        enableHotKey: true
+      })
 
-  gitalk.render('gitalk-container')
-  </script>
+      gitalk.render('gitalk-container')
+    </script>
+  
 </article>
     </main>
     <footer>

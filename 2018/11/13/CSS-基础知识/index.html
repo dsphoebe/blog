@@ -258,21 +258,23 @@
 <p>框的高度不遵守百分比的长度；框的高度总是采用框内容的高度，除非制定一个绝对的高度值。</p>
 
   </div>
-  <div id="gitalk-container"></div>
-  <script>
-  var gitalk = new Gitalk({
-    clientID: 'ef15f4504260877defa7',
-    clientSecret: 'fec978ac841d76e9177c1a8cadd5092de489dc0e',
-    repo: 'blog-comment',
-    owner: 'dsphoebe',
-    admin: ['dsphoebe'],
-    id: '2018-11-13 10:57:16',
-    title: document.title.slice(0, -14),
-    enableHotKey: true
-  })
+  
+    <div id="gitalk-container"></div>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: 'ef15f4504260877defa7',
+        clientSecret: 'fec978ac841d76e9177c1a8cadd5092de489dc0e',
+        repo: 'blog',
+        owner: 'dsphoebe',
+        admin: ['dsphoebe'],
+        id: '2018-11-13 10:57:16',
+        title: document.title.slice(0, -14),
+        enableHotKey: true
+      })
 
-  gitalk.render('gitalk-container')
-  </script>
+      gitalk.render('gitalk-container')
+    </script>
+  
 </article>
     </main>
     <footer>
