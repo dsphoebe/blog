@@ -132,6 +132,10 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">flags = flags ^ mask</span><br><span class="line"><span class="comment">// 0101 ^ 1011 =&gt; 1110 </span></span><br><span class="line"><span class="comment">// 1110 ^ 1011 =&gt; 0101</span></span><br></pre></td></tr></table></figure>
 <p>二进制否运算可以翻转当前设置，即原来设置为 0，运算后变为 1，原来设置为 1，运算后变为 0.</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">flags = ~flags</span><br></pre></td></tr></table></figure>
+<h2 id="位运算取整"><a href="#位运算取整" class="headerlink" title="位运算取整"></a>位运算取整</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">2.3</span> | <span class="number">0</span> <span class="comment">// 2</span></span><br><span class="line">~~<span class="number">2.3</span> <span class="comment">// 2 这么看起来，连续两次二进制否运算会是最快，是一元运算</span></span><br><span class="line"><span class="number">2.3</span> ^ <span class="number">0</span> <span class="comment">// 2</span></span><br><span class="line"><span class="number">2.3</span> &gt;&gt; <span class="number">0</span> <span class="comment">// 2</span></span><br><span class="line"><span class="number">2.3</span> &lt;&lt; <span class="number">0</span> <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>位运算只能取整 -2<sup>31</sup> - 1 到 2<sup>31</sup> - 1 之间的数</p>
+<h2 id="参考-or-深入阅读"><a href="#参考-or-深入阅读" class="headerlink" title="参考 or 深入阅读"></a>参考 or 深入阅读</h2><p><a href="https://www.zhihu.com/question/50856132" target="_blank" rel="noopener">js中使用位操作符取整有没有什么副作用？</a></p>
+
   </div>
   
 </article>
