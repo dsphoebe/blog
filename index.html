@@ -28,6 +28,10 @@
           <a href="/archives" class="menu-item-link">归档</a>
         </li>
       
+        <li class="menu-item">
+          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
+        </li>
+      
     </ul>
   </nav>
   <h1 class="pc">a[href=&#34;code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
@@ -54,107 +58,20 @@
 <p>鉴于我的记性这么地烂，就在博客里面开始记下笔记。</p>
 <p>可是 😂 我还是老是忘记呀，好不好。</p>
 <p>所以从网上收集基础考题来练手，保住我的记性！</p>
-<ol>
-<li><p>JavaScript 中的 undefined 和 not defined 的区别</p>
-</li>
-<li><p>下面的代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;&#125;) &#123;</span><br><span class="line">  y += <span class="keyword">typeof</span> f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(y);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在JavaScript中创建一个真正的private方法有什么缺点？</p>
-</li>
-<li><p>JavaScript中什么是闭包？写出一个例子</p>
-</li>
-<li><p>写一个mul函数，使用方法如下。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(mul(<span class="number">2</span>)(<span class="number">3</span>)(<span class="number">4</span>)); <span class="comment">// output : 24 </span></span><br><span class="line"><span class="built_in">console</span>.log(mul(<span class="number">4</span>)(<span class="number">3</span>)(<span class="number">4</span>)); <span class="comment">// output : 48</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>JavaScript怎么清空数组？几种方法？</p>
-</li>
-<li><p>怎么判断一个object是否是数组(array)？</p>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> output = (<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> x;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;)(<span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line"><span class="built_in">console</span>.log(output);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> output = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> x;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(output);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = &#123; <span class="attr">foo</span> : <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> output = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> x.foo;</span><br><span class="line">    <span class="keyword">return</span> x.foo;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(output);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Employee = &#123;</span><br><span class="line">    company: <span class="string">'xyz'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> emp1 = <span class="built_in">Object</span>.create(Employee);</span><br><span class="line"><span class="keyword">delete</span> emp1.company</span><br><span class="line"><span class="built_in">console</span>.log(emp1.company);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>什么是 undefined x 1 ？</p>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> trees = [<span class="string">"xyz"</span>,<span class="string">"xxxx"</span>,<span class="string">"test"</span>,<span class="string">"ryan"</span>,<span class="string">"apple"</span>];</span><br><span class="line"><span class="keyword">delete</span> trees[<span class="number">3</span>];</span><br><span class="line">  </span><br><span class="line"><span class="built_in">console</span>.log(trees.length);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> bar = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(bar + <span class="number">0</span>);   </span><br><span class="line"><span class="built_in">console</span>.log(bar + <span class="string">"xyz"</span>);  </span><br><span class="line"><span class="built_in">console</span>.log(bar + <span class="literal">true</span>);  </span><br><span class="line"><span class="built_in">console</span>.log(bar + <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> z = <span class="number">1</span>, y = z = <span class="keyword">typeof</span> y;</span><br><span class="line"><span class="built_in">console</span>.log(y);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">12</span>; &#125;;</span><br><span class="line"><span class="keyword">typeof</span> bar();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>两种函数声明有什么区别？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="comment">// Some code</span></span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="comment">// Some code</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> salary = <span class="string">"1000$"</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Original salary was "</span> + salary);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> salary = <span class="string">"5000$"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"My New Salary "</span> + salary);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>什么是 instanceof 操作符？下面代码输出什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">return</span> foo; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> foo() <span class="keyword">instanceof</span> foo);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果我们使用JavaScript的”关联数组”，我们怎么计算”关联数组”的长度？</p>
-</li>
-<li><p>使用 typeof bar === “object” 判断 bar 是不是一个对象有神马潜在的弊端？如何避免这种弊端？</p>
-</li>
-<li><p>下面的代码会在 console 输出神马？为什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = b = <span class="number">3</span>;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"a defined? "</span> + (<span class="keyword">typeof</span> a !== <span class="string">'undefined'</span>));   </span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"b defined? "</span> + (<span class="keyword">typeof</span> b !== <span class="string">'undefined'</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下面的代码会在 console 输出神马？为什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">  foo: <span class="string">"bar"</span>,</span><br><span class="line">  func: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"outer func:  this.foo = "</span> + <span class="keyword">this</span>.foo);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"outer func:  self.foo = "</span> + self.foo);</span><br><span class="line">      (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"inner func:  this.foo = "</span> + <span class="keyword">this</span>.foo);</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"inner func:  self.foo = "</span> + self.foo);</span><br><span class="line">      &#125;());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">myObject.func();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将 JavaScript 代码包含在一个函数块中有神马意思呢？为什么要这么做？</p>
-</li>
-<li><p>在严格模式(‘use strict’)下进行 JavaScript 开发有神马好处？</p>
-</li>
-<li><p>下面两个函数的返回值是一样的吗？为什么？</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      bar: <span class="string">"hello"</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">  &#123;</span><br><span class="line">      bar: <span class="string">"hello"</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>神马是 NaN，它的类型是神马？怎么测试一个值是否等于 NaN?</p>
-</li>
-<li><p>解释一下下面代码的输出</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span>);   <span class="comment">//0.30000000000000004</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span> == <span class="number">0.3</span>);  <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
 <h2 id="题集"><a href="#题集" class="headerlink" title="题集"></a>题集</h2><p><a href="https://segmentfault.com/a/1190000008785931" target="_blank" rel="noopener">20个必会的JavaScript面试题</a><br><a href="https://github.com/dwqs/blog/issues/17" target="_blank" rel="noopener">你有必要知道的 25 个 JavaScript 面试题</a><br><a href="https://juejin.im/post/5b325c38e51d4558c7136818" target="_blank" rel="noopener">JS基础知识（覆盖JS基础面试题）</a><br><a href="https://blog.csdn.net/sunlijie1118/article/details/78825962" target="_blank" rel="noopener">js的6道基础题（笔试常考题）</a><br><a href="https://blog.csdn.net/xun527/article/details/78009044" target="_blank" rel="noopener">JavaScript试题练习题</a><br><a href="https://wenku.baidu.com/view/cc3ee4bbb8d528ea81c758f5f61fb7360b4c2be5.html?re=view" target="_blank" rel="noopener">JavaScript 基础阶段测笔试试题</a><br><a href="https://wenku.baidu.com/view/3528f6ec08a1284ac950432f.html" target="_blank" rel="noopener">Web基础考题(JavaScript-Part1)</a><br><a href="http://web.jobbole.com/86461/" target="_blank" rel="noopener">44个Javascript 变态题解析(上) </a><br><a href="http://www.voidcn.com/article/p-qvgglksg-bhp.html" target="_blank" rel="noopener">js基础试题</a><br><a href="https://leohxj.gitbooks.io/front-end-database/interview/interview-exercises-with-JavaScript.html" target="_blank" rel="noopener">JavaScript面试题</a></p>
 <h2 id="练习网站"><a href="#练习网站" class="headerlink" title="练习网站"></a>练习网站</h2><p>转自 <a href="http://www.lixuejiang.me/2016/11/01/JavaScript%E7%9A%84%E7%BB%83%E4%B9%A0%E7%BD%91%E7%AB%99%E6%94%B6%E9%9B%86/" target="_blank" rel="noopener">JavaScript练习网站收集</a></p>
-<ul>
-<li><p><a href="http://www.codewars.com/" target="_blank" rel="noopener">codewars</a></p>
-<p>国外的一个练习网站，有JavaScript，也有Python，每种语言都有自己的道场（kata），每个用户都有不同的等级，刷题提高等级，也可以插卡别人优秀的解决方案。你会发现牛人无处不在。</p>
-</li>
-<li><p><a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">javascript-puzzlers</a></p>
-<p>44道题，看完你会怀疑你是否真的学过JavaScript😂<br>另附作者的解题链接<a href="http://flyfy1.github.io/language/2014/02/23/js-tricks-from-js-puzzlers.html" target="_blank" rel="noopener">http://flyfy1.github.io/language/2014/02/23/js-tricks-from-js-puzzlers.html</a></p>
-</li>
-<li><p><a href="https://freecodecamp.cn/" target="_blank" rel="noopener">https://freecodecamp.cn</a></p>
-</li>
-<li><p><a href="http://www.lixuejiang.me/2016/11/01/JavaScript%E7%9A%84%E7%BB%83%E4%B9%A0%E7%BD%91%E7%AB%99%E6%94%B6%E9%9B%86/freecodecamp.com" target="_blank" rel="noopener">freecodecamp.com</a>的中文版，可以学习前端，后端，数据可视化等知识</p>
-</li>
-<li><p><a href="http://es6katas.org/" target="_blank" rel="noopener">http://es6katas.org/</a><br>一个用tdd学习es6的网站，学完之后对es6的各种特性会有深入的了解</p>
-</li>
-<li><p><a href="https://www.nowcoder.com/ta/js-assessment" target="_blank" rel="noopener">https://www.nowcoder.com/ta/js-assessment</a><br>牛客网的练习题</p>
-</li>
-<li><p><a href="https://leetcode.com/" target="_blank" rel="noopener">https://leetcode.com/</a><br>有名的oj系统，听说有人通过这个网站刷题进了google</p>
-</li>
-<li><p><a href="https://nodeschool.io/zh-cn/#workshoppers" target="_blank" rel="noopener">nodeschool.io</a><br>nodeschool,有很多js和es6以及web相关的教程</p>
-</li>
-<li><p><a href="https://www.hackerrank.com/" target="_blank" rel="noopener">https://www.hackerrank.com</a><br>一个英文的学习网站，类似oj的形式，有数据结构算法的课程，也有正则表达式等课程，质量还不错</p>
-</li>
-<li><p><a href="http://superherojs.com/" target="_blank" rel="noopener">http://superherojs.com/</a></p>
-</li>
-</ul>
+<p><a href="http://www.codewars.com/" target="_blank" rel="noopener">codewars</a></p>
+<p>  国外的一个练习网站，有JavaScript，也有Python，每种语言都有自己的道场（kata），每个用户都有不同的等级，刷题提高等级，也可以插卡别人优秀的解决方案。你会发现牛人无处不在。</p>
+<p><a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">javascript-puzzlers</a></p>
+<p>  44道题，看完你会怀疑你是否真的学过JavaScript😂<br>  另附作者的解题链接<a href="http://flyfy1.github.io/language/2014/02/23/js-tricks-from-js-puzzlers.html" target="_blank" rel="noopener">http://flyfy1.github.io/language/2014/02/23/js-tricks-from-js-puzzlers.html</a></p>
+<p><a href="https://freecodecamp.cn/" target="_blank" rel="noopener">https://freecodecamp.cn</a></p>
+<p><a href="http://www.lixuejiang.me/2016/11/01/JavaScript%E7%9A%84%E7%BB%83%E4%B9%A0%E7%BD%91%E7%AB%99%E6%94%B6%E9%9B%86/freecodecamp.com" target="_blank" rel="noopener">freecodecamp.com</a>的中文版，可以学习前端，后端，数据可视化等知识</p>
+<p><a href="http://es6katas.org/" target="_blank" rel="noopener">http://es6katas.org/</a><br>  一个用tdd学习es6的网站，学完之后对es6的各种特性会有深入的了解</p>
+<p><a href="https://www.nowcoder.com/ta/js-assessment" target="_blank" rel="noopener">https://www.nowcoder.com/ta/js-assessment</a><br>  牛客网的练习题</p>
+<p><a href="https://leetcode.com/" target="_blank" rel="noopener">https://leetcode.com/</a><br>  有名的oj系统，听说有人通过这个网站刷题进了google</p>
+<p><a href="https://nodeschool.io/zh-cn/#workshoppers" target="_blank" rel="noopener">nodeschool.io</a><br>  nodeschool,有很多js和es6以及web相关的教程</p>
+<p><a href="https://www.hackerrank.com/" target="_blank" rel="noopener">https://www.hackerrank.com</a><br>  一个英文的学习网站，类似oj的形式，有数据结构算法的课程，也有正则表达式等课程，质量还不错</p>
+<p><a href="http://superherojs.com/" target="_blank" rel="noopener">http://superherojs.com/</a></p>
 
   </div>
   

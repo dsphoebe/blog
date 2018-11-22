@@ -28,6 +28,10 @@
           <a href="/archives" class="menu-item-link">归档</a>
         </li>
       
+        <li class="menu-item">
+          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
+        </li>
+      
     </ul>
   </nav>
   <h1 class="pc">a[href=&#34;code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
@@ -98,7 +102,7 @@
 <p>JavaScript 有一些保留字，不能用作标识符：arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield</p>
 <h2 id="4-注释"><a href="#4-注释" class="headerlink" title="4. 注释"></a>4. 注释</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">多行</span></span><br><span class="line"><span class="comment">注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <p>JavaScript 兼容 HTML 代码的注释，所以 <code>&lt;!--</code> 和 <code>--&gt;</code>是合法的单行注释</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span>; <span class="xml"><span class="comment">&lt;!-- x = 2;</span></span></span><br><span class="line"><span class="xml">--&gt; x = 3;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span>; &lt;!-- x = 2;</span><br><span class="line">--&gt; x = 3;</span><br></pre></td></tr></table></figure>
 <p>上面的代码只有 <code>x = 1</code>会执行，其他部分都注释掉了。</p>
 <p>注意 <code>—&gt;</code>只有在行首才能被当成单行注释，否则正常运算</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">countdown</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (n --&gt; <span class="number">0</span>) <span class="built_in">console</span>.log(n);</span><br><span class="line">&#125;</span><br><span class="line">countdown(<span class="number">3</span>)</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
