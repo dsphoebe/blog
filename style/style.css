@@ -172,6 +172,13 @@ code {
   background-color: #f2f2f2;
   border-radius: 3px;
 }
+.practice {
+  position: absolute;
+  right: 0;
+  border: 1px solid #00a0fc;
+  border-radius: 2px;
+  width: 1rem;
+}
 .article-entry pre,
 .article-entry .highlight {
   background: #2d2d2d;
