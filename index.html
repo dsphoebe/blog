@@ -163,12 +163,12 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">f1</span>: <span class="string">'foo'</span>, <span class="attr">f2</span>: <span class="string">'bar'</span>&#125;)</span><br><span class="line"><span class="comment">// Object &#123;f1: "foo", f2: "bar"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.dir(&#123;<span class="attr">f1</span>: <span class="string">'foo'</span>, <span class="attr">f2</span>: <span class="string">'bar'</span>&#125;)</span><br><span class="line"><span class="comment">// Object</span></span><br><span class="line"><span class="comment">//   f1: "foo"</span></span><br><span class="line"><span class="comment">//   f2: "bar"</span></span><br><span class="line"><span class="comment">//   __proto__: Object</span></span><br></pre></td></tr></table></figure>
 <p>对输出 DOM 对象非常有用，因为会显示 DOM 对象的所有属性。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
-<p><img src="/Users/sunyanhui/寄几/hexo/dsphoebe/source/images/console/dir-example.png" alt=""></p>
+<p><img src="/images/console/dir-example.png" alt=""></p>
 <p>Node 环境下还可以指定以代码高亮的形式输出。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(obj, &#123;<span class="attr">colors</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
 <p>dirxml 方法主要用于以目录树的形式，显示 DOM 节点</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.dirxml(<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
-<p><img src="/Users/sunyanhui/寄几/hexo/dsphoebe/source/images/console/dirxml-example.png" alt=""></p>
+<p><img src="/images/console/dirxml-example.png" alt=""></p>
 <p>如果参数不是 DOM 节点，而是普通的 JavaScript 对象，console.dirxml 等同于 console.dir。</p>
 <h3 id="console-assert"><a href="#console-assert" class="headerlink" title="console.assert()"></a>console.assert()</h3><p>console.assert 方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序执行。这样就相当于提示用户，内部状态不正确。</p>
 <p>它接受两个参数，第一个参数是表达式，第二个参数是字符串。只有当第一个参数为 false，才会提示有错误，在控制台输出第二个参数，否则不会有任何结果。</p>
