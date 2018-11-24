@@ -200,7 +200,7 @@ console.dir({f1: 'foo', f2: 'bar'})
 console.dir(document.body)
 ```
 
-![](/Users/sunyanhui/寄几/hexo/dsphoebe/source/images/console/dir-example.png)
+![](/images/console/dir-example.png)
 
 Node 环境下还可以指定以代码高亮的形式输出。
 
@@ -214,7 +214,7 @@ dirxml 方法主要用于以目录树的形式，显示 DOM 节点
 console.dirxml(document.body)
 ```
 
-![](/Users/sunyanhui/寄几/hexo/dsphoebe/source/images/console/dirxml-example.png)
+![](/images/console/dirxml-example.png)
 
 如果参数不是 DOM 节点，而是普通的 JavaScript 对象，console.dirxml 等同于 console.dir。
 
