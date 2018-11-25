@@ -95,6 +95,7 @@ a:hover {
 .main .post img {
   display: block;
   margin: 1.5rem auto;
+  max-width: 58rem;
 }
 .main .post-meta {
   margin: 0 0 0.5rem;
