@@ -75,6 +75,7 @@
 <p>🤔 32 位整数的最大值与最小值</p>
 <p>因为位运算是有符号的 32 位整数，最高位为符号位，不参与运算，正数是 0 000 0000 0000 0000 0000 0000 0000 0000 0000 0000 到 0 111 1111 1111 1111 1111 1111 1111 1111 就是 0 到 2147483647，负数是从 1 000 0000 0000 0000 0000 0000 0000 0000 0000 0001 到 1 111 1111 1111 1111 1111 1111 1111 1111 为负 1 到负 2147483647，中间还有一个 1 000 0000 0000 0000 0000 0000 0000 0000 0000 0000 表示为负零，但是负零和正零都表示零，重复了。所以计算机规定把 1 000 0000 0000 0000 0000 0000 0000 0000 0000 0000 表示 -2147483648</p>
 <p>所以或运算的最大值为 2147483647，最小值为 -2147483648</p>
+<p>PS 快捷方法是：最大值 <code>~(1 &lt;&lt; 31)</code>，最小值 <code>1 &lt;&lt; 31</code></p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">2147483647</span> | <span class="number">0</span> <span class="comment">// 2147483647</span></span><br><span class="line"><span class="number">2147483649.4</span> | <span class="number">0</span> <span class="comment">// -2147483647</span></span><br><span class="line"><span class="number">2147483648</span> | <span class="number">0</span> <span class="comment">// -2147483648</span></span><br><span class="line"><span class="number">-2147483648</span> | <span class="number">0</span> <span class="comment">// -2147483648</span></span><br><span class="line"><span class="number">-2147483649</span> | <span class="number">0</span> <span class="comment">// 2147483647</span></span><br></pre></td></tr></table></figure>
 <h2 id="二进制与运算-amp"><a href="#二进制与运算-amp" class="headerlink" title="二进制与运算 &amp;"></a>二进制与运算 &amp;</h2><p>二进制位与运算，两个二进制位两个都为 1 时返回 1 其他返回 0</p>
