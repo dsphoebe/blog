@@ -42,34 +42,28 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">linux 命令行图片翻转</h2>
+    <h2 class="title">rsync 同步</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2017-12-20 12:40:00</span>
+    <span class="post-time">2018-01-02 15:49:05</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/imagemagick/">imagemagick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片/">图片</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rsync/">rsync</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/权限/">权限</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>胖达的网站里面的图片都是我本地直接 rysnc iPhone 手机里的照片到阿里云的。<br>结果好多图片都是横着的。</p>
-<p>好，找到这个：<br>ImageMagick 图片翻转<br>convert example.jpg -rotate 90 example-rotated.jpg</p>
-<p><a href="https://linux.cn/article-21-1.html" target="_blank" rel="noopener">Linux图片软件</a>安装了 gpicview，这个软件应该是在 Linux GUI 里面用的。<br><a href="http://blog.csdn.net/get_set/article/details/51276609" target="_blank" rel="noopener">移除 apt-get remove –purge gpicview</a></p>
-<p>最后居然还是 ImageMagick</p>
-<p>安排 ImageMagick 问题：</p>
-<ul>
-<li>display.im6: unable to open X server `’ @ error/display.c/DisplayImageCommand/428. 没找到解决的办法</li>
+    <ul>
+<li>-v 显示 rsync 运行的日志</li>
+<li>–rsync-path 指定远程机器上要运行的程序以启动远程 rsync 进程<ul>
+<li>所以把 nginx 配置挪到aa服务器的 rsync 命令是：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rsync -v --rsync-path=&quot;sudo rsync&quot; file.conf aa:/etc/nginx/sites-available/</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>转移另一个方案：<br>虽然图片翻转了，可是 hexo 里面的图片样式的设置也是个麻烦的事。iPhone 直接 rsync 的图片也有点大了，每次请求都好慢。（还是想再研究下ImageMagick的其他方法，也许能找到合适的。）<br>转战本地修饰好了，改好宽高，压缩了大小，美化了照片再上传。</p>
-<p>2017-12-21 updated<br>照片是在太大了，随便都是几兆。压缩下</p>
-<p>参考链接：</p>
-<ul>
-<li><a href="http://blog.csdn.net/zrools/article/details/51347471" target="_blank" rel="noopener">Linux下图像压缩、格式转换、缩放、旋转</a></li>
-<li><a href="https://www.imagemagick.org/script/index.php" target="_blank" rel="noopener">ImageMagick</a></li>
-<li><a href="https://www.computerhope.com/issues/ch001720.htm" target="_blank" rel="noopener">How can I open an image file from the Linux terminal?</a></li>
-<li><a href="http://www.jianshu.com/p/05bdcbe320f6" target="_blank" rel="noopener">mac 命令行批量处理照片</a></li>
+</li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="http://www.cnblogs.com/f-ck-need-u/p/7221713.html" target="_blank" rel="noopener">Rsync 中文手册</a></li>
 </ul>
 
   </div>
@@ -78,7 +72,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/45/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="page-number" href="/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/page/47/">47</a><a class="page-number" href="/page/48/">48</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="extend next" rel="next" href="/page/47/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/45/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="page-number" href="/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/page/47/">47</a><a class="page-number" href="/page/48/">48</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/47/">下一页&raquo;</a>
   </nav>
 
     </main>
