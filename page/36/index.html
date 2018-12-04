@@ -42,75 +42,81 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">理解 CSS 的堆叠上下文和堆叠顺序</h2>
+    <h2 class="title">SFTP 传输协议简介</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-01 16:16:06</span>
+    <span class="post-time">2018-11-06 18:50:03</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/z-index/">z-index</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/堆叠上下文/">堆叠上下文</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/堆叠顺序/">堆叠顺序</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SFTP/">SFTP</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h2 id="堆叠顺序"><a href="#堆叠顺序" class="headerlink" title="堆叠顺序"></a>堆叠顺序</h2><p>从下面这些例子里面可以看出来，各属性及元素的堆叠顺序。</p>
-<p><code>background</code> 高于负 <code>z-index</code> :</p>
-<p></p><p data-height="263" data-theme-id="light" data-slug-hash="VEorav" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: background vs negative z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/VEorav/" target="_blank" rel="noopener">The stacking order: background vs negative z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p><code>background</code> 在 <code>border</code> 层下面，就像 Photoshop 里面，新建一个文件，默认的第一个图层而且是不可编辑图层就是带背景的图层，想通的可以这样理解为，设计 CSS 的人也是认为背景是最下面的，这大概是个常识吧。</p>
-<p><code>border</code> 高于 <code>background</code> ：</p>
-<p></p><p data-height="200" data-theme-id="light" data-slug-hash="YJmrXd" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/YJmrXd/" target="_blank" rel="noopener">The stacking order</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p>内联元素高于 <code>border</code>：</p>
-<p></p><p data-height="300" data-theme-id="light" data-slug-hash="xyvXOj" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs inline/text" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXOj/" target="_blank" rel="noopener">The stacking order: border vs inline/text</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p>浮动元素高于 <code>border</code>：</p>
-<p></p><p data-height="251" data-theme-id="light" data-slug-hash="yRmzQp" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: border vs float" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/yRmzQp/" target="_blank" rel="noopener">The stacking order: border vs float</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p>内嵌元素高于浮动元素：</p>
-<p></p><p data-height="239" data-theme-id="light" data-slug-hash="xyvXdJ" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: multiple inline VS float" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvXdJ/" target="_blank" rel="noopener">The stacking order: multiple inline VS float</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p>浮动元素高于块级元素：</p>
-<p></p><p data-height="265" data-theme-id="light" data-slug-hash="gBVGob" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: float vs block" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/gBVGob/" target="_blank" rel="noopener">The stacking order: float vs block</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p>定位元素高于浮动元素。</p>
-<p></p><p data-height="236" data-theme-id="light" data-slug-hash="PyMJyN" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking order: float vs position" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/PyMJyN/" target="_blank" rel="noopener">The stacking order: float vs position</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-
-
-<h3 id="总结为："><a href="#总结为：" class="headerlink" title="总结为："></a>总结为：</h3><p>从高到低从第一层到第八层：</p>
-<p>第一层 正 <code>z-index</code><br>第二层  <code>z-index</code> 0 层<br>第三层 内嵌元素 / 文本<br>第四层 浮动元素<br>第五层 块级元素<br>第六层 <code>border</code> 层<br>第七层 <code>background</code> 层<br>第八层 负 <code>z-index</code> 层</p>
-<p>如果相同层级的元素，后出现的会盖住先出现的。</p>
-<h2 id="堆叠上下文"><a href="#堆叠上下文" class="headerlink" title="堆叠上下文"></a>堆叠上下文</h2><p>根据元素自身的属性按照优先级顺序占用堆叠上下文的空间。</p>
-<p>堆叠的属性及元素：</p>
-<ul>
-<li>HTML</li>
-<li><code>z-index</code> 值 不为 <code>auto</code> 的 绝对/相对定位</li>
-<li><code>z-index</code> 值 不为 <code>auto</code> 的 <code>flex</code> item 元素</li>
-<li><code>opacity</code> 不为 1</li>
-<li><code>transform</code> 不为 <code>none</code></li>
-<li><code>mix</code>-blend-mode 不为 <code>normal</code></li>
-<li><code>filter</code> 不为 <code>none</code></li>
-<li><code>perspective</code> 不为 <code>none</code></li>
-<li><code>isolation</code> 不为 <code>isolate</code></li>
-<li><code>position</code> 为 <code>fixed</code></li>
-<li><code>will-change</code> 指定了 CSS 属性，即使没指定这些属性的值</li>
-<li><code>-webkit-overflow-scrolling</code> 为 <code>touch</code></li>
-</ul>
-<h3 id="z-index"><a href="#z-index" class="headerlink" title="z-index"></a>z-index</h3><p>多个堆叠上下文间，<code>z-index</code> 父级越大的小子级大于小父级的大子级。</p>
-<p></p><p data-height="540" data-theme-id="light" data-slug-hash="xyvPrK" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="The stacking context: z-index" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/xyvPrK/" target="_blank" rel="noopener">The stacking context: z-index</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<p>son2 的 z-index 值大于 son1，但是 son1 却显示在 son2 上面一层，因为 father1 的 z-index 值大于 father2 的 z-index 值。</p>
-<h2 id="深入阅读"><a href="#深入阅读" class="headerlink" title="深入阅读"></a>深入阅读</h2><p><a href="https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/" target="_blank" rel="noopener">深入理解CSS中的层叠上下文和层叠顺序</a></p>
+    <h2 id="什么是-SFTP"><a href="#什么是-SFTP" class="headerlink" title="什么是 SFTP"></a>什么是 SFTP</h2><p>SFTP SSH 文件传输协议，与普通的文本传输协议 FTP 相比，SFTP 传输过程中用了加密/解密技术，效率比 FTP 传输要低得多。</p>
+<p><strong>它的优势是可以利用安全的连接传输文件</strong>，<strong>还能遍历本地和远端系统上的文件</strong>。</p>
+<h2 id="登录服务器"><a href="#登录服务器" class="headerlink" title="登录服务器"></a>登录服务器</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sftp username@remote_host_name_or_IP</span><br></pre></td></tr></table></figure>
+<p><code>!</code> 或 <code>exit</code> 或 <code>bye</code> 退出 SFTP</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>登录远端服务器后，这些 SFTP 命令 ～</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pwd</td>
+<td>查看远端当前目录</td>
+</tr>
+<tr>
+<td>lpwd</td>
+<td>查看本地当前目录</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>查看远端当前目录下的文件</td>
+</tr>
+<tr>
+<td>lls</td>
+<td>查看本地当前目录下的文件</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>跳转到远端某个目录</td>
+</tr>
+<tr>
+<td>lcd</td>
+<td>跳转到本地某个目录</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>创建远端目录</td>
+</tr>
+<tr>
+<td>lmkdir</td>
+<td>创建本地目录</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>删除远端文件</td>
+</tr>
+<tr>
+<td>rmdir</td>
+<td>删除远端文件夹</td>
+</tr>
+<tr>
+<td>chmod、chown、chgrp</td>
+<td>修改文件权限</td>
+</tr>
+</tbody>
+</table>
+<p>远端命令前加小写字母 <code>l</code> 就是本地的命令。在 put / get 传输完文件，<code>lls</code>, <code>ls</code> 切换查看本地和远端文件传输情况。</p>
+<h2 id="传输文件到远端"><a href="#传输文件到远端" class="headerlink" title="传输文件到远端"></a>传输文件到远端</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">put local_file_name</span><br><span class="line">put -r local_dir</span><br><span class="line">reput local_file_name // 续传，帅</span><br></pre></td></tr></table></figure>
+<h2 id="下载文件到本地"><a href="#下载文件到本地" class="headerlink" title="下载文件到本地"></a>下载文件到本地</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">get remote_file_name</span><br><span class="line">get -r remote_dir</span><br><span class="line">reget remote_file_name // 续传，接着下载，好帅呀</span><br></pre></td></tr></table></figure>
+<p>基本上上面几个命令就够平常的操作了。</p>
 
   </div>
   
@@ -118,7 +124,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/35/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/37/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/35/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/37/">下一页&raquo;</a>
   </nav>
 
     </main>

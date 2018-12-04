@@ -42,75 +42,225 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">如何在网页中插入 icon</h2>
+    <h2 class="title">CSS 基础知识</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-05 18:48:38</span>
+    <span class="post-time">2018-11-13 10:57:16</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-Sprite/">CSS Sprite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVG/">SVG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVG-Sprite/">SVG Sprite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVG-icon/">SVG icon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Symbol/">Symbol</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>从古至今人类就用图标作为交流工具，通过视觉语言来传达信息。比如 象形文字，皇族图腾等。而现今 Web 和 UX 设计的兴起，在 Web 中几乎没有网站或者 APP 没用使用 icon 了。比如 各类网站的分享到微信的微信 icon，点赞的大拇指 icon 或者 心形 icon，还有各种表情 icon。如何在网页中插入 icon 呢？</p>
-<h2 id="直接插入"><a href="#直接插入" class="headerlink" title="直接插入"></a>直接插入</h2><p>最简单的是用 <code>&lt;img&gt;</code> 插入图片 icon 图片，代码如下：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"icon-wechat.png"</span> <span class="attr">alt</span>=<span class="string">"微信"</span> <span class="attr">title</span>=<span class="string">"分享到微信"</span> <span class="attr">width</span>=<span class="string">"25"</span> <span class="attr">height</span>=<span class="string">"25"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span> /&gt;</span> 分享到微信</span><br></pre></td></tr></table></figure>
-<p>可能会有这样的一个场景，PM 希望鼠标 hover 的时候，icon-wechat.png 能被体现出来鼠标经过它了，然后设计师就给了一张图 icon-wechat-hover.png，这个时候咱们可以把 icon-wechat-hover.png 放到另一个 <code>&lt;img&gt;</code> 里，然后再用 CSS 的伪类<code>:hover</code>来实现效果。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"share-2-wechat"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"icon-wechat.png"</span> <span class="attr">alt</span>=<span class="string">"微信"</span> <span class="attr">title</span>=<span class="string">"分享到微信"</span> <span class="attr">width</span>=<span class="string">"25"</span> <span class="attr">height</span>=<span class="string">"25"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"icon-wechat-hover.png"</span> <span class="attr">alt</span>=<span class="string">"微信"</span> <span class="attr">title</span>=<span class="string">"分享到微信"</span> <span class="attr">width</span>=<span class="string">"25"</span> <span class="attr">height</span>=<span class="string">"25"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">  分享到微信</span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.share-2-wechat</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.share-2-wechat</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: initial;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.share-2-wechat</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="http://js.jirengu.com/caboc" target="_blank" rel="noopener">查看DEMO 》</a></p>
-<h3 id="缺点是："><a href="#缺点是：" class="headerlink" title="缺点是："></a>缺点是：</h3><ul>
-<li>对这样一个小小的效果会发送两个 HTTP 请求，<a href="https://webflow.com/blog/the-pros-and-cons-of-icons-in-web-design" target="_blank" rel="noopener">现在 HTTP/2 时代来了也还好了</a></li>
-</ul>
-<blockquote>
-<p>网站为了使请求数减少，通常采用对页面上的图片、脚本进行极简化处理。但是，这一举措十分不方便，也不高效，依然需要诸多HTTP链接来加载页面和页面资源。</p>
-<p>HTTP/2引入了<strong>服务器推送</strong>，即服务端向客户端发送比客户端请求更多的数据。这允许服务器直接提供浏览器渲染页面所需资源，而无须浏览器在收到、解析页面后再提起一轮请求，节约了加载时间。</p>
-</blockquote>
-<h2 id="CSS-背景图"><a href="#CSS-背景图" class="headerlink" title="CSS 背景图"></a>CSS 背景图</h2><p>把 icon-wechat.png 作为 .share-2-wechat 的背景，hover 的时候把背景图片换成 icon-wechat-hover.png。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"share-2-wechat"</span>&gt;</span></span><br><span class="line">  分享到微信</span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.share-2-wechat</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(icon-wechat.png) <span class="number">0</span> center no-repeat;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.share-2-wehcat</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(icon-wechat-hover.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码量上看，CSS 背景图的方法要比直接 image 插入的方法代码少了不少，而且代码也更加清晰。但它的缺点和直接 image 插入法一样，会有两个 HTTP 请求。同时因为 hover 的时候图片 icon-wechat-hover.png 其实是还没有下载的，所以这个时候如果网速慢 .share-2-wechat 框框里会出现一个空白期，然后等 icon-wechat-hover.png 加载完了才会显示，即一个闪屏的现象。</p>
-<h2 id="CSS-sprite-精灵图"><a href="#CSS-sprite-精灵图" class="headerlink" title="CSS sprite 精灵图"></a>CSS sprite 精灵图</h2><p>CSS sprite 是把所有的 icon 都合并到一张图片上，然后用 background-position 控制图片的位置以显示对应的 icon。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.share-2-wechat</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(icons.png) <span class="number">0</span> center no-repeat;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.share-2-wehcat</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> -<span class="number">25px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有许多工具可以实现 CSS sprite 图，以及对应的样式代码。比如：<a href="http://draeton.github.io/stitches/" target="_blank" rel="noopener">stitches</a>。缺点是后期维护修改不方便。如果某个 icon 的位置变了，影响到其他 icon 的位置，那整个 icons.png 相关的 icon 的样式都得修改，工作量不小哇。</p>
-<h2 id="Icon-Font-字体图标"><a href="#Icon-Font-字体图标" class="headerlink" title="Icon Font 字体图标"></a>Icon Font 字体图标</h2><p>如果 icon 的颜色都是单色的时候，可以用这个方法 iconfont</p>
-<p>它的大致原理是</p>
-<ol>
-<li><p>把 icon 画到一个字体文件里面，并给每个 icon 设置一个对应的 Unicode。这里的 Unicode 码位必须是 PUA (Private Use Area) 的 E000 - F8FF，Unicode 特意保留的自定义字符的区域，一共有 6400 个码位。网上说：阿里巴巴的 iconfont.cn 没有遵循这个最佳实践，用的是 CJK（Chinese Japanese Korean 中日韩统一表意文字）编码区间（U+3432）。还说，当浏览器加载字体出问题时，会还原成一些奇怪的中文文字，这对读屏软件也非常不友好。好在它的管理后台，可以手动的编辑这个 code point。但是其实他们设置的编码是 E6xx 的码位。</p>
-</li>
-<li><p>CSS 里设置 @fontface 的 src 指定为这个字体文件，定义它的 font-family。</p>
- <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 这里复制的 iconfont.cn 帮生成的字体文件，然后可以直接用的 font-face 代码 */</span></span><br><span class="line">@<span class="keyword">font-face</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">'iconfont'</span>;</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'//at.alicdn.com/t/font_681540_s4ya5or4w75jyvi.eot'</span>);</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'//at.alicdn.com/t/font_681540_s4ya5or4w75jyvi.eot?#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">'//at.alicdn.com/t/font_681540_s4ya5or4w75jyvi.woff'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">'//at.alicdn.com/t/font_681540_s4ya5or4w75jyvi.ttf'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">'//at.alicdn.com/t/font_681540_s4ya5or4w75jyvi.svg#iconfont'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置为第 2 步定义的 font-family</p>
- <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[data-icon]</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">'iconfont'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>content 为图标对应的 Unicode</p>
- <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-attr">[data-icon]</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(data-icon);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.share-2-wechat</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"share-2-wechat"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">i</span></span></span><br><span class="line"><span class="tag">    <span class="attr">aria-hidden</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">data-icon</span>=<span class="string">"&amp;#xe626;"</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span> 分享到微信</span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><a href="http://js.jirengu.com/hupaz" target="_blank" rel="noopener">查看 DEMO 》</a></p>
-<p>Icon Font 的问题是，字体只能是单色，最多实现渐变色，是不能实现彩色的。而 SVG 是可以实现彩色的 icon 的，可以给它的每个 path 或者其他标签单独加不同的颜色。</p>
-<h2 id="SVG-icon"><a href="#SVG-icon" class="headerlink" title="SVG icon"></a>SVG icon</h2><p>SVG Scalable Vector Graphics 可缩放矢量图形，是一种基于可扩展标记语言 XML，用于描述二维矢量图形的图形格式。也是 W3C 制定的标准之一。</p>
+    <h2 id="CSS-是什么"><a href="#CSS-是什么" class="headerlink" title="CSS 是什么"></a>CSS 是什么</h2><p>CSS 全称 Cascading Style Sheets 层叠样式表，是一种样式表的语言，用来描述 HTML 或 XML 文档的呈现。CSS 描述了在屏幕、纸质、音频等媒体上的元素应该如何渲染。</p>
 <ul>
-<li>SVG 可以直接插入到网页，成为 DOM 的一部分，并且可以用 CSS 和 JavaScript 操作</li>
-<li>SVG 也可以写入一个独立文件中，再用 <code>&lt;img&gt;</code>、<code>&lt;object&gt;</code>、<code>&lt;embed&gt;</code>、<code>&lt;iframe&gt;</code>等标签插入网页中</li>
-<li>SVG 文件也可以作为 CSS 的 <code>background</code></li>
-<li>SVG 文件还可以被转为 base64 编码，然后作为 Data URI 写入网页</li>
+<li>94 年由哈肯&middot;唯姆&middot;莱提出并展示，W3C 也正是这一年由李爵士成立。</li>
+<li>95 年 W3C 组织 CSS 讨论会</li>
+<li>96 年 12 月哈肯&middot;唯姆&middot;莱与伯特&middot;波斯发布 CSS 规范第 1 版</li>
 </ul>
-<h3 id="彩色的-SVG-icon"><a href="#彩色的-SVG-icon" class="headerlink" title="彩色的 SVG icon"></a>彩色的 SVG icon</h3><p>如下 SVG 代码，可以看出控制 <code>&lt;path&gt;</code> 的 fill 颜色就可以产出彩色的 icon 啦：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">style</span>=<span class="string">"width: 3em; height: 3em;"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 1024 1024"</span> <span class="attr">version</span>=<span class="string">"1.1"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M910.9 958.5H278.3c-29.9 0-54.2-24.3-54.2-54.2v-787c0-29.9 24.3-54.2 54.2-54.2h491.3c10 0 18.1 8.1 18.1 18.1v135.6H947c10 0 18.1 8.1 18.1 18.1v669.4c0 29.8-24.3 54.2-54.2 54.2zM278.3 99.3c-10 0-18.1 8.1-18.1 18.1v786.9c0 10 8.1 18.1 18.1 18.1h632.6c10 0 18.1-8.1 18.1-18.1V252.9H769.5c-10 0-18.1-8.1-18.1-18.1V99.3H278.3z"</span> <span class="attr">fill</span>=<span class="string">"#EE7401"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M947.4 253H769.9c-10 0-18.1-8.1-18.1-18.1V81.2c0-7.1 4.1-13.5 10.6-16.4 6.4-2.9 14-1.9 19.3 2.8L801.9 85c0.2 0.1 0.3 0.3 0.5 0.4l156.9 135.8c5.7 4.9 7.7 12.9 5.1 20-2.7 7.1-9.4 11.8-17 11.8zM788 216.8h111l-111-96.1v96.1zM664.5 781.5H79.4c-11.4 0-20.7-9.3-20.7-20.7V490.6c0-11.4 9.3-20.7 20.7-20.7h585.2c11.4 0 20.7 9.3 20.7 20.7v270.2c-0.1 11.4-9.4 20.7-20.8 20.7z"</span> <span class="attr">fill</span>=<span class="string">"#EE7401"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M355.4 677.5H288l-14.6 53.4h-42.2L297.8 523h48.9l66.9 207.9H370l-14.6-53.4z m-9-32.3l-6.2-22.8c-6.5-21.6-12.1-45.5-18.3-68h-1.1c-5.3 22.8-11.5 46.4-17.7 68l-6.2 22.8h49.5zM438 522.9h41.6v207.9H438V522.9z"</span> <span class="attr">fill</span>=<span class="string">"#FFFFFF"</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>icon 图就是下图啦：</p>
-<svg style="width: 3em; height: 3em;" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><br/>  <path d="M910.9 958.5H278.3c-29.9 0-54.2-24.3-54.2-54.2v-787c0-29.9 24.3-54.2 54.2-54.2h491.3c10 0 18.1 8.1 18.1 18.1v135.6H947c10 0 18.1 8.1 18.1 18.1v669.4c0 29.8-24.3 54.2-54.2 54.2zM278.3 99.3c-10 0-18.1 8.1-18.1 18.1v786.9c0 10 8.1 18.1 18.1 18.1h632.6c10 0 18.1-8.1 18.1-18.1V252.9H769.5c-10 0-18.1-8.1-18.1-18.1V99.3H278.3z" fill="#EE7401"/><br/>  <path d="M947.4 253H769.9c-10 0-18.1-8.1-18.1-18.1V81.2c0-7.1 4.1-13.5 10.6-16.4 6.4-2.9 14-1.9 19.3 2.8L801.9 85c0.2 0.1 0.3 0.3 0.5 0.4l156.9 135.8c5.7 4.9 7.7 12.9 5.1 20-2.7 7.1-9.4 11.8-17 11.8zM788 216.8h111l-111-96.1v96.1zM664.5 781.5H79.4c-11.4 0-20.7-9.3-20.7-20.7V490.6c0-11.4 9.3-20.7 20.7-20.7h585.2c11.4 0 20.7 9.3 20.7 20.7v270.2c-0.1 11.4-9.4 20.7-20.8 20.7z" fill="#EE7401"/><br/>  <path d="M355.4 677.5H288l-14.6 53.4h-42.2L297.8 523h48.9l66.9 207.9H370l-14.6-53.4z m-9-32.3l-6.2-22.8c-6.5-21.6-12.1-45.5-18.3-68h-1.1c-5.3 22.8-11.5 46.4-17.7 68l-6.2 22.8h49.5zM438 522.9h41.6v207.9H438V522.9z" fill="#FFFFFF"/><br/></svg>
-
-<h3 id="用-Symbol-实现-SVG-Sprite"><a href="#用-Symbol-实现-SVG-Sprite" class="headerlink" title="用 Symbol 实现 SVG Sprite"></a>用 Symbol 实现 SVG Sprite</h3><p>SVG Sprite 是把所有的 icons 放到 一个SVG 文件里，一个 icon 对应 一个 symbol，用 symbol 的 id 来标识每个 icon，在需要插入 icon 的位置<code>&lt;use xherf:link=&quot;sprites.svg#icon-xx&quot;&gt;&lt;/use&gt;</code>插入。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- sprites.svg 里面定义 symbol  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon-ai"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">symbol</span> <span class="attr">id</span>=<span class="string">"icon-gif"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">symbol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- use symbol --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">style</span>=<span class="string">"width: 3em; height: 3em;"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 1024 1024"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"sprites.svg#icon-ai"</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">style</span>=<span class="string">"width: 3em; height: 3em;"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 1024 1024"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"sprites.svg#icon-gif"</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><a href="http://demo.dsphoebe.com/svg-sprites/" target="_blank" rel="noopener">查看 DEMO 》</a></p>
-<h2 id="CSS-预编译处理器"><a href="#CSS-预编译处理器" class="headerlink" title="CSS 预编译处理器"></a>CSS 预编译处理器</h2><p>如果是用预编译器编写 CSS，个人更倾向于 database64，不管是矢量还是位图。</p>
-<h2 id="CSS-画-icon"><a href="#CSS-画-icon" class="headerlink" title="CSS 画 icon"></a>CSS 画 icon</h2><p>还有其他有意思的 <a href="http://cssicon.space" target="_blank" rel="noopener">cssicon.space</a>，作者用 CSS 实现了各种图标。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://nimbupani.com/markup-free-icon-fonts-with-unicode-range.html" target="_blank" rel="noopener">Markup-free icon fonts using unicode-range</a><br><a href="https://glyphsapp.com/tutorials/creating-an-icon-webfont" target="_blank" rel="noopener">Creating an Icon Webfont</a><br><a href="https://webflow.com/blog/the-pros-and-cons-of-icons-in-web-design" target="_blank" rel="noopener">The pros and cons of icons in web design</a><br><a href="https://css-tricks.com/html-for-icon-font-usage/" target="_blank" rel="noopener">HTML for Icon Font Usage</a><br><a href="http://www.ruanyifeng.com/blog/2018/08/svg.html" target="_blank" rel="noopener">SVG 图像入门教程</a><br><a href="https://tympanus.net/codrops/2015/07/16/styling-svg-use-content-css/" target="_blank" rel="noopener">Styling SVG <use></use> Content with CSS</a></p>
+<h2 id="为什么使用-CSS"><a href="#为什么使用-CSS" class="headerlink" title="为什么使用 CSS"></a>为什么使用 CSS</h2><p>样式从内容分离到单独的样式文件中可：</p>
+<ul>
+<li>避免重复</li>
+<li>更容易维护</li>
+<li>为不同目的，使用不同的样式而内容相同</li>
+</ul>
+<p>!import 是为用户提供的，相对于开发者的样式，浏览器的样式，用户自定义的样式级别最高。</p>
+<h2 id="CSS-是如何工作的？"><a href="#CSS-是如何工作的？" class="headerlink" title="CSS 是如何工作的？"></a>CSS 是如何工作的？</h2><p>当浏览器显示文档时，它必须将文档的内容与其样式信息结合。它分为两个阶段：</p>
+<ol>
+<li>浏览器先将标 HTML 和 CSS 转化成 DOM，DOM 代表了计算机内存中的相应文档，因为它已经融合了文档内容和相应的样式表。</li>
+<li>浏览器显示 DOM 的内容。</li>
+</ol>
+<p><img src="https://mdn.mozillademos.org/files/11781/rendering.svg" alt="img"></p>
+<h2 id="CSS-语法"><a href="#CSS-语法" class="headerlink" title="CSS 语法"></a>CSS 语法</h2><h3 id="CSS-声明"><a href="#CSS-声明" class="headerlink" title="CSS 声明"></a>CSS 声明</h3><p><img src="https://mdn.mozillademos.org/files/16188/css_syntax_-_declaration.png" alt=""></p>
+<h3 id="CSS-声明块"><a href="#CSS-声明块" class="headerlink" title="CSS 声明块"></a>CSS 声明块</h3><p><img src="https://mdn.mozillademos.org/files/3667/css%20syntax%20-%20declarations%20block.png" alt="img"></p>
+<h3 id="CSS-选择器和规则"><a href="#CSS-选择器和规则" class="headerlink" title="CSS 选择器和规则"></a>CSS 选择器和规则</h3><p><img src="https://mdn.mozillademos.org/files/3668/css%20syntax%20-%20ruleset.png" alt="img"></p>
+<h3 id="CSS-语句"><a href="#CSS-语句" class="headerlink" title="CSS 语句"></a>CSS 语句</h3><ul>
+<li>@ 规则 用来传递元数据、条件信息或其他描述性信息。用 @ 开始，半角分号 ; 结束。<ul>
+<li>@charset 和 @import 元数据</li>
+<li>@media、 @document、@supports 条件信息<ul>
+<li>@media 浏览器的设备匹配表达式条件运用该规则下的内容</li>
+<li>@supports 浏览器支持被测功能时运用该规则下的内容</li>
+<li>@document 当前页面匹配一些条件时运用该规则下的内容</li>
+</ul>
+</li>
+<li>@font-face描述性信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><h3 id="简单选择器"><a href="#简单选择器" class="headerlink" title="简单选择器"></a>简单选择器</h3><ul>
+<li>类型选择器 / 元素选择器</li>
+<li>类选择器</li>
+<li>ID 选择器</li>
+<li>通用选择器（<code>*</code>）</li>
+</ul>
+<h3 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h3><ul>
+<li>存在和值属性选择器：<ul>
+<li>[attr]：选择有 attr 属性的元素</li>
+<li>[attr=”val”]：选择属性 attr 的值为 val 的元素</li>
+<li>[attr~=”val”]：选择属性 attr 的值含有单词 val 的元素</li>
+</ul>
+</li>
+<li>子串值属性值 / <strong>伪正则选择器</strong>：<ul>
+<li>[attr|=”val”]：选择 attr 属性的值是单词 val 或者以子字符串 val- 开头的元素</li>
+<li>[attr^=”val”]：选择 attr 属性的值以子字符串 val 开头（包含子字符串 val）的元素</li>
+<li>[attr$=”val”]：选择 attr 属性的值以子字符串 val 结尾（包含子字符串 val）的元素。</li>
+<li>[attr*=”val”]：选择 attr 属性的值中包含子字符串 val 的元素</li>
+</ul>
+</li>
+<li>大小写匹配属性选择器<ul>
+<li>[attr=”val” i]</li>
+</ul>
+</li>
+</ul>
+<h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h3><p>大部分伪类元素都是针对表单元素的，<code>:focus</code> 、<code>:blur</code>、<code>:disabled</code>、<code>:enabled</code>、<code>:in-range</code>、<code>:out-of-range</code>、<code>:valide</code>、<code>:invalide</code>、<code>:indeterminate</code>、<code>:default</code>、<code>:required</code>、<code>:optional</code>、<code>:checked</code></p>
+<p>然后是<code>&lt;a&gt;</code>标签的，<code>:link</code>、<code>:visited</code>、<code>:hover</code>、<code>:active</code></p>
+<p>所有元素的，<code>:hover</code>、<code>:focus</code>、<code>:blur</code>、<code>:first-child</code>、<code>:last-child</code>、<code>:nth-child</code>、<code>:nth-last-child</code>、<code>:only-of-type</code>、<code>:only-child</code>、<code>:nth-last-of-type</code>、<code>:nth-of-type</code>、<code>:first-of-type</code>、<code>:last-of-type</code>、<code>:target</code></p>
+<p>空元素 <code>:empty</code></p>
+<p>非选择器 <code>:not()</code></p>
+<p><code>&lt;style&gt;</code>元素的 <code>:scope</code></p>
+<p>根元素 <code>:root</code></p>
+<p>打印相关：<code>:left</code>、<code>:right</code>、<code>:first</code>、<code>:last</code>、</p>
+<table>
+<thead>
+<tr>
+<th>伪类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:indeterminate</code></td>
+<td>表示不确定的表单元素。<code>&lt;progress&gt;</code> <code>&lt;input type=&quot;radio&quot;&gt;</code> <code>&lt;input type=&quot;checkbox&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>:only-of-type</code></td>
+<td>任意一个元素，这个元素没有其他相同类型的兄弟元素</td>
+</tr>
+<tr>
+<td><code>:in-range</code> 与 <code>:out-of-range</code></td>
+<td><code>&lt;input&gt;</code>元素的当前值是否处于 <code>min</code> 和 <code>max</code> 限定的范围之内</td>
+</tr>
+<tr>
+<td><code>:default</code></td>
+<td>表示一组相关元素中的默认表单元素</td>
+</tr>
+<tr>
+<td><code>:empty</code></td>
+<td>没有子元素的元素，子元素只可以是元素节点或者文本（包括空格）</td>
+</tr>
+<tr>
+<td><code>:left</code> <code>:right</code></td>
+<td>需要和 <code>@</code> 规则 <code>@page</code>配套使用，对打印文档的左 / 右侧页设置 CSS 样式</td>
+</tr>
+<tr>
+<td><code>:link</code> <code>:visited</code> <code>:hover</code> <code>:active</code></td>
+<td>出于隐私原因 <code>:visited</code> 可以设置的样式只有 color，background-color，border-color，border-bottom-color，border-left-color，border-right-color，border-top-color，column-rule-color，outline-color。<code>:active</code> 它让页面能在浏览器监测到激活时给出反馈，比如鼠标交互时，它代表的是用户按下按键和松开按揭之间的时间。LVHA</td>
+</tr>
+<tr>
+<td><code>:root</code></td>
+<td>文档的根元素，优先级比 <code>html</code> 选择器高</td>
+</tr>
+<tr>
+<td><code>:first</code></td>
+<td><code>@page</code> 打印文档的第一页样式</td>
+</tr>
+<tr>
+<td><code>:scope</code></td>
+<td>CSS 作用域，可以给 <code>&lt;style&gt;</code> 定义 scope 来定义新的参考点， Vue ❓</td>
+</tr>
+<tr>
+<td><code>:target</code></td>
+<td>代表一个唯一的页面元素，其 ID 与当前 URL 片段匹配  ❕ 很有意思的一个伪类，可以用它来实现无 JavaScript 的弹窗</td>
+</tr>
+<tr>
+<td><code>:valid</code> <code>:invalid</code></td>
+<td>通过验证 未通过验证的 <code>&lt;input&gt;</code>或者 <code>&lt;form&gt;</code> 元素</td>
+</tr>
+<tr>
+<td><code>:only-child</code></td>
+<td>独生子元素，等效于 <code>:first-child:last-child</code> 或者 <code>:nth-child(1):nth-lastchild(1)</code>，只是 <code>:only-child</code>  优先级更高</td>
+</tr>
+<tr>
+<td>:not()</td>
+<td>可以将一个或多个以逗号分隔的选择器作为其参数，选择器中不得包含另一个否定选择符或者伪元素</td>
+</tr>
+</tbody>
+</table>
+<h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><ul>
+<li>::after，::before，::first-line，::first-letter</li>
+<li>::selection 只有一小部分 CSS 属性可以用：color，background-color，cursor，outline，text-decoration，text-emphasis-color，text-shadow</li>
+</ul>
+<h3 id="组合器和选择器组"><a href="#组合器和选择器组" class="headerlink" title="组合器和选择器组"></a>组合器和选择器组</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>组合器</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>选择器组</td>
+<td>A, B</td>
+<td></td>
+</tr>
+<tr>
+<td>后代选择器</td>
+<td>A B</td>
+<td></td>
+</tr>
+<tr>
+<td>子选择器</td>
+<td>A &gt; B</td>
+<td></td>
+</tr>
+<tr>
+<td>相邻兄弟选择器</td>
+<td>A + B</td>
+<td>上一个兄弟是 A 的 B 元素</td>
+</tr>
+<tr>
+<td>通用兄弟选择器</td>
+<td>A ~ B</td>
+<td>之前有一个兄弟是 A 的 B 元素</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CSS-选择器的优先级"><a href="#CSS-选择器的优先级" class="headerlink" title="CSS 选择器的优先级"></a>CSS 选择器的优先级</h3><ul>
+<li><code>style</code> 属性中的声明在千位加 1；</li>
+<li>每包含一个 ID 选择器就在百位加 1；</li>
+<li>每包含一个类选择器、属性选择器、或者伪类在十位加 1；</li>
+<li>每包含一个元素选择器、或者伪元素就在个位中加 1。</li>
+</ul>
+<p>通用选择器（<code>*</code>），复合选择器（<code>+</code>，<code>&gt;</code>，<code>~</code>，<code>&#39;&#39;</code>）和否定伪类选择器（<code>:not</code>）不符合上面的规则。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li>inherit 继承自父元素</li>
+<li>initial 没有浏览器默认值的自然继承属性值与 inherit 一样</li>
+<li>unset 重置为自然值，如果自然继承属性值为 inherit，否则为 initail</li>
+<li>revert 当前节点没有任何样式，设置为用户设置的样式</li>
+</ul>
+<p>有意思的一点：没设置<code>border-color</code> 的时候，<code>border-color</code>继承的是 <code>color</code> 的值</p>
+<h2 id="CSS-的值和单位"><a href="#CSS-的值和单位" class="headerlink" title="CSS 的值和单位"></a>CSS 的值和单位</h2><p>0 是无单位的，比如 <code>margin: 0</code> ；无单位的行高 <code>line-height: 1.2</code>； 动画执行的次数 <code>animation-iteration-count: 5</code> ；透明度 <code>opacity: .5</code> ；</p>
+<p>常见单位：</p>
+<ul>
+<li>绝对单位：px</li>
+<li>相对单位：<ul>
+<li>em 相对父级 M 的宽度，</li>
+<li>rem 相对于 <code>html</code> M 的宽度，</li>
+<li>百分比</li>
+<li>vw，vh 视窗宽度的 1 / 100，视窗高度的 1 / 100</li>
+</ul>
+</li>
+</ul>
+<p>十六进制值与颜色值：#ff0000，缩写 #f00，颜色值 red</p>
+<p>函数：rgb(r,g,b)，rgba(r,g,b,透明度)，hsl()，hsla()，url()，calc()，rotate()，translate()</p>
+<h2 id="CSS-盒模型"><a href="#CSS-盒模型" class="headerlink" title="CSS 盒模型"></a>CSS 盒模型</h2><p>border-box 盒模型</p>
+<p><img src="https://mdn.mozillademos.org/files/13649/box-model-alt-small.png" alt="img"></p>
+<p>普通盒模型</p>
+<p><img src="https://mdn.mozillademos.org/files/13647/box-model-standard-small.png" alt="img"></p>
+<p>框的高度不遵守百分比的长度；框的高度总是采用框内容的高度，除非制定一个绝对的高度值。</p>
 
   </div>
   
@@ -118,7 +268,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/34/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/36/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/34/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/36/">下一页&raquo;</a>
   </nav>
 
     </main>
