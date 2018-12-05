@@ -1,5 +1,5 @@
 ---
-title: JavaScript-数据类型
+title: JavaScript 数据类型
 date: 2018-12-05 15:12:37
 tags:
 ---
