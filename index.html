@@ -52,8 +52,8 @@
     
   </div>
   <div class="post-content">
-    <p>JavaScript 除了 ES6 的 Symbol 类型，一共还有 6 种数据类型，分别是原始类型 string，number，boolean，引用类型 object，两个特殊类型 undefined、null。</p>
-<h2 id="string-字符串类型"><a href="#string-字符串类型" class="headerlink" title="string 字符串类型"></a>string 字符串类型</h2><p>字符串类型是用单引号或者双引号包含的 0 个或者多个字符就是字符串。如果单引号内再出现单引号，需要转义，如果双引号内再出现双引号，也需要转义一下。转义即在需要转义的引号前加反斜杆。</p>
+    <p>JavaScript 除了 ES6 的 Symbol 类型，一共还有 6 种数据类型，分别是原始类型 string、number、boolean、undefined、null，引用类型 object。</p>
+<h2 id="string-字符串"><a href="#string-字符串" class="headerlink" title="string 字符串"></a>string 字符串</h2><p>字符串类型是用单引号或者双引号包含的 0 个或者多个字符就是字符串。如果单引号内再出现单引号，需要转义，如果双引号内再出现双引号，也需要转义一下。转义即在需要转义的引号前加反斜杆。</p>
 <p>多行字符串，在切换换行的结尾需要加入反斜杆，并且反斜杆后不能出现空格或者其他字符。一般多行字符的时候，会把字符分开多个单行字符然后用 + 连接。还有，因为 function.toString 方法不会过滤掉注释，可以把字符串写在注释内，再调用该方法，已经 split，slice，join 合作实现多行字符串。或者用 ES6 的模版字符串实现。</p>
 <p>转义字符反斜杆后除了在转义引号内的同类引号，还可以加 b 后退键 \b，\f 换页符，\0 null，\t \v 制表符，以及 <code>\\</code>反斜杆。还可以后面 3 个八进制数值转义八进制 \777，十六进制 \x00a9。加正常字符的时候直接返回字符。</p>
 <p>字符串是类数组，它有 length 方法，也可以通过 str[index] 获取第 index 位的字符</p>

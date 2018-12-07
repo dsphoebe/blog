@@ -1,0 +1,129 @@
+<!Doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>CSS 变量 | FE NOTEBOOK</title>
+  
+    <link rel="icon" href="/images/favico.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/style/gitalk.css">
+  <link rel="stylesheet" href="/style/style.css">
+  <script src="/js/gitalk.min.js"></script>
+</head>
+  <body>
+    <header class="header">
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">首页</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link">归档</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <h1 class="pc">a[href=&#34;code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
+  <em>「 困住你的从来都是你自己！」</em>
+</header>
+    <main class="main">
+      <article class="post">
+  <div class="post-title">
+    <h2 class="title">CSS 变量</h2>
+  </div>
+  <div class="post-meta">
+    <span class="post-time">2018-11-25 17:29:12</span>
+    <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-Custom-Properties/">CSS Custom Properties</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-Variables/">CSS Variables</a></li></ul>
+      
+    </span>
+    
+  </div>
+  <div class="post-content">
+    <p><img src="https://i.imgur.com/a7sW8y2.gif" alt="alt"></p>
+<p>CSS 变量是指由 CSS 开发者和用户定义的实体，自定义属性来设置变量，然后用 var() 方法来访问这个自定义变量。实际上 CSS 变量又叫 CSS 自定义属性。</p>
+<p>在之前，原生 CSS 是没有变量的，如果多个选择器使用同一个颜色，就得来回在选择器之间多次复制粘贴。直到后来有了 CSS 预编译器 Less、Sass、Stylus 等有了变量。</p>
+<p>但现在我们有了 CSS 变量并且现在已经<a href="https://www.w3.org/TR/css-variables-1/" target="_blank" rel="noopener">标准化</a>了，<a href="https://www.neowin.net/news/css-custom-properties-are-coming-to-microsoft-edge-in-the-windows-10-creators-update" target="_blank" rel="noopener">IE 的 Edge 也将实现该标准</a>。</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>CSS 变量用 <code>--*</code>定义变量，用<code>var(--*)</code>使用变量，<code>*</code>表示变量名。因为 Sass 用了 <code>$</code> 而 Less 用了 <code>@</code>，为了不产生冲突，CSS 变量用 <code>--</code> 作为前缀。</p>
+<p><strong>首先声明一个变量</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    <span class="attribute">--main-bg-color</span>: brown;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里 <code>:root</code> 是 CSS 结构性伪类，它匹配的是文档树的根元素，对 HTML 来说就是 <code>&lt;html&gt;</code>。不过 <code>:root</code> 的优先级要比 <code>html</code> 选择器的优先级要高，因为伪类选择器的优先级要高于元素选择器优先级。在 JavaScript 中 <code>:root</code> 对应 的是 <code>document.documentElement</code>。</p>
+<p><strong>然后使用这个变量</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: <span class="keyword">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下</p>
+<p></p><p data-height="191" data-theme-id="light" data-slug-hash="EOLqNJ" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="learn CSS variables" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/EOLqNJ/" target="_blank" rel="noopener">learn CSS variables</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="CSS-变量命名规范"><a href="#CSS-变量命名规范" class="headerlink" title="CSS 变量命名规范"></a>CSS 变量命名规范</h2><ul>
+<li>大小写敏感</li>
+<li>不能包含<code>$</code>、<code>[</code>、<code>^</code>、<code>(</code>、<code>%</code>等特殊字符</li>
+<li>支持数字，字母，下划线，横线</li>
+<li>支持中文、日文或者韩文</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--color</span>: red;</span><br><span class="line">  <span class="attribute">--Color</span>: yellow; <span class="comment">/* 和上面的 --color 是两个不同的变量 */</span></span><br><span class="line">  --$: 12px; /* 无效 */</span><br><span class="line">	<span class="selector-tag">--1</span>: <span class="selector-tag">blue</span>; <span class="comment">/* 是有效的 */</span> </span><br><span class="line">  <span class="selector-tag">--main_color</span>: <span class="selector-tag">green</span>;</span><br><span class="line">  --中国: 'China'; /* 有效的 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="通过-var-使用-CSS-变量"><a href="#通过-var-使用-CSS-变量" class="headerlink" title="通过 var() 使用 CSS 变量"></a>通过 var() 使用 CSS 变量</h2><p>var() 函数的语法是<code>var[&lt;自定义属性&gt;[,&lt;自定义属性的默认值&gt;]]</code> ，意思就是如果自定义属性不存在，就会使用自定义属性默认值来渲染。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    <span class="comment">/*--main-bg-color: brown;*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color, green);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个时候 div 的背景颜色就是绿色的，因为它没有找到 <code>--main-bg-color</code></p>
+<p>var() 函数第二个参数可以多层嵌套的：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  --bg1: red;</span><br><span class="line">  <span class="selector-tag">--bg2</span>: <span class="selector-tag">yellow</span>;</span><br><span class="line"><span class="comment">/*   --bg3: blue; */</span></span><br><span class="line"><span class="comment">/*  --bg4: dark;  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--bg4, var(--bg3, var(--bg2))) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的 div 显示的颜色值是黄色，–bg4 和 –bg3 都不存在，就用的 —bg3 的默认值 –bg2 了。</p>
+<p>var() 函数返回值后面会带一个空格</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--font-size</span>: <span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">var</span>(--font-size)<span class="built_in">px</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的 div 的 font-size 不会是 12px，因为 var 的返回值后面会带一个空格，div 的 font-size 值为 <code>12 px</code>，浏览器是不能识别的，是无效字号。</p>
+<p>正确写法应该是下面两种：</p>
+<p>第一种：定义的 CSS 变量就带了 px</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">var</span>(--font-size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二种：使用 calc 函数计算带上 px</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--font-size</span>: <span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">calc</span>(var(--font-size) * <span class="number">1px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带单位的 CSS 变量不能加引号，否则使用的时候不能识别。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">	<span class="attribute">--height</span>: <span class="string">'100px'</span>;</span><br><span class="line">  <span class="attribute">--width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">var</span>(--height); <span class="comment">/* 无效 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">var</span>(--width);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>div 的高度不会如期显示为 CSS 变量定义的 100px，但是 width 却是正确的。</p>
+<p>var() 函数不能嵌套 url() 方法，url 方法要放到 CSS 变量里面。而且需要是绝对地址？</p>
+<h2 id="CSS-变量的作用域"><a href="#CSS-变量的作用域" class="headerlink" title="CSS 变量的作用域"></a>CSS 变量的作用域</h2><p>CSS 预处理器的变量是静态的，语法作用域是限制在调用该变量的当前预处理器文件中。而原生 CSS 变量是自定义属性，与普通 CSS 属性一样，作用域是 DOM，是能继承或者覆盖父级或者祖先级元素的同类属性值的。</p>
+<blockquote>
+<p>在 CSS 中，一个元素的实际属性是由其自身属性以及其祖先元素的属性层叠得到的，CSS 变量也支持层叠的特性，当一个属性没有在当前元素定义，则会转而使用其祖先元素的属性。在当前元素定义的属性，将会覆盖祖先元素的同名属性。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    <span class="attribute">--main-bg-color</span>: brown;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">--main-bg-color</span>: red;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p></p><p data-height="249" data-theme-id="light" data-slug-hash="EOLqeY" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="Inherit CSS variables" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/EOLqeY/" target="_blank" rel="noopener">Inherit CSS variables</a> by dsphoebe (<a href="https://codepen.io/dsphoebe" target="_blank" rel="noopener">@dsphoebe</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>我们除了在 <code>:root</code> 里面定义了一个 <code>--main-bg-color</code> 之外，在 <code>div</code>里面也定义了一个 <code>--main-bg-color</code>，理所当然 当我们在 <code>div</code> 里面使用这个这个 CSS 属性的时候 <code>:root</code> 下的 <code>--main-bg-color</code> 会被 <code>div</code> 下定义的 <code>--main-bg-color</code> 覆盖的。这里的 <code>:root</code> 是 CSS 变量的最大作用域，也就是全局作用域。</p>
+<h2 id="HTML-的-style-属性中使用"><a href="#HTML-的-style-属性中使用" class="headerlink" title="HTML 的 style 属性中使用"></a>HTML 的 style 属性中使用</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">var</span>(--color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>红色的了<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"--color:yellow;"</span>&gt;</span>黄色的啊<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="与-JavaScript-的交互"><a href="#与-JavaScript-的交互" class="headerlink" title="与 JavaScript 的交互"></a>与 JavaScript 的交互</h2><p>JavaScript 访问 CSS 变量：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.style.getPropertyValue(<span class="string">'--color'</span>);</span><br></pre></td></tr></table></figure>
+<p>获取全局 CSS 变量，通过 <code>document.documentElement</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> rootStyle = getComputedStyle(<span class="built_in">document</span>.documentElement);</span><br><span class="line"><span class="keyword">var</span> cssVariable = root.getPropertyValue(<span class="string">'--color'</span>).trim();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(cssVariable) <span class="comment">// 'red'</span></span><br></pre></td></tr></table></figure>
+<p>修改 CSS 变量的值：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.documentElement.style.setProperty(<span class="string">'--color'</span>, <span class="string">'black'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="浏览器支持情况"><a href="#浏览器支持情况" class="headerlink" title="浏览器支持情况"></a>浏览器支持情况</h2><p><img src="/images/css-variables/caniuse.png" alt="caniuse"></p>
+<p><code>@support</code> 检测 CSS 是否支持 CSS 变量</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">@<span class="keyword">supports</span> ((--css: <span class="string">'variables'</span>)) &#123;</span><br><span class="line">  <span class="comment">/* 已经支持了 */</span></span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">supports</span> (not (--css: <span class="string">'variables'</span>)) &#123;</span><br><span class="line">  <span class="comment">/* 不支持啊 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JavaScript 检测是否支持 CSS 变量</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.CSS &amp;&amp; <span class="built_in">window</span>.CSS.supports &amp;&amp; <span class="built_in">window</span>.CSS.supports(<span class="string">'--css'</span>, <span class="string">'variables'</span>)) &#123;</span><br><span class="line">  alert(<span class="string">'已经支持了'</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">'不支持啊'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于老版本的浏览器没有 <code>CSS.supports()</code> 方法的，可以用<a href="https://gist.github.com/wesbos/8b9a22adc1f60336a699" target="_blank" rel="noopener">这个方法</a></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testCSSVariables</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> color = <span class="string">'rgb(255,198,0)'</span>;</span><br><span class="line">  <span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</span><br><span class="line">  </span><br><span class="line">  el.style.setProperty(<span class="string">'--color'</span>, color);</span><br><span class="line">  el.style.setProperty(<span class="string">'background'</span>, <span class="string">'var(--color)'</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(el);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> styles = getComputedStyle(el);</span><br><span class="line">  <span class="keyword">var</span> doesSupport = styles.backgroundColor === color;</span><br><span class="line">  <span class="built_in">document</span>.body.removeChild(el);</span><br><span class="line">  <span class="keyword">return</span> doesSupport;</span><br><span class="line">&#125;</span><br><span class="line">testCSSVariables();</span><br></pre></td></tr></table></figure>
+<h2 id="下一篇：Houdini"><a href="#下一篇：Houdini" class="headerlink" title="下一篇：Houdini"></a>下一篇：Houdini</h2><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html" target="_blank" rel="noopener">CSS 变量教程</a><br><a href="https://www.zhangxinxu.com/wordpress/2016/11/css-css3-variables-var/" target="_blank" rel="noopener">小tips:了解CSS/CSS3原生变量var</a></p>
+
+  </div>
+  
+</article>
+    </main>
+    <footer>
+  <p>&copy; 2018 dsphoebe.com <wbr> <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
+</footer>
+  </body>
+</html>
