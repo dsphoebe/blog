@@ -5,9 +5,9 @@ tags:
 ---
 
 
-JavaScript 除了 ES6 的 Symbol 类型，一共还有 6 种数据类型，分别是原始类型 string，number，boolean，引用类型 object，两个特殊类型 undefined、null。
+JavaScript 除了 ES6 的 Symbol 类型，一共还有 6 种数据类型，分别是原始类型 string、number、boolean、undefined、null，引用类型 object。
 
-## string 字符串类型
+## string 字符串
 
 字符串类型是用单引号或者双引号包含的 0 个或者多个字符就是字符串。如果单引号内再出现单引号，需要转义，如果双引号内再出现双引号，也需要转义一下。转义即在需要转义的引号前加反斜杆。
 

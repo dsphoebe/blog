@@ -26,7 +26,7 @@
   <div class="post-content">
     <%- page.content %>
   </div>
-  <% if (isPageHome === 'dsphoebe') {%>
+  <% if (typeof isPageHome === 'dsphoebe') {%>
     <div id="gitalk-container"></div>
     <script>
       var gitalk = new Gitalk({
