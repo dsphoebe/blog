@@ -42,38 +42,36 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Fabric 使用</h2>
+    <h2 class="title">服务器迁移相关知识点</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-01-03 14:48:03</span>
+    <span class="post-time">2018-01-10 15:45:37</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fabric/">Fabric</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动部署/">自动部署</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器迁移/">服务器迁移</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>pip install fabric</p>
-<h3 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h3><ul>
-<li><p>新建fabfile.py<br>touch fabfile.py</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(name=<span class="string">'world'</span>)</span>:</span></span><br><span class="line">    print(<span class="string">'Hello %s'</span> % name)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行fab</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fab hello:dsphoebe</span><br><span class="line">out: Hello dsphoebe</span><br><span class="line"></span><br><span class="line">     Done.</span><br></pre></td></tr></table></figure>
+    <h3 id="服务器进程"><a href="#服务器进程" class="headerlink" title="服务器进程"></a>服务器进程</h3><ul>
+<li>pstree<ul>
+<li>tmux</li>
+<li>crontab</li>
+<li>nginx</li>
+<li>supervisor</li>
+</ul>
 </li>
 </ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>完全python语法</li>
-<li>省了<code>if __name__ == &quot;__main__&quot;</code></li>
-<li>local测试本地</li>
-<li>settings修改env变量</li>
-<li>失败的处理</li>
-<li>其他api：prefix，run，sudo等</li>
+<h3 id="rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path"><a href="#rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path" class="headerlink" title="rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/"></a>rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/</h3><h3 id="aws"><a href="#aws" class="headerlink" title="aws"></a>aws</h3><ul>
+<li>安全组 ssh登录22端口没开</li>
+<li>ssh -vvv ssh log</li>
 </ul>
-<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><ul>
-<li><a href="http://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html" target="_blank" rel="noopener">概览 &amp; 教程</a></li>
-<li><a href="https://github.com/dsphoebe/flask-fabric" target="_blank" rel="noopener">项目代码</a></li>
+<h3 id="bash-read-file"><a href="#bash-read-file" class="headerlink" title="bash read file"></a>bash read file</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in `cat file.txt`</span><br><span class="line">  do</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>mysqldump databases a &gt; a.sql</li>
+<li>mysql &lt; a.sql</li>
+<li>mysqldump –all-database &gt; all.sql</li>
 </ul>
 
   </div>
@@ -82,7 +80,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/53/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/55/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/53/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/61/">61</a><a class="extend next" rel="next" href="/page/55/">下一页&raquo;</a>
   </nav>
 
     </main>
