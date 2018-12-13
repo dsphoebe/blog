@@ -60,7 +60,7 @@ div {
 
 效果如下
 
-<p data-height="191" data-theme-id="light" data-slug-hash="EOLqNJ" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="learn CSS variables" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/EOLqNJ/">learn CSS variables</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="191" data-slug-hash="EOLqNJ" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="learn CSS variables" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/EOLqNJ/">learn CSS variables</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 ### 命名规范
@@ -209,7 +209,7 @@ div {
 }
 ```
 
-<p data-height="249" data-theme-id="light" data-slug-hash="EOLqeY" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="Inherit CSS variables" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/EOLqeY/">Inherit CSS variables</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="249" data-slug-hash="EOLqeY" data-default-tab="css,result" data-user="dsphoebe" data-pen-title="Inherit CSS variables" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/EOLqeY/">Inherit CSS variables</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 我们除了在 `:root` 里面定义了一个 `--main-bg-color` 之外，在 `div`里面也定义了一个 `--main-bg-color`，理所当然 当我们在 `div` 里面使用这个这个 CSS 属性的时候 `:root` 下的 `--main-bg-color` 会被 `div` 下定义的 `--main-bg-color` 覆盖的。这里的 `:root` 是 CSS 变量的最大作用域，也就是全局作用域。
@@ -303,7 +303,12 @@ testCSSVariables();
 
 CSS 变量实现动画，不会需要过多的 DOM 操作。它结合 CSS calc 函数的加、减、乘、除实现动画。
 
-<p data-height="265" data-theme-id="light" data-slug-hash="yGeObY" data-default-tab="js,result" data-user="dsphoebe" data-pen-title="CSS Variables animation" class="codepen">See the Pen <a href="https://codepen.io/dsphoebe/pen/yGeObY/">CSS Variables animation</a> by dsphoebe (<a href="https://codepen.io/dsphoebe">@dsphoebe</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-slug-hash="mmQNZJ" data-default-tab="css,result" data-user="tutsplus" data-pen-title="CSS Variables Animation" class="codepen">See the Pen <a href="https://codepen.io/tutsplus/pen/mmQNZJ/">CSS Variables Animation</a> by Envato Tuts+ (<a href="https://codepen.io/tutsplus">@tutsplus</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+更帅的，结合 Rxjs，CSS Variables 开发的动画。😭 看来要抓紧时间学下 Rxjs 了。
+
+<p data-height="265" data-slug-hash="rmQXbK" data-default-tab="css,result" data-user="tutsplus" data-pen-title="Sunset/Sunrise Animation with CSS Variables" class="codepen">See the Pen <a href="https://codepen.io/tutsplus/pen/rmQXbK/">Sunset/Sunrise Animation with CSS Variables</a> by Envato Tuts+ (<a href="https://codepen.io/tutsplus">@tutsplus</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 ## 下一篇：Houdini
@@ -312,3 +317,4 @@ CSS 变量实现动画，不会需要过多的 DOM 操作。它结合 CSS calc �
 
 [CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)
 [小tips:了解CSS/CSS3原生变量var](https://www.zhangxinxu.com/wordpress/2016/11/css-css3-variables-var/)
+[Houdini：CSS 领域最令人振奋的革新](https://zhuanlan.zhihu.com/p/20939640)
