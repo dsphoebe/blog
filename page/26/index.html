@@ -42,81 +42,99 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">比较运算符</h2>
+    <h2 class="title">基础考题</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-22 10:32:58</span>
+    <span class="post-time">2018-11-22 18:35:18</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 12 篇《比较运算符》</p>
-<p>比较运算符用于比较两个值的大小，然后返回一个布尔值，表示满足指定的条件。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span> &gt; <span class="number">1</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>比较运算符可以比较各种类型的值，不仅仅是数值</p>
-<p>JavaScript 一共提供了 8 个比较运算符</p>
-<ul>
-<li>大于运算符 <code>&gt;</code></li>
-<li>小于运算符 <code>&lt;</code></li>
-<li>小于或者等于运算符 <code>&lt;=</code></li>
-<li>大于或者等于运算符 <code>&gt;=</code></li>
-<li>相等运算符 <code>==</code></li>
-<li>严格相等运算符 <code>===</code></li>
-<li>不相等运算符 <code>!=</code></li>
-<li>严格不相等运算符 <code>!==</code></li>
-</ul>
-<p>这 8 个比较运算符分成两类：相等比较和非相等比较。两者的规则是不一样的。</p>
-<p>对于非相等比较：算法是先看两个运算子是否都是字符串，如果是的，就按照 Unicode 码点顺序比较；如果不是就将两个运算子都转成数值，再进行大小比较。</p>
-<h2 id="非相等运算符：字符串比较"><a href="#非相等运算符：字符串比较" class="headerlink" title="非相等运算符：字符串比较"></a>非相等运算符：字符串比较</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'cat'</span> &gt; <span class="string">'Cat'</span> <span class="comment">// true c 的码点 99 大于 C 的码点 67</span></span><br><span class="line"><span class="string">'cat'</span> &gt; <span class="string">'dog'</span> <span class="comment">// false c 的码点 99，d 的码点 100</span></span><br><span class="line"><span class="string">'大'</span> &gt; <span class="string">'小'</span> <span class="comment">// false 大的码点是 22823，小的码点是 23567</span></span><br></pre></td></tr></table></figure>
-<h2 id="非相等运算符：非字符串的比较"><a href="#非相等运算符：非字符串的比较" class="headerlink" title="非相等运算符：非字符串的比较"></a>非相等运算符：非字符串的比较</h2><p>如果运算子中，至少有一个不是字符串</p>
-<p>如果两个运算子都是原始类型值，则先转成数值再比较。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span> &gt; <span class="string">'4'</span> <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 等同于 5 &gt; Number('4')</span></span><br><span class="line"><span class="comment">// 即 5 &gt; 4</span></span><br><span class="line"></span><br><span class="line"><span class="literal">true</span> &gt; <span class="literal">false</span> <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 等同于 Number(true) &gt; Number(false)</span></span><br><span class="line"><span class="comment">// 即 1 &gt; 0</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> &gt; <span class="literal">true</span> <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 等同于 2 &gt; Number(true)</span></span><br><span class="line"><span class="comment">// 即 2 &gt; 1</span></span><br></pre></td></tr></table></figure>
-<p>与 NaN 的比较，任何值包括 NaN 本身与 NaN 比较，返回的都是 false。NaN 任何数学运算结果都返回 NaN</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> &gt; <span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">1</span> &lt;= <span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">'1'</span> &gt; <span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">NaN</span> &gt; <span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">1</span> &gt; <span class="literal">undefined</span> <span class="comment">// undefined 会被转成数字 NaN</span></span><br></pre></td></tr></table></figure>
-<p>如果运算子都是对象，会转为原始类型的值，然后再进行比较</p>
-<p>对象转换成原始类型的值，算法是先调用 valueOf 方法；如果返回值还是对象，就再接着调用 toString 方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = [<span class="number">2</span>]</span><br><span class="line">x &gt; <span class="string">'11'</span> <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 等同于 [2].valueOf().toString() &gt; '11'</span></span><br><span class="line"><span class="comment">// 即 '2' &gt; '11' '2'的码点比'1'要大</span></span><br><span class="line"></span><br><span class="line">x.valueOf = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="string">'1'</span>&#125;</span><br><span class="line">x &gt; <span class="string">'11'</span> <span class="comment">// false</span></span><br><span class="line"><span class="comment">// 等同于 [2].valueOf() &gt; '11'</span></span><br><span class="line"><span class="comment">// 即 '1' &gt; '11'</span></span><br></pre></td></tr></table></figure>
-<p>两个对象之间的比较也是如此</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[<span class="number">2</span>] &gt; [<span class="number">1</span>] <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 等同于 [2].valueOf().toString() &gt; [1].valueOf().toString()</span></span><br><span class="line"><span class="comment">// 即 '2' &gt; '1'</span></span><br><span class="line"></span><br><span class="line">[<span class="number">2</span>] &gt; [<span class="number">11</span>] <span class="comment">//true</span></span><br><span class="line"><span class="comment">// 等同于 [2].valueOf().toString() &gt; [11].valueOf().toString()</span></span><br><span class="line"><span class="comment">// 即 '2' &gt; '11'</span></span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">x</span> : <span class="number">2</span>&#125; &gt;= &#123;<span class="attr">x</span> : <span class="number">1</span>&#125; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 等同于 &#123;x : 2&#125;.valueOf().toString() &gt;= &#123;x:1&#125;.valueOf().toString()</span></span><br><span class="line"><span class="comment">// 即 '[object Object]' &gt;= '[object Object]'</span></span><br></pre></td></tr></table></figure>
-<h2 id="严格相等运算符"><a href="#严格相等运算符" class="headerlink" title="严格相等运算符"></a>严格相等运算符</h2><p>不同类型的值，返回 false</p>
-<p>同一类型的原始类型值</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> === <span class="number">0x1</span> <span class="comment">// true 十六进制 0x1 就是十进制 1</span></span><br></pre></td></tr></table></figure>
-<p>NaN 与任何值都不相等包括它自身，正 0 等于 负 0</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">NaN</span> === <span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">-0</span> === +<span class="number">0</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>引用类型值比较时，是比较它们引用的是否是同一个地址。</p>
-<p>两个对象的比较，严格相等运算是比较的地址，但是大于或者小于运算符是比较的值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;&#125;</span><br><span class="line">obj1 &gt; obj2 <span class="comment">// false</span></span><br><span class="line">obj1 &lt;= obj2 <span class="comment">// true</span></span><br><span class="line">obj1 === obj2 <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>undefined 和 null，自身比较是严格相等的</p>
-<h2 id="严格不相等运算符"><a href="#严格不相等运算符" class="headerlink" title="严格不相等运算符 !=="></a>严格不相等运算符 !==</h2><p>严格不相等的算法是先求严格相等运算符的结果，然后返回取反值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> ！== <span class="string">'1'</span> <span class="comment">// true 等同与 !(1==='1')</span></span><br></pre></td></tr></table></figure>
-<h2 id="相等运算符"><a href="#相等运算符" class="headerlink" title="相等运算符"></a>相等运算符</h2><ul>
-<li><p>原始类型的比较，会先转换成数值再进行比较</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> == <span class="literal">true</span></span><br><span class="line"><span class="comment">// 即 1 == Number(true) </span></span><br><span class="line"><span class="comment">// 1 == 1 结果为 true</span></span><br><span class="line"></span><br><span class="line"><span class="string">'true'</span> == <span class="literal">true</span></span><br><span class="line"><span class="comment">// 即 Number('true') == Number(true) </span></span><br><span class="line"><span class="comment">// NaN == 1 结果为 false</span></span><br><span class="line"></span><br><span class="line"><span class="string">''</span> == <span class="number">0</span></span><br><span class="line"><span class="comment">// 即 Number('') == 0</span></span><br><span class="line"><span class="comment">// 0 == 0 结果为 true</span></span><br><span class="line"></span><br><span class="line"><span class="string">''</span> == <span class="literal">false</span></span><br><span class="line"><span class="comment">// 即 Number('') == Number(false)</span></span><br><span class="line"><span class="comment">// 0 == 0 结果为 true</span></span><br><span class="line"></span><br><span class="line"><span class="string">'1'</span> == <span class="literal">true</span></span><br><span class="line"><span class="comment">// 即 Number('1') == Number(true)</span></span><br><span class="line"><span class="comment">// 1 == 1 结果为 true</span></span><br><span class="line"></span><br><span class="line"><span class="string">'\n  123 \t'</span> == <span class="number">123</span></span><br><span class="line"><span class="comment">// 因为字符串转换为数值，省略前置和后置的空格 Number('123') == 123</span></span><br><span class="line"><span class="comment">// 123 == 123 结果为 true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对象与原始类型的比较，对象转成原始类型的值，再进行比较</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对象与数值比较时，对象转为数值</span></span><br><span class="line">[<span class="number">1</span>] == <span class="number">1</span></span><br><span class="line"><span class="comment">// Number([1]) == 1</span></span><br><span class="line"><span class="comment">// 1 == 1 结果为 true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象与字符串比较时，对象转为字符串</span></span><br><span class="line">[<span class="number">1</span>] == <span class="string">'1'</span></span><br><span class="line"><span class="comment">// String([1]) == '1'</span></span><br><span class="line"><span class="comment">// '1' == '1' 结果为 true</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>] == <span class="string">'1, 2'</span></span><br><span class="line"><span class="comment">// String([1,2]) == '1,2'</span></span><br><span class="line"><span class="comment">// '1,2' == '1,2' 结果为 true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象与布尔值进行比较时，两边都转为数值</span></span><br><span class="line">[<span class="number">1</span>] == <span class="literal">true</span></span><br><span class="line"><span class="comment">// Number([1]) == Number(true)</span></span><br><span class="line"><span class="comment">// 1 == 1 结果为 true</span></span><br><span class="line">[<span class="number">2</span>] == <span class="literal">true</span></span><br><span class="line"><span class="comment">// Number([2]) == Number(true)</span></span><br><span class="line"><span class="comment">// 2 == 1 结果为 false</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>undefined 和 null 与其他类型的值的比较都是为 false，它俩互相比较结果是 true。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">''</span> == <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">''</span> == <span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>相等运算符的缺点，违反直觉。建议用严格相等</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="string">''</span> <span class="comment">// true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">'0'</span> <span class="comment">// true</span></span><br><span class="line"><span class="number">2</span> == <span class="literal">true</span> <span class="comment">// false</span></span><br><span class="line"><span class="number">2</span> == <span class="literal">false</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">'false'</span> <span class="comment">// false  --&gt; Number(false) == Number('false') --&gt; 0 == NaN --&gt; false</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">'0'</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">false</span> == <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">false</span> == <span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">' \t\r\n '</span> == <span class="number">0</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="不相等运算符"><a href="#不相等运算符" class="headerlink" title="不相等运算符"></a>不相等运算符</h2><p>算法是先求相等运算符的结果，然后返回相反值。即</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> != <span class="string">'1'</span></span><br><span class="line"><span class="comment">// 即 !(1 == '1')</span></span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
+    <p>最近一直或者说又开始看阮一峰老师的《JavaScript 教程》，说起来我看了大概有三遍了，可是看完就忘，很多基础的东西在平常项目中用得也不多。</p>
+<p>鉴于我的记性这么地烂，就在博客里面开始记下笔记。</p>
+<p>可是 😂 我还是老是忘记呀，好不好。</p>
+<p>所以从网上收集基础考题来练手，保住我的记性！</p>
+<h2 id="题集"><a href="#题集" class="headerlink" title="题集"></a>题集</h2><p><a href="https://segmentfault.com/a/1190000008785931" target="_blank" rel="noopener">20个必会的JavaScript面试题</a><br><a href="https://github.com/dwqs/blog/issues/17" target="_blank" rel="noopener">你有必要知道的 25 个 JavaScript 面试题</a><br><a href="https://juejin.im/post/5b325c38e51d4558c7136818" target="_blank" rel="noopener">JS基础知识（覆盖JS基础面试题）</a><br><a href="https://blog.csdn.net/sunlijie1118/article/details/78825962" target="_blank" rel="noopener">js的6道基础题（笔试常考题）</a><br><a href="https://blog.csdn.net/xun527/article/details/78009044" target="_blank" rel="noopener">JavaScript试题练习题</a><br><a href="https://wenku.baidu.com/view/cc3ee4bbb8d528ea81c758f5f61fb7360b4c2be5.html?re=view" target="_blank" rel="noopener">JavaScript 基础阶段测笔试试题</a><br><a href="https://wenku.baidu.com/view/3528f6ec08a1284ac950432f.html" target="_blank" rel="noopener">Web基础考题(JavaScript-Part1)</a><br><a href="http://web.jobbole.com/86461/" target="_blank" rel="noopener">44个Javascript 变态题解析(上) </a><br><a href="http://www.voidcn.com/article/p-qvgglksg-bhp.html" target="_blank" rel="noopener">js基础试题</a><br><a href="https://leohxj.gitbooks.io/front-end-database/interview/interview-exercises-with-JavaScript.html" target="_blank" rel="noopener">JavaScript面试题</a></p>
+<h2 id="练习网站"><a href="#练习网站" class="headerlink" title="练习网站"></a>练习网站</h2><p>转自 <a href="http://www.lixuejiang.me/2016/11/01/JavaScript%E7%9A%84%E7%BB%83%E4%B9%A0%E7%BD%91%E7%AB%99%E6%94%B6%E9%9B%86/" target="_blank" rel="noopener">JavaScript练习网站收集</a></p>
+<p><a href="http://www.codewars.com/" target="_blank" rel="noopener">codewars</a></p>
+<p>  国外的一个练习网站，有JavaScript，也有Python，每种语言都有自己的道场（kata），每个用户都有不同的等级，刷题提高等级，也可以插卡别人优秀的解决方案。你会发现牛人无处不在。</p>
+<p><a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">javascript-puzzlers</a></p>
+<p>  44道题，看完你会怀疑你是否真的学过JavaScript😂<br>  另附作者的解题链接<a href="http://flyfy1.github.io/language/2014/02/23/js-tricks-from-js-puzzlers.html" target="_blank" rel="noopener">http://flyfy1.github.io/language/2014/02/23/js-tricks-from-js-puzzlers.html</a></p>
+<p><a href="https://freecodecamp.cn/" target="_blank" rel="noopener">https://freecodecamp.cn</a></p>
+<p><a href="http://www.lixuejiang.me/2016/11/01/JavaScript%E7%9A%84%E7%BB%83%E4%B9%A0%E7%BD%91%E7%AB%99%E6%94%B6%E9%9B%86/freecodecamp.com" target="_blank" rel="noopener">freecodecamp.com</a>的中文版，可以学习前端，后端，数据可视化等知识</p>
+<p><a href="http://es6katas.org/" target="_blank" rel="noopener">http://es6katas.org/</a><br>  一个用tdd学习es6的网站，学完之后对es6的各种特性会有深入的了解</p>
+<p><a href="https://www.nowcoder.com/ta/js-assessment" target="_blank" rel="noopener">https://www.nowcoder.com/ta/js-assessment</a><br>  牛客网的练习题</p>
+<p><a href="https://leetcode.com/" target="_blank" rel="noopener">https://leetcode.com/</a><br>  有名的oj系统，听说有人通过这个网站刷题进了google</p>
+<p><a href="https://nodeschool.io/zh-cn/#workshoppers" target="_blank" rel="noopener">nodeschool.io</a><br>  nodeschool,有很多js和es6以及web相关的教程</p>
+<p><a href="https://www.hackerrank.com/" target="_blank" rel="noopener">https://www.hackerrank.com</a><br>  一个英文的学习网站，类似oj的形式，有数据结构算法的课程，也有正则表达式等课程，质量还不错</p>
+<p><a href="http://superherojs.com/" target="_blank" rel="noopener">http://superherojs.com/</a></p>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p>转自<a href="https://blog.xuld.net/js-test/" target="_blank" rel="noopener">JS 能力自测题</a></p>
+<ol>
+<li>1 + 1</li>
+<li>1 + 2 + “3” + 4 + 5</li>
+<li>1e2.toFixed(2)</li>
+<li>NaN != NaN</li>
+<li>1 / 0 &lt; 2 / 0</li>
+<li><code>[0][0]</code></li>
+<li><code>[0, 1][0, 1]</code></li>
+<li><code>[0, 1, 2][0, 1, 2]</code></li>
+<li>[] != []</li>
+<li>1 + { valueOf(){ return 1 } }</li>
+<li>“1” + { toString(){ return “1” } }</li>
+<li>parseInt(Infinity)</li>
+<li>null == null</li>
+<li>![]</li>
+<li>+[]</li>
+<li>“123”.split(“”)</li>
+<li>“xuld222”.substr(2,3)</li>
+<li>[] instanceof Array</li>
+<li>“” instanceof String</li>
+<li>“我C”.length</li>
+<li>[1, 2, 3, 4, 5, 6].splice(2,3)</li>
+<li>“asas”.replace(“s”,”a”)</li>
+<li>1 / 0</li>
+<li>0 || 2</li>
+<li>[] &amp;&amp; {}</li>
+<li>~~2.99999999</li>
+<li>84.01 + 0.2 == 84.21</li>
+<li>3 &gt; 2 &gt; 1</li>
+<li>null instanceof Object</li>
+<li>Object instanceof Function</li>
+<li>Function instanceof Object</li>
+<li>[1, 2, 3].slice.call([4, 5, 6], 1)</li>
+<li>typeof typeof true</li>
+<li>0 == “”</li>
+<li>0 == false</li>
+<li>[] == false</li>
+<li>1 - 2 - “3” - 4 - 5</li>
+<li>[1, 2, 3].reverse().map(t =&gt; t)</li>
+<li>new Date(“1990/12/6”).getMonth()</li>
+<li>“\r” == “\n”</li>
+<li>0xFF == 0xff</li>
+<li>“\u0009” == “\t”</li>
+<li>2 &amp; 3</li>
+<li>4 &lt;&lt; 3</li>
+<li>1 &amp;&amp; 2 || 3</li>
+<li>0 &amp;&amp; 1 || 2</li>
+<li>1 || 2 &amp;&amp; 3</li>
+<li>0 || 1 &amp;&amp; 2</li>
+<li><code>[0][0][0]</code></li>
+<li>[1, …[2]]</li>
+<li>(t =&gt; t + 1)(t =&gt; t + 1)</li>
+<li>[1, 2, 3].shift()</li>
+</ol>
+<h2 id="专项提升"><a href="#专项提升" class="headerlink" title="专项提升"></a><a href="https://blog.xuld.net/categories/guide/programming-skill/" target="_blank" rel="noopener">专项提升</a></h2>
   </div>
   
 </article>
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/25/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/27/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/25/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="extend next" rel="next" href="/page/27/">下一页&raquo;</a>
   </nav>
 
     </main>
