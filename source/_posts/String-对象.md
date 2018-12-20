@@ -1,6 +1,6 @@
 ---
 title: String 对象
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-12-03 15:21:15
 ---

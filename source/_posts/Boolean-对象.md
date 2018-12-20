@@ -1,6 +1,6 @@
 ---
 title: Boolean 对象
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-11-29 10:53:42
 ---

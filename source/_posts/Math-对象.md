@@ -1,6 +1,6 @@
 ---
 title: Math 对象
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-12-04 15:24:01
 ---

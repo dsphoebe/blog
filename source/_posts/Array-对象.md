@@ -1,6 +1,6 @@
 ---
 title: Array 对象
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-11-28 14:23:08
 ---

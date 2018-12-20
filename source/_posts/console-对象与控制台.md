@@ -1,6 +1,6 @@
 ---
 title: console 对象与控制台
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-11-24 10:39:06
 ---

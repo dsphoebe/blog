@@ -1,6 +1,6 @@
 ---
 title: Number 对象
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-11-29 11:32:41
 ---

@@ -1,6 +1,6 @@
 ---
 title: Object 对象
-tags:
+category:
   - JavaScript 教程 - 笔记
 date: 2018-11-26 23:48:43
 ---
