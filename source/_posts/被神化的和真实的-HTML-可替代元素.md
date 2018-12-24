@@ -3,8 +3,9 @@ date: 2018-10-15
 title: 译文：被神化的和真实的 HTML 可替代标签
 tags: 
   - 可替代标签
-  - 译文
   - HTML
+category:
+  - 译文
 ---
 
 > 原文链接：[Replaced Elements in HTML: Myths and Realities](https://www.sitepoint.com/replaced-elements-html-myths-realities/)
