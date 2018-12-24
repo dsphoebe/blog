@@ -1,7 +1,11 @@
 ---
 title: NodeList 接口，HTMLCollection 接口
-category: [JavaScript 教程 - 笔记]
+category:
+  - JavaScript 教程 - 笔记
+date: 2018-12-24 23:50:27
+tags:
 ---
+
 
 NodeList 是 Node 对象的伪数组
 
