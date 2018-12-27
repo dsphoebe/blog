@@ -7,8 +7,6 @@ tags:
 date: 2018-11-15 16:30:18
 ---
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第二篇《JavaScript 语言的历史》
-
 ## 诞生
 
 JavaScript 因互联网而生

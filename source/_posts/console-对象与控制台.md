@@ -6,8 +6,6 @@ date: 2018-11-24 10:39:06
 ---
 
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第 19 篇《console 对象与控制台》
-
 ## console 对象
 
 console 对象是 JavaScript 的原生对象，它有点像 Unix 系统的标准输出 stdout 和标准错误 stderr，可以输出各种信息到控制台。并且还提供了很多有用的辅助方法。

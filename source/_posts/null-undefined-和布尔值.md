@@ -9,8 +9,6 @@ tags:
 date: 2018-11-16 14:28:22
 ---
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第五篇《null、undefined 和布尔值》
-
 ## null 与 undefined
 
 null 和 undefined 都是没有得意思。if 语句中判断都是 false；而且相等运算 == 返回 true。

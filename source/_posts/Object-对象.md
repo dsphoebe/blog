@@ -6,8 +6,6 @@ date: 2018-11-26 23:48:43
 ---
 
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第 20 篇《Object 对象》
-
 JavaScript 的所有其他对象都是继承自 Object 对象的，即所有对象都是 Object 的实例。
 
 Object 对象的原生方法分成两类：Object 本身的方法与 Object 的实例方法。

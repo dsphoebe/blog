@@ -12,8 +12,6 @@ tags:
 date: 2018-11-16 12:49:17
 ---
 
-这是读阮一峰老师的《JavaScript 教程》系列笔记第三篇《JavaScript 的基本语法》
-
 ## 1. 语句
 
 wiki 上[語句 (程式設計)](https://zh.wikipedia.org/wiki/語句_(程式設計))是这么说的
