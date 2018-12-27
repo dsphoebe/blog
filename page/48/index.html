@@ -42,81 +42,49 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">SFTP 传输协议简介</h2>
+    <h2 class="title">null、undefined 和布尔值</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-06 18:50:03</span>
+    <span class="post-time">2018-11-16 14:28:22</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SFTP/">SFTP</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/boolean/">boolean</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/undefined/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布尔值/">布尔值</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h2 id="什么是-SFTP"><a href="#什么是-SFTP" class="headerlink" title="什么是 SFTP"></a>什么是 SFTP</h2><p>SFTP SSH 文件传输协议，与普通的文本传输协议 FTP 相比，SFTP 传输过程中用了加密/解密技术，效率比 FTP 传输要低得多。</p>
-<p><strong>它的优势是可以利用安全的连接传输文件</strong>，<strong>还能遍历本地和远端系统上的文件</strong>。</p>
-<h2 id="登录服务器"><a href="#登录服务器" class="headerlink" title="登录服务器"></a>登录服务器</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sftp username@remote_host_name_or_IP</span><br></pre></td></tr></table></figure>
-<p><code>!</code> 或 <code>exit</code> 或 <code>bye</code> 退出 SFTP</p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>登录远端服务器后，这些 SFTP 命令 ～</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>pwd</td>
-<td>查看远端当前目录</td>
-</tr>
-<tr>
-<td>lpwd</td>
-<td>查看本地当前目录</td>
-</tr>
-<tr>
-<td>ls</td>
-<td>查看远端当前目录下的文件</td>
-</tr>
-<tr>
-<td>lls</td>
-<td>查看本地当前目录下的文件</td>
-</tr>
-<tr>
-<td>cd</td>
-<td>跳转到远端某个目录</td>
-</tr>
-<tr>
-<td>lcd</td>
-<td>跳转到本地某个目录</td>
-</tr>
-<tr>
-<td>mkdir</td>
-<td>创建远端目录</td>
-</tr>
-<tr>
-<td>lmkdir</td>
-<td>创建本地目录</td>
-</tr>
-<tr>
-<td>rm</td>
-<td>删除远端文件</td>
-</tr>
-<tr>
-<td>rmdir</td>
-<td>删除远端文件夹</td>
-</tr>
-<tr>
-<td>chmod、chown、chgrp</td>
-<td>修改文件权限</td>
-</tr>
-</tbody>
-</table>
-<p>远端命令前加小写字母 <code>l</code> 就是本地的命令。在 put / get 传输完文件，<code>lls</code>, <code>ls</code> 切换查看本地和远端文件传输情况。</p>
-<h2 id="传输文件到远端"><a href="#传输文件到远端" class="headerlink" title="传输文件到远端"></a>传输文件到远端</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">put local_file_name</span><br><span class="line">put -r local_dir</span><br><span class="line">reput local_file_name // 续传，帅</span><br></pre></td></tr></table></figure>
-<h2 id="下载文件到本地"><a href="#下载文件到本地" class="headerlink" title="下载文件到本地"></a>下载文件到本地</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">get remote_file_name</span><br><span class="line">get -r remote_dir</span><br><span class="line">reget remote_file_name // 续传，接着下载，好帅呀</span><br></pre></td></tr></table></figure>
-<p>基本上上面几个命令就够平常的操作了。</p>
+    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第五篇《null、undefined 和布尔值》</p>
+<h2 id="null-与-undefined"><a href="#null-与-undefined" class="headerlink" title="null 与 undefined"></a>null 与 undefined</h2><p>null 和 undefined 都是没有得意思。if 语句中判断都是 false；而且相等运算 == 返回 true。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) <span class="built_in">console</span>.log(<span class="string">'null is false'</span>) <span class="comment">// null is false</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>) <span class="comment">// undefined is false</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>95 年 JavaScript 诞生时，null 设计为和 Java 里面的一样，null 可以自动转为 0</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="number">5</span> + <span class="literal">null</span> <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>但是 JavaScript 的设计者 Brendan Eich 觉得这么做还不够。</p>
+<p>首先，第一版 JavaScript 里面，null 就像 Java 一样，被当成一个对象，Brendan Eich 觉得表示“无”的值最好不是对象</p>
+<p>其次，那时的 JavaScript 不包括错误处理机制，Brendan Eich 觉得，如果 null 自动转为 0，很不容易发现错误</p>
+<p>因此 Brendan Eich 又设计了一个 undefined。区别是这样的：null 表示一个空的对象，转为数值时为 0；undefined 表示没有定义的原始值，转为数值时为 NaN</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="number">5</span> + <span class="literal">undefined</span> <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<p><strong>总结一下就是：</strong></p>
+<p>null 表示空值。调用函数时，某个参数未设置任何值，这是就可以传入 null，表示该参数为空。比如，某个函数接受引擎抛出的错误作为参数，如果运行过程中未出错，那么这个参数就会传入 null，表示未发生错误。</p>
+<p>undefined 表示未定义</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i;</span><br><span class="line">i <span class="comment">// 此时 i 为undefined，因为只声明了没有赋值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line">f() <span class="comment">// 此时函数返回 undefined，因为 x 没有赋值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;</span><br><span class="line">o.p <span class="comment">// 返回 undefined，因为 p 是 o 没有赋值的属性</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">f() <span class="comment">// 函数如果没有返回值，默认返回 undefined</span></span><br></pre></td></tr></table></figure>
+<h2 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h2><p>下列运算符会返回布尔值：</p>
+<ul>
+<li>逻辑非运算符：<code>!</code></li>
+<li>相等运算符：<code>==</code>、<code>===</code>、<code>!=</code>、<code>!==</code></li>
+<li>比较运算符：<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code></li>
+</ul>
+<p>如果 JavaScript 预期某个位置应该是布尔值，就会将该位置上的现有值转换为布尔值。转换规则是除了下面 6 个值被转为 false，其他都视为 true。</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>false</li>
+<li>空字符串 ‘’ 或者 “”</li>
+<li>NaN</li>
+<li>0</li>
+</ul>
+<p>空数组和空对象都是 true</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> ([]) <span class="built_in">console</span>.log(<span class="string">'ahahaha1'</span>) <span class="comment">// 这里打印出来 ahahaha1</span></span><br><span class="line"><span class="keyword">if</span> (&#123;&#125;) <span class="built_in">console</span>.log(<span class="string">'ahahaha2'</span>) <span class="comment">// 这里打印出来 ahahaha2</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -124,7 +92,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/47/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="page-number" href="/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/page/49/">49</a><a class="page-number" href="/page/50/">50</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="extend next" rel="next" href="/page/49/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/47/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="page-number" href="/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/page/49/">49</a><a class="page-number" href="/page/50/">50</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/49/">下一页&raquo;</a>
   </nav>
 
     </main>

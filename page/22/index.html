@@ -42,10 +42,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Object 对象</h2>
+    <h2 class="title">Number 对象</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-26 23:48:43</span>
+    <span class="post-time">2018-11-29 11:32:41</span>
     <span class="post-tags">
       
     </span>
@@ -56,45 +56,29 @@
     
   </div>
   <div class="post-content">
-    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 20 篇《Object 对象》</p>
-<p>JavaScript 的所有其他对象都是继承自 Object 对象的，即所有对象都是 Object 的实例。</p>
-<p>Object 对象的原生方法分成两类：Object 本身的方法与 Object 的实例方法。</p>
-<p><strong>Object 对象本身的方法</strong> 就是定义在 Object 对象上的方法，又称为静态方法。</p>
-<p><strong>Object 的实例方法</strong> 就是定义在 Object.prototype 上的方法，又称为实例方法。</p>
-<h2 id="Object-函数"><a href="#Object-函数" class="headerlink" title="Object 函数"></a>Object 函数</h2><p>Object 本身也是一个函数，可以当作工具方法使用，将任意值转为对象。如果参数为空（或者 undefined 和 null），Object() 返回一个空对象。</p>
-<p>如果参数是一个原始类型的值，Object 方法将其转换为对应的包装对象的实例</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>(<span class="number">1</span>)</span><br><span class="line">obj <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line">obj <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>如果参数是一个对象，直接返回这个对象</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value === <span class="built_in">Object</span>(value)</span><br><span class="line">&#125;</span><br><span class="line">isObject([]) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h2 id="Object-构造函数"><a href="#Object-构造函数" class="headerlink" title="Object 构造函数"></a>Object 构造函数</h2><p>Object 不仅可以当作工具函数使用，还可以当作构造函数使用。</p>
-<p>传入参数的用法和 Object 函数式一样的，如果是对象则直接返回对象，如果是原始类型则返回该类型的包装对象。</p>
-<p>不够虽然用法相同，但是 Object(value) 与 new Object(value) 两者的语义是不同的，Object(value) 表示将 value 转换为对象，new Object(value) 则是表示新生成一个对象，它的值是 value。</p>
-<h2 id="Object-的静态方法"><a href="#Object-的静态方法" class="headerlink" title="Object 的静态方法"></a>Object 的静态方法</h2><h3 id="Object-keys-、Object-getOwnPropertyNames"><a href="#Object-keys-、Object-getOwnPropertyNames" class="headerlink" title="Object.keys()、Object.getOwnPropertyNames()"></a>Object.keys()、Object.getOwnPropertyNames()</h3><p>Object.keys 和 Object.getOwnerPropertyNames 方法都是用来遍历对象的属性的。</p>
-<p>Object.keys 方法遍历某个对象自身的可枚举的属性名，返回属性名的数组</p>
-<p>Object.getOwnerPropertyNames 方法则是遍历某个对象自身的属性名，包括不可枚举的属性名，返回这些属性名的数组。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="comment">// [ '0', '1' ]</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="comment">// [ '0', '1', 'length' ]</span></span><br></pre></td></tr></table></figure>
-<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><h4 id="对象属性模型相关方法"><a href="#对象属性模型相关方法" class="headerlink" title="对象属性模型相关方法"></a>对象属性模型相关方法</h4><p>Object.getOwnPropertyDescriptor()：获取某个属性的描述对象</p>
-<p>Object.defineProperty()：通过描述对象，定义某个属性</p>
-<p>Object.defineProperties()：通过描述对象，定义多个属性</p>
-<h4 id="控制对象状态的方法"><a href="#控制对象状态的方法" class="headerlink" title="控制对象状态的方法"></a>控制对象状态的方法</h4><p>Object.preventExtensions()： 防止对象扩展</p>
-<p>Object.isExtensible()：判断对象是否可以扩展</p>
-<p>Object.seal()：禁止对对象进行配置</p>
-<p>Object.isSealed()：判断一个对象是否可配置</p>
-<p>Object.freeze()：冻结一个对像</p>
-<p>Object.isFrozen()：判断一个对象是否被冻结</p>
-<h4 id="原型链想法方法"><a href="#原型链想法方法" class="headerlink" title="原型链想法方法"></a>原型链想法方法</h4><p>Object.create()：传入参数指定原型对象和属性，返回一个新对象</p>
-<p>object.getPrototypeOf()：获取对象的 Prototype 对象</p>
-<h2 id="Object-的实例方法"><a href="#Object-的实例方法" class="headerlink" title="Object 的实例方法"></a>Object 的实例方法</h2><h3 id="Object-prototype-valueOf"><a href="#Object-prototype-valueOf" class="headerlink" title="Object.prototype.valueOf()"></a>Object.prototype.valueOf()</h3><p>返回当前对象对应的值，默认情况下返回对象本身。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">obj.valueOf() === obj <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>valueOf 的主要用途是 JavaScript 自动类型转换时候会调用这个方法。</p>
-<h3 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString()"></a>Object.prototype.toString()</h3><p>一般情况下，都是返回当前对象的字符串形式  “[object Object]”。数组、字符串、函数、Date 对象都有自己的 toString 方法，覆盖了 Object.prototype.toString() 方法，它们并不回返回 “[object Object]”</p>
-<p>toString 方法会返回对象的类型字符串，可以用来判断一个值的类型。值有自带的 toString 方法，所以这里通过 call 调用 Object.prototype.toString 方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">2</span>) <span class="comment">// "[object Number]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="string">''</span>) <span class="comment">// "[object String]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>) <span class="comment">// "[object Boolean]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">undefined</span>) <span class="comment">// "[object Undefined]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>) <span class="comment">// "[object Null]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">Math</span>) <span class="comment">// "[object Math]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;) <span class="comment">// "[object Object]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]) <span class="comment">// "[object Array]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="regexp">/[a-z]/</span>) <span class="comment">// "[object RegExp]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>()) <span class="comment">// "[object Date]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">Date</span>) <span class="comment">// "[object Function]"</span></span><br></pre></td></tr></table></figure>
-<h3 id="Object-prototype-toLocaleString"><a href="#Object-prototype-toLocaleString" class="headerlink" title="Object.prototype.toLocaleString()"></a>Object.prototype.toLocaleString()</h3><p>返回当前对象对应的本地字符串形式。数组，数值，日期的实例对象重写了 toLocaleString 方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">date.toString()</span><br><span class="line"><span class="comment">// 'Mon Nov 26 2018 23:45:27 GMT+0800 (China Standard Time)'</span></span><br><span class="line">date.toLocaleString()</span><br><span class="line"><span class="comment">// '11/26/2018, 11:45:27 PM'</span></span><br></pre></td></tr></table></figure>
-<p>Object.prototype.hasOwnProperty() 判断某个属性是否为当前对象自身的属性</p>
-<p>Object.prototype.isPrototypeOf() 判断当前对象是否为另一个对象的原型</p>
-<p>Object.prototype.propertyIsEnumerable() 判断某个属性是否可枚举</p>
+    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 25 篇《Number 对象》</p>
+<p>Number 对象是数值对应的包装对象，可以作为构造函数也可以作为工具函数使用。</p>
+<p>作为构造函数，它用于生成一个数值的包装对象。</p>
+<p>作为工具函数，它用于把任何类型的值转为数值。</p>
+<h2 id="静态属性"><a href="#静态属性" class="headerlink" title="静态属性"></a>静态属性</h2><p>Number.POSITIVE_INFINITY 正无限 指向 Infinity</p>
+<p>Number.NAGETIVE_INFINITY 负无限 指向 -Infinity</p>
+<p>Number.NaN 表示非数值，指向 NaN</p>
+<p>Number.MIN_VALUE 表示最小的正数（即最接近 0 的正数，在 64 位符点数体系中为 5e-324），相应的最接近 0 的负数位 -Number.MIN_VALUE</p>
+<p>Number.MAX_VALUE 表示最大的正数 在 64 位浮点数体系中为 1.7976313486231574e+308</p>
+<p>Number.MAX_SAFE_INTEGER 表示能够精确表示的最大整数，即 9007199254730991</p>
+<p>Number.MIN_SAFE_INTEGER 表示能够精确表示的最小整数，即 -9007199254740991</p>
+<h2 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h2><p>Number 有 4 个实例方法，都跟将数值转换成指定格式有关。这 4 个实例方法是 ES5 的 Number 实例方法，ES6 新加了几个。</p>
+<h3 id="Number-prototype-toString"><a href="#Number-prototype-toString" class="headerlink" title="Number.prototype.toString()"></a>Number.prototype.toString()</h3><p>将数值转为字符串形式。</p>
+<p>可以传入一个参数，表示输出的进制。默认为 十进制。进制数为 2 - 36</p>
+<p>可以方括号预算法调用 toString 方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">10</span>[toString](<span class="number">2</span>) <span class="comment">// "1010"</span></span><br></pre></td></tr></table></figure>
+<p>toString 方法是将十进制的数转换为其他进制的字符串。</p>
+<p>parseInt 可以将其他进制的字符串转换为十进制的整数。</p>
+<h3 id="Number-prototype-toFixed"><a href="#Number-prototype-toFixed" class="headerlink" title="Number.prototype.toFixed()"></a>Number.prototype.toFixed()</h3><p>先将数值转换为指定位数的小数，然后返回这个小数的字符串形式。toFixed 方法的参数为小数位数，有效范围是 0 到 20，超出范围将抛出 RangeError 错误。</p>
+<h3 id="Number-prototype-toExponential"><a href="#Number-prototype-toExponential" class="headerlink" title="Number.prototype.toExponential()"></a>Number.prototype.toExponential()</h3><p>将数值转换为科学计数法表示的字符串，可以传入一个参数作为小数点的有效位数，范围为 0 到 20，超出范围将抛出 RangeError 错误。</p>
+<h3 id="Number-prototype-toPrecision"><a href="#Number-prototype-toPrecision" class="headerlink" title="Number.prototype.toPrecision()"></a>Number.prototype.toPrecision()</h3><p>用于将数字转为指定位数的有效数字。toFixed 是指定小数的位数，toPrecision 是指定整个数字返回的位数。有效范围是 1 到 21，超出范围会抛出 RangeError 错误。</p>
+<p>toPrecision 用于四舍五入时不太可靠，跟浮点数不是精确存储有关。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="number">12.35</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span><br><span class="line">(<span class="number">12.25</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span><br><span class="line">(<span class="number">12.15</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.2"</span></span><br><span class="line">(<span class="number">12.45</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.4"</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -102,7 +86,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/21/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="extend next" rel="next" href="/page/23/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/21/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/23/">下一页&raquo;</a>
   </nav>
 
     </main>

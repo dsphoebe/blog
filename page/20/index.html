@@ -42,10 +42,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Array 对象</h2>
+    <h2 class="title">Math 对象</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-28 14:23:08</span>
+    <span class="post-time">2018-12-04 15:24:01</span>
     <span class="post-tags">
       
     </span>
@@ -56,26 +56,50 @@
     
   </div>
   <div class="post-content">
-    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 22 篇《Array 对象》</p>
-<p>Array 是 JavaScript 的原生对象，同时也是一个构造函数，可以用它生成新的数组。可以省略前面的 new 命令。</p>
-<p>如果参数是一个正整数，返回数组的成员都是空位。虽然读取的时候返回都是 undefined，其实该位置上并没有任何值。虽然可以取到 length 属性，但取不到键值。</p>
-<p>Array.prototype.valueOf 方法返回数组本身，而 Array.prototype.toString 方法返回的是数组的字符串形式。</p>
-<p>Array.prototype.push 方法在数组末端添加一个或多个元素，并返回数组的长度，它会改变原数组</p>
-<p>Array.prototype.pop 方法删除数组最后一个元素，并返回该元素，它会改变原数组，对空数组使用 pop 方法，不报错会返回 undefined。pop 方法可以遍历并清空数组。</p>
-<p>Array.prototype.shift 方法删除数组第一个元素，并返回这个元素，它会改变原数组。shift 方法可以遍历并清空一个数组。</p>
-<p>Array.prototype.unshift 方法在数组起始位置添加一个或者多个元素，并返回添加新元素后的数组长度，它会改变原数组。</p>
-<p>Array.prototype.join 方法以指定参数作为分隔符，将所有数组成员连接成一个字符串返回。如果不提供参数，默认用逗号分隔。数组成员是 undefined、null 或者空位，会转成空字符串。通过 call 方法，join 方法也可以用字符串或类似数组的对象。</p>
-<p>Array.prototype.concat 方法合并多个数组，将新数组成员添加到原数组成员的后面，返回返回一个新的数组，原数组不变。<br>concat 也接受其他类型的值作为参数，添加到目标数组的尾部，比如字符串，对象，二维数组等。<br>如果数组成员包括对象，concat 方法返回当前数组的一个浅拷贝，也就是新数组拷贝的是对象的引用。</p>
-<p>Array.prototype.reverse 反转数组，返回反转后的数组，它会改变原数组。</p>
-<p>Array.prototype.slice 提取目标数组的一部分，返回一个新数组，原数组不变。<br>第一个参数是起始位置，默认为 0。第二个参数是终止位置（不包括该位置的元素本身），默认为数组长度。如果省略第二个参数，则一直返回到原数组的最后一项。<br>参数可以负数，表示倒数计时的位置。<br>如果第一个参数大于等于数组长度，或者第二个参数小于第一个参数，则返回空数组。<br>slice 的一个重要应用，是将类数组转为数组。</p>
-<p>Array.prototype.splice 用于删除原数组的一部分成员，可以同时在删除的位置添加新的数组成员，返回值是被删除的元素组成的数组，它会改变原数组。<br>splice 的第一个参数是删除的起始位置（从 0 开始），第二个参数是被删除的元素的个数。如果后面还有更多的参数，则表示这些就是要被插入数组的新元素。<br>如果第二个参数设为 0，则不删除元素。<br>如果提供了一个参数，则等同于将原数组拆分成两个数组。如果这个参数为 0，则会清空这个数组。</p>
-<p>Array.prototype.sort 默认按照各个字符（数字会被转换为字符串）的 Unicode 码点顺序原地排序数组，它会改变原数组。<br>sort 方法传入一个函数作为参数，调用这个函数，按照函数的返回值进行排序。如果返回值小于 0，第一个元素排在前面，如果大于 0，第一个元素排在后面。如果比较的是数字，函数返回升序是 a - b，降序为 b - a。String.prototype.localCompare<br>使用映射改善排序</p>
-<p>Array.prototype.map 方法执行指定的函数（map 第一个参数），函数按照指定的上下文（map 的第二个参数）调用，返回一个执行完后了的新数组。</p>
-<p>Array.prototype.filter 方法过滤出来符合参数函数的数组成员组成一个新的数组。</p>
-<p>Array.prototype.some，Array.prototype.every 类似断言，返回布尔值，表示判断数组成员是否符号条件。some 只要有一些事符合条件就是 true，every 是所有都要符合条件才能返回 true。</p>
-<p>Array.prototype.reduce，Array.prototype.reduceRight 方法依次处理数组的每个成员，最终累计为一个值。<br>四个参数分别为：<br>1、累计的变量，默认为数组的第一个成员<br>2、当前变量，默认为数组的第二个成员，如果累计的变量设置了初始值，当前变量就从数组的第一个成员开始<br>3、可选参数 - 前位置，从 0 开始<br>4、可选参数 - 原数组<br>如果是空数组，累计的变量初始值必须传，否则报错。<br>这两个方法是遍历数组的方法，所以实际上也还可以做一些遍历相关的操作。比如 找出字符长度最长的数组成员。</p>
-<p>Array.prototype.indexOf, Array.prototype.lastIndexOf 找出数组中从指定位置（可选第二个参数，默认为 0）找到给定元素（第一个参数）的位置，如果没有返回 -1。内部是用的严格相等来索引的，NaN 不等于自身，不能用来搜索 NaN。</p>
-<p>这些方法中，有 map 返回执行完 callback 后的一个新的数组，filter 返回符合某个条件的成员组成的新数组，sort 返回原地排序好了的数组，slice 切出来的新数组，splice 是执行了删除元素后的元素组成的数组（没有删除只有插入就返回空数组），reverse 反转后的数组，concat 合并后的新数组。因为它们返回的都是数组，可以对它们的返回值再接着进行其他方法操作，可以链式使用。</p>
+    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 27 篇《Math 对象》</p>
+<p>Math 是 JavaScript 的原生对象，提供各种数学功能。该对象不是构造函数，不能生成实例，所有的属性和方法都必须在 Math 对象上调用。</p>
+<h2 id="静态属性"><a href="#静态属性" class="headerlink" title="静态属性"></a>静态属性</h2><p>Math 对象的静态属性，提供一些只读的数学常量。非严格模式下修改无效，严格模式下报错。</p>
+<ul>
+<li>Math.E：常数 e，（e 作为数学常数，是自然对数函数的底数。它是一个无限不循环小数，数值约为 2.71828182845904523536…，小数点后 20 位）</li>
+<li>Math.LN2：2 的自然对数（自然对数，是指以 e 为底数的对数函数，标记作 ln(x) 或者 log<sub>e</sub>(x)）</li>
+<li>Math.LN10：10 的自然对数</li>
+<li>Math.LOG2E：2 为底 e 的对数</li>
+<li>Math.LOG10E：10 为底 e 的对数</li>
+<li>Math.PI：常数 π</li>
+<li>Math.SQRT1_2：0.5 的平方根</li>
+<li>Math.SQRT2：2 的平方根</li>
+</ul>
+<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><p><strong>Math.ceil()</strong>：ceiling 天花板数，向上取整</p>
+<p><strong>Math.floor</strong>()：地板数，向下取整</p>
+<p><strong>Math.max</strong>()：如果参数为空返回 -Infinity</p>
+<p><strong>Math.min</strong>()：如果参数为空返回 Infinity</p>
+<p><strong>Math.pow</strong>()：power 次方，缩写 pow</p>
+<p><strong>Math.sqrt</strong>()：开平方根，参数是负数返回 NaN</p>
+<p><strong>Math.log</strong>()：返回以 e 为底的自然对数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.log(<span class="built_in">Math</span>.E) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Math</span>.log(<span class="number">10</span>) <span class="comment">// 等同于 Math.LN10</span></span><br></pre></td></tr></table></figure>
+<p>如果要计算以 10 为底的对数，可以用 Math.log 求出自然对数，然后除以 Math.LN10；求以 2 为底的对数，可以除以 Math.LN2</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.log(<span class="number">100</span>) / <span class="built_in">Math</span>.LN10 <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">Math</span>.log(<span class="number">8</span>) / <span class="built_in">Math</span>.LN2 <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引申题：求整数的位数 比如 1234 是 4 位</p>
+<p>=&gt; Math.floor(Math.log(1234)/Math.LN10) + 1</p>
+</blockquote>
+<p><strong>Math.exp</strong>()：返回常数 e 的参数次方</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.exp(<span class="number">3</span>) === <span class="built_in">Math</span>.E ** <span class="number">3</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><strong>Math.round()</strong>：返回一个数字四舍五入后最接近的整数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">round</span>(<span class="params">number, percision</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.round(+number + <span class="string">'e'</span> + percision) / <span class="built_in">Math</span>.pow(<span class="number">10</span>, percision);</span><br><span class="line">  <span class="comment">// 或者</span></span><br><span class="line">  <span class="comment">// return Number(Math.round(+number + 'e' + percision) + 'e-' + percision)</span></span><br><span class="line">&#125;</span><br><span class="line">round(<span class="number">1.25</span>, <span class="number">1</span>) <span class="comment">// 1.3</span></span><br><span class="line">round(<span class="number">1.25</span>, <span class="number">0</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p><strong>Math.random()</strong>：返回 0 到 1 之间的伪随机数。</p>
+<p>生成任意范围的随机数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomArbitrary</span>(<span class="params">min, max</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * (max - min) + min;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成任意访问的随机整数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomArbitrary</span>(<span class="params">min, max</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (max - min + <span class="number">1</span>)) + min;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回随机字符串</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">random_str</span>(<span class="params">length</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ALPHABET = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span>;</span><br><span class="line">  ALPHABET += <span class="string">'abcdefghijklmnopqrstuvwxyz'</span>;</span><br><span class="line">  ALPHABET += <span class="string">'0123456789-_'</span>;</span><br><span class="line">	<span class="keyword">var</span> str = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; length; ++i) &#123;</span><br><span class="line">    <span class="keyword">var</span> rand = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * ALPHABET.length)</span><br><span class="line">    str += ALPHABET.substr(rand, <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="⚠️-三角函数方法"><a href="#⚠️-三角函数方法" class="headerlink" title="⚠️ 三角函数方法"></a>⚠️ 三角函数方法</h2><p>Math.sin 返回参数的正弦</p>
+<p>Math.cos 返回参数的余弦</p>
+<p>Math.tan 返回参数的正切</p>
+<p>Math.asin 返回参数的反正弦</p>
+<p>Math.acos 返回参数的反余弦</p>
+<p>Math.atan 返回参数的反正切</p>
 
   </div>
   
@@ -83,7 +107,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/19/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/">70</a><a class="extend next" rel="next" href="/page/21/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/19/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/21/">下一页&raquo;</a>
   </nav>
 
     </main>

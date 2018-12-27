@@ -42,20 +42,37 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">没有提交 git，vue 无法打包成功。[无法重现]</h2>
+    <h2 class="title">服务器迁移相关知识点</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2017-12-14 14:33:45</span>
+    <span class="post-time">2018-01-10 15:45:37</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rsync/">rsync</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/">vscode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器迁移/">服务器迁移</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>遇到一个奇怪的问题<br>为了方便开发<br>我在本地开发 vue 时，用 rsync 一类的 vscode 插件同步代码到服务器了<br>再在服务上直接 npm run build<br>不知道为啥，执行的时候，rsync 同步过来的文件都没有被成功打包  </p>
-<p>[2017-12-16 更新]<br>汗了，又无法重现了…</p>
+    <h3 id="服务器进程"><a href="#服务器进程" class="headerlink" title="服务器进程"></a>服务器进程</h3><ul>
+<li>pstree<ul>
+<li>tmux</li>
+<li>crontab</li>
+<li>nginx</li>
+<li>supervisor</li>
+</ul>
+</li>
+</ul>
+<h3 id="rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path"><a href="#rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path" class="headerlink" title="rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/"></a>rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/</h3><h3 id="aws"><a href="#aws" class="headerlink" title="aws"></a>aws</h3><ul>
+<li>安全组 ssh登录22端口没开</li>
+<li>ssh -vvv ssh log</li>
+</ul>
+<h3 id="bash-read-file"><a href="#bash-read-file" class="headerlink" title="bash read file"></a>bash read file</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in `cat file.txt`</span><br><span class="line">  do</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>mysqldump databases a &gt; a.sql</li>
+<li>mysql &lt; a.sql</li>
+<li>mysqldump –all-database &gt; all.sql</li>
+</ul>
 
   </div>
   
@@ -63,7 +80,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/68/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="page-number" href="/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/page/70/">70</a><a class="extend next" rel="next" href="/page/70/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/68/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="page-number" href="/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/70/">下一页&raquo;</a>
   </nav>
 
     </main>
