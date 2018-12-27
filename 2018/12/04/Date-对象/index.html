@@ -55,8 +55,7 @@
     
   </div>
   <div class="post-content">
-    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 28 篇《Date 对象》</p>
-<p>Date 对象是 JavaScript 原生的时间库。它以 1970 年 1 月 1 日 00:00:00 作为时间的零点，可以表示的时间范围是前后各 1 亿天（单位为毫秒）</p>
+    <p>Date 对象是 JavaScript 原生的时间库。它以 1970 年 1 月 1 日 00:00:00 作为时间的零点，可以表示的时间范围是前后各 1 亿天（单位为毫秒）</p>
 <h2 id="普通函数的用法"><a href="#普通函数的用法" class="headerlink" title="普通函数的用法"></a>普通函数的用法</h2><p>Date 对象可以作为普通函数直接调用，返回一个代表当前时间的字符串。即使带有参数，Date 作为普通函数返回的依然是当前时间。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Date</span>()</span><br><span class="line"><span class="comment">// 'Tue Dec 04 2018 13:33:36 GMT+0800 (China Standard Time)'</span></span><br><span class="line"><span class="built_in">Date</span>(<span class="number">2010</span>, <span class="number">10</span>,<span class="number">10</span>)</span><br><span class="line"><span class="comment">// 'Tue Dec 04 2018 13:33:43 GMT+0800 (China Standard Time)'</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"><span class="comment">// 2018-12-04T05:38:16.321Z</span></span><br></pre></td></tr></table></figure>
 <h2 id="构造函数的用法"><a href="#构造函数的用法" class="headerlink" title="构造函数的用法"></a>构造函数的用法</h2><p>Date 还可以当作构造函数使用。对它使用 new 命令，会返回一个 Date 对象的实例。如果不参数，实例代表的就是当前时间。</p>

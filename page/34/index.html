@@ -56,8 +56,7 @@
     
   </div>
   <div class="post-content">
-    <p>这是读阮一峰老师的《JavaScript 教程》系列笔记第 15 篇《其他运算符及运算符顺序》</p>
-<h2 id="void-运算符"><a href="#void-运算符" class="headerlink" title="void 运算符"></a>void 运算符</h2><p>void 运算符的作用是执行一个表达式，然后不返回任何值，或者说返回 undefined。</p>
+    <h2 id="void-运算符"><a href="#void-运算符" class="headerlink" title="void 运算符"></a>void 运算符</h2><p>void 运算符的作用是执行一个表达式，然后不返回任何值，或者说返回 undefined。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="number">0</span> <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">void</span>(<span class="number">0</span>) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 <p>上面 void  运算符的两种写法都正确。建议采用后一种形式，即总是使用圆括号。因为 void 运算符的优先级很高，如果不使用括号，容易找出错误的结果。比如 void 4 + 7 实际上等同于 void(4) + 7。只是 void 所有值都是返回 undefined。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">3</span></span><br><span class="line"><span class="keyword">void</span>(x = <span class="number">5</span>) <span class="comment">// undefined</span></span><br><span class="line">x <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
