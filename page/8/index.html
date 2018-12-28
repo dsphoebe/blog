@@ -42,66 +42,110 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">计算机是如果存储数据的</h2>
+    <h2 class="title">Node 接口</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-21 00:25:31</span>
+    <span class="post-time">2018-12-24 23:36:09</span>
     <span class="post-tags">
-      
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unicode/">Unicode</a></li></ul>
       
     </span>
     
       <div class="article-category">分类：
-        <a class="article-category-link" href="/categories/计算机科学/">计算机科学</a>
+        <a class="article-category-link" href="/categories/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a>
       </div>
     
   </div>
   <div class="post-content">
-    <h2 id="内存如何存储-0-和-1-的"><a href="#内存如何存储-0-和-1-的" class="headerlink" title="内存如何存储 0 和 1 的"></a>内存如何存储 0 和 1 的</h2><p>计算机只能存储 0 和 1，那它是怎么存储 0 和 1 的了？</p>
-<p>每个微晶体管就是一个 BIT （BInary digiT），一个字节是 8 个 bit，就是一排晶体管（一排 8 个）</p>
-<blockquote>
-<p>🤔 <a href="https://www.quora.com/Why-is-a-byte-EXACTLY-8-bits" target="_blank" rel="noopener">Why is a byte EXACTLY 8 bits?</a></p>
-<p>“字节”是在 1950 年代创造的，用于指代 IBM 7030 Stretch 计算机中可寻址的内存存储单元。一个字节的大小是可变的，在指令中指定，拼写为“字节”是为了避免冲突缩写为位。</p>
-<p>早期的计算机并不是 8 位字节。以前也有过 4 位、6 位、 7 位字节，是基于它们使用的字符集以及硬件设计者的选择。</p>
-<p>后来受欢迎的 IBM System / 360 大型机使用了 8 位字节，这有助于提高 8 位字节的流行度。大约在同一时间，AT＆T开始引入 8 位编码，用于通过其线路以数字方式传输声音，这也使得 8 位数据传输大小便于通过 AT＆T 线路传输。</p>
-<p>因此，到20世纪70年代初，微型计算机首次被设计时，已有十年以 8 位块编码数据。因此，早期的微型计算机围绕 8 位数据设计，因此它们使用 8 位字节。</p>
-<p>出于某些原因，IBM 选择将 8 位字符用于其 System / 360。第一个是他们想要一个大致与他们之前编码兼容的字符代码（其历史可追溯到最初设计于1800年代后期的计算机前打卡系统），希望足够大，可以容纳他们觉得有必要处理的所有角色。所以他们选择了 8 位。</p>
-<p>还有主要商业计算架构的普及，也是有助于无处不在地接受 8 位字节大小的。</p>
-</blockquote>
-<p>先选中竖排 8 个点，计算机把这一竖排充满电，但并不代表这个电池有电，然后横排开始向 8 个点输送电量，先第一横排，如果是 1 就给竖排第一个电池充电，如果是 0 就给竖排第一个电池充电。然后看第二横排，如果是 1 就给竖排第一个电池充电，如果是 0 就给竖排第一个电池充电。依此类推，直到这个竖排的电池充完电。读取时，如果电量大于 50% 就是 1， 如果小于 50% 就是 0。</p>
-<p>电池的电量会自动消耗，电池怎么长久存，计算机的电池耗电很快，充电大概几纳秒，充完几毫秒就耗完了。计算机通过刷新来重新充电。cpu 的多少 hz，就是说没秒能重多少次电。</p>
-<h2 id="如何存储数字"><a href="#如何存储数字" class="headerlink" title="如何存储数字"></a>如何存储数字</h2><p>可以存二进制了，那十进制怎么存？那就把十进制转成二进制来存。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">37</span>(<span class="number">10</span>) = <span class="number">3</span>*<span class="number">10</span>^<span class="number">1</span> + <span class="number">7</span>*<span class="number">10</span>^<span class="number">0</span></span><br><span class="line">			 = n1*<span class="number">2</span>^? + n2*<span class="number">2</span>^?</span><br><span class="line">  		 = <span class="number">32</span> + <span class="number">4</span> + <span class="number">1</span></span><br><span class="line">		   = <span class="number">1</span> * <span class="number">2</span>^<span class="number">5</span> <span class="number">0</span> <span class="number">0</span> + <span class="number">1</span>*<span class="number">2</span>^<span class="number">2</span> + <span class="number">0</span> + <span class="number">1</span>*<span class="number">2</span>^<span class="number">0</span></span><br><span class="line">			 = <span class="number">100101</span>(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>负数用补码存储</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">0.75</span>(<span class="number">10</span>) = <span class="number">7</span>*<span class="number">1</span>/<span class="number">10</span> + <span class="number">5</span>*<span class="number">1</span>/<span class="number">10</span>^<span class="number">2</span></span><br><span class="line">				 = n1*<span class="number">1</span>/<span class="number">2</span> + n2*<span class="number">1</span>/<span class="number">4</span> + ..</span><br><span class="line">         = <span class="number">0.5</span> + <span class="number">0.25</span></span><br><span class="line">			   = <span class="number">1</span>*<span class="number">1</span>/<span class="number">2</span> + <span class="number">1</span>*<span class="number">1</span>/<span class="number">4</span></span><br><span class="line">				 = <span class="number">0.11</span>(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>小数用浮点数存储</p>
-<p>为了方便书写，一般会将二进制存为十六进制。</p>
-<h2 id="如何存储字符"><a href="#如何存储字符" class="headerlink" title="如何存储字符"></a>如何存储字符</h2><p>将每个字符编号，ASCII 美国信息交换标准代码。</p>
-<p>在计算机中，1 个字节对应 8 位二进制数，而每位二进制数有 0，1 两种状态，因此 1 个字节可以组合成 256（2<sup>8</sup>）种状态。如果这 256 种状态每一个对应一个符号，就能通过 1 个字节的数据表示 256 个字符。</p>
-<p>上世纪 60 年代，美国制定了一套编码，ASCII（发音 /ˈæski/）码，全称为 American Standard Code for Information Interchange 美国信息交换标准代码。 </p>
-<p>ASCII 码一共定义了 128 个字符的编码，比如空格 SPACE 的二进制形式为 0010 0000，大写字母 A 的二进制形式为 0100 0000。这 128 个字符，其中包括 32 个不能打印出来的控制符号，都只使用了 8 位二进制数中的 后 7 位，最前面的一位统一规定位 0。</p>
-<p>如果存储 a，对应 ASCII 表中的 97 对应的二进制。</p>
-<p>a -&gt; 97<sub>10</sub> -&gt; 0110 0001<sub>2</sub> -&gt; 61<sub>16</sub></p>
-<p>如果存储 1，1 是字符 1，不是数字 1，对应 ASCII 表中的 49，修改为对应的二进制。</p>
-<p>1 -&gt; 49<sub>10</sub> -&gt; 0011 0001<sub>2</sub> -&gt; 31<sub>16</sub></p>
-<h2 id="如何存储中文"><a href="#如何存储中文" class="headerlink" title="如何存储中文"></a>如何存储中文</h2><p>中国国家标准局发布一个标准 扩充了一下 ASCII，增加 6763 个汉字，682 个字符：GB 2312。GB Guo Biao 国标。2^16 双字节存中文。</p>
-<p>后来为了存储生僻字、繁体字、日语等。微软推出 GBK 字符集。GBK Guo Biao Kuo 国标扩。</p>
-<p>国标又推出一个 GB 18030。</p>
-<h2 id="如何存储所有字符"><a href="#如何存储所有字符" class="headerlink" title="如何存储所有字符"></a>如何存储所有字符</h2><p>将全球字符编号：Unicode 字符集。包含所有文字，比如日韩、藏文、盲文、绘文字、颜文字。</p>
-<p>到 2016 年 6 月，Unicode 表已经有 128237 个字符。2^32 四个字节存所有字符。</p>
-<h2 id="如何将Unicode-存到计算机"><a href="#如何将Unicode-存到计算机" class="headerlink" title="如何将Unicode 存到计算机"></a>如何将Unicode 存到计算机</h2><p>a -&gt; 00000000 0000000 0000000 01100001<sub>2</sub> = 0061<sub>16</sub></p>
-<p>你 -&gt; 0000000 0000000 01001111 01100000 = 4F60<sub>1</sub></p>
-<p>32 位存储占用的存储空间太多，所以后来又有了 UTF-8 编码方式：</p>
-<p>a -&gt; 01100001</p>
-<p>你 -&gt; 11100100 10111101 10100000</p>
-<p>第一个字节的前 4 位 1110，第二个字节的前 2 位 10，第三个字节的前 2 位 10。</p>
-<p>UTF-8：<br>32 位 Unicode ：00000000 00000000 00000000 011111111<br>转为 UTF-8 ：0xxxxxxx<br>对应十六进制 0000007F 以下值</p>
-<p>32 位 Unicode ：00000000 00000000 00000111 111111111<br>转为 UTF-8 ：110xxxxx 10xxxxxx<br>对应十六进制 000007FF 以下值</p>
-<p>32 位 Unicode ：00000000 00000000 11111111 111111111<br>转为 UTF-8 ：1110xxxx 10xxxxxx 10xxxxxx<br>对应十六进制 0000FFFF 以下值</p>
-<p>32 位 Unicode ：00000000 00011111 11111111 111111111<br>转为 UTF-8 ：11110xxx 10xxxxxx 10xxxxxx 10xxxxxx<br>对应十六进制 0000FFFF 以下值</p>
-<p>可以看到 第一个字节的前面几位的1 加上 0 ，后面字节的第 1，2 位的 10 都用来表示字节位数标识，其他剩余的位数存有效二进制数值。</p>
-<h2 id="字符集历史问题"><a href="#字符集历史问题" class="headerlink" title="字符集历史问题"></a>字符集历史问题</h2><p>JavaScript 是 95 年发布的。它用的也是 Unicode，只是是 Unicode 的早起版本 UCS-2，UCS-2 是后来合并到 Unicode 的。缺点是只能表示两个字节。无法表示 \uFFFF 之后的字符。F 表示 4 个位，FFFF 表示 2 个字节。</p>
+    <p>所有的 DOM 节点都继承自 Node 接口，所有的 DOM 节点都共有 DOM.prototype 下的方法和属性。</p>
+<p>nodeType</p>
+<ul>
+<li>文档节点：9</li>
+<li>元素节点：1</li>
+<li>属性节点：2</li>
+<li>文本节点：3</li>
+<li>文档片段节点：11</li>
+<li>文档类型节点：10</li>
+<li>注释节点：8</li>
+</ul>
+<p>nodeName</p>
+<ul>
+<li>文档节点：#document</li>
+<li>元素节点：大写标签名，除了 SVG 是小写标签名，因为是后来添加的。</li>
+<li>属性节点：属性的名称</li>
+<li>文本节点：#text</li>
+<li>文档片段节点：#document-fragment</li>
+<li>文档类型节点：文档的类型</li>
+<li>注释节点：#comment</li>
+</ul>
+<p>nodeValue：节点的文本值，所以只有文本节点、注释节点、属性节点才有 nodeValue 值。其他类型的节点都返回 null。</p>
+<p>textContext：返回当前节点及其后代节点的文本内容。它会自动对 HTML 标签转义。文本节点、注释节点、属性节点的值和 nodeValue 一样。文档节点和文档类型节点的 textContent 属性为 null。读取整个文档的内容为 document.document.textContent.</p>
+<p>baseURI：只读，一般由当前网页的 URL window.location 决定，可以使用<code>&lt;base&gt;</code>标签修改。用来计算网页上的相对路径的 URL。</p>
+<p>nextSibling：当前节点的下一个节点，如果没有返回 null，用来遍历所有子节点：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> parent = <span class="built_in">document</span>.querySelector(<span class="string">'.el'</span>)</span><br><span class="line"><span class="keyword">const</span> el = parent.firstChild</span><br><span class="line"><span class="keyword">while</span>(el !== <span class="literal">null</span>) &#123;</span><br><span class="line">  el = el.nextSibling</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>prevSibling：当前节点的上一个节点，如果没有就返回 null，同 nextSibling 原理，也可以用来遍历所有子节点。</p>
+<p>parentNode：对于一个节点来说，它的父节点可能是三种类型：元素节点、文档节点、文档片段节点。</p>
+<p>childNodes：返回节点的子节点 NodeList 伪数组动态集合</p>
+<p>isConnected：返回节点是否在文档之中</p>
+<p>appendChild()：插入一个节点，并作为当前节点最后一个节点，相当于生的最后一个儿子。返回这个节点。如果参数是 DocumentFragment 节点，那么插入的是 DocumentFragment 的所有子节点，而不是 DocumentFragment 节点本身。返回值是一个空的 DocumentFragment 节点。</p>
+<p>hasChildNodes()：遍历当前节点的所有后代节点：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DOMComb</span>(<span class="params">parent, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (parent.hasChildNodes()) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> node = parent.firstChild; node; node = node.nextSibling) &#123;</span><br><span class="line">      DOMComb(node, callback)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  callback(parent)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">DOMComb(<span class="built_in">document</span>.body, <span class="built_in">console</span>.log)</span><br></pre></td></tr></table></figure>
+<p>cloneNode()：参数表示是否深度 clone，返回克隆的新节点。只克隆 DOM 里面带的属性，如果有 id 或者 name 属性，需要修改 clone 出来的节点的 id 和 name 属性。</p>
+<p>insertBefore()：将第一个参数插入当前节点内的某个子节点即第二个参数前，返回新节点。如果第二个参数为 null，则是将节点插入到当前节点内部的最后的位置，也就是 appendChild 一样了。node 节点插入到 nnode 节点后：<code>parent.insertBefore(node, nnode.nextSibling)</code>。同 appendChild 方法，如果参数是 DocumentFragment 节点，那么插入的是 DocumentFragment 的所有子节点，而不是 DocumentFragment 节点本身。返回值是一个空的 DocumentFragment 节点。</p>
+<p>replaceChild：第一个参数节点替换第二个参数节点，返回第二个参数节点</p>
+<p>contains()：返回节点是否在当前文档中。确定参数节点为当前节点，参数节点是否为当前节点的子节点，参数节点是否为当前节点的后代节点。</p>
+<p>compareDocumentPosition()：用法和 contains 一样，返回一个 7 bit 位的二进制值，表示参数节点与当前节点的关系</p>
+<table>
+<thead>
+<tr>
+<th>二进制值</th>
+<th>十进制值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000000</td>
+<td>0</td>
+<td>两个节点相同</td>
+</tr>
+<tr>
+<td>000001</td>
+<td>1</td>
+<td>两个节点不在同一个文档（即有一个节点不在当前文档）</td>
+</tr>
+<tr>
+<td>000010</td>
+<td>2</td>
+<td>参数节点在当前节点的前面</td>
+</tr>
+<tr>
+<td>000100</td>
+<td>4</td>
+<td>参数节点在当前节点的后面</td>
+</tr>
+<tr>
+<td>001000</td>
+<td>8</td>
+<td>参数节点包含当前节点</td>
+</tr>
+<tr>
+<td>010000</td>
+<td>16</td>
+<td>当前节点包含参数节点</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>32</td>
+<td>浏览器内部使用</td>
+</tr>
+</tbody>
+</table>
+<p>通过掩码进行运算，简称某个特定位置的标签嵌套是否合乎规范：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> head = <span class="built_in">document</span>.head;</span><br><span class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.body;</span><br><span class="line"><span class="keyword">if</span> (head.compareDocumentPosition(body) &amp; <span class="number">4</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'文档结构正确'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;body&gt; 不能在 &lt;head&gt; 前面'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>isEqualNode() 节点与参数节点是否相等</p>
+<p>isSameNode() 节点与参数节点是否为同一个节点</p>
+<p>normalize() 去除节点文本节点之间的多余空格</p>
+<p>getRootNode() 返回所在文档的根节点</p>
 
   </div>
   
@@ -109,7 +153,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/76/">76</a><a class="extend next" rel="next" href="/page/9/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/9/">下一页&raquo;</a>
   </nav>
 
     </main>
