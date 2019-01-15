@@ -53,9 +53,12 @@
     
   </div>
   <div class="post-content">
-    <h2 id="如何发请求"><a href="#如何发请求" class="headerlink" title="如何发请求"></a>如何发请求</h2><ul>
-<li>form action 会新开一个页面</li>
-<li>a 标签 会刷新页面或者新开一个页面，img 标签 会返回一个图片，link 标签 只能以 CSS JS 展示结果，script 标签 SRJ （Server Render JavaScript）</li>
+    <h3 id="如何发请求"><a href="#如何发请求" class="headerlink" title="如何发请求"></a>如何发请求</h3><ul>
+<li>form 通过 action 发请求，不过会新开一个页面</li>
+<li>a 标签可以通过 href 发请求，不过会刷新页面或者新开一个页面</li>
+<li>img 标签可以通过 src 发请求，不过会返回一个图片</li>
+<li>link 标签可以通过 href 发请求，不过只能以 CSS 展示结果</li>
+<li>script 标签可以通过 src 发请求，通过 SRJ （Server Render JavaScript）的方式实现 JSONP，不过会返回一个 script。</li>
 </ul>
 <h3 id="AJAX-是异步的-JavaScript-和-XML"><a href="#AJAX-是异步的-JavaScript-和-XML" class="headerlink" title="AJAX 是异步的 JavaScript 和 XML"></a>AJAX 是异步的 JavaScript 和 XML</h3><p>使用 XMLHttpRequest 发请求，服务器返回 XML 格式的字符串，JavaScript 解析 XML 并更新局部页面。</p>
 <p>XMLHttpRequest 的 onreadystatechange 方法，readyState、status、responseText 属性</p>
@@ -109,6 +112,18 @@
 <p>同源策略：协议 + 域名 + 端口 一模一样才允许发 AJAX 请求</p>
 <p>设置 Access-Cross-Allow-Origin 为其他域名，就可以让其他域名访问当前服务器的数据。</p>
 <p>Cross Origin Resource Sharing 跨站资源共享 CORS</p>
+<h3 id="JS-操作请求与响应"><a href="#JS-操作请求与响应" class="headerlink" title="JS 操作请求与响应"></a>JS 操作请求与响应</h3><p>JS 可以设置任意请求的 header</p>
+<ul>
+<li>设置请求 header 的第一部分 xhr.open(‘GET’, ‘/xxx’)</li>
+<li>设置请求 header 的第二部分 xhr.setHeader(‘content-type’, ‘x-www-form-urlencoded’)</li>
+<li>设置请求 header 的第四部分 xhr.send(‘a=1&amp;b=2’)</li>
+</ul>
+<p>JS 可以获取任意响应 header</p>
+<ul>
+<li>获取响应 header 的第一部分 xhr.status / xhr.statusText</li>
+<li>获取响应 header 的第二部分 xhr.getResponseHeader() / xhr.getAllResponseHeaders()</li>
+<li>获取响应 header 的第四部分 xhr.responseText</li>
+</ul>
 
   </div>
   
