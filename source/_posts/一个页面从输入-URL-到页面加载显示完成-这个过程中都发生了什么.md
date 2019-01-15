@@ -6,6 +6,7 @@ date: 2019-01-07 11:51:20
 tags:
 ---
 
+![](/images/url-view/tcp.png)
 
 第一步：根据域名进行 DNS 解析到 IP 地址
 
