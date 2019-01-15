@@ -42,20 +42,35 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Git 笔记</h2>
+    <h2 class="title">linux 命令行图片翻转</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2017-12-19 23:22:30</span>
+    <span class="post-time">2017-12-20 12:40:00</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/imagemagick/">imagemagick</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片/">图片</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h3 id="git-commit-时，文件名中文是乱码："><a href="#git-commit-时，文件名中文是乱码：" class="headerlink" title="git commit 时，文件名中文是乱码："></a>git commit 时，文件名中文是乱码：</h3><p>git config –global core.quotepath false<br>如果是true：输入路径名大于0x80的字符串，转义并用双引号印起来，否则不转义。<a href="https://www.git-scm.com/docs/git-config#git-config-corequotePath" target="_blank" rel="noopener">Git帮助文档查看详情</a></p>
-<h3 id="git-pull-时候冲突。"><a href="#git-pull-时候冲突。" class="headerlink" title="git pull 时候冲突。"></a>git pull 时候冲突。</h3><p>俩份代码的commit没有在同一条线上时，就会有这个冲突 fatal: refusing to merge unrelated histories<br>git pull origin master –allow-unrelated-histories</p>
+    <p>胖达的网站里面的图片都是我本地直接 rysnc iPhone 手机里的照片到阿里云的。<br>结果好多图片都是横着的。</p>
+<p>好，找到这个：<br>ImageMagick 图片翻转<br>convert example.jpg -rotate 90 example-rotated.jpg</p>
+<p><a href="https://linux.cn/article-21-1.html" target="_blank" rel="noopener">Linux图片软件</a>安装了 gpicview，这个软件应该是在 Linux GUI 里面用的。<br><a href="http://blog.csdn.net/get_set/article/details/51276609" target="_blank" rel="noopener">移除 apt-get remove –purge gpicview</a></p>
+<p>最后居然还是 ImageMagick</p>
+<p>安排 ImageMagick 问题：</p>
+<ul>
+<li>display.im6: unable to open X server `’ @ error/display.c/DisplayImageCommand/428. 没找到解决的办法</li>
+</ul>
+<p>转移另一个方案：<br>虽然图片翻转了，可是 hexo 里面的图片样式的设置也是个麻烦的事。iPhone 直接 rsync 的图片也有点大了，每次请求都好慢。（还是想再研究下ImageMagick的其他方法，也许能找到合适的。）<br>转战本地修饰好了，改好宽高，压缩了大小，美化了照片再上传。</p>
+<p>2017-12-21 updated<br>照片是在太大了，随便都是几兆。压缩下</p>
+<p>参考链接：</p>
+<ul>
+<li><a href="http://blog.csdn.net/zrools/article/details/51347471" target="_blank" rel="noopener">Linux下图像压缩、格式转换、缩放、旋转</a></li>
+<li><a href="https://www.imagemagick.org/script/index.php" target="_blank" rel="noopener">ImageMagick</a></li>
+<li><a href="https://www.computerhope.com/issues/ch001720.htm" target="_blank" rel="noopener">How can I open an image file from the Linux terminal?</a></li>
+<li><a href="http://www.jianshu.com/p/05bdcbe320f6" target="_blank" rel="noopener">mac 命令行批量处理照片</a></li>
+</ul>
 
   </div>
   
@@ -63,7 +78,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/81/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><a class="extend next" rel="next" href="/page/83/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/81/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><a class="extend next" rel="next" href="/page/83/">下一页&raquo;</a>
   </nav>
 
     </main>
