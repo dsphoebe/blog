@@ -6,10 +6,13 @@ date: 2019-01-15 16:29:55
 ---
 
 
-## 如何发请求
+### 如何发请求
 
-- form action 会新开一个页面
-- a 标签 会刷新页面或者新开一个页面，img 标签 会返回一个图片，link 标签 只能以 CSS JS 展示结果，script 标签 SRJ （Server Render JavaScript）
+- form 通过 action 发请求，不过会新开一个页面
+- a 标签可以通过 href 发请求，不过会刷新页面或者新开一个页面
+- img 标签可以通过 src 发请求，不过会返回一个图片
+- link 标签可以通过 href 发请求，不过只能以 CSS 展示结果
+- script 标签可以通过 src 发请求，通过 SRJ （Server Render JavaScript）的方式实现 JSONP，不过会返回一个 script。
 
 ### AJAX 是异步的 JavaScript 和 XML
 
@@ -65,3 +68,18 @@ form 发请求可以跨域，因为是跳转到其他页面，它是不会修改
 设置 Access-Cross-Allow-Origin 为其他域名，就可以让其他域名访问当前服务器的数据。
 
 Cross Origin Resource Sharing 跨站资源共享 CORS
+
+### JS 操作请求与响应
+
+JS 可以设置任意请求的 header
+
+- 设置请求 header 的第一部分 xhr.open('GET', '/xxx')
+- 设置请求 header 的第二部分 xhr.setHeader('content-type', 'x-www-form-urlencoded')
+- 设置请求 header 的第四部分 xhr.send('a=1&b=2')
+
+JS 可以获取任意响应 header
+
+- 获取响应 header 的第一部分 xhr.status / xhr.statusText
+- 获取响应 header 的第二部分 xhr.getResponseHeader() / xhr.getAllResponseHeaders()
+- 获取响应 header 的第四部分 xhr.responseText
+
