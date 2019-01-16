@@ -34,7 +34,7 @@
       
     </ul>
   </nav>
-  <h1 class="pc">a[href=&#34;code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
   <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
   <em>「 学海无涯，没空撩妹！」</em>
 </header>
@@ -42,39 +42,20 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">比较 cookie，localStorage 和 sessionStorage</h2>
+    <h2 class="title">Git 笔记</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2017-12-17 00:00:00</span>
+    <span class="post-time">2017-12-19 23:22:30</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie/">cookie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html5/">html5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/localStroage/">localStroage</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sessionStorage/">sessionStorage</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>cookie, sessionStorage, localStroage都是存储在客户端本地机器上的数据。设置完后，可整站调用，是真正意义上的“全局变量”。</p>
-<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>由于HTTP无法记录状态，服务器端用cookie来记录用户状态的，由服务器端生成。<br>通过HTTP把值存储在用户本地机器上，下次服务器端再访问的时候，通过HTTP的请求头带着cookie来确认是不是同一个用户。  </p>
-<p>最初是服务器端动态开发web的时候，是服务器端操作。  </p>
-<p>有了AJAX后，AJAX请求接口的时候，AJAX通过xhrFields.withCredentials: true，在request.header里带cookie值给服务器端已确认是同一个用户。  </p>
-<p>cookie也可以在前端生成，直接document.cookie=”key=value;key2=value2;….domain=..path=..expired=…”，是键值对组成的字符串。cookie的设置，读取都是操作字符串，一般大家操作都会自己再重新定义setcookie，getcookie，removecookie等基础方法来操作document.cookie字符串。或者找类似的小框架比如 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework" target="_blank" rel="noopener">cookie操作简易库</a>。  </p>
-<p>cookie的存储量最多只能4kb，最多存储的键值对各个浏览器不同，最多的也只有50个。</p>
-<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>sessionStorage和localStorage都是H5新出来的，用来替换document.cookie的，与HTTP头无关系。<br>能存储5mb的数据。<br>有对应的webapi操作数据：</p>
-<ul>
-<li>storge.setItem(key, value) // 设置storage</li>
-<li>storage.getItem(key) // 获取storage</li>
-<li>storage.removeItem(key) // 删除key的storage</li>
-<li>storage.clear() // 清除storage</li>
-</ul>
-<h4 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h4><p>localStorage是永久保存的，除非覆盖/清除</p>
-<h4 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h4><p>sessionStorage，session这个词，大概就能知道它的时效性了。它在关闭会话或者浏览器就会被清除</p>
-<h5 id="sessionStorage场景？"><a href="#sessionStorage场景？" class="headerlink" title="sessionStorage场景？"></a>sessionStorage场景？</h5><p>调查问卷</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
-<li><a href="http://blog.csdn.net/lijing198997/article/details/9378047" target="_blank" rel="noopener">HTTP cookies 详解</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie" target="_blank" rel="noopener">Document.cookie</a></li>
-<li><a href="http://jerryzou.com/posts/cookie-and-web-storage/" target="_blank" rel="noopener">详说 cookie, LocalStorage 与 SessionStorage</a></li>
-</ul>
+    <h3 id="git-commit-时，文件名中文是乱码："><a href="#git-commit-时，文件名中文是乱码：" class="headerlink" title="git commit 时，文件名中文是乱码："></a>git commit 时，文件名中文是乱码：</h3><p>git config –global core.quotepath false<br>如果是true：输入路径名大于0x80的字符串，转义并用双引号印起来，否则不转义。<a href="https://www.git-scm.com/docs/git-config#git-config-corequotePath" target="_blank" rel="noopener">Git帮助文档查看详情</a></p>
+<h3 id="git-pull-时候冲突。"><a href="#git-pull-时候冲突。" class="headerlink" title="git pull 时候冲突。"></a>git pull 时候冲突。</h3><p>俩份代码的commit没有在同一条线上时，就会有这个冲突 fatal: refusing to merge unrelated histories<br>git pull origin master –allow-unrelated-histories</p>
 
   </div>
   
@@ -82,12 +63,12 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/84/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><a class="page-number" href="/page/87/">87</a><a class="extend next" rel="next" href="/page/86/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/84/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/86/">下一页&raquo;</a>
   </nav>
 
     </main>
     <footer>
-  <p>&copy; 2018 dsphoebe.com <wbr> <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
+  <p>&copy; 2019 code.dsphoebe.com <wbr> <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
 </footer>
   </body>
 </html>

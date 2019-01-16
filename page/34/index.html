@@ -34,7 +34,7 @@
       
     </ul>
   </nav>
-  <h1 class="pc">a[href=&#34;code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
   <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
   <em>「 学海无涯，没空撩妹！」</em>
 </header>
@@ -42,10 +42,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Boolean 对象</h2>
+    <h2 class="title">Number 对象</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-29 10:53:42</span>
+    <span class="post-time">2018-11-29 11:32:41</span>
     <span class="post-tags">
       
     </span>
@@ -56,14 +56,28 @@
     
   </div>
   <div class="post-content">
-    <p>Boolean 对象是 JavaScript 的三个包装对象之一。作为构造函数，它主要用于生成布尔值的包装对象实例。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> b <span class="comment">// "object"</span></span><br><span class="line">b.valueOf() <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span><br><span class="line">&#125; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>).valueOf()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'true'</span>);</span><br><span class="line">&#125; <span class="comment">// 无输出</span></span><br></pre></td></tr></table></figure>
-<h2 id="Boolean-函数的类型转换作用"><a href="#Boolean-函数的类型转换作用" class="headerlink" title="Boolean 函数的类型转换作用"></a>Boolean 函数的类型转换作用</h2><p>Boolean 对象除了可以作为构造函数，还能单独使用，将任意值转为布尔值。这是 Boolean 就是一个单纯的工具方法，将它的参数转为布尔值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">false</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">1</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">'false'</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>([]) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="regexp">/foo/</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>使用双重否运算也可以将任意值转为对应布尔值</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">!!<span class="string">''</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="number">0</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="literal">false</span> <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">!!<span class="number">1</span> <span class="comment">// true</span></span><br><span class="line">!!<span class="string">'false'</span> <span class="comment">// true</span></span><br><span class="line">!![] <span class="comment">// true</span></span><br><span class="line">!!&#123;&#125; <span class="comment">// true</span></span><br><span class="line">!!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; <span class="comment">// true</span></span><br><span class="line">!!<span class="regexp">/foo/</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>注意是不使用构造函数调用 Boolean 的差异</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="literal">false</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// 无输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="string">''</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// 无输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="string">''</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="literal">null</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// 无输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">null</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="number">0</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// 无输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="number">0</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="literal">NaN</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// 无输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">NaN</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">Boolean</span>(<span class="literal">undefined</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// 无输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">undefined</span>)) &#123;<span class="built_in">console</span>.log(<span class="string">'true'</span>)&#125; <span class="comment">// "true"</span></span><br></pre></td></tr></table></figure>
+    <p>Number 对象是数值对应的包装对象，可以作为构造函数也可以作为工具函数使用。</p>
+<p>作为构造函数，它用于生成一个数值的包装对象。</p>
+<p>作为工具函数，它用于把任何类型的值转为数值。</p>
+<h2 id="静态属性"><a href="#静态属性" class="headerlink" title="静态属性"></a>静态属性</h2><p>Number.POSITIVE_INFINITY 正无限 指向 Infinity</p>
+<p>Number.NAGETIVE_INFINITY 负无限 指向 -Infinity</p>
+<p>Number.NaN 表示非数值，指向 NaN</p>
+<p>Number.MIN_VALUE 表示最小的正数（即最接近 0 的正数，在 64 位符点数体系中为 5e-324），相应的最接近 0 的负数位 -Number.MIN_VALUE</p>
+<p>Number.MAX_VALUE 表示最大的正数 在 64 位浮点数体系中为 1.7976313486231574e+308</p>
+<p>Number.MAX_SAFE_INTEGER 表示能够精确表示的最大整数，即 9007199254730991</p>
+<p>Number.MIN_SAFE_INTEGER 表示能够精确表示的最小整数，即 -9007199254740991</p>
+<h2 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h2><p>Number 有 4 个实例方法，都跟将数值转换成指定格式有关。这 4 个实例方法是 ES5 的 Number 实例方法，ES6 新加了几个。</p>
+<h3 id="Number-prototype-toString"><a href="#Number-prototype-toString" class="headerlink" title="Number.prototype.toString()"></a>Number.prototype.toString()</h3><p>将数值转为字符串形式。</p>
+<p>可以传入一个参数，表示输出的进制。默认为 十进制。进制数为 2 - 36</p>
+<p>可以方括号预算法调用 toString 方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">10</span>[toString](<span class="number">2</span>) <span class="comment">// "1010"</span></span><br></pre></td></tr></table></figure>
+<p>toString 方法是将十进制的数转换为其他进制的字符串。</p>
+<p>parseInt 可以将其他进制的字符串转换为十进制的整数。</p>
+<h3 id="Number-prototype-toFixed"><a href="#Number-prototype-toFixed" class="headerlink" title="Number.prototype.toFixed()"></a>Number.prototype.toFixed()</h3><p>先将数值转换为指定位数的小数，然后返回这个小数的字符串形式。toFixed 方法的参数为小数位数，有效范围是 0 到 20，超出范围将抛出 RangeError 错误。</p>
+<h3 id="Number-prototype-toExponential"><a href="#Number-prototype-toExponential" class="headerlink" title="Number.prototype.toExponential()"></a>Number.prototype.toExponential()</h3><p>将数值转换为科学计数法表示的字符串，可以传入一个参数作为小数点的有效位数，范围为 0 到 20，超出范围将抛出 RangeError 错误。</p>
+<h3 id="Number-prototype-toPrecision"><a href="#Number-prototype-toPrecision" class="headerlink" title="Number.prototype.toPrecision()"></a>Number.prototype.toPrecision()</h3><p>用于将数字转为指定位数的有效数字。toFixed 是指定小数的位数，toPrecision 是指定整个数字返回的位数。有效范围是 1 到 21，超出范围会抛出 RangeError 错误。</p>
+<p>toPrecision 用于四舍五入时不太可靠，跟浮点数不是精确存储有关。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="number">12.35</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span><br><span class="line">(<span class="number">12.25</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.3"</span></span><br><span class="line">(<span class="number">12.15</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.2"</span></span><br><span class="line">(<span class="number">12.45</span>).toPrecision(<span class="number">3</span>) <span class="comment">// "12.4"</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -71,12 +85,12 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/33/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="extend next" rel="next" href="/page/35/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/33/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="page-number" href="/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/35/">下一页&raquo;</a>
   </nav>
 
     </main>
     <footer>
-  <p>&copy; 2018 dsphoebe.com <wbr> <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
+  <p>&copy; 2019 code.dsphoebe.com <wbr> <a href="http://www.miitbeian.gov.cn/">京ICP备15048606号-1</a></p>
 </footer>
   </body>
 </html>
