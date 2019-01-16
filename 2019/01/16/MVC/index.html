@@ -53,7 +53,7 @@
     
   </div>
   <div class="post-content">
-    <p>MVC = Model、View、Controller</p>
+    <p>MVC = Model、View、Controller 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。</p>
 <ol>
 <li><p>功能转换为模块</p>
 </li>
@@ -83,6 +83,11 @@
 </ul>
 </li>
 </ul>
+<p>最后一个 Model 与数据库交互</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> model = &#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 数据初始化逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">  fetch: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取数据</span></span><br><span class="line">  &#125;,</span><br><span class="line">  save: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// return promise 对象</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  model: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view, model</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.model = model</span><br><span class="line">    model.init()</span><br><span class="line">  &#125;,</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">controller.init(view, model)</span><br></pre></td></tr></table></figure>
+<p>用户点击 view，controll 监听了 view，view 一旦点击了就会通知 controller，controller 调用 model，model 去 server 拿数据，server 拿到数据返回给 model，model 再把数据返回给 controller，controller 再把数据显示给 view。</p>
+<p>MVC ：职责分明，模块清晰，代码简单！😄</p>
+<p><img src="/images/mvc/1.png" alt="Model、View、Controller"></p>
 
   </div>
   
