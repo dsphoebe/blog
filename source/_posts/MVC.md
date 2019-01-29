@@ -5,7 +5,7 @@ tags:
 date: 2019-01-16 10:35:11
 ---
 
-MVC = Model、View、Controller 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。
+MVC = Model （操作数据）、View （表示视图）、Controller （控制器） 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。
 
 1. 功能转换为模块
 
@@ -111,7 +111,7 @@ var controller = {
 controller.init(view, model)
 ```
 
-用户点击 view，controll 监听了 view，view 一旦点击了就会通知 controller，controller 调用 model，model 去 server 拿数据，server 拿到数据返回给 model，model 再把数据返回给 controller，controller 再把数据显示给 view。
+Model 和服务器交互，Model 将得到的数据交给 Controller，Controller 把数据填入 View，并监听 View。用户操作 View，比如点击按钮，Controller 就会接受到点击时间，Controller 这时会去调用 Model，Model 会与服务器交互，得到数据后返回给 Controller，Controller 得到数据就去更新 View。
 
 MVC ：职责分明，模块清晰，代码简单！😄
 
