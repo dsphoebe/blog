@@ -27,7 +27,7 @@ MVC = Model、View、Controller 是代码组织形式，只是一种思想。就
     view: null,
     init: function(view) {
       this.view = view
-  		window.addEventListener('click', e => view.classList.add('class'))
+      window.addEventListener('click', e => view.classList.add('class'))
     }
   }
   controller.init(view)
