@@ -28,10 +28,6 @@
           <a href="/archives" class="menu-item-link">归档</a>
         </li>
       
-        <li class="menu-item">
-          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
-        </li>
-      
     </ul>
   </nav>
   <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
@@ -42,41 +38,34 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">清空数组的几个方法</h2>
+    <h2 class="title">包装对象</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-28 14:52:23</span>
+    <span class="post-time">2018-11-29 10:32:04</span>
     <span class="post-tags">
-      
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
       
     </span>
     
+      <div class="article-category">分类：
+        <a class="article-category-link" href="/categories/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a>
+      </div>
+    
   </div>
   <div class="post-content">
-    <p>数组的相关教程已经看完，总结一下清空数组的几个方法</p>
-<ul>
-<li>length = 0</li>
-<li>shift</li>
-<li>pop</li>
-<li>filter</li>
-<li>slice</li>
-<li>splice</li>
-</ul>
-<h3 id="length-0"><a href="#length-0" class="headerlink" title="length = 0"></a>length = 0</h3><p>这个最快，直接把数组的长度设置为 0，数组里面就没有东西了</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.length = <span class="number">0</span></span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-<h3 id="shift"><a href="#shift" class="headerlink" title="shift"></a>shift</h3><p>shift 用于删除数组第一项，这里清空数组就是用的 for 循环遍历数组长度次，每次都运行一次 shift 方法，最后就把数组清空啦。注意的是数组的长度，因为每次 shift 之后，数组的长度就会少 1，所以这里 for 开始的时候，需要定义一个 l 缓存住最开始数组的长度。看下面的代码。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = arr.length; i &lt; l; i++) &#123;</span><br><span class="line">  arr.shift()</span><br><span class="line">&#125;</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-<h3 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h3><p>pop 清空数组原理同上面操作，只是 pop 是用来删除数组最后一项。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = arr.length; i &lt; l; i++) &#123;</span><br><span class="line">  arr.pop()</span><br><span class="line">&#125;</span><br><span class="line">arr.length <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-<h3 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h3><p>splice 可以删除元素也可以插入元素，这里用的删除元素。删除从 0 开始的长度为数组长度的元素个数，这个时候删除后返回的就是原来的数组的一个拷贝。是不是可以用于浅拷贝 🤔</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.splice(<span class="number">0</span>)</span><br><span class="line"><span class="comment">// 这里返回的是 [1,2,3]</span></span><br><span class="line"><span class="comment">// arr.splice(0, arr.length) 是一样的</span></span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>过滤一个数组的元素，找出符合过滤 callback 的元素组成一个新的数组。所以我们这里就是找出一个都不会符合的条件，最后生成一个空的数组。这里其实也不能说是清空了数组，而只是把一个生成的空数组赋值给了原来的数组。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr = arr.filter(<span class="function"><span class="params">e</span> =&gt;</span> e === <span class="literal">undefined</span>)</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h3><p>slice 是提取数组中的一部分，生成一个新的数组，不会修改原来的数组。同上面 filter，把一个空数组赋值给了原来的数组，有点犯规啊。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr = arr.slice(arr.length)</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-<p>这么说来，直接赋值为空数组也是清空数组的意思了。😂</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr = []</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+    <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><p>对象是 JavaScript 语言最主要的数据类型，三种原始类型的值 — 数值、字符串、布尔值。在一定条件下，也会自动转为对象，也就是原始类型的“包装对象”。</p>
+<p>所谓包装对象，就是分别于数值、布尔值、字符串相对应的 Number、Boolean、String 三个原生对象。这三个原生对象可以把原始类型的值变成（包装成）对象。</p>
+<p>包装对象的最大目的，首先是使得 JavaScript 的对象涵盖了所有的值，其次使得原始类型的值可以方便地调用某些方法。</p>
+<p>Number、String 和 Boolean 如果不作为构造函数调用（即调用的时候不加 new），常常用于将任意类型的值转为数值、字符串和布尔值。</p>
+<p>总结一下，这三个对象作为构造函数使用时，可以将原始类型的值转为对象；作为普通函数调用时，可以将任意类型的值转为原始类型的值。</p>
+<h2 id="2-实例方法"><a href="#2-实例方法" class="headerlink" title="2. 实例方法"></a>2. 实例方法</h2><p>三种包装对象各自提供了许多实例方法。其中它们都有 2 个从 Object 对象继承的方法 valueOf、toString</p>
+<h3 id="2-1-valueOf"><a href="#2-1-valueOf" class="headerlink" title="2.1 valueOf"></a>2.1 valueOf</h3><p>返回包装对象实例对应的原始类型值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>).valueOf()  <span class="comment">// 123</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>).valueOf() <span class="comment">// "abc"</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>).valueOf() <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-toString"><a href="#2-2-toString" class="headerlink" title="2.2 toString"></a>2.2 toString</h3><p>返回对应的字符串形式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>).toString() <span class="comment">// "123"</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'abc'</span>).toString() <span class="comment">// "abc"</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>).toString() <span class="comment">// "true"</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-原始类型与实例对象的自动转换"><a href="#3-原始类型与实例对象的自动转换" class="headerlink" title="3. 原始类型与实例对象的自动转换"></a>3. 原始类型与实例对象的自动转换</h2><p>原始类型的值，可以自动当作包装对象调用，即调用包装对象的属性和方法。这时，JavaScript 引擎会自动将原始类型的值转为包装对象实例，在执行完后立刻销毁实例。比如 字符串可以调用 length 属性，返回字符串的长度。再调用字符串的属性时，实际是调用一个新生成的对象，而不是上一次调用时生成的那个对象。</p>
+<h2 id="4-自定义方法"><a href="#4-自定义方法" class="headerlink" title="4. 自定义方法"></a>4. 自定义方法</h2><p>在包装对象的原型上添加自定义方法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.double = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.valueOf() + <span class="keyword">this</span>.valueOf();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="string">'abc'</span>.double()</span><br><span class="line"><span class="comment">// abcabc</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>.prototype.double = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.valueOf() + <span class="keyword">this</span>.valueOf();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(<span class="number">123</span>).double()</span><br><span class="line"><span class="comment">// 246</span></span><br></pre></td></tr></table></figure>
+<p>上面代码 123 外面必须要加上圆括号，否则后面的点运算符（.）会被解释成小数点。</p>
 
   </div>
   
@@ -84,7 +73,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/36/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/38/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/36/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><a class="extend next" rel="next" href="/page/38/">下一页&raquo;</a>
   </nav>
 
     </main>

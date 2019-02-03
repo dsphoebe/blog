@@ -28,10 +28,6 @@
           <a href="/archives" class="menu-item-link">归档</a>
         </li>
       
-        <li class="menu-item">
-          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
-        </li>
-      
     </ul>
   </nav>
   <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
@@ -42,37 +38,36 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">HTTP 强缓存与协商缓存</h2>
+    <h2 class="title">JSONP 理解</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-01-07 14:11:54</span>
+    <span class="post-time">2019-01-08 11:35:35</span>
     <span class="post-tags">
-      
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>强缓存：向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程。</p>
-<p>强缓存是根据客户的保留的服务器端的 response header 中的字段：expires、cache-control 来控制的。</p>
-<p>cache-control 是过期的一个时间长度，expires 是过期的时间点。cache-control 的优先级高于 expires。在无法确定客户端时间是否与服务器端时间同步的情况下，cache-control 相比 expires 是更好的选择，所以如果同时存在时，只有 cache-control 会生效。</p>
-<p>Expires 是 HTTP/1.0 控制网页缓存的字段，其值为服务器返回请求结果缓存的到期时间，即再次发起该请求时，如果客户端的时间小于 expires 值，则直接返回缓存结果。</p>
-<p>Cache-Control 是在 HTTP/1.1 用于控制网页缓存的字段，常见值：</p>
-<ul>
-<li>public：所有内容都缓存 客户端和代理服务器都可缓存（一般都是设置为这个）</li>
-<li>private：所有内容都缓存 客户端可缓存，默认值</li>
-<li>no-cache：客户端缓存内容，但是是否使用缓存则需要经过协商缓存来验证决定</li>
-<li>no-store：所有内容都不缓存，既不强制缓存也不协商缓存</li>
-<li>max-age=xxx：缓存在 xxx 秒后失效</li>
+    <h2 id="什么是JSONP"><a href="#什么是JSONP" class="headerlink" title="什么是JSONP"></a>什么是JSONP</h2><ul>
+<li>请求方：前端程序员（浏览器）</li>
+<li>响应方：后端程序员（服务器）</li>
 </ul>
-<p>缓存失效时间计算公式：expirationTime = responseTime + freshnessLifetime - currentAge</p>
-<p>协商缓存：在强制缓存失效后，浏览器携带缓存标识向服务器发送请求，由服务器根据缓存标识决定是否使用缓存的过程。</p>
-<p>协商缓存的标识 response header 中的字段：Last-Modified / If-Modified-Since、Etag / If-None-Match 来控制的。</p>
-<p>Etag / If-None-Match 的优先级高于 Last-Modified / If-Modified-Since。</p>
-<p>Last-Modifed 是服务器响应请求时，返回该资源文件在服务器最后被修改的时间</p>
-<p>Etag 是服务器响应请求时，返回当前资源文件的一个唯一标识（有服务器生成），客服端再次发起请求时，If-None-Match 携带上次请求返回的唯一标识 Etag 值，If-None-Match 与该资源在服务器的 Etag 值做比较，一致则返回 304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码 200</p>
-<p>强制缓存不会发请求到服务器，而协商缓存会发请求到服务器，所以说它两都不会从服务器加载资源数据。</p>
+<p>这就是 JSONP 的整个过程：</p>
+<ul>
+<li>请求方创建 script，src 指向响应方，同时传一个查询参数 ?callbackName=xxx</li>
+<li>响应方根据查询参数 callbackName，构造一个函数调用 xxx.call(undefined, ‘请求方需要的数据’) 这样的响应</li>
+<li>请求方浏览器收到响应，就会执行 xxx.call(undefined, ‘请求方需要的数据’)</li>
+</ul>
+<p>行业约定：</p>
+<ol>
+<li>callbackName -&gt; callback</li>
+<li>xxx -&gt; 名字+随机数</li>
+</ol>
+<h2 id="JSONP-请求方代码"><a href="#JSONP-请求方代码" class="headerlink" title="JSONP 请求方代码"></a>JSONP 请求方代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 请求方创建 script</span></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line"><span class="comment">// functionName 是名字加随机数</span></span><br><span class="line"><span class="keyword">var</span> functionName = jsonpCallback + <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">100000</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">// script 的 src 指向响应方，同时传一个查询参数 ?callback=functionName</span></span><br><span class="line">script.src = <span class="string">'http://example.com?callback='</span> + functionName</span><br><span class="line"><span class="comment">// 浏览器收到响应，就会执行 xxx.call(undefined, '请求方需要的数据')</span></span><br><span class="line"><span class="built_in">window</span>[functionName] = <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// result 是请求方需要的数据</span></span><br><span class="line">  <span class="comment">// 这里可以对数据进行处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 移除动态加入的 script</span></span><br><span class="line">  e.currentTarget.remove()</span><br><span class="line">  <span class="comment">// 删除内存中的 functionName 函数</span></span><br><span class="line">  <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">&#125;</span><br><span class="line">script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.currentTarget.remove()</span><br><span class="line">  <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JSONP-为什么无法支持-POST"><a href="#JSONP-为什么无法支持-POST" class="headerlink" title="JSONP 为什么无法支持 POST"></a>JSONP 为什么无法支持 POST</h2><ul>
+<li>JSONP 是通过动态创建的 script 实现的</li>
+<li>动态创建的 script 只能用 GET 没法用 POST</li>
+</ul>
 
   </div>
   
@@ -80,7 +75,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/6/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><a class="extend next" rel="next" href="/page/6/">下一页&raquo;</a>
   </nav>
 
     </main>

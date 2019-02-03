@@ -28,10 +28,6 @@
           <a href="/archives" class="menu-item-link">归档</a>
         </li>
       
-        <li class="menu-item">
-          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
-        </li>
-      
     </ul>
   </nav>
   <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
@@ -42,41 +38,35 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">实现一个 jQuery API</h2>
+    <h2 class="title">DOM 概述</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-24 12:44:32</span>
+    <span class="post-time">2018-12-24 22:43:37</span>
     <span class="post-tags">
-      
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
       
     </span>
     
       <div class="article-category">分类：
-        <a class="article-category-link" href="/categories/练习/">练习</a>
+        <a class="article-category-link" href="/categories/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a>
       </div>
     
   </div>
   <div class="post-content">
-    <p>我们的需求是这样的：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = ???</span><br><span class="line"><span class="built_in">window</span>.$ = jQuery</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $div = $(<span class="string">'div'</span>)</span><br><span class="line">$div.addClass(<span class="string">'red'</span>) <span class="comment">// 可将所有 div 的 class 添加一个 red</span></span><br><span class="line">$div.setText(<span class="string">'hi'</span>) <span class="comment">// 可将所有 div 的 textContent 变为 hi</span></span><br></pre></td></tr></table></figure>
-<p>实现一个 addClass 的函数，给一个节点添加 className：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">node, className</span>) </span>&#123;</span><br><span class="line">  node.classList.add(className)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>题目的要求是给所有节点添加 class，那就给所有节点循环执行一下添加 className，我们要找到一个 NodeList 的伪数组，然后给它下的每个节点 add 一下 className</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">selector, className</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> nodes = <span class="built_in">document</span>.querySelectorAll(selector)</span><br><span class="line">  nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.classList.add(className))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果 selector 传入时就已经是一个节点，或者节点列表了，那就做一下类型判断：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">nodeOrSelector, className</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nodes</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>) &#123;</span><br><span class="line">    nodes = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector.length === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="comment">// nodeOrSelector 没有 length 那就说明传入的是单个节点</span></span><br><span class="line">    nodes = [nodeOrSelector]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    nodes = nodeOrSelector</span><br><span class="line">  &#125;</span><br><span class="line">  nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.classList.add(className))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后把 addClass 移入到 window.jQuery 内。</p>
-<p>题目上写了，<code>window.$ = jQuery</code>，给 window.jQuery 的别名设置为美元符号，接下来还调用了这个美元符号的函数，可以看出来，jQuery 为一个函数，参数为 selector 也就是我们 addClass 里面的 nodeOrSelector。</p>
-<p>而 addClass 是作为这个函数执行后返回值的一个方法。</p>
-<p>所以接下来的代码为：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">nodeOrSelector</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nodes</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>) &#123;</span><br><span class="line">    nodes = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector.length === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="comment">// nodeOrSelector 没有 length 那就说明传入的是单个节点</span></span><br><span class="line">    nodes = [nodeOrSelector]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    nodes = nodeOrSelector</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    addClass: <span class="function"><span class="keyword">function</span>(<span class="params">className</span>) </span>&#123;</span><br><span class="line">      nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.classList.add(className))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后我们实现 setText，题目要求是用节点的 API textContent：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">nodeOrSelector, text</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nodes</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>) &#123;</span><br><span class="line">    nodes = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector.length === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="comment">// nodeOrSelector 没有 length 那就说明传入的是单个节点</span></span><br><span class="line">    nodes = [nodeOrSelector]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    nodes = nodeOrSelector</span><br><span class="line">  &#125;</span><br><span class="line">  nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.textContent = text)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>把它作为 window.jQuery 函数返回值的一个方法。再加上别名：<code>window.$ = jQuery</code>。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">nodeOrSelector</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nodes</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>) &#123;</span><br><span class="line">    nodes = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector.length === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="comment">// nodeOrSelector 没有 length 那就说明传入的是单个节点</span></span><br><span class="line">    nodes = [nodeOrSelector]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    nodes = nodeOrSelector</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    addClass: <span class="function"><span class="keyword">function</span>(<span class="params">className</span>) </span>&#123;</span><br><span class="line">      nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.classList.add(className))</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">    &#125;,</span><br><span class="line">    setText: <span class="function"><span class="keyword">function</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">      nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.textContent = text)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.$ = jQuery</span><br></pre></td></tr></table></figure>
-<p>原本 jQuery 函数它还会返回几个其他的 key，比如对应的node 还有 length 等，我们也来加入一下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">nodeOrSelector</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> jQueryObj, nodes</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>) &#123;</span><br><span class="line">    nodes = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> nodeOrSelector.length === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    nodes = [nodeOrSelector]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    nodes = nodeOrSelector</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  nodes.forEach(<span class="function">(<span class="params">n, i</span>) =&gt;</span> &#123;</span><br><span class="line">    jQueryObj[i] = n</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  jQueryObj.length = nodes.length</span><br><span class="line">  </span><br><span class="line">  jQueryObj.addClass = <span class="function"><span class="keyword">function</span>(<span class="params">className</span>) </span>&#123;</span><br><span class="line">    nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.classList.add(className))</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  jQueryObj.setText = <span class="function"><span class="keyword">function</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    nodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.textContent = text)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> jQueryObj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.$ = jQuery</span><br></pre></td></tr></table></figure>
+    <p>DOM 是 JavaScript 操作网页的接口，它将网页转成一个 JavaScript 对象，从而可以用脚本进行各种操作。</p>
+<p>浏览器根据 DOM 模型，将 HTML 解析成一系列节点，再由这些节点组成一个树状结构 DOM tree。所有节点和最终的树状结构，都有规范的对外接口。</p>
+<p>DOM 只是一个接口规范，可以用各种语言实现。所以严格地说，DOM 不是 JavaScript 语法的一部分，但是 DOM 操作是 JavaScript 最常见的任务，离开 DOM，JavaScript 就无法控制网页。另一方面，JavaScript 也是最常用于 DOM 操作的语言。</p>
+<p>DOM 的最小组成单位是节点 node，DOM 树就是由各种不同类型的节点组成。每个节点可以看作是文档树的一片叶子。</p>
+<p>节点的类型有七种，他们都继承自浏览器提供的节点对象 Node，都有 共有属性 Node.prototype</p>
+<ul>
+<li>Document：整个文档树的顶层节点</li>
+<li>DocumentType：doctype 标签</li>
+<li>Element：标签节点</li>
+<li>Attribute：标签节点的属性</li>
+<li>Text：标签之间（比如空格）或标签包含的文本</li>
+<li>Comment：注释</li>
+<li>DocumentFragment：文档片段</li>
+</ul>
+<p>document 节点继承自 Document，代表整个文档树，它有一个子节点标签节点 html，也是 DOM 树的根节点 root node。</p>
 
   </div>
   
@@ -84,7 +74,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/18/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/20/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/18/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><a class="extend next" rel="next" href="/page/20/">下一页&raquo;</a>
   </nav>
 
     </main>

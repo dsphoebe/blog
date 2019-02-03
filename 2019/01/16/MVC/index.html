@@ -28,10 +28,6 @@
           <a href="/archives" class="menu-item-link">归档</a>
         </li>
       
-        <li class="menu-item">
-          <a href="/2018/11/22/基础考题/" class="menu-item-link">练一套</a>
-        </li>
-      
     </ul>
   </nav>
   <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
@@ -53,7 +49,7 @@
     
   </div>
   <div class="post-content">
-    <p>MVC = Model、View、Controller 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。</p>
+    <p>MVC = Model （操作数据）、View （表示视图）、Controller （控制器） 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。</p>
 <ol>
 <li><p>功能转换为模块</p>
 </li>
@@ -63,7 +59,7 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>controller 作为对象，把 controller 函数作为这个对象的 init 函数，controller(view) 转换为 controller.init(view)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">		<span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>controller 对象下再加上一个 bindEvents 函数，也就是操作 view</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.bindEvents()		</span><br><span class="line">  &#125;,</span><br><span class="line">  bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> view = <span class="keyword">this</span>.view</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
@@ -85,7 +81,7 @@
 </ul>
 <p>最后一个 Model 与数据库交互</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> model = &#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 数据初始化逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">  fetch: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取数据</span></span><br><span class="line">  &#125;,</span><br><span class="line">  save: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// return promise 对象</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  model: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view, model</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.model = model</span><br><span class="line">    model.init()</span><br><span class="line">  &#125;,</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">controller.init(view, model)</span><br></pre></td></tr></table></figure>
-<p>用户点击 view，controll 监听了 view，view 一旦点击了就会通知 controller，controller 调用 model，model 去 server 拿数据，server 拿到数据返回给 model，model 再把数据返回给 controller，controller 再把数据显示给 view。</p>
+<p>Model 和服务器交互，Model 将得到的数据交给 Controller，Controller 把数据填入 View，并监听 View。用户操作 View，比如点击按钮，Controller 就会接受到点击时间，Controller 这时会去调用 Model，Model 会与服务器交互，得到数据后返回给 Controller，Controller 得到数据就去更新 View。</p>
 <p>MVC ：职责分明，模块清晰，代码简单！😄</p>
 <p><img src="/images/mvc/1.png" alt="Model、View、Controller"></p>
 
