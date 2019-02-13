@@ -1,8 +1,15 @@
 <section class="archive">
   <ul class="post-archive">
-    <% page.posts.each(function (post) { %>
+    <% var currentY = '' %>
+    <% page.posts.each(function (post) {
+      var y = date(post.date, "YYYY")
+    %>
+      <% if (y !== currentY) {%>
+      <% currentY = y %>
+        <li class="post-year"><%= currentY %></li>
+      <% } %>
       <li class="post-item">
-        <time class="post-date pc"><%= date(post.date, "YYYY-MM-DD HH:mm:ss") %></time>
+        <time class="post-date pc"><%= date(post.date, "YYYY-MM-DD") %></time>
         <a class="post-title" href="<%- url_for(post.path) %>"><%= post.title %></a>
       </li>
     <% }) %>
