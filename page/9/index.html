@@ -38,102 +38,50 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">DOM 知识点总结篇</h2>
+    <h2 class="title">一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-28 19:23:45</span>
+    <span class="post-time">2019-01-07 11:51:20</span>
     <span class="post-tags">
-      
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
       
     </span>
     
+      <div class="article-category">分类：
+        <a class="article-category-link" href="/categories/面试题/">面试题</a>
+      </div>
+    
   </div>
   <div class="post-content">
-    <h2 id="什么是-DOM"><a href="#什么是-DOM" class="headerlink" title="什么是 DOM"></a>什么是 DOM</h2><p>一个 HTML 文档，初始代码：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> <span class="comment">&lt;!-- 告诉浏览器请用 HTML5 来解析以下代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-Hans"</span>&gt;</span> <span class="comment">&lt;!-- zh-Hans, s 是 simple 表示中文简体 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>🤔 如果 DOCTYPE 是 XML 了？</p>
-<p>我记得 RSS 就是 XML 格式的，<a href="https://www.xml.com/pub/a/2002/12/18/dive-into-xml.html" target="_blank" rel="noopener">What Is RSS</a></p>
-<p><a href="https://www.xml.com/pub/a/w3j/s3.walsh.html" target="_blank" rel="noopener">A Guide to XML</a> / What Do XML Documents Look Like?<br>所以 XML 文档大概长这样，它的 DOCTYPE 是 <code>&lt;?XML version=xxx..?&gt;</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">&gt; &lt;?XML version="1.0"?&gt;</span><br><span class="line">&gt; <span class="tag">&lt;<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">burns</span>&gt;</span>Say <span class="tag">&lt;<span class="name">quote</span>&gt;</span>goodnight</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span>, Gracie.<span class="tag">&lt;/<span class="name">burns</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">allen</span>&gt;</span><span class="tag">&lt;<span class="name">quote</span>&gt;</span>Goodnight, Gracie.</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span><span class="tag">&lt;/<span class="name">allen</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">applause</span>/&gt;</span></span><br><span class="line">&gt; <span class="tag">&lt;/<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>HTML5 规范里，html、head、body 三个标签都是可以省略的，属性值无所谓单双引号。</p>
-<p>HTML 文档，在 DOM 中对应字母 D，即 Document。<br>然后它在内存中存储的 HTML 文档的数据，对应 DOM 中的 O，即  Object，这个 Object 存在堆中，按照一个树型结构，通过构造函数构造出对象，将 DOM 存储在内存中。<br>Document 和 Object 之间的对应关系是用一个树型结构的模型来表示，这个模型叫做 Model。<br>它们三者组成了 Document Object Model 简称 DOM，读作 [dʌm]。</p>
-<p>以下 DOM 树</p>
-<p><img src="/images/dom/tree.png" alt="DOM tree"></p>
-<p>DOM 树中的每个节点都是 Node 类型。<br>节点类型主要有：document节点、标签节点、文本节点、注释节点</p>
+    <p><img src="/images/url-view/tcp.png" alt=""></p>
+<p>第一步：根据域名进行 DNS 解析到 IP 地址</p>
+<p>第二步：根据 IP 地址向服务器发起 TCP 连接，与浏览器进行三次握手：</p>
 <ul>
-<li>标签节点是由 Element 构造函数构造</li>
-<li>文本节点是由 Text 构造函数构造</li>
-<li>document 节点是由 Document 构造函数构造，它代表了整个文档。<code>document</code> 可以获取整个文档，<code>document.documentElement</code> 则获取是 html 节点，即根节点。</li>
-<li>所有节点构造函数（Element、Text、Comment、Document构造函数）都继承自 Node 构造函数，而 Node 构造函数又继承自 JavaScript 里的 Object.prototype。节点们都有 Node 的实例属性和方法，比如 Node.prototype.nodeName。节点们都有 Object 的实例属性和方法，比如 Object.prototype.toString 方法。</li>
+<li>主机向服务器发送一个建立连接的请求</li>
+<li>服务器接到请求后发送同意连接的信号</li>
+<li>主机到同意连接的信号后，再次向服务器发送了确认信号</li>
 </ul>
-<p><img src="/images/dom/node-tree.jpg" alt="Node constructor tree"></p>
-<h2 id="DOM-操作"><a href="#DOM-操作" class="headerlink" title="DOM 操作"></a>DOM 操作</h2><p>DOM 将 HTML 页面与 JavaScript 连接起来，它提供了一系列 API 来操作 HTML 代码，操作 DOM 节点。DOM 最开始设计不是给 HTML 用的，而是给 XML 用的，所以有很多 API 用起来就是很奇怪。</p>
+<p>第三步：发送 HTTP 请求，请求报文包括三部分：请求行、请求头和请求正文</p>
+<p>第四步：服务器处理请求并返回 HTTP 响应报文，响应报文包括三部分：响应状态码、响应报头和响应报文。</p>
+<p>如果该资源浏览器访问过，而且该资源的 response header 的 cache-control 有效时间内，就不再访问服务器，而是直接从本地读取，如果没有 cache-control 而有 expires，而且本地时间在 expires 时间之前，也不再访问服务器，也是直接从本地读取。expires 和 cache-control，cache-control 优先级更高，所以先访问 cache-control，它俩是 HTTP 强缓存。</p>
+<p>如果 HTTP 强缓存都已经失效，则访问协商缓存，浏览器会携带缓存标识 Etag 和 Last-Modified 发送请求，如果 If-None-Match 值与浏览器携带的 Etag 值一致则返回 304，不用再请求服务器资源，缓存有效。如果失效，则看 Last-Modified-Sine 与浏览器携带的 Last-Modified 是否一致，如果一致，则返回 304 不再请求服务器资源。</p>
+<p>第五步：解析并渲染页面</p>
 <ul>
-<li>获取节点：node.querySelector、node.querySelectorAll。通过节点关系获取节点：parentNode、children、nextSibling、nextElemntSibling 等</li>
-<li>修改节点的属性：节点类型 标签/文本，节点名称 div/#text，节点内部文本 textContent，标签节点的样式 className、classList 等</li>
-<li>删除节点：removeChild、删除标签节点 remove</li>
-<li>创建节点：创建标签节点 document.createElement(‘div’)、创建文本节点 document.createTextNode(‘xx’)。</li>
+<li>HTML 开始构建一个 DOM 树</li>
+<li>如果遇到的 DOM 节点是 JavaScript 代码，就会调用 JavaScript 引擎对 JavaScript 代码进行解释执行，此时由 JavaScript 引擎和 GUI 渲染线程的互斥，GUI 渲染线程就会被挂起，渲染过程停止；如果 JavaScript 代码的运行中对 DOM 树进行了修改，那么 DOM 的构建需要从新开始</li>
+<li>如果节点需要依赖其他资源，如（图片，CSS等），便会调用网络模块的资源加载器来加载它们，但它们是异步的，不会阻塞当前DOM树的构建</li>
+<li>如果遇到的是 JavaScript 资源 URL（没有标记异步），则需要停止当前 DOM 的构建，直到 JavaScript 的资源加载并被 JavaScript 引擎执行后才能继续构建 DOM</li>
+<li>对于 CSS，CSS 解释器会将 CSS 文件解释成内部表示结构，生成 CSS 规则树；</li>
+<li>然后合并 CSS 规则树和 DOM 树，生成渲染树</li>
+<li>最后对渲染树树进行布局和绘制</li>
 </ul>
-<h2 id="常用-Node-类型的属性及方法"><a href="#常用-Node-类型的属性及方法" class="headerlink" title="常用 Node 类型的属性及方法"></a>常用 Node 类型的属性及方法</h2><p>所有节点都继承自 Node 类型，也就是所有节点都有以下这些属性和方法：</p>
+<p>第六步：通过四次挥手关闭 TCP：</p>
 <ul>
-<li><p>确定一个节点的类型</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.querySelector(<span class="string">'p'</span>)</span><br><span class="line">p.nodeName <span class="comment">// "P"</span></span><br><span class="line">p.nodeType <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">document</span>.nodeName <span class="comment">// "#document"</span></span><br></pre></td></tr></table></figure>
-<p>nodeName 返回节点的名字。如果是文本节点返回的是 <code>#text</code>、如果是文档节点返回的是 <code>#document</code>、而如果是标签节点则返回这个标签的大写，比如 p 标签则返回 <code>P</code>，有一个元素标签例外，那就是 SVG 标签，它返回的是小写的 svg。</p>
-</li>
+<li>主机向服务器发送一个断开的请求</li>
+<li>服务器接到请求后发送确认收到请求的信号</li>
+<li>服务器向主机发送断开通知</li>
+<li>主机接到断开通知后断开连接并反馈一个确认信号，服务器收到取人信号后断开连接。</li>
 </ul>
-<p>  nodeType 返回的节点类型对应的数值。1 表示的是标签节点，即 Element 类型的节点；3 则表示是文本节点； 9 表示文档节点；11 表示 DocumentFragment。当时设计 nodeType 用数值表示，是为了省内存。</p>
-<ul>
-<li><p>获取节点内的文本 textContext</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>)</span><br><span class="line"><span class="keyword">const</span> tn = <span class="built_in">document</span>.createTextNode(<span class="string">'panda'</span>)</span><br><span class="line">p.appendChild(tn)</span><br><span class="line"><span class="built_in">document</span>.body.append(p)</span><br><span class="line">tn.innerText <span class="comment">// undefined</span></span><br><span class="line">tn.innerHTML <span class="comment">// undefined</span></span><br><span class="line">tn.textContent <span class="comment">// "panda"</span></span><br><span class="line">p.innerText <span class="comment">// "panda"</span></span><br><span class="line">p.innerHTML <span class="comment">// "panda"</span></span><br><span class="line">p.textContent <span class="comment">// "panda"</span></span><br></pre></td></tr></table></figure>
-<p>标签节点有个 innerHTML 和 innerText，如果文本节点访问 innerHTML、innerText 会返回 undefined。innerText 返回节点下所有的文本包括其后代节点。IE 发布 innerText ~ ，FF、opera 发布的 textContent，会获取 script、style 的文本。innerText 会触发重排。</p>
-</li>
-<li><p>获取兄弟节点、子节点、父节点</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="built_in">document</span>.querySelector(<span class="string">'main'</span>)</span><br><span class="line">main.nextSibling</span><br><span class="line">main.nextElementSibling</span><br><span class="line">main.previousSibling</span><br><span class="line">main.childNodes <span class="comment">// 返回一个动态的 NodeList 伪数组</span></span><br><span class="line">main.children <span class="comment">// 返回一个动态的 HTMLCollection 标签集合伪数组</span></span><br><span class="line">main.firstChild</span><br><span class="line">main.lastChild</span><br><span class="line">main.parentNode</span><br><span class="line">main.parentElement</span><br></pre></td></tr></table></figure>
-<p>注意 NodeList 伪数组只能使用数字索引节点，而 HTMLCollection 对象则可以用 id 属性或者 name 属性来索引标签节点。</p>
-</li>
-<li><p>node.hasChildNodes() 返回是否有子节点，也可以用 node.firstChild 为空来判断，也可以用 node.childNodes &amp;&amp; node.childNodes.length 为否来判断。</p>
-</li>
-<li><p>node.cloneNode(deep) 默认 deep 为 true，表示深度克隆，会克隆该 node 的所有后代节点，否则浅克隆只克隆当前 node。</p>
-</li>
-<li><p>node.contains(otherNode) 返回 node 是否包含 otherNode。</p>
-</li>
-<li><p>node.isEqualNode(otherNode) 如果 node 和 otherNode 的 nodeType、子节点、属性等一致返回 true，否则 false</p>
-</li>
-<li><p>node.normalize() 规范化 node 和 node 后代节点。规范化后不存在空的文本节点，或者两个相邻的文本节点。</p>
-</li>
-<li><p>输入 id 的值可以快速获取 id 为这个值的节点。比如有一段 HTML：<code>&lt;div id=&quot;myHoneyPanda&quot;&gt;balabala...&lt;/div&gt;</code> 然后可以在 JavaScript 里面输入 <code>myHoneyPanda</code> 获取这个节点。</p>
-</li>
-</ul>
-<h2 id="常见的-document-属性和方法"><a href="#常见的-document-属性和方法" class="headerlink" title="常见的 document 属性和方法"></a>常见的 document 属性和方法</h2><p>document 继承自 Document 类型。表示一个 HTML 的文档。</p>
-<ul>
-<li>document.documentElement 返回 html 节点</li>
-<li>document.activeElment 指向获得焦点的那个节点，相当于 Chrome devtool 里面的 <code>$0-$9</code> ？ </li>
-<li>获取文档下的指定标签的集合，可以抓包下载美图~<ul>
-<li>document.images </li>
-<li>document.links</li>
-</ul>
-</li>
-<li>获取文档信息<ul>
-<li>document.location 返回 Location 对象，document.documentURI 返回当前文档的路径，document.URL 返回当前文档的 URL</li>
-<li>document.readyState 返回当前文档加载状态</li>
-<li>document.cookie cookie 设置/获取</li>
-<li>document.domain 域名</li>
-<li>document.defaultView 返回一个 window 对象</li>
-</ul>
-</li>
-<li>document.querySelectorAll 获取到的标签伪数组不是动态的。</li>
-</ul>
-<h2 id="常见-Element-节点的属性和方法"><a href="#常见-Element-节点的属性和方法" class="headerlink" title="常见 Element 节点的属性和方法"></a>常见 Element 节点的属性和方法</h2><ul>
-<li>document.documentElement.scrollHeight 获取整个页面的高度</li>
-<li>document.documentElement.clientHeight 获取整个浏览器视口的高度</li>
-<li>Element.clientHeight/clientLeft 返回节点的不包括 border、margin 的高度/左边框的宽度</li>
-<li>Element.scrollHeight/scrollLeft 经过浏览器视口变化，返回节点的不包括 border、margin 的高度/滚动条离视口左边的距离</li>
-<li>Element.offsetHeight/offsetLeft 经过浏览器视口变化，返回节点所占的整个页面左上角 距离 右下角的宽度和高度，并且左上角是包括 padding 和 border 的 / 距离父节点的左侧的距离。</li>
-<li>Element.getBoundingClientRect().left、Element.getBoundingClientRect().top</li>
-</ul>
+<h3 id="推荐神文"><a href="#推荐神文" class="headerlink" title="推荐神文"></a>推荐神文</h3><p><a href="http://fex.baidu.com/blog/2014/05/what-happen/" target="_blank" rel="noopener">从输入 URL 到页面加载完成的过程中都发生了什么事情？</a></p>
 
   </div>
   
@@ -141,7 +89,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><a class="extend next" rel="next" href="/page/10/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><a class="extend next" rel="next" href="/page/10/">下一页&raquo;</a>
   </nav>
 
     </main>
