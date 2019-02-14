@@ -58,6 +58,10 @@ a:hover {
   padding: 0;
   margin: 0;
 }
+.post-year {
+  list-style: none;
+  font-size: 2.5rem;
+}
 .header {
   display: flow-root;
   text-align: center;
