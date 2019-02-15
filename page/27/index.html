@@ -38,10 +38,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">函数的本质</h2>
+    <h2 class="title">怎么声明一个函数</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-20 13:23:19</span>
+    <span class="post-time">2018-12-20 13:25:30</span>
     <span class="post-tags">
       
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li></ul>
@@ -54,31 +54,47 @@
     
   </div>
   <div class="post-content">
-    <h2 id="函数怎么调用"><a href="#函数怎么调用" class="headerlink" title="函数怎么调用"></a>函数怎么调用</h2><p>如果是数据，就是直接用的。比如 n = 1，要用就直接写上 n 就可以了。而函数要用的话叫做 调用，英文 call 或者 invoke。那函数是怎么调用的了？比如</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x,y</span>) </span>&#123;<span class="keyword">return</span> x+y&#125;</span><br></pre></td></tr></table></figure>
-<p>函数 f 怎么调用了？</p>
-<h2 id="首先我们看，函数到底是什么？"><a href="#首先我们看，函数到底是什么？" class="headerlink" title="首先我们看，函数到底是什么？"></a>首先我们看，函数到底是什么？</h2><blockquote>
-<p>函数是一段可以反复调用的代码块</p>
-</blockquote>
-<p>比如，我们求三角形的面积，我们知道它的宽为 100、高为 200。三角形面积公式为 S = ah/2。所以结果为 100 x 200 / 2 = 10000。JavaScript 代码写下来：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">width = <span class="number">100</span></span><br><span class="line">height = <span class="number">200</span></span><br><span class="line"><span class="keyword">var</span> area = width * height / <span class="number">2</span></span><br><span class="line">area <span class="comment">// 10000</span></span><br></pre></td></tr></table></figure>
-<p>那上面的 <code>var area = width * height / 2</code> 以及返回 <code>area</code> 就是求三角形面积的两句话，那我们可以把这两句话写成一个函数，然后取一个名字。比如说：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> 求三角形面积(<span class="params">w,h</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> area = w * h / <span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span> area</span><br><span class="line">&#125;</span><br><span class="line">求三角形面积(<span class="number">4</span>,<span class="number">3</span>) <span class="comment">// 6</span></span><br><span class="line">求三角形面积(<span class="number">5</span>,<span class="number">3</span>) <span class="comment">// 7.5</span></span><br></pre></td></tr></table></figure>
-<p>求三角形面积 这个函数就可以反复调用。</p>
-<h2 id="函数在内存中是怎么存的？"><a href="#函数在内存中是怎么存的？" class="headerlink" title="函数在内存中是怎么存的？"></a>函数在内存中是怎么存的？</h2><p>函数在内存里面是存的函数 toString 值。实际上是一个字符串。</p>
-<p><code>function f(x,y){return x+y}</code> 改用更明确的形式 <code>var f = new Function(&#39;x&#39;, &#39;y&#39;, &#39;return x+y&#39;)</code></p>
-<p>在栈中存入 f，值为 ADDR 77，然后在堆中有一个 ADDR 77 的值，它里面对应存了函数的参数，比如 <code>params：[&#39;x&#39;, &#39;y&#39;]</code>，然后还有函数体 <code>fbody:&#39;return x+y&#39;</code>，然后就是函数的共有属性 <code>__proto__</code>。而 <code>__proto__</code> 里面有个方法叫 call，call 调用 <code>fbody</code>。</p>
-<p><img src="/Users/sunyanhui/dp/hexo/dsphoebe/source/images/function/memory.png" alt="memory"></p>
-<p>这个调用的过程：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = &#123;&#125;</span><br><span class="line">f.name = f</span><br><span class="line">f.params = [<span class="string">'x'</span>, <span class="string">'y'</span>]</span><br><span class="line">f.fbody = <span class="string">'console.log(1)'</span></span><br><span class="line">f.call = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.eval(f.body)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">f.call() </span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>函数是一个对象，因为函数的调用过程，其实就是 eval 它的函数体的过程。</p>
-<p>eval 的参数是字符串，eval 执行它的参数。</p>
-<p>所以可以总结为：可以执行代码的对象叫做函数。</p>
-<h2 id="硬核玩家函数调用"><a href="#硬核玩家函数调用" class="headerlink" title="硬核玩家函数调用"></a>硬核玩家函数调用</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x,y</span>) </span>&#123;<span class="keyword">return</span> x+y&#125;</span><br><span class="line">f.call(<span class="literal">undefined</span>, <span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<h2 id="知识体系回顾"><a href="#知识体系回顾" class="headerlink" title="知识体系回顾"></a>知识体系回顾</h2><p>JavaScript 有 7 种数据类型：number，string，boolean，null，undefined，symbol，object</p>
-<p>最复杂的就是 object 它是复杂对象，它能包含其他数据类型。</p>
-<p>比如一个普通对象 {name: ‘frank’}，它有个 toString 方法，继承自它的 <code>__proto__</code> ，<code>__proto__</code>指向 Object.prototype。还有一个 Array.prototype 的原型，比如我们有个数组 [1,2,3]，它有个<code>__proto__</code> ，它是指向 Array.prototype，它有 push，pop 等方法。然后有个 Function.prototype 的原型，比如我们有个函数 <code>var f = function(){}</code>，它有个<code>__proto__</code>，它指向 Function.prototype，它里面有 bind、call、apply 方法。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,<span class="number">2</span> <span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">var</span> a = (<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+    <ol>
+<li>最简单的声明方法，具名函数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params">输入<span class="number">1</span>， 输入<span class="number">2.</span>..</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>function 是关键字，和 var 一样，var 是声明一个变量，funciton 是声明一个函数。变量和函数的差别是，变量有 7 种数据类型（string，number，null，undefined，boolean，symbol，object），而 function 声明一个函数，那么这个变量就只能是一个函数，也就是 object 数据类型，function 是特殊的 var，变量的特例。</p>
+<p>x 是函数的名字，名字可以用来 console.log(x) 输出这个函数，console.log 的参数只支持字符串，如果这个 x 不是字符串，console.log 会自动把 x 的值调用 toString 方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params">input1, input2</span>) </span>&#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125;</span><br><span class="line">x.toString() <span class="comment">// "function x(input1, input2) &#123;return undefined&#125;"</span></span><br><span class="line"><span class="built_in">console</span>.log(x) <span class="comment">// f x(input1, input2) &#123;return undefined&#125;</span></span><br></pre></td></tr></table></figure>
+<p>不要相信 Chrome 打印出来的东西</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"1"</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>Chrome 打印出来的是数值 1，而应该是字符串“1”。console.log 永远返回 undefined。打印的并不是返回值。</p>
+<p>x 的返回值默认会带上 return undefined，如果没有 return 的话。因为一个函数必须要有一个终止语句，所以就算不写 return，函数也会自动带上 return undefined。</p>
+<ol start="2">
+<li>匿名函数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">input1, input2</span>) </span>&#123; <span class="keyword">return</span> <span class="literal">undefined</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>不能单独使用，必须赋给另外一个变量。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x</span><br><span class="line">x = <span class="function"><span class="keyword">function</span> (<span class="params">input1, input2</span>) </span>&#123; <span class="keyword">return</span> <span class="literal">undefined</span> &#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>具名函数赋值给一个变量</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span> <span class="title">y</span>(<span class="params">input1, input2</span>) </span>&#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>y 的作用域只在函数体内。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span> <span class="title">y</span>(<span class="params">input1, input2</span>) </span>&#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'y'</span>) <span class="comment">// 会报错，找不到 y</span></span><br></pre></td></tr></table></figure>
+<p>第 3 种和第 1 种的语法一样，但是 y 的体现不一致，这也是 JavaScript 的垃圾之处。</p>
+<ol start="4">
+<li>window.Function 函数对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> Funtion(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x + y'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x'</span> + n + <span class="string">'y'</span>)</span><br><span class="line">f(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<p>所有的参数都是字符串，然后字符串是可以拼接的。</p>
+<ol start="5">
+<li>箭头函数</li>
+</ol>
+<p>箭头函数是匿名函数！</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123; <span class="keyword">return</span> x + y &#125;</span><br></pre></td></tr></table></figure>
+<p>如果花括号内只有一个语句，可以去掉花括号和 return</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function">(<span class="params">x, y</span>) =&gt;</span> x + y</span><br></pre></td></tr></table></figure>
+<p>如果参数只有一个，则不需要小括号</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="params">x</span> =&gt;</span> x**<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>函数的名字的坑</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">f.name <span class="comment">// "f"</span></span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">f2.name <span class="comment">// "f2"</span></span><br><span class="line"><span class="keyword">var</span> f3 = <span class="function"><span class="keyword">function</span> <span class="title">f4</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">f3.name <span class="comment">// "f4"</span></span><br><span class="line"><span class="keyword">var</span> f5 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x+y'</span>)</span><br><span class="line">f5.name <span class="comment">// "anonymous"</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -86,7 +102,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/26/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/28/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/26/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/28/">下一页&raquo;</a>
   </nav>
 
     </main>
