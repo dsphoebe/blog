@@ -9,7 +9,7 @@
         <li class="post-year"><%= currentY %></li>
       <% } %>
       <li class="post-item">
-        <time class="post-date pc"><%= date(post.date, "YYYY-MM-DD") %></time>
+        <time class="post-date pc"><%= date(post.date, "MM-DD") %></time>
         <a class="post-title" href="<%- url_for(post.path) %>"><%= post.title %></a>
       </li>
     <% }) %>
