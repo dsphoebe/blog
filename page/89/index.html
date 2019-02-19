@@ -38,20 +38,37 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Git 笔记</h2>
+    <h2 class="title">服务器迁移相关知识点</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2017-12-19 23:22:30</span>
+    <span class="post-time">2018-01-10 15:45:37</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器迁移/">服务器迁移</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h3 id="git-commit-时，文件名中文是乱码："><a href="#git-commit-时，文件名中文是乱码：" class="headerlink" title="git commit 时，文件名中文是乱码："></a>git commit 时，文件名中文是乱码：</h3><p>git config –global core.quotepath false<br>如果是true：输入路径名大于0x80的字符串，转义并用双引号印起来，否则不转义。<a href="https://www.git-scm.com/docs/git-config#git-config-corequotePath" target="_blank" rel="noopener">Git帮助文档查看详情</a></p>
-<h3 id="git-pull-时候冲突。"><a href="#git-pull-时候冲突。" class="headerlink" title="git pull 时候冲突。"></a>git pull 时候冲突。</h3><p>俩份代码的commit没有在同一条线上时，就会有这个冲突 fatal: refusing to merge unrelated histories<br>git pull origin master –allow-unrelated-histories</p>
+    <h3 id="服务器进程"><a href="#服务器进程" class="headerlink" title="服务器进程"></a>服务器进程</h3><ul>
+<li>pstree<ul>
+<li>tmux</li>
+<li>crontab</li>
+<li>nginx</li>
+<li>supervisor</li>
+</ul>
+</li>
+</ul>
+<h3 id="rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path"><a href="#rsync-–rsync-path-’xxxx’-avz-file-ssh-server-path" class="headerlink" title="rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/"></a>rsync –rsync-path=’xxxx’ -avz file ssh-server:/path/</h3><h3 id="aws"><a href="#aws" class="headerlink" title="aws"></a>aws</h3><ul>
+<li>安全组 ssh登录22端口没开</li>
+<li>ssh -vvv ssh log</li>
+</ul>
+<h3 id="bash-read-file"><a href="#bash-read-file" class="headerlink" title="bash read file"></a>bash read file</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in `cat file.txt`</span><br><span class="line">  do</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>mysqldump databases a &gt; a.sql</li>
+<li>mysql &lt; a.sql</li>
+<li>mysqldump –all-database &gt; all.sql</li>
+</ul>
 
   </div>
   
@@ -59,7 +76,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/88/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="page-number current">89</span><a class="page-number" href="/page/90/">90</a><a class="page-number" href="/page/91/">91</a><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/90/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/88/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="page-number current">89</span><a class="page-number" href="/page/90/">90</a><a class="page-number" href="/page/91/">91</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/90/">下一页&raquo;</a>
   </nav>
 
     </main>

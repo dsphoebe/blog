@@ -38,58 +38,48 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">String 对象</h2>
+    <h2 class="title">基本数据类型和对象 与 栈和堆</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-03 15:21:15</span>
+    <span class="post-time">2018-12-11 10:31:32</span>
     <span class="post-tags">
       
     </span>
     
-      <div class="article-category">分类：
-        <a class="article-category-link" href="/categories/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a>
-      </div>
-    
   </div>
   <div class="post-content">
-    <p>String 对象是 JavaScript 原生提供的三个包装对象之一，用来生成字符串对象。给生成的字符串对象调用 valueOf 将返回它对应的原始字符串。</p>
-<p>除了用作构造函数，String 还可以用作工具方法，用来将任意类型的值转换为字符串。</p>
-<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><p>String 对象提供的静态方法（即定义在对象本身，而不是定义在对象实例的方法）</p>
-<h3 id="String-fromCharCode"><a href="#String-fromCharCode" class="headerlink" title="String.fromCharCode"></a>String.fromCharCode</h3><p>该方法的参数是一个或多个数值，代表 Unicode 码点，返回值是这写码点组成的字符串。如果参数为空，就返回空字符串。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">104</span>,<span class="number">101</span>,<span class="number">108</span>,<span class="number">108</span>,<span class="number">111</span>) <span class="comment">// "hello"</span></span><br></pre></td></tr></table></figure>
-<p>不支持 Unicode 大于 0xFFFF 的字符，即传入的参数不能大于 0xFFFF，即 十进制 65535。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode() <span class="comment">// ""</span></span><br><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">0x20BB7</span>) <span class="comment">// 'ஷ' </span></span><br><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">0x20BB7</span>) === <span class="built_in">String</span>.fromCharCode(<span class="number">0x0BB7</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>String.fromCharCode 发现参数值大于 0xFFFF，就会忽略多出的位，即忽略 0x20BB7 里面的 2。这是因为码点大于 0xFFFF 的字符占用四个字节，而 JavaScript 默认只支持两个字节。这种情况下把 0x20BB7 拆成两个字符表示。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&gt; <span class="built_in">String</span>.fromCharCode(<span class="number">0xD842</span>, <span class="number">0xDFB7</span>)</span><br><span class="line">&gt; <span class="comment">// "吉"</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>码点大于 0xFFFF 的字符的四字节表示法，由 UTF-16编码方法决定。</p>
-</blockquote>
-<h2 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h2><p>String.prototype.charAt 返回指定位置的字符，参数从 0 开始编号的位置，默认值也是 0，不能是负数或者大于等于字符长度否则返回空字符串。</p>
-<p>String.prototype.charCodeAt 返回字符串指定位置的 Unicode 码点对应的十进制数，相当于 String.fromCharCode 的逆操作。参数默认值为 0，参数若为负数或者大于等于字符串长度则返回 NaN。charCodeAt 方法返回的 Unicode 码点不回大于 65535 （0xFFFF），也就是说，只返回两个字节的字符的码点。如果遇到码点大于 65535 的字符（四个字节的字符），必须连续使用两次 charCodeAt，不仅读入 charCodeAt(i)，还要读入 charCodeAt(i+1)，将两个值放在一起。</p>
-<p>String.prototype.concat 连接多个字符串，返回一个新的字符串，不改变原来的字符串。如果参数不是字符串，会先转换为字符串再连接。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> two = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> three = <span class="string">'3'</span>;</span><br><span class="line"></span><br><span class="line"><span class="string">''</span>.concat(one, two, three) <span class="comment">// "123"</span></span><br><span class="line">one + two + three <span class="comment">// "33"</span></span><br></pre></td></tr></table></figure>
-<p>String.prototype.slice 从字符串取出指定的子字符串。<br>第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）<br>如果参数是负数，表示从结尾开始倒数计算的位置<br>如果第二个参数小于第一个参数，返回空字符串</p>
-<p>String.prototype.substring 同 slice 也是用于从字符串中取出指定的字符串。<br>第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含该位置）<br>如果参数是负数，substring 会自动将负数砖为 0<br>如果第二个参数小于第一个参数，substring 会自动更换两个参数的位置</p>
-<p><strong>所以 substring vs slice，优先选择 slice，substring 违反直觉。</strong></p>
-<p>String.prototype.substr 同 slice、substring 也是用于从字符串取出指定的字符串。<br>第一个参数是子字符串开始的位置，第二个参数是子字符串的长度。<br>如果第一个参数是负数，表示倒数计算字符的位置<br>如果第二个参数是负数，将被自动转为 0</p>
-<p>String.prototype.indexOf，String.prototype.lastIndexOf 索引另一个字符串在字符串中出现的位置。第二个参数表示开始索引的位置。</p>
-<p>String.prototype.trim 用于去除字符串两端的空格（包括制表符<code>\t</code>,<code>\v</code>、换行符<code>\n</code>、回车符<code>\r</code>），返回一个新字符串，不改变原字符串。</p>
-<p>String.prototype.toLowerCase，String.prototype.toUpperCase 将字符串该为小写，大写，返回一个新字符串，不改变原字符串。</p>
-<p>String.prototype.match 用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串，如果没有返回 null。返回的数组还有 index 属性和 input 属性，分别表示匹配字符串开始的位置和原字符串。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> matches = <span class="string">'cat, bat, sat, fat'</span>.match(<span class="string">'at'</span>);</span><br><span class="line">matches.index <span class="comment">// 1</span></span><br><span class="line">matches.input <span class="comment">// "cat, bat, sat, fat"</span></span><br></pre></td></tr></table></figure>
-<p>String.prototype.search 同 match，但是返回值为匹配的第一个位置。如果没有匹配到，则返回 -1<br>String.prototype.replace 用于替换匹配的子字符串，一般只替换第一个匹配，如果加了 g 修饰符则替换全部匹配</p>
-<p>String.prototype.split 按照给定的字符串返回一个由分割出来的子字符串组成的数组。<br>如果分割字符串为空字符串，则返回数组的成员是原字符串的每一个字符串<br>如果省略参数，则返回的数组的唯一成员就是原字符串<br>split 的第二个参数，限定返回数组的最大成员数</p>
-<p>String.prototype.localCompare 用于比较两个字符串。它返回一个整数，如果是小于 0，表示第一个字符串小于第二个字符串；如果等于 0，表示两者相等；如果大于 0，表示第一个字符串大于第二个字符串。<br>按照自然语言的顺序进行比较。<br>第二个参数指定使用的语言。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'B'</span> &gt; <span class="string">'a'</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">'B'</span>.localeCompare(<span class="string">'a'</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+    <p>当我们写下 var a = 1 的时候，JavaScript引擎到底在做什么？首先从内存，内存条开始说。</p>
+<p><img src="/images/memory/Kingston.jpg" alt="Kingston"></p>
+<p>内存条如上图，上面有 8 个小黑块。内存条上的这些小黑块是用来存 0 和 1，比如存数字 2，那就把 2 变成二进制，也就是 10。0 是低电位，1 是高电位，然后存到内存里面，也就是内存是通过高低电位来存储数据的，所以内存须要一直通电。如果突然断电的话，所有内存中的 0 和 1 就都没了，数据都没了。如果要想数据都存起来，我们是把他们存到外存中，也就是硬盘中。比如我们把东西存到硬盘，关机后再开机，硬盘里面的东西还是在的，但是内存中的东西没了。每次开机的时候都要重新启动系统，系统会载入你的内存。</p>
+<p>内存的特点就是，一旦断电，它里面的东西全部消失，所以要保持通电。内存的读写速度快。</p>
+<p>外存的特点是，它里面的东西一直都在，但读写速度慢，目前最快的外存是 SSD 固态硬盘，能接近内存速度，现在很多人用固态硬盘来开机缩短开机时间。SSD 不易坏，但是 SSD 一旦坏了一点就整个坏了。另一种外存是机械硬盘，速度比 SSD 慢，容易坏，一般 10 年就会坏掉。不过机械硬盘坏了一点点是没有关系的，只要不去读它就可以了。另外价格上 SSD 比机械硬盘要贵。配置电脑的话，可以小体积的 SSD 加上大体积的机械硬盘配合，这样速度和空间就都有了。</p>
+<p>我们开机就是把硬盘里面的操作系统读写到内存中。</p>
+<p>如果我们有 2G 的内存，打开操作系统，操作系统占用了 512M 内存，操作系统开启后，我们打开浏览器，比如浏览器占了 1G（这里分配 1G 是因为 Chrome 浏览器很吃内存，所以购买电脑最低配 8G 内存。）浏览器把这个 1G 分配给每个页面，比如每个页面占 100M，而这个 100M 分配给 HTML + CSS 可能占 20M，一部分分配给 JavaScript 引擎 可能占 10M，让它去运行引擎，还有一部分分配网络模块 HTTP 可能占 20M，还有的分配给其他，比如说插件，定时器。JavaScript 引擎顶多能申请到 100M 内存。</p>
+<p>所以当我们写下 var a = 1 的时候，JavaScript 引擎的 100M 内存会把 a 存在内存里的代码区，而 1 存在内存里面的数据区，然后 JavaScript 引擎会把代码区的 a 和数据区的 1 关联上，再进行 a 的其他运算逻辑的处理。到程序结束，a 会被销毁。</p>
+<p>数据区分为两个区：栈 Stack 区内存、堆 Heap 区 内存。堆区内存存储的方式是个树的形式，像个堆一样，所以叫做堆内存。而栈区内存的组织结构像栈一样所以叫做栈内存。</p>
+<p><img src="/images/memory/stack-heap.png" alt="stack-heap"></p>
+<p>然后我们看看下面这些代码是怎么在堆内存和栈内存中存储的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  name: <span class="string">'panda'</span>,</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>第一步：JavaScript 引擎先分析语法，把所有 var 进行变量提升；</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="keyword">var</span> b</span><br><span class="line"><span class="keyword">var</span> o</span><br><span class="line"><span class="keyword">var</span> c</span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line">o = &#123;</span><br><span class="line">  name: <span class="string">'panda'</span>,</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">c = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>a = 1，存到内存的栈中，JavaScript 里面的数字都是 64 位浮点数，小数点是浮动的所以叫浮点数。1 转为 64 位符点数格式是 <code>0:2^1023:0</code></p>
+<p>而 b = 2 ，2 的二进制是 10，64位符点数格式表示为 <code>0:2^1024:0</code></p>
+<p>如果 b = a 的话，就直接复制一份 a 到 b 的位置。</p>
+<p>对象存储在堆中的，如果存在栈区中，对象的大小变化后，会需要除了修改对象之外，还要修改对象之后的栈中的其他值的位置，效率会很慢。所以最后对象存储在堆中，然后把堆的地址存在栈中。所以对象 o 的值会存在堆中，然后把它的地址比如 ADDR 100 存在栈中。</p>
+<p>c 是 true，只需要 1 位，即 1</p>
+<p>o2 = o，是直接把 o 的地址复制给 o2 的位置。</p>
+<p>最后数据在内存中的存储大致是这样的：</p>
+<p><img src="/images/memory/data-instack-inheap.png" alt=""></p>
+<p>总结：</p>
+<p>JavaScript 语言的每一个值，都属于某一种数据类型。而 JavaScript 值的数据类型有 7 种。分别为基本类型（primitive type）：字符串（string）、数值（number）、布尔值（boolean）、符号（symbol）、空值（null）、未定义的值（undefined），和复杂类型（complex type ）：对象（object）。JavaScript 的基本数据类型存储在内存中的栈区中，复杂类型 object 存储在堆区中。</p>
+
   </div>
   
 </article>
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/36/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/38/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/36/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/38/">下一页&raquo;</a>
   </nav>
 
     </main>
