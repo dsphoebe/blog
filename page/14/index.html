@@ -38,76 +38,57 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">理解 TCP 协议</h2>
+    <h2 class="title">HTTP 强缓存与协商缓存</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-01-07 13:23:28</span>
+    <span class="post-time">2019-01-07 14:11:54</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h2 id="了解什么是-OSI-七层模型？"><a href="#了解什么是-OSI-七层模型？" class="headerlink" title="了解什么是 OSI 七层模型？"></a>了解什么是 OSI 七层模型？</h2><p>OSI Open System Interconnection Reference Model 开放式系统互联通信参考模型，简称 OSI 模型 OSI model，由国际标准化组织 ISO 于 1984 年提出。</p>
-<p>分为应用层、表示层、会话层、传输层、网络层、数据链路层、物理层七层。</p>
-<p><img src="/images/http/iso.gif" alt="iso"></p>
-<center><sup><a href="https://blog.csdn.net/yaopeng_2005/article/details/7064869" title="OSI七层模型详解" target="_blank" rel="noopener"></a>图来自：OSI七层模型详解</sup></center>
-
-<p>应用层 Application Layer 提供为应用软件而设的接口，以设置与另一应用软件之间的通信。例如：HTTP、HTTPS、FTP、TELNET、SSH、SMTP、POP3 等。</p>
-<p>表示层 Presentation Layer 把数据转换为能与接收者的系统格式兼容并适合传输的格式。</p>
-<p>会话层 Session Layer 负责在数据传输中设置和维护计算机网络中两台计算机之间的通信连接。</p>
-<p>传输层 Transport Layer 把传输表头 TH 加至数据以形成数据包。传输表头包含了所使用的协议等发送信息。例如：TCP、UDP 等。</p>
-<p>网络层 Network Layer 决定数据的路径选择和转寄，将网络表头 NH 加至数据包，以形成分组。网络表头包含了网络数据。例如：互联网协议 IP 等等。</p>
-<p>数据链路层 Data Link Layer 负责网络寻址、错误侦测和改错。当表头和表尾被加至数据包时，会形成帧。数据链表头 DLH 是包含了物理地址和错误侦测及改错的方法。数据链表尾 DLT 是一串指示数据末端的字符串。例如 以太网、无线局域网 Wi-Fi 和 通用分组无线服务（GPRS）等。</p>
-<p>物理层 Physical Layer 在局部局域网上传送数据帧 data frame，它负责管理计算机通信设备和网络媒体之间的互通。包括了针脚、电压、线缆规范、集线器、中断器、网卡、主机适配器等。</p>
-<h2 id="什么是-TCP-IP-四层模型"><a href="#什么是-TCP-IP-四层模型" class="headerlink" title="什么是 TCP/IP 四层模型"></a>什么是 TCP/IP 四层模型</h2><p>因为 ISO 七层里面的分层分得不够清晰，有的层没什么用，有的层的实现却在其他的层里，所以后来 ISO 七层模型别 TCP/IP 四层模型替换掉了：应用层、传输层、网络层、数据链路层。</p>
-<p>应用层是大多数普通与网络相关的程序为了通过网络与其他程序通信所使用的层。这个层的处理过程是应用特有的；数据从网络相关的程序以这种应用内部使用的格式进行传送，然后被编码成标准协议的格式。每一个应用层协议一般都会使用到传输层协议 TCP 和 UDP 协议之一：</p>
-<p>运行在 TCP 协议上的协议：</p>
+    <h3 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a>HTTP 报文</h3><p>HTTP 缓存机制是根据 HTTP 报文的缓存标识定义的。而HTTP 报文分为 HTTP 请求报文 和 HTTP 响应报文。</p>
+<p>HTTP 请求报文格式为：</p>
+<p>1 请求行<br>2 通用头信息<br>2 请求头<br>2 实体头<br>3<br>4 请求报文体</p>
+<p>HTTP 响应报文对应为：</p>
+<p>1 状态行<br>2 通用信息头<br>2 响应头<br>2 实体头<br>3<br>4 响应报文体</p>
+<p>通用信息头一般包含：Cache-Control、Connection、Date<br>实体头是实体信息的实体头域常见的有：Connection、Keep-Alive、Contect-Type、Etag、Expires、Last-Modified、extension-header、Content-Encoding、Content-Range</p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>强缓存：向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程。</p>
+<p>强缓存是根据客户的保留的服务器端的 response header 中的字段：expires、cache-control 来控制的。</p>
 <ul>
-<li>HTTP（80 端口），主要用于普通浏览</li>
-<li>HTTPS（443 端口），HTTP 协议的安全版本</li>
-<li>FTP（20 和 21 端口），用于文件传输</li>
-<li>POP3（110 端口），收邮件用</li>
-<li>SMTP（25 端口），用来发送邮件</li>
-<li>SSH（22端口），用于加密安全登陆用</li>
+<li>cache-control 是过期的一个时间长度，expires 是过期的时间点。cache-control 的优先级高于 expires。在无法确定客户端时间是否与服务器端时间同步的情况下，cache-control 相比 expires 是更好的选择，所以如果同时存在时，只有 cache-control 会生效。</li>
+<li>Expires 是 HTTP/1.0 控制网页缓存的字段，其值为服务器返回请求结果缓存的到期时间，即再次发起该请求时，如果客户端的时间小于 expires 值，则直接返回缓存结果。</li>
 </ul>
-<p>运行在 UDP 协议上的应用层协议：</p>
+<p>Cache-Control 是在 HTTP/1.1 用于控制网页缓存的字段，常见值：</p>
 <ul>
-<li>DHCP（67 端口，动态主机配置协议），动态配置 IP 地址</li>
+<li>public：所有内容都缓存 客户端和代理服务器都可缓存（一般都是设置为这个）</li>
+<li>private：所有内容都缓存 客户端可缓存，默认值</li>
+<li>no-cache：客户端缓存内容，但是是否使用缓存则需要经过协商缓存来验证决定</li>
+<li>no-store：所有内容都不缓存，既不强制缓存也不协商缓存</li>
+<li>max-age=xxx：缓存在 xxx 秒后失效</li>
 </ul>
-<p>其他：</p>
-<ul>
-<li>DNS（Domain Name Service 域名服务），用于完成地址查找，邮件转发等工作（运行在 TCP 和 UDP 协议上）</li>
-<li>SNMP（Simple Network Management Protocal，简单网络管理协议），用于网络信息的收集和网络管理</li>
-<li>ARP（Address Resolution Protocol，地址解析协议），用于动态解析以太网硬件的地址。</li>
-</ul>
-<p>传输层：解决诸如端对端可靠性（数据是否已经到达目的地）和保证数据按照正确的顺序到达这样的问题。TCP 和 UDP 都是传输层协议。</p>
-<p>网络层：解决在一个单一网络上传输数据包的问题。IP 协议是网络层协议</p>
-<p>数据链路层：它是数据包从一个设备的网络层传输到另外一个设备的网络层的方法。这个过程能够在网卡的软件驱动程序中控制或者专用芯片中控制。这将完成如添加报头准备发送、通过实体介质实际发送这样一些数据链路功能。另一端，链路层将完成数据帧接收、去除报头并且将接收到的包传到网络层。</p>
-<h2 id="TCP-的三次握手"><a href="#TCP-的三次握手" class="headerlink" title="TCP 的三次握手"></a>TCP 的三次握手</h2><p>TCP 传输控制协议，面向连接的可靠的基于字节流的传输层通信协议。</p>
-<p>A：SYN 提问的序号，seq 提问的内容<br>B：ACK 回答的问题的序号，ack 已经回答了，在提问的内容上加 1。同时提问 SYN 提问序号，seq 提问内容<br>A：ACK 回答的问题的序号，ack 针对谁的回答，谁 加 1，同时我当前的问题为 seq 序号加 1。</p>
-<p><img src="/images/http/tcp3.jpg" alt="TCP 的三次握手"></p>
-<ul>
-<li>客户端发送 SYN 报文给服务器端，序号为 n，进入 SYN-SEND 状态</li>
-<li>服务器端收到 SYN 报文，回应一个 ACK（序号是 n + 1）同时发送一个 SYN 报文，序号是 m，进入 SYN-RCVD 状态</li>
-<li>客户端收到服务器端的 SYN 报文，回应一个 ACK 序号为 m + 1，进入 Established 状态。表示连接成功。注意第三次挥手的 seq 与服务器的 ack 是一样的。</li>
-</ul>
-<h2 id="TCP-四次挥手"><a href="#TCP-四次挥手" class="headerlink" title="TCP 四次挥手"></a>TCP 四次挥手</h2><p><img src="/images/http/tcp4.jpg" alt="TCP 的四次挥手"></p>
-<p>服务器去终止传输必须等到应用传输完成才能终止，所以才有四次挥手。</p>
-<ul>
-<li>客户端发送一个 FIN，告诉服务器想关闭连接</li>
-<li>服务器收到这个 FIN，发回一个 ACK</li>
-<li>服务器通知应用程序关闭网络连接，应用程序关闭后通知服务器。服务器发送一个 FIN 给客户端</li>
-<li>客户端发回 ACK 报文确认</li>
-</ul>
-<p>服务器端的 LISTEN 状态下的 SOCKET 当收到客户端建立连接请求的 SYN 报文后，它可以把 ACK 和 SYN （ACK 起应答作用，而 SYN 起同步作用）放在一个报文里来发送。但关闭连接时，当服务器收到客户端的 FIN 报文通知时，服务器只能发一个回应报文 ACK：“哦，我知道了”，然后通知应用程序。等应用程序完成全部数据发送并确定可以终止了，服务器才能发送 FIN 告诉客户端可以真正断开连接了。所以这一步 ACK 报文和 FIN 报文需要分开发送，因此有四次挥手，而不是三次。</p>
-<h2 id="TCP-报文格式"><a href="#TCP-报文格式" class="headerlink" title="TCP 报文格式"></a>TCP 报文格式</h2><p><img src="/images/http/tcp.jpg" alt=""></p>
-<ul>
-<li>ACK：TCP 协议规定，只有 ACK = 1 时有效，也规定连接建立后所有发送给的报文的 ACK 必须为 1</li>
-<li>SYN（SYNchronization）：在连接建立时用来同步序号。当 SYN = 1 而 ACK = 0 时，标明这是一个连接请求报文。对方若同意建立连接，则应在响应报文中使用 SYN = 1 和 ACK = 1，因此，SYN 置 1 就表示这是一个连接请求或连接接受报文。</li>
-<li>FIN（finish）用来释放一个连接。当 FIN = 1 时，表明此报文段的发送方的数据已经发送完毕，并要求释放连接。</li>
+<p>缓存失效时间计算公式：expirationTime = responseTime + freshnessLifetime - currentAge</p>
+<h3 id="强缓存下的内存缓存与硬盘缓存"><a href="#强缓存下的内存缓存与硬盘缓存" class="headerlink" title="强缓存下的内存缓存与硬盘缓存"></a>强缓存下的内存缓存与硬盘缓存</h3><p>内存缓存：内存缓存会将变异解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取，但一旦关闭该进程，该缓存就没有了。</p>
+<p>硬盘缓存：是直接写入硬盘文件中的，读取缓存需要对该缓存存放的硬盘文件进行 I/O 操作，然后重新解析该缓存内容，读取复杂，速度显然会比内存缓存慢</p>
+<p>在浏览器中，浏览器会在 JS 和图片等文件解析执行后直接存入内存缓存中，当刷新页面时只需直接从内存缓存中读取，而 CSS 文件则会存入硬盘文件中，所以每次渲染页面都需要从硬盘缓存中读取。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存：在强制缓存失效后，浏览器携带缓存标识向服务器发送请求，由服务器根据缓存标识决定是否使用缓存的过程。</p>
+<p>协商缓存的标识 response header 中的字段：Last-Modified / If-Modified-Since、Etag / If-None-Match 来控制的。</p>
+<p>Etag / If-None-Match 的优先级高于 Last-Modified / If-Modified-Since。</p>
+<p>Last-Modifed 是服务器响应请求时，返回该资源文件在服务器最后被修改的时间</p>
+<p>Etag 是服务器响应请求时，返回当前资源文件的一个唯一标识（有服务器生成），客服端再次发起请求时，If-None-Match 携带上次请求返回的唯一标识 Etag 值，If-None-Match 与该资源在服务器的 Etag 值做比较，一致则返回 304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码 200</p>
+<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><p>协商缓存需要配合强缓存使用，你看前面这个截图中，除了Last-Modified这个header，还有强缓存的相关header，因为如果不启用强缓存的话，协商缓存根本没有意义。</p>
+<p>强制缓存不会发请求到服务器，而协商缓存会发请求到服务器，所以说它两都不会从服务器加载资源数据。</p>
+<h3 id="浏览器缓存过程"><a href="#浏览器缓存过程" class="headerlink" title="浏览器缓存过程"></a>浏览器缓存过程</h3><p>浏览器第一次加载资源，服务器返回 200，浏览器将资源文件从服务器上请求下载下来，并把 response header 及该请求的资源一并缓存；也就是说缓存命中的请求返回的 response header 并不是来自服务器，而是来自之前的缓存的 response header；</p>
+<p>浏览器再次请求这个资源的时候，会先从缓存中旋转这个资源的 response header，比较当前时间和上一次返回 200 的时间差，如果没有超过 cache-control 设置的 max-age，则没有过期，命中强制缓存，不发请求直接从本地缓存读取该文件（如果浏览器不支持 HTTP 1.1，则用 expires 设置的时间点判断是否过期）；如果过期，则向服务器发送 header 带有 If-None-Match 和 If-Modified-Since 的请求；</p>
+<p>服务器收到请求后，优先根据 Etag 的值判断被请求的文件有没有被修改，Etag 与 If-None-Match 的值一致则表示没有修改，命中协商缓存，返回 304。如果不一致则有改动，直接返回新的资源文件带上新的 Etag 的 response header 并返回 500。</p>
+<p>如果服务器收到的请求没有 Etag 值，则将 If-Modified-Since 和被请求文件的最后修改时间进行比较，一致则命中协商缓存，返回 304；不一致则返回新的 last-Modified 的 response header 和文件并返回 200</p>
+<h3 id="用户行为对浏览器缓存的控制"><a href="#用户行为对浏览器缓存的控制" class="headerlink" title="用户行为对浏览器缓存的控制"></a>用户行为对浏览器缓存的控制</h3><ul>
+<li>地址栏访问，链接跳转是正常的用户行为，都会触发浏览器缓存机制</li>
+<li>F5 刷新，浏览器会设置 max-age=0，跳过强缓存判断，进行协商缓存判断</li>
+<li>ctrl + F5 刷新，跳过强缓存和协商缓存，直接从服务器下载资源</li>
 </ul>
 
   </div>
@@ -116,7 +97,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/13/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><a class="extend next" rel="next" href="/page/15/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/13/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/97/">97</a><a class="extend next" rel="next" href="/page/15/">下一页&raquo;</a>
   </nav>
 
     </main>
