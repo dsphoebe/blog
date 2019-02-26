@@ -38,51 +38,40 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">JavaScript 数据类型</h2>
+    <h2 class="title">基本数据类型和对象 与 栈和堆</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-05 15:12:37</span>
+    <span class="post-time">2018-12-11 10:31:32</span>
     <span class="post-tags">
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>JavaScript 除了 ES6 的 Symbol 类型，一共还有 6 种数据类型，分别是原始类型 string、number、boolean、undefined、null，引用类型 object。</p>
-<h2 id="string-字符串"><a href="#string-字符串" class="headerlink" title="string 字符串"></a>string 字符串</h2><p>字符串类型是用单引号或者双引号包含的 0 个或者多个字符就是字符串。如果单引号内再出现单引号，需要转义，如果双引号内再出现双引号，也需要转义一下。转义即在需要转义的引号前加反斜杆。</p>
-<p>多行字符串，在切换换行的结尾需要加入反斜杆，并且反斜杆后不能出现空格或者其他字符。一般多行字符的时候，会把字符分开多个单行字符然后用 + 连接。还有，因为 function.toString 方法不会过滤掉注释，可以把字符串写在注释内，再调用该方法，已经 split，slice，join 合作实现多行字符串。或者用 ES6 的模版字符串实现。</p>
-<p>转义字符反斜杆后除了在转义引号内的同类引号，还可以加 b 后退键 \b，\f 换页符，\0 null，\t \v 制表符，以及 <code>\\</code>反斜杆。还可以后面 3 个八进制数值转义八进制 \777，十六进制 \x00a9。加正常字符的时候直接返回字符。</p>
-<p>字符串是类数组，它有 length 方法，也可以通过 str[index] 获取第 index 位的字符</p>
-<p>Unicode 码点 0000 到 FFFF 之间的字符是 2 个字节，而 10000 到 10FFFF 之间的字符是 4 个字节。但 JavaScript 内部都是以 UTF-16 的格式存储的，它只能识别 2 个字节。如果一个字符是 4 个字节的字符，JavaScript 会不识别，会认为它是 2 个字符。</p>
-<p>ASCII 0 到 31 码点的符号是无法打印出来的，可以用 Base64 编码转成 0 ～ 9、a ～ z、A ～ Z、+ 和 <code>/</code> 这 64 个字符组成的可打印字符。JavaScript 的 btoa 方法将字符串转为 Base64 编码字符串，atob 方法将 Base64 编码字符串转为字符串原来的值。如果是非 ASCII 码字符串转 Base64 编码，需要先使用 encodeURIComponent 转码（这个转码会转义出来字母、数字、<code>(</code>、<code>)</code>、<code>.</code>、<code>~</code>、<code>!</code>、<code>*</code>、<code>&#39;</code>、<code>-</code> 和 <code>_</code> 之外的所有字符。），然后再对 encodeURIComponent 转码后的字符串调用 btoa 进行 Base64 编码。</p>
-<h2 id="number-数值"><a href="#number-数值" class="headerlink" title="number 数值"></a>number 数值</h2><p>数值分为，整数，有限小数，无限小数。在 JavaScript 内部，所有数值都是以 64 位浮点数存储的，整数也是如此，所以 1.0 是全等于 1 的。除了进行位运算时，JavaScript 会把运算子转为 32 位整数进行运算，最后也返回 32 位整数。</p>
-<p>64 位浮点数是国际标准组织 IEEE 754 提出来的，又称为双精度浮点数。它的规则是：</p>
-<ul>
-<li>第 1 个二进制位表示符号，表示是否为负数，如果是负数值 为 1，如果是正数值为 0</li>
-<li>第 2 位到第 12 位二进制位，共 11 位表示浮点数的指数部分</li>
-<li>第 13 位到第 64 位二进制位，共 52 位表示小数部分，也称有效数字部分</li>
-</ul>
-<p>符号位是数值的正负，指数部分决定了数值的大小，小数部分决定了数值的精度。</p>
-<p>指数部分共有 11 个二进制位，它能表示的指数是 0 ～ 2<sup>11</sup> - 1。IEEE 754 规定，如果指数在 (0, 2470) 区间，那么有效数字的第一位默认总是 1，所以有效数字最长可以存储 53 位。64 位浮点数可以存储 -2<sup>53</sup> 到 2<sup>53</sup> 的十进制数值。2<sup>53</sup> 等于 9007199254740992，是一个 16 位的十进制数，所以可以简单理解为 JavaScript 可以精确处理的 15 位的十进制数值。</p>
-<p>根据标准 64 位浮点数的指数部分的长度是 11 个二进制位，指数部分最大值为 2047，分一半给负数。所以 JavaScript 能表示的数值范围是 2<sup>1024</sup> 到 2<sup>-1023</sup> ，超出范围的数值将无法表示。如果大于等于 2<sup>1024</sup> 会正向溢出返回 Infinity，如果小于等于 2<sup>-1075</sup> （指数部分最小值 -1023 加上小数部分 52 位），会负向溢出返回 0。</p>
-<p>数值小数点前的数字多余 21 位，或者小数点后的零多余 5 位，数值会自动转换为科学计数法。</p>
-<p>进制的前缀：八进制 octal 0o 或者 0O，二进制 binary 0B 或者 0b，十六进制 hex 0X 或者 0x，以及没前缀的十进制 decimal。</p>
-<p>+0 和 -0 除了符号位不一样，以及 +0 被当分母返回 +Infinity，-0 当分母返回 -Infinity 外，其他的运算都是一样，值也是全等于的。</p>
-<p>NaN 的任何运算都是返回 NaN。数字运算中除了加法，其他运算时，如果运算子不是数值会返回 NaN；0 / 0 返回 NaN。</p>
-<p>Infinity 加减乘除 0，-0，null、undefined，NaN、infinity，-Infinity</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">Infinity</span> + <span class="number">-0</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> - <span class="number">-0</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="number">-0</span> - <span class="literal">Infinity</span> <span class="comment">// -Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> * <span class="number">-0</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> / <span class="number">-0</span> <span class="comment">// -Infinity</span></span><br><span class="line"><span class="number">-0</span> / <span class="literal">Infinity</span> <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null 参与运算会被转为数值 0，所以同 Infinity 与 null 的运算就是 Infinity 和 0 之间的运算</span></span><br><span class="line"><span class="literal">Infinity</span> + <span class="number">0</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> - <span class="number">0</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="number">0</span> - <span class="literal">Infinity</span> <span class="comment">// -Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> * <span class="number">0</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> / <span class="number">0</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="number">0</span> / <span class="literal">Infinity</span> <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined 参与运算会被转为数值 NaN，所以同 Infinity 与 undefined 的运算就是 Infinity 和  NaN 的运算</span></span><br><span class="line"><span class="literal">Infinity</span> + <span class="literal">NaN</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> - <span class="literal">NaN</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">NaN</span> - <span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> * <span class="literal">NaN</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> / <span class="literal">NaN</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">NaN</span> / <span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="literal">Infinity</span> + <span class="literal">Infinity</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> - <span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> * <span class="literal">Infinity</span> <span class="comment">// Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> / <span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="literal">Infinity</span> + -<span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br><span class="line"><span class="literal">Infinity</span> - -<span class="literal">Infinity</span> <span class="comment">// Infinity</span></span><br><span class="line">-<span class="literal">Infinity</span> - <span class="literal">Infinity</span> <span class="comment">// -Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> * -<span class="literal">Infinity</span> <span class="comment">// -Infinity</span></span><br><span class="line"><span class="literal">Infinity</span> / -<span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br><span class="line">-<span class="literal">Infinity</span> / <span class="literal">Infinity</span> <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
-<p>parseInt 字符串转换为整数，先把参数转换为字符串，然后再转换为整数。<br>如果参数是 0x 开始的十六进制数值，会先被转换成十六进制的数值再转换为整数返回，其他进制的是返回 0<br>如果参数是 + 好开始后面接了数值的字符串，会返回这个数值，如果没接，返回 NaN<br>如果参数是可以自动转换为科学计数法的数值，会转换为科学计数法的数值转换字符串再转换为整数。<br>如果参数里面有空格，会自动忽略。</p>
-<p>parseInt 的第二个参数是转换为整数时，规定的整数的进制，进制只能是在 2 到 36 之间的。超出返回 NaN，如果是 0，null，undefined 直接忽略。</p>
-<p>isNaN 是先将参数转换为数值，再判断数值是不是 NaN，所以如果是参数是字符串，是对象，是非空且不是只有一个数值成员项的数组时，会返回 NaN。所以判断 isNaN 应该先判断 typeof args 是否是 number，再执行 isNaN。或者更简洁的，因为 NaN 是唯一一个不等于自己的值 直接判断 args 是否全等于 args，不等于就是 NaN 了。</p>
-<p>isFinite 判断一个值是否是正常数值。</p>
-<h2 id="null-空值、undefined-未定义、boolean-布尔值"><a href="#null-空值、undefined-未定义、boolean-布尔值" class="headerlink" title="null 空值、undefined 未定义、boolean 布尔值"></a>null 空值、undefined 未定义、boolean 布尔值</h2><p>null 表示空值，而 undefined 表示未定义，都是没有的意思，非运算都是返回 false。null 转为数值是 0，undefined 转为数值是 NaN。</p>
-<p>六个值转为 boolean 是返回 false 的：undefined、null、false、0、NaN、’’</p>
-<h2 id="object-对象"><a href="#object-对象" class="headerlink" title="object 对象"></a>object 对象</h2><p>对象是一组键值对组成的无序复合数据集合。键名是字符串，可以不加引号，可以是数字，因为会自动转为字符串，如果键名不符合标识符条件，须要给键名加上引号。</p>
-<p>行首是大括号一律解释为对象，理解为一个表达式，不过为了避免歧义，最好在大括号外再套一个圆括号。</p>
-<p>delete 命令只有在对象存在某个属性而且不可以删除时，才返回 false，其他都是返回 true。</p>
-<p>in 运算符判断对象是否有某个属性，无所谓属性是继承还是自身的</p>
-<p>for…in 遍历对象所有属性包括继承来的，不可遍历的属性不会遍历</p>
-<p>with 语句内部赋值变量，这个变量必须是当前对象已有的属性，否则会创建一个全局变量。</p>
+    <p>当我们写下 var a = 1 的时候，JavaScript引擎到底在做什么？首先从内存，内存条开始说。</p>
+<p><img src="/images/memory/Kingston.jpg" alt="Kingston"></p>
+<p>内存条如上图，上面有 8 个小黑块。内存条上的这些小黑块是用来存 0 和 1，比如存数字 2，那就把 2 变成二进制，也就是 10。0 是低电位，1 是高电位，然后存到内存里面，也就是内存是通过高低电位来存储数据的，所以内存须要一直通电。如果突然断电的话，所有内存中的 0 和 1 就都没了，数据都没了。如果要想数据都存起来，我们是把他们存到外存中，也就是硬盘中。比如我们把东西存到硬盘，关机后再开机，硬盘里面的东西还是在的，但是内存中的东西没了。每次开机的时候都要重新启动系统，系统会载入你的内存。</p>
+<p>内存的特点就是，一旦断电，它里面的东西全部消失，所以要保持通电。内存的读写速度快。</p>
+<p>外存的特点是，它里面的东西一直都在，但读写速度慢，目前最快的外存是 SSD 固态硬盘，能接近内存速度，现在很多人用固态硬盘来开机缩短开机时间。SSD 不易坏，但是 SSD 一旦坏了一点就整个坏了。另一种外存是机械硬盘，速度比 SSD 慢，容易坏，一般 10 年就会坏掉。不过机械硬盘坏了一点点是没有关系的，只要不去读它就可以了。另外价格上 SSD 比机械硬盘要贵。配置电脑的话，可以小体积的 SSD 加上大体积的机械硬盘配合，这样速度和空间就都有了。</p>
+<p>我们开机就是把硬盘里面的操作系统读写到内存中。</p>
+<p>如果我们有 2G 的内存，打开操作系统，操作系统占用了 512M 内存，操作系统开启后，我们打开浏览器，比如浏览器占了 1G（这里分配 1G 是因为 Chrome 浏览器很吃内存，所以购买电脑最低配 8G 内存。）浏览器把这个 1G 分配给每个页面，比如每个页面占 100M，而这个 100M 分配给 HTML + CSS 可能占 20M，一部分分配给 JavaScript 引擎 可能占 10M，让它去运行引擎，还有一部分分配网络模块 HTTP 可能占 20M，还有的分配给其他，比如说插件，定时器。JavaScript 引擎顶多能申请到 100M 内存。</p>
+<p>所以当我们写下 var a = 1 的时候，JavaScript 引擎的 100M 内存会把 a 存在内存里的代码区，而 1 存在内存里面的数据区，然后 JavaScript 引擎会把代码区的 a 和数据区的 1 关联上，再进行 a 的其他运算逻辑的处理。到程序结束，a 会被销毁。</p>
+<p>数据区分为两个区：栈 Stack 区内存、堆 Heap 区 内存。堆区内存存储的方式是个树的形式，像个堆一样，所以叫做堆内存。而栈区内存的组织结构像栈一样所以叫做栈内存。</p>
+<p><img src="/images/memory/stack-heap.png" alt="stack-heap"></p>
+<p>然后我们看看下面这些代码是怎么在堆内存和栈内存中存储的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  name: <span class="string">'panda'</span>,</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>第一步：JavaScript 引擎先分析语法，把所有 var 进行变量提升；</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="keyword">var</span> b</span><br><span class="line"><span class="keyword">var</span> o</span><br><span class="line"><span class="keyword">var</span> c</span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line">o = &#123;</span><br><span class="line">  name: <span class="string">'panda'</span>,</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">c = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>a = 1，存到内存的栈中，JavaScript 里面的数字都是 64 位浮点数，小数点是浮动的所以叫浮点数。1 转为 64 位符点数格式是 <code>0:2^1023:0</code></p>
+<p>而 b = 2 ，2 的二进制是 10，64位符点数格式表示为 <code>0:2^1024:0</code></p>
+<p>如果 b = a 的话，就直接复制一份 a 到 b 的位置。</p>
+<p>对象存储在堆中的，如果存在栈区中，对象的大小变化后，会需要除了修改对象之外，还要修改对象之后的栈中的其他值的位置，效率会很慢。所以最后对象存储在堆中，然后把堆的地址存在栈中。所以对象 o 的值会存在堆中，然后把它的地址比如 ADDR 100 存在栈中。</p>
+<p>c 是 true，只需要 1 位，即 1</p>
+<p>o2 = o，是直接把 o 的地址复制给 o2 的位置。</p>
+<p>最后数据在内存中的存储大致是这样的：</p>
+<p><img src="/images/memory/data-instack-inheap.png" alt=""></p>
+<p>总结：</p>
+<p>JavaScript 语言的每一个值，都属于某一种数据类型。而 JavaScript 值的数据类型有 7 种。分别为基本类型（primitive type）：字符串（string）、数值（number）、布尔值（boolean）、符号（symbol）、空值（null）、未定义的值（undefined），和复杂类型（complex type ）：对象（object）。JavaScript 的基本数据类型存储在内存中的栈区中，复杂类型 object 存储在堆区中。</p>
 
   </div>
   
@@ -90,7 +79,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/39/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="extend next" rel="next" href="/page/41/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/39/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/38/">38</a><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><span class="space">&hellip;</span><a class="page-number" href="/page/99/">99</a><a class="extend next" rel="next" href="/page/41/">下一页&raquo;</a>
   </nav>
 
     </main>
