@@ -38,83 +38,102 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">JavaScript 操作 CSS</h2>
+    <h2 class="title">DOM 知识点总结篇</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-28 11:37:54</span>
+    <span class="post-time">2018-12-28 19:23:45</span>
     <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
       
     </span>
     
-      <div class="article-category">分类：
-        <a class="article-category-link" href="/categories/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a>
-      </div>
-    
   </div>
   <div class="post-content">
-    <p>HTML 元素的 style 属性：JavaScript 可以用标签元素的 getAttribute、setAttriubte 和 remoteAttriubte 三个方法来操作。style 不仅可以使用字符串读写，它本身还是一个对象，部署了 CSSStyleDeclaration 接口。</p>
-<h2 id="CSSStyleDeclaration-接口"><a href="#CSSStyleDeclaration-接口" class="headerlink" title="CSSStyleDeclaration 接口"></a>CSSStyleDeclaration 接口</h2><p>有三个地方部署了这个接口：</p>
-<ol>
-<li>元素节点的 style 属性 Element.style</li>
-<li>CSSStyle 实例的 style 属性 <strong><em>❓没找到 CSSStyle 相关的文章 ❓</em></strong></li>
-<li>window.getComputedStyle() 方法的返回值</li>
-</ol>
-<p>CSSStyleDeclaration 接口可以直接读写 CSS 的样式属性，不过，连词号需要变成骆驼拼写法。</p>
-<p>CSSStyleDeclaration.cssText 属性用来读写当前规则的所有样式文本。删除一个元素的所有行内样式，最简便的方法就是设置 cssText 为空字符串。</p>
-<p>CSSStyleDeclaration.length 属性返回一个整数值，表示当前规则包含了多少条样式声明</p>
-<p>CSSStyleDeclaration.parentRule 属性返回当前规则所属的那个样式块 （CSSRule 实例）。如果不存在所属的样式块，该属性返回 null。该属性为只读，且只在使用 CSSRule 接口时才有意义。</p>
-<p>CSSStyleDeclaration.getPropertyPriority() 接受 CSS 样式的属性名作为参数，返回一个字符串，表示有没有设置 important 优先级。有返回 important，没有则返回空。</p>
-<p>CSSStyleDeclaration.getPropertyValue() 返回参数的 CSS 属性值</p>
-<p>CSSStyleDeclaration.item() 接受一个整数值作为参数，返回该位置的 CSS 属性名</p>
-<p>CSSStyleDeclaration.removeProperty() 删除 CSS 规则里面的属性名参数的属性值返回这个属性原来的值</p>
-<p>CSSStyleDeclaration.setProperty() 设置新的 CSS 属性。第一个参数表示属性名，第二个参数表示属性值，第三个参数唯一合法值是 important</p>
-<h2 id="CSS-对象"><a href="#CSS-对象" class="headerlink" title="CSS 对象"></a>CSS 对象</h2><p>CSS.escape() 转义 CSS 选择器里面的特殊字符</p>
-<p>CSS.supports() 返回一个布尔值，表示当前环境是否支持某个 CSS 规则</p>
-<h2 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h2><p>返回浏览器计算后得到的最终规则。返回一个 CSSStyleDeclaration 实例，包含了指定节点的最终样式信息。</p>
-<p>CSSStyleDeclaration 实例是一个活的对象，任何对于样式的修改，会实时反映到这个实例上面。另外这个实例是只读的。</p>
-<p>getComputedStyle() 的第二个参数是表示当前元素的伪元素（比如：<code>:before</code>、<code>:after</code> 等）</p>
-<p>CSS 规则的简写形式无效。比如读取 margin 的值不能直接读，只能读 marginLeft、marginTop 等。</p>
-<p>getComputedStyle 方法返回的 CSSStyleDeclaration 实例的 cssText 属性无效，返回 undefined。</p>
-<h2 id="CSS-伪元素"><a href="#CSS-伪元素" class="headerlink" title="CSS 伪元素"></a>CSS 伪元素</h2><p>节点元素的 style 属性无法读写伪元素的样式，这时候要用的 window.getComputedStyle() 。JavaScript 获取伪元素，可以使用下面的方法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="built_in">document</span>.querySelector(<span class="string">'#test'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">window</span>.getComputedStyle(test, <span class="string">':before'</span>).content;</span><br><span class="line"><span class="keyword">var</span> color = <span class="built_in">window</span>.getComputedStyle(test, <span class="string">':before'</span>).color;</span><br></pre></td></tr></table></figure>
-<p>此外，也可以使用 CSSStyleDeclaration 实例的 getPropertyValue 方法，获取伪元素的属性</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">window</span>.getComputedStyle(test, <span class="string">':before'</span>)</span><br><span class="line">  .getPropertyValue(<span class="string">'content'</span>);</span><br><span class="line"><span class="keyword">var</span> color = <span class="built_in">window</span>.getComputedStyle(test, <span class="string">':before'</span>)</span><br><span class="line">  .getPropertyValue(<span class="string">'color'</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="StyleSheet-接口"><a href="#StyleSheet-接口" class="headerlink" title="StyleSheet 接口"></a>StyleSheet 接口</h2><p>代表网页的一张样式表，包括 link 元素加载的样式表和 style 元素内勤的样式表。document 对象的 styleSheets 属性返回当前页面的所有 StyleSheet 实例，是一个伪数组。</p>
-<p>如果 style 元素嵌入的样式表，还可以通过节点元素的 sheet 属性获取 StyleSheet 实例。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// HTML 代码为 &lt;style id="myStyle"&gt;&lt;/style&gt;</span></span><br><span class="line"><span class="keyword">var</span> myStyleSheet = <span class="built_in">document</span>.getElementById(<span class="string">'myStyle'</span>).sheet;</span><br><span class="line">myStyleSheet <span class="keyword">instanceof</span> StyleSheet <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>StyleSheet.disabled 是否禁用该样式表。可以通过 JavaScript 里面设置 disabled 为 true，等同于 link 里面将这张表设为 alternate stylesheet，即该样式不会生效。</p>
-<p>StyleSheet.href 返回样式表的网址</p>
-<p>StyleSheet.media  返回一个伪数组对象 MediaList 实例，成员是表示适用媒介的字符串：screen、print、handheld、all</p>
-<p>StyleSheet.title</p>
-<p>StyleSheet.type</p>
-<p>StyleSheet.parentStyleSheet CSS 的 @import 加载其他样式表</p>
-<p>StyleSheet.ownerNode 返回 StyleSheet 对象所在 DOM 节点，通常是 link 或者 style 节点</p>
-<p>CSSStyleSheet.cssRules 属性指向一个类似数组的对象（CSSRuleList 实例），里面每一个成员就是当前样式表的一条 CSS 规则。使用该规则的 cssText 属性，可以得到 CSS 规则对应的字符串。每条 CSS 规则有个 style 属性指向一个对象，可以i 用来读写具体的 CSS 命令。</p>
-<p>CSSStyleSheet.ownerRule 通过 @import 规则引入的 CSS 文件，它的 ownerRule 属性会返回一个 CSSRule 实例，代表那行 @import 规则。</p>
-<p>CSSStyleSheet.insertRule() 方法用于在当前样式表插入一个新的 CSS 规则</p>
-<p>CSSStyleSheet.deleteRule() 传入要删除的规则在 cssRules 对象中位置删除这条规则</p>
-<h2 id="添加样式表"><a href="#添加样式表" class="headerlink" title="添加样式表"></a>添加样式表</h2><p>JavaScript 添加 link 或者 style 标签，再加入对应的 href 或者 innerHTML 值</p>
-<h2 id="CSSRuleList-接口"><a href="#CSSRuleList-接口" class="headerlink" title="CSSRuleList 接口"></a>CSSRuleList 接口</h2><p>CSSRuleList 是一个伪数组，表示一组 CSS 规则，成员都是 CSSRule 实例。获取 CSSRuleList 实例，一般都是通过 StyleSheet.cssRules 属性。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// HTML 代码如下</span></span><br><span class="line"><span class="comment">// &lt;style id="myStyle"&gt;</span></span><br><span class="line"><span class="comment">//   h1 &#123; color: red; &#125;</span></span><br><span class="line"><span class="comment">//   p &#123; color: blue; &#125;</span></span><br><span class="line"><span class="comment">// &lt;/style&gt;</span></span><br><span class="line"><span class="keyword">var</span> myStyleSheet = <span class="built_in">document</span>.getElementById(<span class="string">'myStyle'</span>).sheet;</span><br><span class="line"><span class="keyword">var</span> crl = sheet.cssRules</span><br><span class="line">crl instanceOf CSSRuleList <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h2 id="CSSRule"><a href="#CSSRule" class="headerlink" title="CSSRule"></a>CSSRule</h2><p>一条 CSS 规则包括两个部分：CSS 选择器和样式声明。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.myClass</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">  <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>JavaScript 通过 CSSRule 接口操作 CSS 规则，一般通过 CSSRuleList 接口。CSSStyleSheet.cssRules 获取 CSSRuleList 实例。</p>
-<p>CSSRule.cssText 返回当前规则的文本</p>
-<p>CSSRule.parentStyleSheet 返回当前规则所在 StyleSheet 实例</p>
-<p>CSSRule.parentRule 返回包含当前规则的父规则，如果不存在父规则（即当前规则是顶层规则），则返回 null。父规则最常见的情况是，当前规则包含在 @media 规则代码块中。</p>
-<p>CSSRule.type 返回一个当前规则的类型的整数：普通样式规则 1 CSSStyleRule 实例，@import 规则 3，@media 规则 4 CSSMediaRule 实例，@font-size 规则 5。</p>
-<h3 id="CSSStyleRule-接口"><a href="#CSSStyleRule-接口" class="headerlink" title="CSSStyleRule 接口"></a>CSSStyleRule 接口</h3><p>如果一条普通 CSS 规则的样式（不含特殊的 CSS 命令），那么除了 CSSRule 接口，它还部署了 CSSStyleRule 接口。</p>
-<p>CSSStyleRule.selectorText 返回当前规则的选择器，可读写</p>
-<p>CSSStyleRule.style 返回一个 CSSStyleDeclaration 实例，选择器后面的大括号里的部分。而 CSSStyleDeclaration 实例的 cssText 属性可以返回样式声明的字符串格式。</p>
-<h3 id="CSSMediaRule接口"><a href="#CSSMediaRule接口" class="headerlink" title="CSSMediaRule接口"></a>CSSMediaRule接口</h3><p>如果一条 CSS 规则是 @media 代码块，那么它除了 CSSRule 接口，还部署了 CSSMediaRule 接口。</p>
-<p>该接口主要提供了 media 属性和 conditionText 属性。前者返回代表 @media 规则的一个对象 MediaList 实例，后者返回 @media 规则的生效条件。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// HTML 代码如下</span></span><br><span class="line"><span class="comment">// &lt;style id="myStyle"&gt;</span></span><br><span class="line"><span class="comment">//   @media screen and (min-width: 900px) &#123;</span></span><br><span class="line"><span class="comment">//     article &#123; display: flex; &#125;</span></span><br><span class="line"><span class="comment">//   &#125;</span></span><br><span class="line"><span class="comment">// &lt;/style&gt;</span></span><br><span class="line"><span class="keyword">var</span> styleSheet = <span class="built_in">document</span>.getElementById(<span class="string">'myStyle'</span>).sheet;</span><br><span class="line">styleSheet.cssRules[<span class="number">0</span>] <span class="keyword">instanceof</span> CSSMediaRule</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">styleSheet.cssRules[<span class="number">0</span>].media</span><br><span class="line"><span class="comment">//  &#123;</span></span><br><span class="line"><span class="comment">//    0: "screen and (min-width: 900px)",</span></span><br><span class="line"><span class="comment">//    appendMedium: function,</span></span><br><span class="line"><span class="comment">//    deleteMedium: function,</span></span><br><span class="line"><span class="comment">//    item: function,</span></span><br><span class="line"><span class="comment">//    length: 1,</span></span><br><span class="line"><span class="comment">//    mediaText: "screen and (min-width: 900px)"</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">styleSheet.cssRules[<span class="number">0</span>].conditionText</span><br><span class="line"><span class="comment">// "screen and (min-width: 900px)"</span></span><br></pre></td></tr></table></figure>
-<h2 id="window-macthMedia"><a href="#window-macthMedia" class="headerlink" title="window.macthMedia()"></a>window.macthMedia()</h2><p>用来将 CSS 的 MediaQuery 条件语句，转换成一个 MediaQueryList 实例。就算参数是非法 MediaQuery 条件语句，不报错。</p>
-<h3 id="MediaQueryList-接口"><a href="#MediaQueryList-接口" class="headerlink" title="MediaQueryList 接口"></a>MediaQueryList 接口</h3><p>MediaQueryList.media 返回一个字符串，表示对应的 MediaQuery 条件语句</p>
-<p>MediaQueryList.matches 表示当前页面是否符合指定的 MediaQuery 条件语句</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">window</span>.matchMedia(<span class="string">"(max-width: 700px)"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.matches)&#123;</span><br><span class="line">  <span class="keyword">var</span> linkElm = <span class="built_in">document</span>.createElement(<span class="string">'link'</span>);</span><br><span class="line">  linkElm.setAttribute(<span class="string">'rel'</span>, <span class="string">'stylesheet'</span>);</span><br><span class="line">  linkElm.setAttribute(<span class="string">'type'</span>, <span class="string">'text/css'</span>);</span><br><span class="line">  linkElm.setAttribute(<span class="string">'href'</span>, <span class="string">'small.css'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.head.appendChild(linkElm);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>MediaQueryList.onChange 如果条件适配环境发生变化，会触发 change 事件。该函数的参数是 change 事件对象（MediaQueryListEvent 实例），该对象与 MediaQueryList 实例类似，也有 media 和 matches 属性。</p>
-<p>MediaQueryList.addListener() 和 MediaQueryList.removeListener() 用来为 change 事件添加或者撤销监听函数。</p>
+    <h2 id="什么是-DOM"><a href="#什么是-DOM" class="headerlink" title="什么是 DOM"></a>什么是 DOM</h2><p>一个 HTML 文档，初始代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> <span class="comment">&lt;!-- 告诉浏览器请用 HTML5 来解析以下代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-Hans"</span>&gt;</span> <span class="comment">&lt;!-- zh-Hans, s 是 simple 表示中文简体 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>🤔 如果 DOCTYPE 是 XML 了？</p>
+<p>我记得 RSS 就是 XML 格式的，<a href="https://www.xml.com/pub/a/2002/12/18/dive-into-xml.html" target="_blank" rel="noopener">What Is RSS</a></p>
+<p><a href="https://www.xml.com/pub/a/w3j/s3.walsh.html" target="_blank" rel="noopener">A Guide to XML</a> / What Do XML Documents Look Like?<br>所以 XML 文档大概长这样，它的 DOCTYPE 是 <code>&lt;?XML version=xxx..?&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">&gt; &lt;?XML version="1.0"?&gt;</span><br><span class="line">&gt; <span class="tag">&lt;<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">burns</span>&gt;</span>Say <span class="tag">&lt;<span class="name">quote</span>&gt;</span>goodnight</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span>, Gracie.<span class="tag">&lt;/<span class="name">burns</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">allen</span>&gt;</span><span class="tag">&lt;<span class="name">quote</span>&gt;</span>Goodnight, Gracie.</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span><span class="tag">&lt;/<span class="name">allen</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">applause</span>/&gt;</span></span><br><span class="line">&gt; <span class="tag">&lt;/<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>HTML5 规范里，html、head、body 三个标签都是可以省略的，属性值无所谓单双引号。</p>
+<p>HTML 文档，在 DOM 中对应字母 D，即 Document。<br>然后它在内存中存储的 HTML 文档的数据，对应 DOM 中的 O，即  Object，这个 Object 存在堆中，按照一个树型结构，通过构造函数构造出对象，将 DOM 存储在内存中。<br>Document 和 Object 之间的对应关系是用一个树型结构的模型来表示，这个模型叫做 Model。<br>它们三者组成了 Document Object Model 简称 DOM，读作 [dʌm]。</p>
+<p>以下 DOM 树</p>
+<p><img src="/images/dom/tree.png" alt="DOM tree"></p>
+<p>DOM 树中的每个节点都是 Node 类型。<br>节点类型主要有：document节点、标签节点、文本节点、注释节点</p>
+<ul>
+<li>标签节点是由 Element 构造函数构造</li>
+<li>文本节点是由 Text 构造函数构造</li>
+<li>document 节点是由 Document 构造函数构造，它代表了整个文档。<code>document</code> 可以获取整个文档，<code>document.documentElement</code> 则获取是 html 节点，即根节点。</li>
+<li>所有节点构造函数（Element、Text、Comment、Document构造函数）都继承自 Node 构造函数，而 Node 构造函数又继承自 JavaScript 里的 Object.prototype。节点们都有 Node 的实例属性和方法，比如 Node.prototype.nodeName。节点们都有 Object 的实例属性和方法，比如 Object.prototype.toString 方法。</li>
+</ul>
+<p><img src="/images/dom/node-tree.jpg" alt="Node constructor tree"></p>
+<h2 id="DOM-操作"><a href="#DOM-操作" class="headerlink" title="DOM 操作"></a>DOM 操作</h2><p>DOM 将 HTML 页面与 JavaScript 连接起来，它提供了一系列 API 来操作 HTML 代码，操作 DOM 节点。DOM 最开始设计不是给 HTML 用的，而是给 XML 用的，所以有很多 API 用起来就是很奇怪。</p>
+<ul>
+<li>获取节点：node.querySelector、node.querySelectorAll。通过节点关系获取节点：parentNode、children、nextSibling、nextElemntSibling 等</li>
+<li>修改节点的属性：节点类型 标签/文本，节点名称 div/#text，节点内部文本 textContent，标签节点的样式 className、classList 等</li>
+<li>删除节点：removeChild、删除标签节点 remove</li>
+<li>创建节点：创建标签节点 document.createElement(‘div’)、创建文本节点 document.createTextNode(‘xx’)。</li>
+</ul>
+<h2 id="常用-Node-类型的属性及方法"><a href="#常用-Node-类型的属性及方法" class="headerlink" title="常用 Node 类型的属性及方法"></a>常用 Node 类型的属性及方法</h2><p>所有节点都继承自 Node 类型，也就是所有节点都有以下这些属性和方法：</p>
+<ul>
+<li><p>确定一个节点的类型</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.querySelector(<span class="string">'p'</span>)</span><br><span class="line">p.nodeName <span class="comment">// "P"</span></span><br><span class="line">p.nodeType <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">document</span>.nodeName <span class="comment">// "#document"</span></span><br></pre></td></tr></table></figure>
+<p>nodeName 返回节点的名字。如果是文本节点返回的是 <code>#text</code>、如果是文档节点返回的是 <code>#document</code>、而如果是标签节点则返回这个标签的大写，比如 p 标签则返回 <code>P</code>，有一个元素标签例外，那就是 SVG 标签，它返回的是小写的 svg。</p>
+</li>
+</ul>
+<p>  nodeType 返回的节点类型对应的数值。1 表示的是标签节点，即 Element 类型的节点；3 则表示是文本节点； 9 表示文档节点；11 表示 DocumentFragment。当时设计 nodeType 用数值表示，是为了省内存。</p>
+<ul>
+<li><p>获取节点内的文本 textContext</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>)</span><br><span class="line"><span class="keyword">const</span> tn = <span class="built_in">document</span>.createTextNode(<span class="string">'panda'</span>)</span><br><span class="line">p.appendChild(tn)</span><br><span class="line"><span class="built_in">document</span>.body.append(p)</span><br><span class="line">tn.innerText <span class="comment">// undefined</span></span><br><span class="line">tn.innerHTML <span class="comment">// undefined</span></span><br><span class="line">tn.textContent <span class="comment">// "panda"</span></span><br><span class="line">p.innerText <span class="comment">// "panda"</span></span><br><span class="line">p.innerHTML <span class="comment">// "panda"</span></span><br><span class="line">p.textContent <span class="comment">// "panda"</span></span><br></pre></td></tr></table></figure>
+<p>标签节点有个 innerHTML 和 innerText，如果文本节点访问 innerHTML、innerText 会返回 undefined。innerText 返回节点下所有的文本包括其后代节点。IE 发布 innerText ~ ，FF、opera 发布的 textContent，会获取 script、style 的文本。innerText 会触发重排。</p>
+</li>
+<li><p>获取兄弟节点、子节点、父节点</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="built_in">document</span>.querySelector(<span class="string">'main'</span>)</span><br><span class="line">main.nextSibling</span><br><span class="line">main.nextElementSibling</span><br><span class="line">main.previousSibling</span><br><span class="line">main.childNodes <span class="comment">// 返回一个动态的 NodeList 伪数组</span></span><br><span class="line">main.children <span class="comment">// 返回一个动态的 HTMLCollection 标签集合伪数组</span></span><br><span class="line">main.firstChild</span><br><span class="line">main.lastChild</span><br><span class="line">main.parentNode</span><br><span class="line">main.parentElement</span><br></pre></td></tr></table></figure>
+<p>注意 NodeList 伪数组只能使用数字索引节点，而 HTMLCollection 对象则可以用 id 属性或者 name 属性来索引标签节点。</p>
+</li>
+<li><p>node.hasChildNodes() 返回是否有子节点，也可以用 node.firstChild 为空来判断，也可以用 node.childNodes &amp;&amp; node.childNodes.length 为否来判断。</p>
+</li>
+<li><p>node.cloneNode(deep) 默认 deep 为 true，表示深度克隆，会克隆该 node 的所有后代节点，否则浅克隆只克隆当前 node。</p>
+</li>
+<li><p>node.contains(otherNode) 返回 node 是否包含 otherNode。</p>
+</li>
+<li><p>node.isEqualNode(otherNode) 如果 node 和 otherNode 的 nodeType、子节点、属性等一致返回 true，否则 false</p>
+</li>
+<li><p>node.normalize() 规范化 node 和 node 后代节点。规范化后不存在空的文本节点，或者两个相邻的文本节点。</p>
+</li>
+<li><p>输入 id 的值可以快速获取 id 为这个值的节点。比如有一段 HTML：<code>&lt;div id=&quot;myHoneyPanda&quot;&gt;balabala...&lt;/div&gt;</code> 然后可以在 JavaScript 里面输入 <code>myHoneyPanda</code> 获取这个节点。</p>
+</li>
+</ul>
+<h2 id="常见的-document-属性和方法"><a href="#常见的-document-属性和方法" class="headerlink" title="常见的 document 属性和方法"></a>常见的 document 属性和方法</h2><p>document 继承自 Document 类型。表示一个 HTML 的文档。</p>
+<ul>
+<li>document.documentElement 返回 html 节点</li>
+<li>document.activeElment 指向获得焦点的那个节点，相当于 Chrome devtool 里面的 <code>$0-$9</code> ？ </li>
+<li>获取文档下的指定标签的集合，可以抓包下载美图~<ul>
+<li>document.images </li>
+<li>document.links</li>
+</ul>
+</li>
+<li>获取文档信息<ul>
+<li>document.location 返回 Location 对象，document.documentURI 返回当前文档的路径，document.URL 返回当前文档的 URL</li>
+<li>document.readyState 返回当前文档加载状态</li>
+<li>document.cookie cookie 设置/获取</li>
+<li>document.domain 域名</li>
+<li>document.defaultView 返回一个 window 对象</li>
+</ul>
+</li>
+<li>document.querySelectorAll 获取到的标签伪数组不是动态的。</li>
+</ul>
+<h2 id="常见-Element-节点的属性和方法"><a href="#常见-Element-节点的属性和方法" class="headerlink" title="常见 Element 节点的属性和方法"></a>常见 Element 节点的属性和方法</h2><ul>
+<li>document.documentElement.scrollHeight 获取整个页面的高度</li>
+<li>document.documentElement.clientHeight 获取整个浏览器视口的高度</li>
+<li>Element.clientHeight/clientLeft 返回节点的不包括 border、margin 的高度/左边框的宽度</li>
+<li>Element.scrollHeight/scrollLeft 经过浏览器视口变化，返回节点的不包括 border、margin 的高度/滚动条离视口左边的距离</li>
+<li>Element.offsetHeight/offsetLeft 经过浏览器视口变化，返回节点所占的整个页面左上角 距离 右下角的宽度和高度，并且左上角是包括 padding 和 border 的 / 距离父节点的左侧的距离。</li>
+<li>Element.getBoundingClientRect().left、Element.getBoundingClientRect().top</li>
+</ul>
 
   </div>
   
@@ -122,7 +141,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/20/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/99/">99</a><a class="extend next" rel="next" href="/page/22/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/20/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><a class="extend next" rel="next" href="/page/22/">下一页&raquo;</a>
   </nav>
 
     </main>

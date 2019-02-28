@@ -38,10 +38,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Element 节点</h2>
+    <h2 class="title">Text 节点和 DocumentFragment 节点</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-27 12:31:17</span>
+    <span class="post-time">2018-12-27 13:22:53</span>
     <span class="post-tags">
       
     </span>
@@ -52,62 +52,29 @@
     
   </div>
   <div class="post-content">
-    <p>不同的 HTML 对象对应的标签节点不一样，浏览器使用了不同的构造函数，生成不同的标签节点。比如标签 a 的节点对象是由 HTMLAnchorElement 构造生成，button 标签的节点对象由 HTMLButtonElement 构造生成。因此，元素节点不是一种对象，而是一组对象，这些对象除了继承 Element 的属性和方法，还有各自的构造函数的属性和方法。</p>
-<p>特性属性</p>
-<ul>
-<li>Element.id</li>
-<li>Element.tagName 除了 svg 标签其他标签都是返回大写的标签名，与 nodeName 属性的值相等</li>
-<li>Element.dir 读写当前标签的文字方向：ltr 或者 rtl。并不是所有 Element 都有这个值，亲测 svg 是 undefined，div、p、span 标签的都是空</li>
-<li>Element.accessKey 标签设置快捷键</li>
-<li>Element.draggable</li>
-<li>Element.lang</li>
-<li>Element.tabIndex 按 Tab 键遍历 tabIndex 为正整数的标签，从大到小，如果值一样按出现顺序，然后遍历 0、属性为非法值或者没有 tabIndex 属性的标签，按照它们出现顺序。</li>
-<li>Element.title 鼠标悬浮时弹出的文字提示框的文案</li>
-</ul>
-<p>状态属性</p>
-<ul>
-<li>Element.hidden 优先级低于 CSS 指定的 display</li>
-<li>Element.contentEditable、Element.isContentEditable：前者设置或者返回一个字符串 true/false/inherit，后者表示是否设置了 contentEditable，返回布尔值。</li>
-</ul>
-<p>Element.attributes 返回标签属性值的伪数组</p>
-<p>Element.className、Element.classList：className 返回标签的所有 class 的字符串。classList 返回一个包含所有 class 的伪数组，这个伪数组还有方法可以控制标签的 class 们：add(classStr1, classStr2, …)、remove(classStr1, classStr2, …)、contains(classStr1, classStr2, …)、toggle(classStr) 返回 false 表示标签已经清空 classStr，否则表示添加上了 classStr、item(indexNum)、toString()</p>
-<p>Element.dataset 返回标签所有 data-xxx 属性的对象。xxx 只能包含英文字母、数字、连词线、点、冒号和下划线。如果 xxx 内是用连词线后跟字母，则 dataset 获取的时候，需要删除连词线并大写连词线后的字母后的字符串作为 dataset 的属性来获取。</p>
-<p>Element.innerHTML 设为空，清空标签下的所有节点。读取属性值的时候，文本节点包含 &amp;、&lt;、&gt; 都会被转成实体形式。如果想得到原文，可以用 Element.textContent。而写入的时候，如果插入的文本包含 HTML 标签，会被解析成为节点对象。如果文本中有 script 标签，虽然可以生成 script 节点，但是插入的代码不会执行。但是以下 alert 还是会被执行。因此为了安全考虑，如果插入文本使用 textContent 代替 innerHTML</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"&lt;img src=x onerror=alert(1)&gt;"</span>;</span><br><span class="line">el.innerHTML = name;</span><br></pre></td></tr></table></figure>
-<p>Element.outerHTML 返回一个有父节点的当前标签及其当前标签下的所有子标签，没有父节点会报错</p>
-<p>Element.clientHeight、Element.clientWidth 块级标签的 CSS 高度/宽度，如果没有则返回实际高度/宽度，包括 padding 部分，但不包括 border、margin 部分。小数会四舍五入为整数。</p>
-<p>Element.clientLeft、Element.clientTop 块级标签左边框 left border 的宽度、上边框 top border 的高度</p>
-<p>Element.scrollHeight、Element.scrollWidth 元素的总高度 包括溢出超出部分。document.documentElement.scrollHeight 获取整个网页的内容高度。</p>
-<p>Element.offsetParent offset 的相对元素</p>
-<p>Element.offsetHeight、Element.offsetWidth 包括 padding、border。额，Mac Chrome 亲测只是单纯的高度和宽度，并不包括 padding、border。</p>
-<p>Element.offsetLeft、Element.offsetTop 包括 margin 值</p>
-<p>Element.style</p>
-<p>Element.children、Element.childElementCount</p>
-<p>Element.firstElementChild、Element.lastElementChild</p>
-<p>Element.nextElementSibling、Element.previousSibling</p>
-<p>属性相关方法</p>
-<ul>
-<li>Element.getAttribute()、Element.getAttributeNames()、Element.setAttribute()、Element.hasAttribute()、Element.hasAttributes()、Element.removeAttribute() </li>
-<li>Element.getAttributeName()</li>
-<li>Element.querySelector()</li>
-<li>Element.querySelectorAll()</li>
-<li>Element.getElementsByClassName()</li>
-<li>Element.getElementsByTagName()</li>
-<li>Element.closest() 参数是 CSS 选择器，返回匹配该选择器、最接近当前节点的一个祖先节点（包括当前节点本身），没有返回 null。</li>
-<li>Element.matches() 返回当前节点是否匹配给定的 CSS 选择器</li>
-</ul>
-<p>事件相关方法</p>
-<ul>
-<li>Element.addEventListener() 添加监听事件、Element.removeEventListener() 移除监听事件、Event.dispatchEvent() 触发事件</li>
-<li>Element.scrolllntoView() 浏览器滚动到当前标签</li>
-<li>Element.getBoundingClientRect() 返回一个包含当前标签的 CSS 盒模型的所有信息的 rect 对象 x：元素左上角相对于视口的横坐标、y：元素左上角相对于视口的纵坐标、height、width、top、bottom。元素相对于视口的位置，是随着页面滚动变化的，因此表示位置的四个属性值，都不是固定不变的。如果想得到绝对的值，可以将 left 属性加上 window.scrollX，top 属性加上 window.scrollY。rect 对象里的值都是把 border 计算进去了的。也就是说，都是从边框外缘的各个点来计算。因此，width 和 height 包括了元素本身 + padding + border。rect 对象里的属性都是继承自原型的属性，所以 Object.keys(rect) 是一个空数组。</li>
-<li>Element.getClientRects()  返回标签节点在页面上形成的所有矩形的伪数组，伪数组内都有 bottom、height、left、right、top、width 6 个属性，表示矩形相对于视口的四个坐标以及本身的高度和宽度。块状标签只有一个矩形，而内嵌标签，如果是多行文本就会有多个矩形。</li>
-<li>Element.insertAdjacentElement() 在相对于当前标签节点的指定位置，插入一个新的节点，返回被插入的节点，如果插入失败，返回 null。接收两个参数，第一个参数表示插入元素的位置：beforebegin 表示当前元素之前、afterbegin 表示当前元素内部的第一个子节点前面、beforeend 表示元素内部的最后一个子节点后面、afterend 表示当前元素之后。beforebegin 和 afterend 这两个值，只有在当前节点有父节点时才会生效，如果没有父节点插入会失败，返回 null。</li>
-<li>Element.insertAdjacentHTML()、Element.insertAdjacentText() 前者是插入一段 HTML 字符串 到指定的位置，第一个参数是指定位置，位置参数与 insertAdjacentElement 一致。后者插入的是文本节点。</li>
-<li>Element.remove() 继承自 ChildNode 接口，用于将当前节点从它的父节点移除。</li>
-<li>Element.focus()、Element.blur() 接受一个对象作为参数，参数对象的 preventScroll 属性是一个布尔值，指定是否将当前元素停留在原始位置，而不是滚动到可见区域。意思就是可以实现获取焦点并滚动到焦点所在的位置。</li>
-<li>Element.click() 模拟鼠标点击，也就是触发 click 事件。</li>
-</ul>
+    <p>Text 节点代表元素节点和属性节点的文本内容。如果一个节点只包含一段文本，那么它就有一个文本子节点，代表该节点的文本内容。</p>
+<p>可以使用父节点的 firstChild、nextSibling 等属性获取文本节点<br>使用 Document.createTextNode 方法创造一个文本节点</p>
+<p>浏览器原生提供了一个 Text 构造函数，它返回一个文本节点实例。它的参数就是该文本节点的文本内容。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="keyword">new</span> Text(<span class="string">'I\'m a lovely Panda.'</span>)</span><br></pre></td></tr></table></figure>
+<p>文本节点继承了 Node 接口，还继承了 CharacterData 接口。</p>
+<h2 id="Text-节点的属性"><a href="#Text-节点的属性" class="headerlink" title="Text 节点的属性"></a>Text 节点的属性</h2><p>data 属性等同于 nodeValue 属性，用来设置或读取文本节点的内容。</p>
+<p>wholeText 属性将当前文本节点于毗邻的文本节点，作为一个整体返回。大多数情况下，wholeText 属性的返回值，与 data 属性和 textContext 属性相同。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"para"</span>&gt;</span></span><br><span class="line">  A <span class="tag">&lt;<span class="name">em</span>&gt;</span>B<span class="tag">&lt;/<span class="name">em</span>&gt;</span> C</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时候的 wholeText 属性和 data 属性返回值相同</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'para'</span>);</span><br><span class="line">el.firstChild.wholeText <span class="comment">// "A "</span></span><br><span class="line">el.firstChild.data <span class="comment">// "A "</span></span><br></pre></td></tr></table></figure>
+<p>但是一旦移除 em 节点，wholeText 属性与 data 属性就会有差异，因为这时其实 p 节点下面包含了两个毗邻的文本节点</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">el.removeChild(para.childNodes[<span class="number">1</span>]);</span><br><span class="line">el.firstChild.wholeText <span class="comment">// "A C"</span></span><br><span class="line">el.firstChild.data <span class="comment">// "A "</span></span><br></pre></td></tr></table></figure>
+<p>length、nextElementSibling、previousElementSibling </p>
+<p>appendData() 在 Text 节点后追加字符串、deleteData() 删除 Text 节点内部的子字符串，第一个参数为子字符串，第二个参数为子字符串的长度、insertData() 在 Text 节点插入字符串，第一个参数为插入的位置，第二个参数为插入的子字符串、replaceData() 用于替换文本，第一个参数为替换开始位置，第二个参数为需要被替换掉的长度，第三个参数为新加入的字符串、subStringData() 用于获取子字符串，第一个参数为子字符串在 Text 节点的开始位置，第二个参数为子字符串长度：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// HTML 代码为</span></span><br><span class="line"><span class="comment">// &lt;p&gt;Hello World&lt;/p&gt;</span></span><br><span class="line"><span class="keyword">var</span> pElementText = <span class="built_in">document</span>.querySelector(<span class="string">'p'</span>).firstChild;</span><br><span class="line"></span><br><span class="line">pElementText.appendData(<span class="string">'!'</span>);</span><br><span class="line"><span class="comment">// 页面显示 Hello World!</span></span><br><span class="line">pElementText.deleteData(<span class="number">7</span>, <span class="number">5</span>);</span><br><span class="line"><span class="comment">// 页面显示 Hello W</span></span><br><span class="line">pElementText.insertData(<span class="number">7</span>, <span class="string">'Hello '</span>);</span><br><span class="line"><span class="comment">// 页面显示 Hello WHello</span></span><br><span class="line">pElementText.replaceData(<span class="number">7</span>, <span class="number">5</span>, <span class="string">'World'</span>);</span><br><span class="line"><span class="comment">// 页面显示 Hello WWorld</span></span><br><span class="line">pElementText.substringData(<span class="number">7</span>, <span class="number">10</span>); </span><br><span class="line"><span class="comment">// 页面显示不变，返回"World "</span></span><br></pre></td></tr></table></figure>
+<p>remove() 移除当前 Text 节点</p>
+<p>splitText() 将 Text 节点一分为二，变成两个毗邻的 Text 节点。它的参数就是分割位置（从零开始），分割到该位置的字符前结束。。如果分割位置不存在，就报错。分割后，该方法返回分割位置后方的字符串，而原 Text 节点变成只包含分割位置前方的字符串。父元素的节点的 normalize 方法可以将两个毗邻的 Text 节点河北。</p>
+<h2 id="DocumentFragment-节点"><a href="#DocumentFragment-节点" class="headerlink" title="DocumentFragment 节点"></a>DocumentFragment 节点</h2><p>DocumentFragment 节点代表一个文档片段，本身就是一个完整的 DOM 树形结构。它没有父节点，parentNode 为 null，但是可以插入任意数量的子节点。它不属于当前文档。操作 DocumentFragment 节点要比直接操作 DOM 数快得多。</p>
+<p>它一般用于构建一个 DOM 结构，然后插入到当前文档。document.createDocumentFragment 方法以及浏览器原生的 DocumentFragment 构造函数，可以创建一个空的 DocumentFragment 节点。然后再使用其他 DOM 方法，向其添加子节点。</p>
+<p>DocumentFragment 节点本身不能被插入当前文档。当它作为 appendChild()、insertBefore()、replaceChild() 等方法的参数时，是它的所有子节点插入当前文档，而不是它自身。一旦 DocumentFragment 节点被添加进文档，它自身就变成了空节点（textContent 属性为空字符串），可以被再次使用。如果想要保存 DocumentFragment 节点的内容，可以使用 cloneNode 方法。</p>
+<p>DocumentFragment 反转一个指定节点的所有子节点的顺序</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line">  <span class="keyword">while</span>(n.lastChild) f.appendChild(n.lastChild);</span><br><span class="line">  n.appendChild(f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>DocumentFragment 节点对象么有自己的属性和方法，全部继承自 Node 节点和 ParentNode 接口。也就是说 DocumentFragement 节点比 Node 节点多了四个属性：children、firstElementChild、lastElementChild、childElementCount。</p>
 
   </div>
   
@@ -115,7 +82,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/23/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/99/">99</a><a class="extend next" rel="next" href="/page/25/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/23/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><a class="extend next" rel="next" href="/page/25/">下一页&raquo;</a>
   </nav>
 
     </main>

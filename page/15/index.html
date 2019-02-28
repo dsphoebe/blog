@@ -38,36 +38,53 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">JSONP 理解</h2>
+    <h2 class="title">简易 MVC 实践</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-01-08 11:35:35</span>
+    <span class="post-time">2019-01-16 10:35:11</span>
     <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h2 id="什么是JSONP"><a href="#什么是JSONP" class="headerlink" title="什么是JSONP"></a>什么是JSONP</h2><ul>
-<li>请求方：前端程序员（浏览器）</li>
-<li>响应方：后端程序员（服务器）</li>
-</ul>
-<p>这就是 JSONP 的整个过程：</p>
-<ul>
-<li>请求方创建 script，src 指向响应方，同时传一个查询参数 ?callbackName=xxx</li>
-<li>响应方根据查询参数 callbackName，构造一个函数调用 xxx.call(undefined, ‘请求方需要的数据’) 这样的响应</li>
-<li>请求方浏览器收到响应，就会执行 xxx.call(undefined, ‘请求方需要的数据’)</li>
-</ul>
-<p>行业约定：</p>
+    <p>MVC = Model （操作数据）、View （表示视图）、Controller （控制器） 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。</p>
 <ol>
-<li>callbackName -&gt; callback</li>
-<li>xxx -&gt; 名字+随机数</li>
+<li><p>功能转换为模块</p>
+</li>
+<li><p>模块对应的能看到的部分 HTML 指定给 view</p>
+</li>
+<li><p>操作 view 的逻辑指定为 controller，所以可以转换为函数 controller，controller(view)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>controller 作为对象，把 controller 函数作为这个对象的 init 函数，controller(view) 转换为 controller.init(view)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>controller 对象下再加上一个 bindEvents 函数，也就是操作 view</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.bindEvents()		</span><br><span class="line">  &#125;,</span><br><span class="line">  bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> view = <span class="keyword">this</span>.view</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bindEvents 只进行 bind 事件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.bindEvents()		</span><br><span class="line">  &#125;,</span><br><span class="line">  bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; <span class="keyword">this</span>.clickWrapper)</span><br><span class="line">  &#125;,</span><br><span class="line">  clickWrapper: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view.classList.add(<span class="string">'class'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h2 id="JSONP-请求方代码"><a href="#JSONP-请求方代码" class="headerlink" title="JSONP 请求方代码"></a>JSONP 请求方代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 请求方创建 script</span></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line"><span class="comment">// functionName 是名字加随机数</span></span><br><span class="line"><span class="keyword">var</span> functionName = jsonpCallback + <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">100000</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">// script 的 src 指向响应方，同时传一个查询参数 ?callback=functionName</span></span><br><span class="line">script.src = <span class="string">'http://example.com?callback='</span> + functionName</span><br><span class="line"><span class="comment">// 浏览器收到响应，就会执行 xxx.call(undefined, '请求方需要的数据')</span></span><br><span class="line"><span class="built_in">window</span>[functionName] = <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// result 是请求方需要的数据</span></span><br><span class="line">  <span class="comment">// 这里可以对数据进行处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 移除动态加入的 script</span></span><br><span class="line">  e.currentTarget.remove()</span><br><span class="line">  <span class="comment">// 删除内存中的 functionName 函数</span></span><br><span class="line">  <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">&#125;</span><br><span class="line">script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.currentTarget.remove()</span><br><span class="line">  <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="JSONP-为什么无法支持-POST"><a href="#JSONP-为什么无法支持-POST" class="headerlink" title="JSONP 为什么无法支持 POST"></a>JSONP 为什么无法支持 POST</h2><ul>
-<li>JSONP 是通过动态创建的 script 实现的</li>
-<li>动态创建的 script 只能用 GET 没法用 POST</li>
+<p>整个代码都变得很有条理了：</p>
+<ul>
+<li>一个 view；</li>
+<li>一个 controller，<ul>
+<li>controller.init(view)，</li>
+<li>controller 里有一个 bindEvents，</li>
+<li>以及在 controller 里定义操作 view 的函数</li>
+<li>再到 bindEvents 里面执行这些操作 view 的函数们。</li>
 </ul>
+</li>
+</ul>
+<p>最后一个 Model 与数据库交互</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> model = &#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 数据初始化逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">  fetch: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取数据</span></span><br><span class="line">  &#125;,</span><br><span class="line">  save: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// return promise 对象</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  model: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view, model</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.model = model</span><br><span class="line">    model.init()</span><br><span class="line">  &#125;,</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">controller.init(view, model)</span><br></pre></td></tr></table></figure>
+<p>Model 和服务器交互，Model 将得到的数据交给 Controller，Controller 把数据填入 View，并监听 View。用户操作 View，比如点击按钮，Controller 就会接受到点击时间，Controller 这时会去调用 Model，Model 会与服务器交互，得到数据后返回给 Controller，Controller 得到数据就去更新 View。</p>
+<p>MVC ：职责分明，模块清晰，代码简单！😄</p>
+<p><img src="/images/mvc/1.png" alt="Model、View、Controller"></p>
 
   </div>
   
@@ -75,7 +92,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/14/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/99/">99</a><a class="extend next" rel="next" href="/page/16/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><a class="extend next" rel="next" href="/page/16/">下一页&raquo;</a>
   </nav>
 
     </main>

@@ -38,13 +38,13 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">数组 API 之 forEach、reduce</h2>
+    <h2 class="title">怎么声明一个函数</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-18 23:31:15</span>
+    <span class="post-time">2018-12-20 13:25:30</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forEach/">forEach</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reduce/">reduce</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li></ul>
       
     </span>
     
@@ -54,52 +54,47 @@
     
   </div>
   <div class="post-content">
-    <h2 id="forEach-的实现"><a href="#forEach-的实现" class="headerlink" title="forEach 的实现"></a>forEach 的实现</h2><p>一个数组 arr 调用 forEach 方法，并传入 callback 方法：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, index</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, index)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 0</span></span><br><span class="line"><span class="comment">// 2 1</span></span><br><span class="line"><span class="comment">// 3 2</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看到 callback 里面并没有传入 arr，那 callback 是怎么获取到数组 arr 的 value 和 index 的了。</p>
-<p>它是通过 this 关键字来传入的。JavaScript 已经帮我们把 arr 传入了，类似调用了函数的 call 方法，并把 call 方法的第一个参数 this 指向 arr。如下：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line">arr.forEach.call(arr, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>我们的 forEach 的实现<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 我们的 forEach 实现</span></span><br><span class="line">obj.forEach = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">    x(obj[i], i)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 有个 obj</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">2</span>,</span><br><span class="line">  length: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用 forEach 方法：</span></span><br><span class="line">obj.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, key</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, key)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 0</span></span><br><span class="line"><span class="comment">// 2 1</span></span><br></pre></td></tr></table></figure></p>
-<p>所以从数据结构来看，数组和对象其实没有差别。</p>
-<h2 id="arr-sort"><a href="#arr-sort" class="headerlink" title="arr.sort"></a>arr.sort</h2><p>arr.sort 原地排序自身，可以省空间。数组的其他 API 都不会修改原数组。</p>
-<p>数组的 API 返回一个数组，所以可以操作成链式操作。</p>
-<h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>举个列子，范伟火车上打劫 “IC、IP、IQ 卡通通告诉我密码。” 😂，火车上有 10 个人。</p>
-<table>
-<thead>
-<tr>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-<th>8</th>
-<th>9</th>
-<th>10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>100</td>
-<td>200</td>
-<td>30</td>
-<td>10</td>
-<td>20</td>
-<td>200</td>
-<td>100</td>
-<td>30</td>
-<td>10</td>
-<td>30</td>
-</tr>
-</tbody>
-</table>
-<p>范伟手里最开始是么有钱的，钱数为 0，即初始值为 0<br>当打劫完第 1 个人，钱数变为了 0 + 100 = 100<br>打劫完第 2 个人，钱数变成了 100 + 200 = 300<br>打劫完第 3 个人，钱数就变成了 300 + 30 = 330<br>…<br>就是也就是累加。把之前打劫的钱加上新的打劫的钱。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">30</span>]</span><br><span class="line">arr.reduce(<span class="function">(<span class="params">preValue, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> preValue + currentValue</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="comment">// 730</span></span><br></pre></td></tr></table></figure>
-<p>map 和 filter 都可以用 reduce 表示。</p>
-<h3 id="map-用-reduce-表示"><a href="#map-用-reduce-表示" class="headerlink" title="map 用 reduce 表示"></a>map 用 reduce 表示</h3><p>数组所有值乘以 2</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">30</span>]</span><br><span class="line">arr.reduce(<span class="function">(<span class="params">prevValue, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  prevValue.push(currentValue * <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">return</span> prevValue</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
-<h3 id="filter-用-reduce-表示"><a href="#filter-用-reduce-表示" class="headerlink" title="filter 用 reduce 表示"></a>filter 用 reduce 表示</h3><p>比如过滤大于 100 的数值</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">30</span>]</span><br><span class="line">arr.reduce(<span class="function">(<span class="params">prevValue, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (currentValue &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    prevValue.push(currentValue)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> prevValue</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
-<p>所以说，map 和 filter 其实这是 reduce 的一个实现。</p>
+    <ol>
+<li>最简单的声明方法，具名函数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params">输入<span class="number">1</span>， 输入<span class="number">2.</span>..</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>function 是关键字，和 var 一样，var 是声明一个变量，funciton 是声明一个函数。变量和函数的差别是，变量有 7 种数据类型（string，number，null，undefined，boolean，symbol，object），而 function 声明一个函数，那么这个变量就只能是一个函数，也就是 object 数据类型，function 是特殊的 var，变量的特例。</p>
+<p>x 是函数的名字，名字可以用来 console.log(x) 输出这个函数，console.log 的参数只支持字符串，如果这个 x 不是字符串，console.log 会自动把 x 的值调用 toString 方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params">input1, input2</span>) </span>&#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125;</span><br><span class="line">x.toString() <span class="comment">// "function x(input1, input2) &#123;return undefined&#125;"</span></span><br><span class="line"><span class="built_in">console</span>.log(x) <span class="comment">// f x(input1, input2) &#123;return undefined&#125;</span></span><br></pre></td></tr></table></figure>
+<p>不要相信 Chrome 打印出来的东西</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"1"</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>Chrome 打印出来的是数值 1，而应该是字符串“1”。console.log 永远返回 undefined。打印的并不是返回值。</p>
+<p>x 的返回值默认会带上 return undefined，如果没有 return 的话。因为一个函数必须要有一个终止语句，所以就算不写 return，函数也会自动带上 return undefined。</p>
+<ol start="2">
+<li>匿名函数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">input1, input2</span>) </span>&#123; <span class="keyword">return</span> <span class="literal">undefined</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>不能单独使用，必须赋给另外一个变量。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x</span><br><span class="line">x = <span class="function"><span class="keyword">function</span> (<span class="params">input1, input2</span>) </span>&#123; <span class="keyword">return</span> <span class="literal">undefined</span> &#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>具名函数赋值给一个变量</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span> <span class="title">y</span>(<span class="params">input1, input2</span>) </span>&#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>y 的作用域只在函数体内。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span> <span class="title">y</span>(<span class="params">input1, input2</span>) </span>&#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'y'</span>) <span class="comment">// 会报错，找不到 y</span></span><br></pre></td></tr></table></figure>
+<p>第 3 种和第 1 种的语法一样，但是 y 的体现不一致，这也是 JavaScript 的垃圾之处。</p>
+<ol start="4">
+<li>window.Function 函数对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> Funtion(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x + y'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x'</span> + n + <span class="string">'y'</span>)</span><br><span class="line">f(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<p>所有的参数都是字符串，然后字符串是可以拼接的。</p>
+<ol start="5">
+<li>箭头函数</li>
+</ol>
+<p>箭头函数是匿名函数！</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123; <span class="keyword">return</span> x + y &#125;</span><br></pre></td></tr></table></figure>
+<p>如果花括号内只有一个语句，可以去掉花括号和 return</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function">(<span class="params">x, y</span>) =&gt;</span> x + y</span><br></pre></td></tr></table></figure>
+<p>如果参数只有一个，则不需要小括号</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="params">x</span> =&gt;</span> x**<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>函数的名字的坑</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">f.name <span class="comment">// "f"</span></span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">f2.name <span class="comment">// "f2"</span></span><br><span class="line"><span class="keyword">var</span> f3 = <span class="function"><span class="keyword">function</span> <span class="title">f4</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">f3.name <span class="comment">// "f4"</span></span><br><span class="line"><span class="keyword">var</span> f5 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'return x+y'</span>)</span><br><span class="line">f5.name <span class="comment">// "anonymous"</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -107,7 +102,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/35/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/99/">99</a><a class="extend next" rel="next" href="/page/37/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/35/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><a class="extend next" rel="next" href="/page/37/">下一页&raquo;</a>
   </nav>
 
     </main>

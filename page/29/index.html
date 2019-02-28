@@ -38,10 +38,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">DOM 概述</h2>
+    <h2 class="title">NodeList 接口，HTMLCollection 接口</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-24 22:43:37</span>
+    <span class="post-time">2018-12-24 23:50:27</span>
     <span class="post-tags">
       
     </span>
@@ -52,21 +52,16 @@
     
   </div>
   <div class="post-content">
-    <p>DOM 是 JavaScript 操作网页的接口，它将网页转成一个 JavaScript 对象，从而可以用脚本进行各种操作。</p>
-<p>浏览器根据 DOM 模型，将 HTML 解析成一系列节点，再由这些节点组成一个树状结构 DOM tree。所有节点和最终的树状结构，都有规范的对外接口。</p>
-<p>DOM 只是一个接口规范，可以用各种语言实现。所以严格地说，DOM 不是 JavaScript 语法的一部分，但是 DOM 操作是 JavaScript 最常见的任务，离开 DOM，JavaScript 就无法控制网页。另一方面，JavaScript 也是最常用于 DOM 操作的语言。</p>
-<p>DOM 的最小组成单位是节点 node，DOM 树就是由各种不同类型的节点组成。每个节点可以看作是文档树的一片叶子。</p>
-<p>节点的类型有七种，他们都继承自浏览器提供的节点对象 Node，都有 共有属性 Node.prototype</p>
-<ul>
-<li>Document：整个文档树的顶层节点</li>
-<li>DocumentType：doctype 标签</li>
-<li>Element：标签节点</li>
-<li>Attribute：标签节点的属性</li>
-<li>Text：标签之间（比如空格）或标签包含的文本</li>
-<li>Comment：注释</li>
-<li>DocumentFragment：文档片段</li>
-</ul>
-<p>document 节点继承自 Document，代表整个文档树，它有一个子节点标签节点 html，也是 DOM 树的根节点 root node。</p>
+    <p>NodeList 是 Node 对象的伪数组</p>
+<p>HTMLCollection 是标签节点的伪数组</p>
+<p>Node.childNodes 属性返回 NodeList，也只有这个属性的返回的 NodeList 是动态集合</p>
+<p>document.querySelectorAll() 节点搜索方法返回 NodeList</p>
+<p>NodeList 有 forEach 方法和 length 属性，但是么有数组的 push 等方法</p>
+<p>NodeList 的 item 方法，参数为整数值，表示成员的位置，返回该位置的成员。这个方法等价于 <code>NodeList[&lt;int&gt;]</code></p>
+<p>keys、values、entries 三个方法分别返回一个键名遍历器、一个键值遍历器、一个包含键名和键值的遍历器。遍历器对象可以通过 for…of 循环遍历获取每一个成员的信息。</p>
+<p>HTMLCollection 没有 forEach 方法，只能使用 for 循环。它主要是一些 Document 对象的集合属性：document.links、document.forms、document.images 等。如果节点有 id 或 name 属性，可以用 id 或者 name 来引用节点元素。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// HTML 代码如下</span></span><br><span class="line"><span class="comment">// &lt;img id="pic" src="http://example.com/foo.jpg"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pic = <span class="built_in">document</span>.getElementById(<span class="string">'pic'</span>);</span><br><span class="line"><span class="built_in">document</span>.images.pic === pic <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>namedItem() 参数为 id 属性或 name 属性的值，返回对应的标签节点，如果么有返回 null。</p>
 
   </div>
   
@@ -74,7 +69,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/28/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/99/">99</a><a class="extend next" rel="next" href="/page/30/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/28/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><a class="extend next" rel="next" href="/page/30/">下一页&raquo;</a>
   </nav>
 
     </main>
