@@ -1,5 +1,5 @@
 ---
-title: 实例对象与-new-命令
+title: 实例对象与 new 命令
 category:
   - JavaScript 教程 - 笔记
 date: 2019-02-28 11:34:39
