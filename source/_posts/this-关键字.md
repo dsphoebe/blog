@@ -187,7 +187,7 @@ Object.prototype.hasOwnProperty.call(obj, 'toString') // false
 func.apply(thisValue, [arg1, arg2, ...])
 ```
 
-call 方法中原函数的参数需要一个一个添加，apply 中数组形式传入。
+call 方法中原函数的参数需要一个一个添加，apply 中类数组形式传入。
 
 ##### 找出数组中最大的元素
 
@@ -201,8 +201,8 @@ Math.max.apply(null, a) // 15
 ```js
 Array.apply(null, ['a',,'b']) // ['a', undefined, 'b']
 ```
-
-空元素与 undefined 差别是，数组的 forEach 方法会跳过空元素，但是不会跳过 undefined。
+原理是，在 apply 的第二个参数接受的是一个类数组对象，调用的是内置方法 CreateListFromArrayLike 方法 `CreateListFromArrayLike(obj[, elementTypes])` 如果没有定义 elementTypes 时，会被认定为 Undefined、Null、Boolean、String、Symbol、Number、Object。在生成 list 时，调用 `Get(obj, indexName)`。我们这个例子返回的是 elementTypes 里面的 undefined 了。[CreateListFromArrayLike](http://www.ecma-international.org/ecma-262/6.0/#sec-createlistfromarraylike)
+然后 空元素与 undefined 差别是，数组的 forEach 方法会跳过空元素，但是不会跳过 undefined。
 
 ##### 转换类似数组的对象
 
