@@ -125,7 +125,8 @@ f() // 1
 obj.f() // 2
 ```
 
-🤔 那和 python 的 self 一样吗？
+> 🤔 那和 python 的 self 一样吗？https://docs.python.org/3/tutorial/classes.html 
+> self 出现在 class 中。一般 class 所有的实例方法的第一个参数都命名为 self，并指向实例化后 class 的实例。
 
 ### 使用场合
 
