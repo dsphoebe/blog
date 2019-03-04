@@ -70,7 +70,9 @@
 <p>这时，引擎会将函数单独保存在内存中，然后将函数的内存地址赋值给 foo 属性的 value 属性。</p>
 <p>函数可以在不同的运行环境中执行，所以需要有一种机制，能够在函数体内部获得当前的运行环境 context。所以 this 就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.x)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  f: f,</span><br><span class="line">  x: <span class="number">2</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">f() <span class="comment">// 1</span></span><br><span class="line">obj.f() <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-<p>🤔 那和 python 的 self 一样吗？</p>
+<blockquote>
+<p>🤔 那和 python 的 self 一样吗？<a href="https://docs.python.org/3/tutorial/classes.html" target="_blank" rel="noopener">https://docs.python.org/3/tutorial/classes.html</a><br>self 出现在 class 中。一般 class 所有的实例方法的第一个参数都命名为 self，并指向实例化后 class 的实例。</p>
+</blockquote>
 <h3 id="使用场合"><a href="#使用场合" class="headerlink" title="使用场合"></a>使用场合</h3><ol>
 <li><p>指代全局环境</p>
 </li>
