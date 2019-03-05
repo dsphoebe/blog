@@ -125,7 +125,7 @@ f() // 1
 obj.f() // 2
 ```
 
-> 🤔 那和 python 的 self 一样吗？https://docs.python.org/3/tutorial/classes.html 
+> 🤔 那和 python 的 self 一样吗？ [Classes](https://docs.python.org/3/tutorial/classes.html)
 > self 出现在 class 中。一般 class 所有的实例方法的第一个参数都命名为 self，并指向实例化后 class 的实例。
 
 ### 使用场合
@@ -313,15 +313,18 @@ obj.print()
 与 call 一起使用
 
 ```js
-var slice = Function.prototype.call.bind(Array.prototype.slice);
+var slice = Function.prototype.call.bind(
+  Array.prototype.slice);
 slice([1,2,3], 0, 1) // [1]
 ```
 
 上面代码的含义就是，将 Array.prototype.slice 变成 Function.prototype.call 方法所在的对象，调用时就变成了 Array.prototype.slice.call。类似的写法还可用于其他数组方法。
 
 ```js
-var push = Function.prototype.call.bind(Array.prototype.push);
-var pop = Function.prototype.call.bind(Array.prototype.pop);
+var push = Function.prototype.call.bind(
+  Array.prototype.push);
+var pop = Function.prototype.call.bind(
+  Array.prototype.pop);
 
 var a = [1 ,2 ,3];
 push(a, 4)
@@ -339,7 +342,8 @@ function f() {
 }
 
 var o = { v: 123 };
-var bind = Function.prototype.call.bind(Function.prototype.bind);
+var bind = Function.prototype.call.bind(
+  Function.prototype.bind);
 bind(f, o)() // 123
 ```
 
