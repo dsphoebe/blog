@@ -1,11 +1,10 @@
 ---
 title: Boolean 对象
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-11-29 10:53:42
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 Boolean 对象是 JavaScript 的三个包装对象之一。作为构造函数，它主要用于生成布尔值的包装对象实例。
 

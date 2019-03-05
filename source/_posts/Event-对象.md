@@ -1,12 +1,11 @@
 ---
 title: Event 对象
 category:
-  - JavaScript 教程 - 笔记
 date: 2019-02-14 11:35:55
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 事件发生后，会产生一个事件对象，作为参数传给监听函数。浏览器原生提供一个 Event 对象，所有的事件都是这个对象的实例。
 

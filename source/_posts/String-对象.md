@@ -1,11 +1,10 @@
 ---
 title: String 对象
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-03 15:21:15
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 String 对象是 JavaScript 原生提供的三个包装对象之一，用来生成字符串对象。给生成的字符串对象调用 valueOf 将返回它对应的原始字符串。
 

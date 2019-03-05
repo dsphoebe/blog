@@ -8,11 +8,10 @@ tags:
   - 标签
   - 循环
   - 三元表达式
-  - JavaScript 教程 - 笔记
 date: 2018-11-16 12:49:17
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 ## 1. 语句
 

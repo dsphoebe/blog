@@ -1,12 +1,11 @@
 ---
 title: DOM 概述
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-24 22:43:37
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 DOM 是 JavaScript 操作网页的接口，它将网页转成一个 JavaScript 对象，从而可以用脚本进行各种操作。
 

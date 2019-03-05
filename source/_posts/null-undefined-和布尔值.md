@@ -5,11 +5,10 @@ tags:
   - undefined
   - 布尔值
   - boolean
-  - JavaScript 教程 - 笔记
 date: 2018-11-16 14:28:22
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 ## null 与 undefined
 

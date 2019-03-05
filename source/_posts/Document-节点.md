@@ -1,12 +1,11 @@
 ---
 title: Document 节点
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-25 11:40:06
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 document 节点对象代表整个文档，window.document 属性指向这个对象。只要浏览器开始载入 HTML 文档，该对象就存在了，可以直接使用。
 

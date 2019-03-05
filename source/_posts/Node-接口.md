@@ -1,12 +1,11 @@
 ---
 title: Node 接口
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-24 23:36:09
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 所有的 DOM 节点都继承自 Node 接口，所有的 DOM 节点都共有 DOM.prototype 下的方法和属性。
 

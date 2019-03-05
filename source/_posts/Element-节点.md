@@ -1,12 +1,11 @@
 ---
 title: Element 节点
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-27 12:31:17
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 不同的 HTML 对象对应的标签节点不一样，浏览器使用了不同的构造函数，生成不同的标签节点。比如标签 a 的节点对象是由 HTMLAnchorElement 构造生成，button 标签的节点对象由 HTMLButtonElement 构造生成。因此，元素节点不是一种对象，而是一组对象，这些对象除了继承 Element 的属性和方法，还有各自的构造函数的属性和方法。
 

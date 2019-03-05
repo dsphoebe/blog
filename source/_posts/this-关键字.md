@@ -1,12 +1,11 @@
 ---
 title: this 关键字
 category:
-  - JavaScript 教程 - 笔记
 date: 2019-03-04 12:44:24
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 ```js
 var person = {

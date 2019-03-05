@@ -1,12 +1,11 @@
 ---
 title: Mutation Observer API
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-28 14:16:46
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 Mutation Observer API 用来监视 DOM 变动。DOM 的任何变动，比如节点的增删、属性的变动、文本内容的变动，这个 API 都可以得到通知。
 

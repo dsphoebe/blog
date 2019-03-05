@@ -3,11 +3,10 @@ title: JavaScript 的数据类型概述
 tags:
   - JavaScript
   - 数据类型
-  - JavaScript 教程 - 笔记
 date: 2018-11-16 13:58:19
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 ## JavaScript 的数据类型
 

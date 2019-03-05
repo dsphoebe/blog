@@ -1,12 +1,11 @@
 ---
 title: JSON 对象
 category:
-  - JavaScript 教程 - 笔记
 date: 2019-02-27 17:51:24
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 JSON JavaScript Object Notation 用于数据交换的文本格式。2001 Douglas Crockford 提出，取代繁锁笨重的 XML 格式。
 

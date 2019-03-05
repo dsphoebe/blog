@@ -1,11 +1,10 @@
 ---
 title: console 对象与控制台
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-11-24 10:39:06
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 ## console 对象
 

@@ -1,12 +1,11 @@
 ---
 title: Text 节点和 DocumentFragment 节点
 category:
-  - JavaScript 教程 - 笔记
 date: 2018-12-27 13:22:53
 tags:
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 Text 节点代表元素节点和属性节点的文本内容。如果一个节点只包含一段文本，那么它就有一个文本子节点，代表该节点的文本内容。
 

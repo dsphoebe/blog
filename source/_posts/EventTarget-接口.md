@@ -5,11 +5,10 @@ tags:
   - 事件
   - 发布订阅
 categories:
-  - JavaScript 教程 - 笔记
 date: 2019-02-03 11:28:29
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 事件本质是程序各个组成部分之间的一种通信方式，也是异步编程的一种实现。
 

@@ -3,11 +3,10 @@ title: JavaScript 导论
 tags:
   - JavaScript
   - 脚本语言
-  - JavaScript 教程 - 笔记
 date: 2018-11-15 12:38:13
 ---
 
-> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+> <sup>这里是我读[《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)做的笔记。</sup>
 
 ## JavaScript 是一种轻量级的脚本语言
 
