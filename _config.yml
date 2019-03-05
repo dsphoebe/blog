@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: a[href="//code.dsphoebe.com"]{FE NOTEBOOK}
-pc_title: a[href="//code.dsphoebe.com"]{FE NOTEBOOK}
+title: FE NOTEBOOK 🚀
+pc_title: FE NOTEBOOK 🚀
 tabtitle: FE NOTEBOOK 🚀
 subtitle: 「 学海无涯，没空撩妹！」
 description:
@@ -14,7 +14,7 @@ timezone: Asia/Hong_Kong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://code.dsphoebe.me
+url: http://code.dsphoebe.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
