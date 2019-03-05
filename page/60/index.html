@@ -30,7 +30,7 @@
       
     </ul>
   </nav>
-  <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="pc">FE NOTEBOOK 🚀</h1>
   <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
   <em>「 学海无涯，没空撩妹！」</em>
 </header>
@@ -52,7 +52,10 @@
     
   </div>
   <div class="post-content">
-    <h2 id="Error-实例对象"><a href="#Error-实例对象" class="headerlink" title="Error 实例对象"></a>Error 实例对象</h2><p>JavaScript 解析或运行时，一旦发生错误，引擎就会抛出一个错误对象。JavaScript 原生提供 Error 构造函数，所有抛出错误都是这个构造函数的实例。</p>
+    <blockquote>
+<p><a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a></p>
+</blockquote>
+<h2 id="Error-实例对象"><a href="#Error-实例对象" class="headerlink" title="Error 实例对象"></a>Error 实例对象</h2><p>JavaScript 解析或运行时，一旦发生错误，引擎就会抛出一个错误对象。JavaScript 原生提供 Error 构造函数，所有抛出错误都是这个构造函数的实例。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'出错啦'</span>)</span><br><span class="line">error.message <span class="comment">// "出错啦"</span></span><br></pre></td></tr></table></figure>
 <p>Error 构造函数接受一个参数，表示错误提示，可以从实例的 message 属性读到这个参数。抛出 Error 实例对象以后，整个程序就中断在发生错误的地方，不再往下执行。</p>
 <p>JavaScript 语言标准只提到，Error 实例对象必须有 message 属性，表示出错时的提示信息，没有提到其他属性。大多数 JavaScript 引擎，对 Error 实例还提供 name 和 stack 属性，分别表示错误的名称和错误的堆栈，但他们是非标准的，不是每种实现都有。</p>

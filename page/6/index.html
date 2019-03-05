@@ -30,7 +30,7 @@
       
     </ul>
   </nav>
-  <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="pc">FE NOTEBOOK 🚀</h1>
   <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
   <em>「 学海无涯，没空撩妹！」</em>
 </header>
@@ -52,7 +52,10 @@
     
   </div>
   <div class="post-content">
-    <h3 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h3><p>单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。</p>
+    <blockquote>
+<p><a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a></p>
+</blockquote>
+<h3 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h3><p>单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。</p>
 <p>注意：JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（成为主线程），其他线程都是在后台配合。</p>
 <p>JavaScript 之所以采用单线程，而不是多线程，跟历史有关系。JavaScript 从诞生起就是单线程，原因是不想让浏览器变得太复杂，因为多线程需要共享资源、具有可能修改彼此的运行结果，对于一中网页脚本语言来说，这就太复杂了。如果 JavaScript 同时有两个线程，一个线程在网页 DOM 节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？是不是还要有锁机制？所以，为了避免复杂性，JavaScript 一开始就是单线程，这已经成为了这门语言的核心特征，将来也不会改变。</p>
 <p>这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等待，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一个段 JavaScript 代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。JavaScript 语言本身并不慢，慢的是读写外部数据，比如等待 AJAX 请求返回结果。这个事件，如果对方服务器迟迟没有响应，或者网络不通畅，就会导致脚本的长时间停滞。</p>

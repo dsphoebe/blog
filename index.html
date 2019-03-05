@@ -30,7 +30,7 @@
       
     </ul>
   </nav>
-  <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="pc">FE NOTEBOOK 🚀</h1>
   <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
   <em>「 学海无涯，没空撩妹！」</em>
 </header>
@@ -52,7 +52,10 @@
     
   </div>
   <div class="post-content">
-    <p>面向对象编程很重要的一个方面，就是对象的继承，A 对象继承 B 对象，A 对象就能直接用 B 对象的所有属性和方法了，这对于代码的复用非常重要。</p>
+    <blockquote>
+<p><a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a></p>
+</blockquote>
+<p>面向对象编程很重要的一个方面，就是对象的继承，A 对象继承 B 对象，A 对象就能直接用 B 对象的所有属性和方法了，这对于代码的复用非常重要。</p>
 <p>大部分面向对象编程的语言，都是通过类 class 实现对象的继承的。传统上 JavaScript 语言的继承不通过 class，而是通过 原型对象 prototype 实现的。ES6 引入了 class 语法。</p>
 <h3 id="构造函数的缺点"><a href="#构造函数的缺点" class="headerlink" title="构造函数的缺点"></a>构造函数的缺点</h3><p>JavaScript 通过构造函数生成新对象，因此构造函数可以视为对象的模板。实例对象的属性和方法，可以定义在构造函数内部。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name, color</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.color = color;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> Cat(<span class="string">'大猫'</span>, <span class="string">'白色'</span>);</span><br><span class="line">cat1.name <span class="comment">// '大猫'</span></span><br><span class="line">cat1.color <span class="comment">// '白色'</span></span><br></pre></td></tr></table></figure>

@@ -30,7 +30,7 @@
       
     </ul>
   </nav>
-  <h1 class="pc">a[href=&#34;//code.dsphoebe.com&#34;]{FE NOTEBOOK}</h1>
+  <h1 class="pc">FE NOTEBOOK 🚀</h1>
   <h1 class="mobile"><a href="/">FE NOTEBOOK 🚀</a></h1>
   <em>「 学海无涯，没空撩妹！」</em>
 </header>
@@ -52,7 +52,10 @@
     
   </div>
   <div class="post-content">
-    <h3 id="资源事件"><a href="#资源事件" class="headerlink" title="资源事件"></a>资源事件</h3><h4 id="beforeunload-事件"><a href="#beforeunload-事件" class="headerlink" title="beforeunload 事件"></a>beforeunload 事件</h4><p>beforeunload 事件在窗口、文档、各种资源将要卸载前触发。它可以防止用户不小心卸载资源。</p>
+    <blockquote>
+<p><a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a></p>
+</blockquote>
+<h3 id="资源事件"><a href="#资源事件" class="headerlink" title="资源事件"></a>资源事件</h3><h4 id="beforeunload-事件"><a href="#beforeunload-事件" class="headerlink" title="beforeunload 事件"></a>beforeunload 事件</h4><p>beforeunload 事件在窗口、文档、各种资源将要卸载前触发。它可以防止用户不小心卸载资源。</p>
 <p>如果该事件对象的 returnValue 属性是一个非空字符串，那么浏览器就会弹车一个对话框，询问用户是否要卸载该资源。但是，用户指定的字符串可能无法显示，浏览器会展示预定义的字符串。如果用户点击“取消”按钮，资源就不会卸载。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'beforeunload'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> confirmationMessage = <span class="string">'确定关闭窗口'</span>;</span><br><span class="line">  event.returnValue = confirmationMessage;</span><br><span class="line">  <span class="keyword">return</span> confirmationMessage;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>各浏览器不一样，许多浏览器会忽略这个事件，一旦调用了这个事件，浏览器就不会缓存当前网页。因为执行了这个事件后，缓存页面就没有意义了。</p>
