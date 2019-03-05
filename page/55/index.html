@@ -46,14 +46,10 @@
       
     </span>
     
-      <div class="article-category">分类：
-        <a class="article-category-link" href="/categories/JavaScript-教程-笔记/">JavaScript 教程 - 笔记</a>
-      </div>
-    
   </div>
   <div class="post-content">
     <blockquote>
-<p><a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a></p>
+<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
 </blockquote>
 <p>JavaScript 提供了一个内部数据结构，用来描述对象的属性，控制它的行为，比如该属性是否可写、是否可遍历。这个内部数据结构称为“属性描述对象”（attributes object）。每个属性都有自己对应的属性描述对象，保存该属性的一些元信息。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	value: <span class="literal">undefined</span>,</span><br><span class="line">  writable: <span class="literal">true</span>,</span><br><span class="line">  enumerable: <span class="literal">true</span>, <span class="comment">// 如果是 false，for...in 与 Object.keys() 将忽略这个值</span></span><br><span class="line">  configurable: <span class="literal">true</span>, <span class="comment">// 控制除了 value 以外的属性描述对象的可写性</span></span><br><span class="line">  get: <span class="literal">undefined</span>,<span class="comment">// 该属性的取值函数，默认 undefined</span></span><br><span class="line">  set: <span class="literal">undefined</span> <span class="comment">// 该属性的存值函数，默认 undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
