@@ -7,6 +7,8 @@ tags:
 date: 2018-11-15 16:30:18
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+
 ## 诞生
 
 JavaScript 因互联网而生

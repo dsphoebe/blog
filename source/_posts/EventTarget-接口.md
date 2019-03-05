@@ -9,6 +9,7 @@ categories:
 date: 2019-02-03 11:28:29
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 事件本质是程序各个组成部分之间的一种通信方式，也是异步编程的一种实现。
 

@@ -6,6 +6,7 @@ date: 2018-12-24 23:50:27
 tags:
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 NodeList 是 Node 对象的伪数组
 

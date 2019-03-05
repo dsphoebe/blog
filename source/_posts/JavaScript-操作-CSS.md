@@ -6,6 +6,7 @@ date: 2018-12-28 11:37:54
 tags:
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 HTML 元素的 style 属性：JavaScript 可以用标签元素的 getAttribute、setAttriubte 和 remoteAttriubte 三个方法来操作。style 不仅可以使用字符串读写，它本身还是一个对象，部署了 CSSStyleDeclaration 接口。
 

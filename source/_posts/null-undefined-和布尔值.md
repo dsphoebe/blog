@@ -9,6 +9,8 @@ tags:
 date: 2018-11-16 14:28:22
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+
 ## null 与 undefined
 
 null 和 undefined 都是没有得意思。if 语句中判断都是 false；而且相等运算 == 返回 true。

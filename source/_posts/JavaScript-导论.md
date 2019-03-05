@@ -7,6 +7,8 @@ tags:
 date: 2018-11-15 12:38:13
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+
 ## JavaScript 是一种轻量级的脚本语言
 
 - [什么是“脚本语言”](http://www.yinwang.org/blog-cn/2013/03/29/scripting-language)

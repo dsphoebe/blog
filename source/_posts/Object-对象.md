@@ -5,6 +5,7 @@ category:
 date: 2018-11-26 23:48:43
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 JavaScript 的所有其他对象都是继承自 Object 对象的，即所有对象都是 Object 的实例。
 

@@ -12,6 +12,8 @@ tags:
 date: 2018-11-16 12:49:17
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+
 ## 1. 语句
 
 wiki 上[語句 (程式設計)](https://zh.wikipedia.org/wiki/語句_(程式設計))是这么说的

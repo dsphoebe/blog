@@ -5,6 +5,7 @@ category:
 date: 2018-11-28 14:23:08
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 Array 是 JavaScript 的原生对象，同时也是一个构造函数，可以用它生成新的数组。可以省略前面的 new 命令。
 

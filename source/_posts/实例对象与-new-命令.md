@@ -6,6 +6,7 @@ date: 2019-02-28 11:34:39
 tags:
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 面向对象编程（Object Oritented Programming，缩写 OOP）是目前主流的编程范式。它将真实世界各种复杂的关系，抽象为一个个对象，然后由对象之间的分工与合作，完成对真实世界的模拟。
 

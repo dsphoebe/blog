@@ -7,6 +7,8 @@ tags:
 date: 2018-11-16 13:58:19
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
+
 ## JavaScript 的数据类型
 
 JavaScript 语言的每一个值，都属于某一种数据类型。JavaScript 的数据类型有 7 种：

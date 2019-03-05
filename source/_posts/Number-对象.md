@@ -5,6 +5,7 @@ category:
 date: 2018-11-29 11:32:41
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 Number 对象是数值对应的包装对象，可以作为构造函数也可以作为工具函数使用。
 

@@ -5,6 +5,7 @@ category:
 date: 2018-11-24 10:39:06
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 ## console 对象
 

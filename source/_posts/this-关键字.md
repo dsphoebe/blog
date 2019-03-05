@@ -6,6 +6,7 @@ date: 2019-03-04 12:44:24
 tags:
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 ```js
 var person = {

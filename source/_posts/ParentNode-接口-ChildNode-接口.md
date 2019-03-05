@@ -6,6 +6,7 @@ date: 2018-12-25 00:24:44
 tags:
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 节点对象除了继承 Node 对象外，还会继承其他接口。 ParentNode 接口表示当前节点是一个父节点，它会有一些处理子节点的方法。ChildNode 接口表示当前节点是一个子节点，提供一些相关方法。
 

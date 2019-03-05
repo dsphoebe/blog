@@ -7,6 +7,7 @@ category:
 date: 2018-12-20 22:08:36
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 正则表达式 regular expression 是一种表达文本模式（即字符串结构）的方法，有点像字符串的模板，常常用来按照“给定模式”匹配文本。
 

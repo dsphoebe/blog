@@ -6,6 +6,7 @@ date: 2018-12-24 23:36:09
 tags:
 ---
 
+> [《阮一峰 JavaScript 教程》](https://wangdoc.com/javascript/)
 
 所有的 DOM 节点都继承自 Node 接口，所有的 DOM 节点都共有 DOM.prototype 下的方法和属性。
 
