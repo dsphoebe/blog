@@ -38,10 +38,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">字符串</h2>
+    <h2 class="title">数组</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-20 16:20:17</span>
+    <span class="post-time">2018-11-21 18:56:13</span>
     <span class="post-tags">
       
     </span>
@@ -51,65 +51,52 @@
     <blockquote>
 <p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
 </blockquote>
-<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h3><p>单引号或者双引号中的 0 个或者多个字符就是字符串</p>
-<p>单引号里面再用单引号需要用反斜杆转义，或者将其中一对引号改成双引号</p>
-<p>双引号里面再用双引号需要用反斜杆转义，或者将其中一对引号改成单引号</p>
-<p>单双引号引号包含的字符串默认是单行，要分成多行，需要在行尾加反斜杆，否则会报错，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> errorStr = <span class="string">'</span></span><br><span class="line"><span class="string">a</span></span><br><span class="line"><span class="string">b</span></span><br><span class="line"><span class="string">c'</span></span><br><span class="line"><span class="comment">// SyntaxError: Unexpected token ILLEGAL</span></span><br></pre></td></tr></table></figure>
-<p>加了反斜杠以后，原来写在一行的字符串，可以分成多行书写。但是，输出的时候还是单行，效果与写在同一行完全一样。注意，反斜杠的后面必须是换行符，而不能有其他字符（比如空格），否则会报错。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">'</span></span><br><span class="line"><span class="string">a \</span></span><br><span class="line"><span class="string">b \</span></span><br><span class="line"><span class="string">c</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line">str <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
-<p>可以用 + 连接多个单行字符串</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">'a'</span></span><br><span class="line">+ <span class="string">'b'</span></span><br><span class="line">+ <span class="string">'c'</span></span><br><span class="line">str <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
-<p>输出多行字符串，奇淫怪技啊.</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">/*</span></span><br><span class="line"><span class="comment">line 1</span></span><br><span class="line"><span class="comment">line 2</span></span><br><span class="line"><span class="comment">line 3</span></span><br><span class="line"><span class="comment">*/</span>&#125;).toString().split(<span class="string">'\n'</span>).slice(<span class="number">1</span>, <span class="number">-1</span>).join(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
-<p>或者用 ES 6 的模版字符串</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">`a</span></span><br><span class="line"><span class="string">b</span></span><br><span class="line"><span class="string">c`</span></span><br></pre></td></tr></table></figure>
-<h3 id="1-2-转义"><a href="#1-2-转义" class="headerlink" title="1.2 转义"></a>1.2 转义</h3><ul>
-<li><code>\0</code> null <code>\u0000</code></li>
-<li><code>\b</code> 后退键 <code>\u0008</code></li>
-<li><code>\f</code> 换页符 <code>\u000C</code></li>
-<li><code>\n</code> 换行符  <code>\u000A</code></li>
-<li><code>\r</code> 回车符 <code>\u000D</code></li>
-<li><code>\t</code> 制表符  <code>\u0009</code></li>
-<li><code>\v</code> 垂直制表符 <code>\u000B</code></li>
-<li><code>\&#39;</code> 单引号 <code>\u0027</code></li>
-<li><code>\&quot;</code> 双引号 <code>\u0022</code></li>
-<li><code>\\</code> 反斜杆  <code>\u005C</code></li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'1\t2'</span>) <span class="comment">// 1	2</span></span><br></pre></td></tr></table></figure>
-<p>反斜杆后跟 3 个八进制数，代表一个字符。八进制数对应该字符的 Unicode 码点，比如 <code>\251</code> 表示版权符号。这种方法只能输出 265 种字符</p>
-<p>反斜杆后跟 x 再接着 2 个十六进制数，也代表一个字符。十六进制数对应的是这个字符的 Unicode 码点，比如 <code>\xA9</code> 表示版权符号。这种也只能显示 256 种字符。</p>
-<p>反斜杆后跟 u 再接着 4 个十六进制数，代表一个字符。十六进制是对应的这个字符的 Unicode 码点，比如 <code>\u00A9</code> 表示版权符号。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'\251'</span> <span class="comment">// "©"</span></span><br><span class="line"><span class="string">'\xA9'</span> <span class="comment">// "©"</span></span><br><span class="line"><span class="string">'\u00A9'</span> <span class="comment">// "©"</span></span><br></pre></td></tr></table></figure>
-<p>正常字符前面使用反斜杆，反斜杆会被忽略。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'\a'</span> <span class="comment">// "a"</span></span><br></pre></td></tr></table></figure>
-<h3 id="1-3-字符串与数组"><a href="#1-3-字符串与数组" class="headerlink" title="1.3 字符串与数组"></a>1.3 字符串与数组</h3><p>字符串可以视为字符串数组，可以且只可以像数组一样读取字符串数组里面值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="string">'12345'</span></span><br><span class="line">a.length <span class="comment">// 5</span></span><br><span class="line">a[<span class="number">0</span>] <span class="comment">// 1</span></span><br><span class="line">a[<span class="number">8</span>] <span class="comment">// undefined</span></span><br><span class="line">a[<span class="string">'x'</span>] <span class="comment">// undefined</span></span><br><span class="line">a[<span class="number">-1</span>] <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-字符集"><a href="#2-字符集" class="headerlink" title="2. 字符集"></a>2. 字符集</h2><p>JavaScript 使用 Unicode 字符集。JavaScript 引擎内部，所有字符都用的 Unicode 表示。</p>
-<p>JavaScript 不仅可以用 Unicode 存储字符，还可以只用在程序中 Unicode 码点表示字符，比如 <code>\u00A9</code> 代表版权符号。</p>
-<p>解析代码时，JavaScript 会自动识别一个字符时字面量还是 Unicode，输出字面量给用户</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> f\u006F\u006F = <span class="string">'abc'</span></span><br><span class="line">foo <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
-<p>每个字符在 JavaScript 内部都是以 16 位（即 2 个字节）的 UTF-16 格式存储的。也就是说 JavaScript 的单位字符长度固定为 16 位长度，即 2 个字节。</p>
-<p>UTF-16 有两种长度：</p>
-<ul>
-<li>对于码点在 U+0000 到 U+FFFF 之间的字符，长度为 16 位，即 2 个字节</li>
-<li>对于码点在 U+10000 到 U+10FFFF 之间的字符，长度为 32 位，即 4 个字节，而且前两个字节在 0xD800 到 0xDBFF 之间，后两个字节在 0xDC00 到 0xDFFF 之间。码点 U+1D306 对应的字符为<code>𝌆</code>，它的 UTF-16 字符是 0xD834 0xDF06</li>
-</ul>
-<p>JavaScript 对 UTF-16 的支持是不完整的，由于历史原因，只支持两字节的字符，不支持四字节的字符。这是因为 JavaScript 第一版发布的时候，Unicode 的码点只编到 U+FFFF，因此两字符足够表示了。后来，Unicode 纳入的字符越来越多，出现了四字节的编码。但是，JavaScript 的标准此时已经定型了，统一将字符长度限制在两字节，导致无法识别四字节的字符。<code>𝌆</code>浏览器会正确识别为一个字符，而 JavaScript 却无法识别，会认为这是两个字符。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">'𝌆'</span>.length <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-<p>总结一下，对于码点在 U+10000 到 U+10FFFF 之间的字符，JavaScript 总是认为它们是两个字符。处理的时候，必须考虑到这一点，也就是说 JavaScript 返回的字符串的长度可能是不对的。</p>
-<h2 id="3-Base64-转码"><a href="#3-Base64-转码" class="headerlink" title="3. Base64 转码"></a>3. Base64 转码</h2><p>有时，文本里面包含一些不可打印的符号，比如 ASCII 码 0 到 31 的符号都无法打印出来，这时可以使用 Base64 编码将它们转成可以打印的字符。另一个场景时，有时候需要以文本格式传递二进制数据，那么也可以使用 Base64 编码。</p>
-<p>所谓 Base64 编码就是一种编码方法，可以将任意值转成 0～9、A～Z、a～z、+ 和 / 这 64 个字符组成的可打印字符。使用它的主要目的不是为了加密，而是为了不出现特殊字符，简化程序的处理。</p>
-<p>JavaScript 原生提供的 Base64 的两个方法：</p>
-<ul>
-<li>btoa 任意值转为 Base64 编码</li>
-<li>atob Base64 编码转为原来的值</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">'hahaha'</span></span><br><span class="line">base64Str = btoa(str) <span class="comment">// "aGFoYWhh"</span></span><br><span class="line">atob(base64Str) <span class="comment">// "hahaha"</span></span><br></pre></td></tr></table></figure>
-<p>这两个方法不适合非 ASCII 码的字符，会报错</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">btoa(<span class="string">'胖达'</span>) <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
-<p>要将非 ASCII 码字符转为 Base64 编码，必须中间加一个转码环节，再使用这两个方法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> base64encode = <span class="function"><span class="params">str</span> =&gt;</span> btoa(<span class="built_in">encodeURIComponent</span>(str))</span><br><span class="line"><span class="keyword">const</span> base64Decode = <span class="function"><span class="params">str</span> =&gt;</span> <span class="built_in">decodeURIComponent</span>(atob(str))</span><br><span class="line">base64encode(<span class="string">'胖达'</span>) <span class="comment">// "JUU4JTgzJTk2JUU4JUJFJUJF"</span></span><br><span class="line">base64Decode(<span class="string">'JUU4JTgzJTk2JUU4JUJFJUJF'</span>) <span class="comment">// 胖达</span></span><br></pre></td></tr></table></figure>
+<p>数组有序的一组值，每个值的位置都有编号（从 0 开始），整个数组用方括号表示。任何类型的数据都可以放入数组。</p>
+<h2 id="数组的本质"><a href="#数组的本质" class="headerlink" title="数组的本质"></a>数组的本质</h2><p>数组是一种特殊的对象，一组键是从 0 开始的有序数字，且有一个 length 的键的对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typeof</span> [a,b,c] <span class="comment">// "object"</span></span><br><span class="line"><span class="keyword">const</span> arr = [a,b,c]</span><br><span class="line"><span class="built_in">Object</span>.keys(arr) <span class="comment">// ["0", "1", "2"]</span></span><br></pre></td></tr></table></figure>
+<p>JavaScript 语言规定，对象的键名一律为字符串，所以数组的键名其实也是字符串。之所以可以用数值读取，是因为非字符串的键名会被转为字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">arr[<span class="number">0</span>] <span class="comment">// "a"</span></span><br><span class="line">arr[<span class="string">'a'</span>] <span class="comment">// "a"</span></span><br></pre></td></tr></table></figure>
+<p>这点在赋值时也是成立的。任何一个值总是先转成字符串然后在进行赋值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = []</span><br><span class="line">a[<span class="number">1.00</span>] = <span class="number">6</span></span><br><span class="line">a[<span class="string">'1'</span>] <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+<p>对象读取成员可以用点结构和方括号结构，但是对于数值的键名，不能使用点结构。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr[<span class="number">0</span>] <span class="comment">// 1</span></span><br><span class="line">arr<span class="number">.0</span> <span class="comment">// SyntaxError</span></span><br></pre></td></tr></table></figure>
+<h2 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h2><p>JavaScript 使用一个 32 位整数保存数组的元素个数。所以数组的成员最多只能有 2<sup>32</sup> - 1 个 4294967295 个。</p>
+<p>只要是数组，就一定有 length 属性。该属性是一个动态的值，等于键名的最大整数加上 1。</p>
+<p>清空数组的一个有效方法，就是将 length 设置为 0</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">arr.length = <span class="number">0</span></span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+<p>如果人为设置 length 大于当前元素个数，则数组的成员数量会增加到这个值，新增的位置都是空位。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="string">'a'</span>]</span><br><span class="line">a.length = <span class="number">3</span></span><br><span class="line">a[<span class="number">1</span>] <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>如果人为设置 length 为不合法的值，JavaScript 会报错。</p>
+<p>数组本质上是一种对象，所以可以为数组添加属性，但是这不影响 length 属性的值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"></span><br><span class="line">a[<span class="string">'p'</span>] = <span class="string">'abc'</span>;</span><br><span class="line">a.length <span class="comment">// 0</span></span><br><span class="line">a.p <span class="comment">// 'abc'</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">2.1</span>] = <span class="string">'abc'</span>;</span><br><span class="line">a.length <span class="comment">// 0</span></span><br><span class="line">a[<span class="number">2.1</span>] <span class="comment">// 'abc'</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">-1</span>] = <span class="string">'a'</span>;</span><br><span class="line">a.length <span class="comment">// 0</span></span><br><span class="line">a[<span class="number">-1</span>] <span class="comment">// 'a'</span></span><br><span class="line"></span><br><span class="line">a[<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">32</span>)] = <span class="string">'b'</span>;</span><br><span class="line">a.length <span class="comment">// 0</span></span><br><span class="line">a[<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">32</span>)] <span class="comment">// 'b'</span></span><br></pre></td></tr></table></figure>
+<h2 id="in-运算"><a href="#in-运算" class="headerlink" title="in 运算"></a>in 运算</h2><p>检查某个键名是否存在的运算符 in，适用于对象也适用于数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line"><span class="number">2</span> <span class="keyword">in</span> arr <span class="comment">// true</span></span><br><span class="line"><span class="string">'2'</span> <span class="keyword">in</span> arr <span class="comment">// true</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">in</span> arr <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>如果数组的某个位置是空位， in 运算符返回 false</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = []</span><br><span class="line">arr[<span class="number">100</span>] = <span class="string">'a'</span></span><br><span class="line"><span class="number">100</span> <span class="keyword">in</span> arr <span class="comment">// true</span></span><br><span class="line"><span class="number">1</span> <span class="keyword">in</span> arr <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h2 id="for…in-循环和数组的遍历"><a href="#for…in-循环和数组的遍历" class="headerlink" title="for…in 循环和数组的遍历"></a>for…in 循环和数组的遍历</h2><p>for … in 不仅会遍历数组所有的数字键，还会遍历非数字键</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line">a.foo = <span class="literal">true</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> a) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a[i], i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 'a', 0</span></span><br><span class="line"><span class="comment">// 'b', 1</span></span><br><span class="line"><span class="comment">// 'c', 2</span></span><br><span class="line"><span class="comment">// true, foo</span></span><br></pre></td></tr></table></figure>
+<p>会遍历到非整数键名，所以不推荐 for…in 遍历数组，可以考虑使用 for 循环或者 while 循环或者数组的方法 forEach</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">'red'</span>, <span class="string">'green'</span>, <span class="string">'blue'</span>];</span><br><span class="line">colors.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">color</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(color);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// red</span></span><br><span class="line"><span class="comment">// green</span></span><br><span class="line"><span class="comment">// blue</span></span><br></pre></td></tr></table></figure>
+<h2 id="数组的空位"><a href="#数组的空位" class="headerlink" title="数组的空位"></a>数组的空位</h2><p>当数组的某个位置是空元素，即两个逗号之间没有任何值，我们称该数组存在空位（hole）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, , <span class="number">1</span>];</span><br><span class="line">a.length <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>如果最后一个元素后面有逗号，并不会产生空位。也就是说，有没有这个逗号，结果都是一样的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,];</span><br><span class="line"></span><br><span class="line">a.length <span class="comment">// 3</span></span><br><span class="line">a <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+<p>数组的空位是可以读取的，返回 undefined</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [, , ,];</span><br><span class="line">a[<span class="number">1</span>] <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>使用 delete 命令删除一个数组成员，会形成空位，并且不会影响 length 属性</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">delete</span> a[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">a[<span class="number">1</span>] <span class="comment">// undefined</span></span><br><span class="line">a.length <span class="comment">// 3</span></span><br><span class="line">a <span class="comment">// [1, empty, 3]</span></span><br></pre></td></tr></table></figure>
+<p>如果是空位，数组的方法 forEach，for…in，以及 Object.keys 方法遍历的时候，空位都会被跳过。但是如果某个位置是 undefined，遍历的时候就不会被跳过。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>];</span><br><span class="line"></span><br><span class="line">a.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">x, i</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i + <span class="string">'. '</span> + x);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 0. undefined</span></span><br><span class="line"><span class="comment">// 1. undefined</span></span><br><span class="line"><span class="comment">// 2. undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> a) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(a)</span><br><span class="line"><span class="comment">// ['0', '1', '2']</span></span><br></pre></td></tr></table></figure>
+<p>空位就是数组没有这个元素，所以不会遍历到，而 undefined 则表示数组有这个元素，值是 undefined，所以遍历不会跳过。</p>
+<h2 id="类似数组的对象-array-like-object"><a href="#类似数组的对象-array-like-object" class="headerlink" title="类似数组的对象 array-like object"></a>类似数组的对象 array-like object</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">'a'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">'b'</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">'c'</span>,</span><br><span class="line">  length: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj[<span class="number">0</span>] <span class="comment">// 'a'</span></span><br><span class="line">obj[<span class="number">1</span>] <span class="comment">// 'b'</span></span><br><span class="line">obj.length <span class="comment">// 3</span></span><br><span class="line">obj.push(<span class="string">'d'</span>) <span class="comment">// TypeError: obj.push is not a function</span></span><br></pre></td></tr></table></figure>
+<p>类似数组的对象根本的特征就是具有 length 属性。只要有 length 属性，就可以认为这个对象类似于数组。但是这种 length 不是动态值，不会随着成员的变化而变化。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  length: <span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line">obj[<span class="number">3</span>] = <span class="string">'d'</span>;</span><br><span class="line">obj.length <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<p>典型的类似数组的对象是函数的 arguments 对象，以及大多数 DOM 元素集，还有字符串。</p>
+<p>可以用数组的 slice 方法将类似数组的对象变成真正的数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = <span class="built_in">Array</span>.prototype.slice.call(arrayLike)</span><br></pre></td></tr></table></figure>
+<p>除了转为真正的数组，类似数组的对象还有一个办法可以使用数组的方法，就是通过 call 方法把数组的方法放到对象上。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// forEach 方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logArgs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Array</span>.prototype.forEach.call(<span class="built_in">arguments</span>, <span class="function"><span class="keyword">function</span> (<span class="params">elem, i</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i + <span class="string">'. '</span> + elem);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于 for 循环</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logArgs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i + <span class="string">'. '</span> + <span class="built_in">arguments</span>[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这种方法比直接使用数组元素的 forEach 要慢，所以最好还是先将类似数组的对象转为真正的数组，然后再直接调用数组的 forEach 方法。</p>
 
   </div>
   
@@ -117,7 +104,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/73/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="extend next" rel="next" href="/page/75/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><a class="page-number" href="/page/76/">76</a><span class="space">&hellip;</span><a class="page-number" href="/page/110/">110</a><a class="extend next" rel="next" href="/page/75/">下一页&raquo;</a>
   </nav>
 
     </main>

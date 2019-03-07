@@ -38,101 +38,223 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">JavaScript 的基本语法</h2>
+    <h2 class="title">译文：二进制数与浮点数的转换</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-16 12:49:17</span>
+    <span class="post-time">2018-11-19 11:35:07</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/label/">label</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三元表达式/">三元表达式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/变量/">变量</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/循环/">循环</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/标签/">标签</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/表达式/">表达式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语句/">语句</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IEE-754/">IEE 754</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/二进制/">二进制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浮点数/">浮点数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机科学/">计算机科学</a></li></ul>
       
     </span>
+    
+      <div class="article-category">分类：
+        <a class="article-category-link" href="/categories/译文/">译文</a>
+      </div>
     
   </div>
   <div class="post-content">
     <blockquote>
-<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
+<p>原文：<a href="https://blog.penjee.com/binary-numbers-floating-point-conversion/" target="_blank" rel="noopener">Binary numbers – floating point conversion</a><br>作者：<a href="https://blog.penjee.com/author/thomas-n/" target="_blank" rel="noopener">Thomas N</a></p>
 </blockquote>
-<h2 id="1-语句"><a href="#1-语句" class="headerlink" title="1. 语句"></a>1. 语句</h2><p>wiki 上<a href="https://zh.wikipedia.org/wiki/語句_(程式設計" target="_blank" rel="noopener">語句 (程式設計)</a>)是这么说的</p>
-<blockquote>
-<p>一个语句是指令式编程语言中最小的独立元素，表达程序要运行的一些动作。</p>
-</blockquote>
-<p>JavaScript 程序的执行单位是行，一行一行地执行。一般情况下，JavaScript 每一行就是一个语句。</p>
-<h3 id="1-1-语句和表达式"><a href="#1-1-语句和表达式" class="headerlink" title="1.1 语句和表达式"></a>1.1 语句和表达式</h3><p>语句是为了完成某种任务而进行的操作，比如下面就是一行赋值语句。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span> + <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p>这条语句先用<code>var</code> 命令，声明了变量<code>a</code>，然后将<code>1 + 3</code>的运算结果赋值给变量<code>a</code>。</p>
-<p><code>1 + 3</code> 叫做表达式，表达式是指一个为了得到返回值的运算式。语句和表达式的区别是，语句时为了进行某种操作，一般情况下没有返回值；而表达式则是为了得到返回值，一定会有一个返回值。凡是 JavaScript 语言中预期为值的地方，都可以使用表达式。比如，赋值语句的等号右边，预期是一个值，因此可以放置各种表达式。</p>
-<p>语句以分号结尾，一个分号表示一个语句的结束。用分号结束时，多个语句可以写在一行，也就是多个语句之间用分号隔离开时，这些语句可以写在一行：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span> + <span class="number">3</span>; <span class="keyword">var</span> b = <span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure>
-<p>定义多个变量时，也可以是用逗号隔开，最后语句再用分号结尾。JavaScript 部署上线 minify 时就是这样的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span> + <span class="number">3</span>, b = <span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure>
-<p>分号前面没有任何内容，JavaScript 引擎将其视为空语句。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">;;; <span class="comment">// 啥也不会执行</span></span><br></pre></td></tr></table></figure>
-<p>表达式不需要分号结尾。一旦在表达式后添加了分号，则 JavaScript 引擎就将表达式视为语句，这样就会产生一些没有意义的语句</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="number">3</span>;</span><br><span class="line"><span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure>
-<p>上面两行语句只是单纯地产生一个值，对程序并没有任何实际的意义。</p>
-<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2. 变量"></a>2. 变量</h2><h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h3><p>可以变的量就是变量，它是对“值”的具名引用。变量就是为“值”起名，然后引用这个名字，就等同于引用这个值，对这个名字的操作就是对这个值的操作。变量的名字就是变量名。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>; <span class="comment">// 用 var 命令声明变量 a，然后在变量 a 与数值 1 之间建立引用关系，成为数值 1 赋值给变量 a。</span></span><br><span class="line"><span class="keyword">var</span> b = a + <span class="number">1</span>; <span class="comment">// 用 var 命令声明变量 b，然后引用变量 a，再加 1，因为引用变量 a 就是引用的数值 1，所以再加 1，得到的结果就是 2，所以与变量 b 建立引用关系的是 2.</span></span><br></pre></td></tr></table></figure>
-<p>变量名是区分大小写的</p>
-<p>变量没有声明直接调用，JavaScript 会报错，告诉你变量未定义。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">x</span><br><span class="line"><span class="comment">// ReferenceError: x is not defined</span></span><br></pre></td></tr></table></figure>
-<p>可以在同一条 var 命令中声明多个变量。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a, b;</span><br></pre></td></tr></table></figure>
-<p>JavaScript 是动态类型语言，变量的类型是没有限制的，随时可以更改类型。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">a = <span class="string">'hello'</span>;</span><br></pre></td></tr></table></figure>
-<p>使用 var 重新声明一个已经存在的变量是无效的。</p>
-<h3 id="2-2-变量提升"><a href="#2-2-变量提升" class="headerlink" title="2.2 变量提升"></a>2.2 变量提升</h3><p>JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是看起来所有变量的声明语句，都会被提升到代码作用域最开始的位置，这就叫做变量提升。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<p>JavaScript 引擎执行真正运行的代码是这样的：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a; </span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// console 的时候，a 还没有被赋值，所以打印出来的结果是 undefined</span></span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="3-标识符"><a href="#3-标识符" class="headerlink" title="3. 标识符"></a>3. 标识符</h2><p>标识符 identifier 指的是用来识别各种值的合法名称。最常见的标识符就是变量名，以及后面函数名。</p>
-<p>JavaScript 语言的标识符对大小写敏感。</p>
-<p>JavaScript 语言的标识符有一套命名规则，不符合规则的就是非法标识符。JavaScript 遇到非法标识符就会报错。</p>
-<p>标识符的规则如下：</p>
+<p>8位（1字节）的二进制数可以表示 0 到 255 范围内的十进制值，但是，这只包括整数而没有实数（例如分数），如 0.5 或 20.456 等。</p>
+<p><img src="https://blog.penjee.com/wp-content/uploads/2015/03/binary-floating-point-binary-byte.png" alt="181 in binary form"></p>
+<center>十进制 181 的二进制形式</center>
+
+<p>为了以二进制形式表示所有实数，需要更多位和明确定义的格式。所以就出现了浮点数。但是，浮点数只是接近实数而已。想象一下PI 3.14159265的数字……它永远不会结束。它需要无限多的位来表示这个数字。二进制浮点数只是精度和范围之间的折中的办法。根据用途，有不同大小的二进制浮点数。</p>
+<h2 id="为什么称它为“浮点数”？"><a href="#为什么称它为“浮点数”？" class="headerlink" title="为什么称它为“浮点数”？"></a>为什么称它为“浮点数”？</h2><p>顾名思义，点（小数点）可以浮动。浮点数的格式是使用科学计数法。科学计数法是一种书写数字的形式，当数字太大或太小，不能以十进制形式方便地写时，就用科学计数法。基数为 10 科学记数法是 x x 10y，允许小数点移动。</p>
+<p>例如，数字523.0可以用科学记数法写成 523.0 x 10<sup>0</sup>，52.30 x 10<sup>1</sup> 或 5.230 x 10<sup>2</sup>。“浮动”小数点出现在数字 x 中的不同位置取决于指数 y。将小数点向右移动一个位置会增加指数，向左移动指数会减小指数。</p>
+<h2 id="二进制浮点数"><a href="#二进制浮点数" class="headerlink" title="二进制浮点数"></a>二进制浮点数</h2><p>两种最常见的浮点存储格式由IEEE 754标准（电气和电子工程师协会，一个定义标准的大型组织）定义：</p>
 <ul>
-<li>第一个字符，可以是任意的 Unicode 字母（包括英文字母和其他语言的字母），以及美元符号和下划线。</li>
-<li>第二个字符及后面的字符，除了 Unicode 字母、美元符号和下划线，还可以用数字 0 - 9。</li>
+<li>32位浮点数（也称为单精度浮点数）<ul>
+<li>1位符号位，8位指数位，23位尾数位</li>
 </ul>
-<p>合法的标识符：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Ʃ = <span class="number">1</span> <span class="comment">// Ʃ 是拉丁文大写字母 Esh https://unicode-table.com/cn/#01A9</span></span><br><span class="line"><span class="keyword">var</span> π = <span class="number">2</span> <span class="comment">// π 是希腊文大写字母 Pi https://unicode-table.com/cn/#03A0</span></span><br><span class="line"><span class="keyword">var</span> $<span class="number">0</span> = <span class="string">''</span></span><br><span class="line"><span class="keyword">var</span> _xiao = <span class="string">'xiao'</span></span><br></pre></td></tr></table></figure>
-<p>中文是合法的标识符：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> 我就是帅 = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-<p>JavaScript 有一些保留字，不能用作标识符：arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield</p>
-<h2 id="4-注释"><a href="#4-注释" class="headerlink" title="4. 注释"></a>4. 注释</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">多行</span></span><br><span class="line"><span class="comment">注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>JavaScript 兼容 HTML 代码的注释，所以 <code>&lt;!--</code> 和 <code>--&gt;</code>是合法的单行注释</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1</span>; <span class="xml"><span class="comment">&lt;!-- x = 2;</span></span></span><br><span class="line"><span class="xml">--&gt; x = 3;</span></span><br></pre></td></tr></table></figure>
-<p>上面的代码只有 <code>x = 1</code>会执行，其他部分都注释掉了。</p>
-<p>注意 <code>—&gt;</code>只有在行首才能被当成单行注释，否则正常运算</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">countdown</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (n --&gt; <span class="number">0</span>) <span class="built_in">console</span>.log(n);</span><br><span class="line">&#125;</span><br><span class="line">countdown(<span class="number">3</span>)</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-<p>上面的代码 <code>n--&gt;0</code>实际上被当成了 <code>n--&gt;0</code>，递减 n <code>n-—</code> 然后再 <code>n &gt; 0</code> 比较，所以得到了 2、1、0</p>
-<h2 id="5-区块"><a href="#5-区块" class="headerlink" title="5. 区块"></a>5. 区块</h2><p>JavaScript 用大括号将多个相关的语句组合在一起，成为区块。但是 JavaScript 的区块并不会构成单独的作用域。JavaScript 里一般在 for、if、while、function 等场景使用区块</p>
-<h2 id="6-条件语句"><a href="#6-条件语句" class="headerlink" title="6. 条件语句"></a>6. 条件语句</h2><h3 id="6-1-if-结构"><a href="#6-1-if-结构" class="headerlink" title="6.1 if 结构"></a>6.1 if 结构</h3><p>if 结构先判断一个表达式的布尔值，然后根据布尔值的真伪，执行不同的语句。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (m === <span class="number">3</span>)</span><br><span class="line">  m = m + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<p>只有 m 等于 3 时，才会给 m 加上 1</p>
-<p>这种写法要求条件表达式后面只能有一个语句。如果像执行多个语句，必须在 if 的条件判断之后，加上大括号，表示代码块（多个语句合并成一个语句）</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (m === <span class="number">3</span>) &#123;</span><br><span class="line">  m = m + <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果 if 布尔表达式写成了赋值表达式：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (x = <span class="number">2</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'yayaya'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果会把 2 赋值给 x，然后再判断 x 的值的布尔值，x 的值是 2，所以它的布尔值为 true，所以这里结果会打印出来 yayaya</p>
-<h3 id="6-2-if…else-结构"><a href="#6-2-if…else-结构" class="headerlink" title="6.2 if…else 结构"></a>6.2 if…else 结构</h3><h3 id="6-3-switch-结构"><a href="#6-3-switch-结构" class="headerlink" title="6.3 switch 结构"></a>6.3 switch 结构</h3><p>多个 if…else 连在一起使用的时候，可以转为更方便的 switch 结构。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (a == <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="number">2</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 转换成 switch</span></span><br><span class="line"><span class="keyword">switch</span> (a) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>switch 结构中，case 代码块之中要加 break 语句，否则会一直执行下去。</p>
-<p>switch 语句部分和 case 语句部分都可以使用表达式。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (<span class="number">1</span> + <span class="number">3</span>) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span> + <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">   	<span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'default'</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>switch 语句后的表达式与 case 语句后的表达式比较运行结果时，是用的严格相等运算符 ===</p>
-<h3 id="6-4-三元运算符"><a href="#6-4-三元运算符" class="headerlink" title="6.4 三元运算符 ?:"></a>6.4 三元运算符 ?:</h3><h2 id="7-循环语句"><a href="#7-循环语句" class="headerlink" title="7. 循环语句"></a>7. 循环语句</h2><h3 id="7-1-while-循环"><a href="#7-1-while-循环" class="headerlink" title="7.1 while 循环"></a>7.1 while 循环</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span> <span class="comment">// 循环的起点</span></span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">100</span>) &#123; <span class="comment">// i &lt; 100 为终止条件</span></span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i = i + <span class="number">1</span>; <span class="comment">// 递增表达式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="7-2-for-循环"><a href="#7-2-for-循环" class="headerlink" title="7.2 for 循环"></a>7.2 for 循环</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i = i + <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以省略任何一个，也可以全部省略，全部省略就形成了一个无限循环。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 省略一个</span></span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (; i &lt; <span class="number">100</span>; i = i + <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 省略两个</span></span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (;i &lt; <span class="number">100</span>;) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  i = i + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 全部省略</span></span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'死循环'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="7-3-do…while-循环"><a href="#7-3-do…while-循环" class="headerlink" title="7.3 do…while 循环"></a>7.3 do…while 循环</h3><p>不管真假都会执行一次，while 后面的分号不要省略。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i = i + <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="7-4-break-语句和-continue-语句"><a href="#7-4-break-语句和-continue-语句" class="headerlink" title="7.4 break 语句和 continue 语句"></a>7.4 break 语句和 continue 语句</h3><p>break 语句和 continue 语句都是跳转作用，让代码块不按既有的顺序执行。</p>
-<p>break 语句用于跳出代码块或者整个循环，continue 语句用于终止本轮循环。不带参数的 break 语句和 continue 语句只能跳出最内层的循环。</p>
-<h3 id="7-5-标签-label"><a href="#7-5-标签-label" class="headerlink" title="7.5 标签 label"></a>7.5 标签 label</h3><p>语句的前面有标签，相当于定位符，用于跳转到程序的任意位置。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">foo: &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">break</span> foo;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码执行，break foo 后就会跳出代码块，所以打印结果是 1，不会有 2</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">top:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">continue</span> top;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// i = 0, j = 0</span></span><br><span class="line"><span class="comment">// i = 0, j = 1</span></span><br><span class="line"><span class="comment">// i = 0, j = 2</span></span><br><span class="line"><span class="comment">// i = 1, j = 0 </span></span><br><span class="line"><span class="comment">// i = 2, j = 0</span></span><br><span class="line"><span class="comment">// i = 2, j = 1</span></span><br><span class="line"><span class="comment">// i = 2, j = 2</span></span><br></pre></td></tr></table></figure>
-<p>可以看到 i 等于 1 和 j 等于 1 之后就跳出循环进入到下一轮 i 等于 2 的循环了。</p>
+</li>
+<li>64位浮点数（也称双精度浮点数）<ul>
+<li>1位符号位，11位指数位，52位尾数位</li>
+</ul>
+</li>
+</ul>
+<p>下图显示了二进制形式的32位浮点数。高亮的部分指示出符号位“S”，指数 Exponet 和 尾数 Mantissa 的三部分的位置：</p>
+<p><img src="https://blog.penjee.com/wp-content/uploads/2015/03/binary-floating-point-binary-short-real-32-bit.png" alt="32 bit floating point number"></p>
+<center>32位浮点数：灰色表示的位的位置和各个位置位的值全部设置为 1</center>
+
+<p>以下是浮点数的示例，其科学记数法为 + 34.890625 x 10<sup>4</sup>。符号位是加号。尾数是 34.890625，指数是 4。因为我们在十进制系统中，所以基数是10。</p>
+<p>有关位区域的更多信息： </p>
+<ul>
+<li><p>符号位</p>
+<ul>
+<li>一个单一的位。符号位表示数字是否为负数。因此，1 表示该数字是负数，0 表示该数字是正数。</li>
+</ul>
+</li>
+<li><p>尾数位</p>
+<ul>
+<li>23位（单精度浮点）可以表示 8388608 个不同的值。有时也称为有效数字。</li>
+</ul>
+</li>
+<li><p>指数位</p>
+<ul>
+<li><p>8位（单精度浮点）可以表示 256 个不同的值。<br><img src="https://blog.penjee.com/wp-content/uploads/2015/03/binary-floating-point-8-bit-range.png" alt="negative-positive range"></p>
+<center>具有负和正范围的8位值的图</center>
+
+<p>允许正指数和负指数，范围的一半（0 - 127）用于负指数，另一半（128 - 255）用于正指数。正指数 10<sup>5 </sup>的值为 5 + 127 = 132，而负指数 10<sup>-8</sup> 的值为 -8 + 127 = 119。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="将十进制浮点数转换为二进制"><a href="#将十进制浮点数转换为二进制" class="headerlink" title="将十进制浮点数转换为二进制"></a>将十进制浮点数转换为二进制</h2><p>将十进制值转换为二进制值需要在其中添加每个位位置值</p>
+<p><img src="https://blog.penjee.com/wp-content/uploads/2015/03/binary-floating-point-binary-number-with-decimal-values.png" alt="Binary number with decimal bit values"></p>
+<center>从图中可以得出二进制数 10110101 的十进制值为 1 + 4 + 16 + 32 + 128 = 181</center>
+
+<p>处理浮点数时，过程非常相似，但还需要一些额外的步骤。将十进制浮点数转换为二进制形式比使用其他方式更复杂。首先解释转换为二进制，因为它逐步显示和解释二进制浮点数的所有部分。</p>
+<p>浮点数具有整数部分和小数部分。例如，在数字 34.890625，整数部分是小数点前面的数字（34），小数部分是小数点后面的其余部分（.890625）。以下是将十进制数转换为二进制数的步骤（以下将详细说明这些步骤）：</p>
+<ol>
+<li>将十进制数转换为二进制科学记数法，独立处理积分和小数部分</li>
+<li>然后将科学二进制数归一化（小数点移动到最左侧位置，相应地调整指数）</li>
+<li>指数转换为二进制</li>
+<li>二进制浮点数由所有转换的数字部分构成。尾数的前 1 个被省略</li>
+</ol>
+<h3 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h3><p>第一步是将数字转换为二进制科学记数法。要将此浮点值转换为二进制，首先独立处理整数和小数部分。</p>
+<p><strong>将整分部分转换为二进制：</strong></p>
+<p>整数部分转换：34 的二进制数是 10 0010。<br>首先整数部分除以 2（2 因为我们想要转换为二进制）。然后结果的整数部分再次用 2 除以，依此类推，直到整数部分为 0。</p>
+<table>
+<thead>
+<tr>
+<th>计算</th>
+<th>结果</th>
+<th>整数部分</th>
+<th>余数（位）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>34 / 2</td>
+<td>17</td>
+<td>17</td>
+<td>0</td>
+</tr>
+<tr>
+<td>17 / 2</td>
+<td>8.5</td>
+<td>8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8 / 2</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4 / 2</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2 / 2</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1 / 2</td>
+<td>0.5</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>结果是以相反的顺序计算。从下到上读取二进制数为 10 0010（提示：以 4 个为一组写入二进制数，这是一个字节，使其更容易阅读）。</p>
+<p><strong>将小数部分转换为二进制：</strong></p>
+<p>转换小数部分，不是用整数部分的除法，而是用乘法。如果乘法计算的结果（&gt; = 1.0）也就是整数，则该位为 1。然后将剩余的小数部分用于下一次计算。直到结果为 1.0，转换结束。但是，有许多数字不会以 1.0 的结果结束。由于尾数有 23 个可能的位（在单个精度浮点数中），一旦达到 23 位，转换就会结束。还是以小数部分 .890625 为例，我们来进行转换计算：</p>
+<table>
+<thead>
+<tr>
+<th>计算</th>
+<th>结果</th>
+<th>整数 ( &gt; = 1 )</th>
+<th>位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.890625 x 2</td>
+<td>1.78125</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>.78125 x 2</td>
+<td>1.5625</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>.5625 x 2</td>
+<td>1.125</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>.125 x 2</td>
+<td>0.25</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>.25 x 2</td>
+<td>0.5</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>.5 x 2</td>
+<td>1</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>结果位按照它们的写入顺序计算，这给出了二进制数 11 1001。数字 34.890625 组合的整数和小数部分给出了基数 2 的科学二进制数 100010.111001 x 2<sup>0</sup>（34 = 10 0010 和 .890625 = 11 1001），因为它是二进制数（而不是基数为 10 的十进制数）。</p>
+<h3 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h3><p>归一化科学数字意味着通过相应地调整指数将小数点移动到最左边的位置。对于数字 100010.111001 x 2<sup>0</sup>，小数点可以向左移动 5 个位置，这使指数增加 5：1.00010111001 x 2<sup>5</sup>。</p>
+<p>注意：对于任何科学记数法，小数点始终移动到最左侧位置，以便没有前导零。例如，0.234 x 10<sup>2</sup> 或 0.365 x 10<sup>5</sup>。这些数字将写成 2.34 x 10<sup>1</sup> 和 3.65 x 10<sup>4</sup>。同样的规则用于二进制科学记数法，这意味着任何标准化的科学二进制数都以 1 开头。</p>
+<h3 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h3><p>二进制数的归一化导致调整的指数为 5。如前所述，二进制浮点指数具有负范围和正范围。因此，必须将 127 添加到指数 5，然后转换为二进制：5 + 127 = 132，其为二进制的 1000 0100。所以指数部分的值为 1000 0100。</p>
+<h3 id="步骤四"><a href="#步骤四" class="headerlink" title="步骤四"></a>步骤四</h3><p>现在，可以构造二进制浮点数。合并步骤一到步骤三的结果：</p>
+<ul>
+<li>二进制形式的正数：1.00010111001</li>
+<li>二进制形式的指数：1000 0100</li>
+</ul>
+<p>现在可以将这些数字填充到32位浮点数的位区域中。</p>
+<ul>
+<li>符号位<ul>
+<li>数字为正数，表示符号为0</li>
+</ul>
+</li>
+<li>尾数位<ul>
+<li>尾数是 00010111001。前面的1去了哪里？如步骤二中所述，任何科学记数都以前面的 1 结束。因此，前面的 1 被省略，因为对于状态已知的位，不必浪费空间。</li>
+</ul>
+</li>
+<li>指数位<ul>
+<li>指数是1000 0100</li>
+</ul>
+</li>
+</ul>
+<p>所以 34.890625 的浮点数值为0 10000100 0001011100100000000000：</p>
+<p><img src="https://blog.penjee.com/wp-content/uploads/2015/03/binary-floating-point-decimal-to-binary-result.png" alt="Result of decimal to binary conversion"></p>
+<p>转换的尾数值是“左对齐”，这意味着数字右侧的任何未使用的位都用 0 填充以达到二进制数的大小。双精度64位二进制数将具有更多可用位，如果需要可以提供更好的精度。转换的指数是“右对齐”，并且数字左侧的任何未使用的位都用0填充。</p>
+<h2 id="将二进制浮点数转换为十进制数"><a href="#将二进制浮点数转换为十进制数" class="headerlink" title="将二进制浮点数转换为十进制数"></a>将二进制浮点数转换为十进制数</h2><p>将二进制浮点数转换为十进制比十进制转二进制浮点数要简单得多。为简单起见，我们将再次使用先前转换的数字并将其转换回十进制数。如果一切正常，结果应该是 34.890625。</p>
+<p>二进制 32 位浮点数为：0 10000100 0001011100100000000000</p>
+<p>同样，这是一个正数（第一位，符号，为0），指数为10000100，尾数为1.00010111001（在末尾省略任意零，并在小数点前面加上省略的1）。</p>
+<p><strong>将指数转换为十进制：</strong></p>
+<p>转换是基本二进制到十进制转换。</p>
+<p>2<sup>2</sup> + 2<sup>7</sup> = 132<br>or 4 + 128 =132</p>
+<p>由于指数的正负范围为 + - 127（如前所述），因此必须从转换后的值中减去 127： 132 - 127 = 5</p>
+<p>得到的指数是5。</p>
+<p><strong>整个尾数现在可以转换为十进制：</strong></p>
+<p>转换尾数不需要撤消规范化。整数可以计算如下： 1.00010111001 x 2<sup>5</sup></p>
+<p>负指数：（2<sup>0</sup> + 2<sup>-4</sup> + 2<sup>-6</sup> + 2<sup>-7</sup> + 2<sup>-8</sup> + 2<sup>-11</sup>）x 2<sup>5</sup> = 34.890625 或分数：（1 + 1/16 + 1/64 + 1/128 + 1/256 + 1/2048）x 25 = 34.890625</p>
+<p>该数字现在已成功转换为十进制，结果为 34.890625，这是我们开始使用的浮点数的十进制表示。</p>
 
   </div>
   
@@ -140,7 +262,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/80/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="extend next" rel="next" href="/page/82/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/80/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/110/">110</a><a class="extend next" rel="next" href="/page/82/">下一页&raquo;</a>
   </nav>
 
     </main>
