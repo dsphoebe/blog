@@ -38,10 +38,10 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">console 对象与控制台</h2>
+    <h2 class="title">属性描述对象</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-11-24 10:39:06</span>
+    <span class="post-time">2018-11-27 18:37:42</span>
     <span class="post-tags">
       
     </span>
@@ -51,154 +51,52 @@
     <blockquote>
 <p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
 </blockquote>
-<h2 id="console-对象"><a href="#console-对象" class="headerlink" title="console 对象"></a>console 对象</h2><p>console 对象是 JavaScript 的原生对象，它有点像 Unix 系统的标准输出 stdout 和标准错误 stderr，可以输出各种信息到控制台。并且还提供了很多有用的辅助方法。</p>
-<p>console 的常见用途有两个：</p>
-<ul>
-<li>调试程序，显示网页代码运行时的错误</li>
-<li>提供了一个命令行接口，用来与网页代码互动</li>
-</ul>
-<p>console 对象的浏览器实现，包含在浏览器自带的开发者工具之中。以 Chrome 浏览器的开发者工具 Developer Tools 为例，可以使用下面三种方法来打开它。</p>
-<ol>
-<li>Alt + Command + i</li>
-<li>浏览器菜单选择“工具/开发者工具”</li>
-<li>在一个页面元素上，打开右键菜单，选择其中的“Inspect Element”</li>
-</ol>
-<p>打开开发者工具以后，顶端有多个面板。</p>
-<ul>
-<li>Elements 查看网页的 HTML 源码和 CSS 代码</li>
-<li>Resources 查看网页加载的各种资源文件（比如代码文件、字体文件、CSS 文件等），以及在硬盘上创建的各种内容（比如本地缓存、Cookie、Local Storage 等）。</li>
-<li>Network 查看网页的 HTTP 的通信情况。</li>
-<li>Sources 查看网页加载的脚本源码</li>
-<li>Timeline 查看各种网页行为随时间变化的情况</li>
-<li>Performance 查看网页的性能情况，比如 CPU 和内存消耗</li>
-<li>Console 用来运行 JavaScript 命令</li>
-</ul>
-<h2 id="Console-对象的静态方法"><a href="#Console-对象的静态方法" class="headerlink" title="Console 对象的静态方法"></a>Console 对象的静态方法</h2><h3 id="console-log、console-info、console-debug"><a href="#console-log、console-info、console-debug" class="headerlink" title="console.log、console.info、console.debug"></a>console.log、console.info、console.debug</h3><p>如果 console.log 方法第一个参数是格式字符串，使用了格式占位符，将依次用后面的参数替代占位符，然后再输出</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'%s + %s = %s'</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment">// 1 + 1 = 2</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，console.log 方法的第一个参数有三个占位符 %s，第二、三、四个参数会替换掉三个占位符。</p>
-<p>Console 还有其他的占位符对应不同的数据类型</p>
-<ul>
-<li>%s 字符串</li>
-<li>%d 整数</li>
-<li>%i 整数</li>
-<li>%f 浮点数</li>
-<li>%o 对象的链接</li>
-<li>%c CSS 格式的字符串</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">  <span class="string">'%cThis text is styled!'</span>,</span><br><span class="line">  <span class="string">'color: red; background: yellow; font-size: 24px;'</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>如果参数是一个对象，console.log 会显示该对象的值</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">foo</span>: <span class="string">'bar'</span>&#125;)</span><br><span class="line"><span class="comment">// Object &#123;foo: "bar"&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Date</span>)</span><br><span class="line"><span class="comment">// function Date() &#123; [native code] &#125;</span></span><br></pre></td></tr></table></figure>
-<p>上面的代码 Date 输出的对象值是一个构造函数</p>
-<p>console.info 是 console.log 的别名，用法完全一样。只不过 console.info 方法会在输出信息的前面，加上一个蓝色图标</p>
-<p>console.debug 方法与 console.log 方法类似，会在控制台输出调试信息。但是在默认情况下，console.debug 输出的信息不会显示，只有在打开显示级别在 verbose 的情况下才会显示。</p>
-<p>console 对象的所有方法，都可以被覆盖。因此可以按照自己的需要，定义 console.log 方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[<span class="string">'log'</span>, <span class="string">'info'</span>, <span class="string">'warn'</span>, <span class="string">'error'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">method</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>[method] = <span class="built_in">console</span>[method].bind(</span><br><span class="line">    <span class="built_in">console</span>,</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Date</span>().toISOString()</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"出错了！"</span>);</span><br><span class="line"><span class="comment">// 2018-11-23T15:28:49.233Z 出错了！</span></span><br></pre></td></tr></table></figure>
-<p>上面调用 bind 方法，给 console 传入了参数 new Date().toISOString()，标准规定给 bind 方法传入的第 1 个参数以后的参数全部是放在被 bind 的方法的实参之前传递给该方法。所以这里最后显示为 2018-11-23T15:28:49.233Z 出错了！</p>
-<h3 id="console-warn-，console-error"><a href="#console-warn-，console-error" class="headerlink" title="console.warn()，console.error()"></a>console.warn()，console.error()</h3><p>warn 方法和 error 方法也是在控制台输出信息，它们与 log 方法的不同之处在于 warn 方法输出信息时，在最前面加上一个黄色三角表示警告；error 方法输出信息时，在最前面加一个红色的叉，表示出错。同时，还会高亮显示输出文字和错误发生的堆栈。其他方面都一样。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.error(<span class="string">'Error: %s (%i)'</span>, <span class="string">'Server is not responding'</span>, <span class="number">500</span>)</span><br><span class="line"><span class="comment">// Error: Server is not responding (500)</span></span><br><span class="line"><span class="built_in">console</span>.warn(<span class="string">'Warning! Too few nodes (%d)'</span>, <span class="built_in">document</span>.childNodes.length)</span><br><span class="line"><span class="comment">// Warning! Too few nodes (1)</span></span><br></pre></td></tr></table></figure>
-<p>可以这样理解，log 方法是写入标准输出（stdout），而 warn 方法和 error 方法是写入标准错误（stderr）。</p>
-<h3 id="console-table"><a href="#console-table" class="headerlink" title="console.table"></a>console.table</h3><p>对于某些复合类型的数据，console.table 方法可以将其转为表格显示。</p>
-<p><strong>将数组内容显示为表格</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> languages = [</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">"JavaScript"</span>, <span class="attr">fileExtension</span>: <span class="string">".js"</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">"TypeScript"</span>, <span class="attr">fileExtension</span>: <span class="string">".ts"</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">"CoffeeScript"</span>, <span class="attr">fileExtension</span>: <span class="string">".coffee"</span> &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.table(languages);</span><br></pre></td></tr></table></figure>
-<p>最后在 console 控制台显示为</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th>name</th>
-<th>fileExtension</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>“JavaScript”</td>
-<td>“.js”</td>
-</tr>
-<tr>
-<td>1</td>
-<td>“TypeScript”</td>
-<td>“.ts”</td>
-</tr>
-<tr>
-<td>2</td>
-<td>“CoffeeScript”</td>
-<td>“.coffee”</td>
-</tr>
-</tbody>
-</table>
-<p><strong>将对象内容显示为表格</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> languages = &#123;</span><br><span class="line">  csharp: &#123;<span class="attr">name</span>: <span class="string">"C#"</span>, <span class="attr">paradigm</span>: <span class="string">"object-oriented"</span>&#125;,</span><br><span class="line">  fsharp: &#123;<span class="attr">name</span>: <span class="string">"F#"</span>, <span class="attr">paradigm</span>: <span class="string">"functional"</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.table(languages);</span><br></pre></td></tr></table></figure>
-<p>最后在 console 控制台显示为</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th>name</th>
-<th>paradigm</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>csharp</td>
-<td>“C#”</td>
-<td>“object-oriented”</td>
-</tr>
-<tr>
-<td>fsharp</td>
-<td>“F#”</td>
-<td>“functional”</td>
-</tr>
-</tbody>
-</table>
-<h3 id="console-count"><a href="#console-count" class="headerlink" title="console.count()"></a>console.count()</h3><p>count 方法用于计数，输出它被调用的次数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greet</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.count()</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hi, '</span> + user</span><br><span class="line">&#125;</span><br><span class="line">greet(<span class="string">'胖达'</span>)</span><br><span class="line"><span class="comment">// : 1</span></span><br><span class="line"><span class="comment">// "Hi, 胖达"</span></span><br><span class="line">greet(<span class="string">'pandada'</span>)</span><br><span class="line"><span class="comment">// : 2</span></span><br><span class="line"><span class="comment">// "Hi, pandada"</span></span><br></pre></td></tr></table></figure>
-<p> 可以接受一个字符串作为参数作为标签，对执行次数进行分类。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greet</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.count(user)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hi, '</span> + user</span><br><span class="line">&#125;</span><br><span class="line">greet(<span class="string">'胖达'</span>)</span><br><span class="line"><span class="comment">// 胖达: 1</span></span><br><span class="line"><span class="comment">// "Hi, 胖达"</span></span><br><span class="line">greet(<span class="string">'pandada'</span>)</span><br><span class="line"><span class="comment">// pandada: 1</span></span><br><span class="line"><span class="comment">// "Hi, pandada"</span></span><br></pre></td></tr></table></figure>
-<h3 id="console-dir-，console-dirxml"><a href="#console-dir-，console-dirxml" class="headerlink" title="console.dir()，console.dirxml()"></a>console.dir()，console.dirxml()</h3><p>dir 方法用来对一个对象进行检查，并以易于阅读和打印的格式显示。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">f1</span>: <span class="string">'foo'</span>, <span class="attr">f2</span>: <span class="string">'bar'</span>&#125;)</span><br><span class="line"><span class="comment">// Object &#123;f1: "foo", f2: "bar"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.dir(&#123;<span class="attr">f1</span>: <span class="string">'foo'</span>, <span class="attr">f2</span>: <span class="string">'bar'</span>&#125;)</span><br><span class="line"><span class="comment">// Object</span></span><br><span class="line"><span class="comment">//   f1: "foo"</span></span><br><span class="line"><span class="comment">//   f2: "bar"</span></span><br><span class="line"><span class="comment">//   __proto__: Object</span></span><br></pre></td></tr></table></figure>
-<p>对输出 DOM 对象非常有用，因为会显示 DOM 对象的所有属性。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/console/dir-example.png" alt=""></p>
-<p>Node 环境下还可以指定以代码高亮的形式输出。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(obj, &#123;<span class="attr">colors</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p>dirxml 方法主要用于以目录树的形式，显示 DOM 节点</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.dirxml(<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/console/dirxml-example.png" alt=""></p>
-<p>如果参数不是 DOM 节点，而是普通的 JavaScript 对象，console.dirxml 等同于 console.dir。</p>
-<h3 id="console-assert"><a href="#console-assert" class="headerlink" title="console.assert()"></a>console.assert()</h3><p>console.assert 方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序执行。这样就相当于提示用户，内部状态不正确。</p>
-<p>它接受两个参数，第一个参数是表达式，第二个参数是字符串。只有当第一个参数为 false，才会提示有错误，在控制台输出第二个参数，否则不会有任何结果。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.assert(<span class="literal">false</span>, <span class="string">'判断条件不成立'</span>)</span><br><span class="line"><span class="comment">// Assertion failed：判断条件不成立</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'判断条件不成立'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="console-time-，console-timeEnd"><a href="#console-time-，console-timeEnd" class="headerlink" title="console.time()，console.timeEnd()"></a>console.time()，console.timeEnd()</h3><p>计算出一个操作所花费的准确时间。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.time(<span class="string">'test '</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>;i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'..for..'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">'test'</span>)</span><br><span class="line"><span class="comment">// test: xxxxms</span></span><br></pre></td></tr></table></figure>
-<h3 id="console-group-，console-groupEnd-，console-groupCollapsed"><a href="#console-group-，console-groupEnd-，console-groupCollapsed" class="headerlink" title="console.group()，console.groupEnd()，console.groupCollapsed()"></a>console.group()，console.groupEnd()，console.groupCollapsed()</h3><p>console.group 和 console.groupEnd 用于讲 console 信息分组。只在输出大量信息时有用，分在一组的信息，可以用鼠标折叠/展开。</p>
-<p>console.groupCollapsed 方法与 console.group 方法很类似，唯一的区别是该组内容在第一次显示是收起的 collapsed，而不是展开的。</p>
-<h3 id="console-trace-，console-clear"><a href="#console-trace-，console-clear" class="headerlink" title="console.trace()，console.clear()"></a>console.trace()，console.clear()</h3><p>console.trace 方法显示当前执行的代码在堆栈中的调用路径。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.trace()</span><br><span class="line"><span class="comment">// console.trace</span></span><br><span class="line"><span class="comment">// (anonymous) @ VM1469:1</span></span><br></pre></td></tr></table></figure>
-<p>console.clear 方法用于清除当前控制台的所有输出，将光标回置到第一行。如果用户选中了控制台的“Preserve log”选项，console.clear 方法将不起作用。</p>
-<h2 id="控制台命令行-API"><a href="#控制台命令行-API" class="headerlink" title="控制台命令行 API"></a>控制台命令行 API</h2><p><code>$_</code> 返回上一个表达式的值</p>
-<p><code>$0</code> - <code>$4</code> 控制台保存了最近 5 个在 Elements 面板中的 DOM 元素，<code>$0</code> 代表倒数第一个（最近一个），<code>$1</code> 代表倒数第二个，以此类推直达 <code>$4</code></p>
-<p><code>$(selector)</code> 返回第一个匹配的元素，等同于 <code>document.querySelector()</code></p>
-<p><code>$$(selector)</code> 返回选中的 DOM 对象，等同于 <code>document.querySelectorAll()</code></p>
-<p><code>$x(path)</code> 返回一个数组，包含匹配特定 XPath 表达式的所有 DOM 元素。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$x(<span class="string">'//p[a]'</span>) <span class="comment">// 返回所有包含 a 元素的 p 元素</span></span><br></pre></td></tr></table></figure>
-<p><code>inspect(object)</code> 打开相关面板，并选中相应的元素，显示它的细节。 DOM 元素在 Elements 面板中显示，比如 inspect(document) 会在 Elements 面板中显示 document 元素。</p>
-<p><code>getEventListeners(object)</code> 返回一个对象，该对象的成员为 object 登记了回调函数的各种事件（比如 click 或者 keydown），每个事件对应一个数组，数组的成员为该事件的回调函数。</p>
-<p><code>keys(object)</code>，<code>values(object)</code> 返回一个包含键名，键值的数组</p>
-<p><code>monitorEvents(object[,events])</code>，<code>unmoitorEvents(object[,events])</code> 监听某个对象的某个事件。事件发生时，会返回一个 Event 对象，包含这个事件的相关信息。unmountorEvent 方法用于停止监听。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">monitorEvents(<span class="built_in">window</span>, <span class="string">"resize"</span>);</span><br><span class="line">monitorEvents(<span class="built_in">window</span>, [<span class="string">"resize"</span>, <span class="string">"scroll"</span>])</span><br><span class="line">monitorEvents($<span class="number">0</span>, <span class="string">'mouse'</span>);</span><br><span class="line">unmonitorEvents($<span class="number">0</span>, <span class="string">'mousemove'</span>);</span><br><span class="line">monitorEvents($(<span class="string">"#msg"</span>), <span class="string">"key"</span>);</span><br></pre></td></tr></table></figure>
-<p><code>clear()</code> 清除控制台的历史 console.clear() 别名</p>
-<p><code>copy(object)</code> 复制 DOM 元素对象到剪贴板</p>
-<p><code>dir(object)</code> console.dir 方法别名</p>
-<p><code>dirxml(object)</code> console.dirxml 方法别名</p>
-<h2 id="debugger-语句"><a href="#debugger-语句" class="headerlink" title="debugger 语句"></a>debugger 语句</h2>
+<p>JavaScript 提供了一个内部数据结构，用来描述对象的属性，控制它的行为，比如该属性是否可写、是否可遍历。这个内部数据结构称为“属性描述对象”（attributes object）。每个属性都有自己对应的属性描述对象，保存该属性的一些元信息。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	value: <span class="literal">undefined</span>,</span><br><span class="line">  writable: <span class="literal">true</span>,</span><br><span class="line">  enumerable: <span class="literal">true</span>, <span class="comment">// 如果是 false，for...in 与 Object.keys() 将忽略这个值</span></span><br><span class="line">  configurable: <span class="literal">true</span>, <span class="comment">// 控制除了 value 以外的属性描述对象的可写性</span></span><br><span class="line">  get: <span class="literal">undefined</span>,<span class="comment">// 该属性的取值函数，默认 undefined</span></span><br><span class="line">  set: <span class="literal">undefined</span> <span class="comment">// 该属性的存值函数，默认 undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Object.getOwnPropertyDescriptor(obj, property) 获取对象的自身某个属性的属性描写对象。</p>
+<p>Object.defineProperty(obj, property, attributesObject) 定义或修改对象 obj 的某个属性 property 的属性描写对象 attributesObject，返回定义或修改后的对象 obj。</p>
+<p>不允许同时设置 value 和 get，就是 undefined 都不行，不允许同时设置 writable 和 get。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'p'</span>, &#123;</span><br><span class="line">  value: <span class="literal">undefined</span>,</span><br><span class="line">  get: <span class="literal">undefined</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// TypeError: Invalid property.</span></span><br><span class="line"><span class="comment">// A property cannot both have accessors and be writable or have a value</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'p'</span>, &#123;</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">  get: <span class="literal">undefined</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// TypeError: Invalid property descriptor.</span></span><br><span class="line"><span class="comment">// Cannot both specify accessors and a value or writable attribute</span></span><br></pre></td></tr></table></figure>
+<p>Object.defineProperty 和 Object.defineProperties 参数里面的属性描述对象 writable、configurable、enumerable 属性的默认值都是 false。</p>
+<h2 id="元属性"><a href="#元属性" class="headerlink" title="元属性"></a>元属性</h2><p>元属性是控制对象属性的属性。</p>
+<h3 id="writable"><a href="#writable" class="headerlink" title="writable"></a>writable</h3><p>writable 是指 value 可否修改，返回一个布尔值。</p>
+<p>正常模式下，如果 writable 为 false，修改对象的属性值时，会默默失败，不会有报错。严格模式下会报错。</p>
+<p>如果原型对象的某个属性的 writable 是 false，它的子对象会继承这个元属性，子对象将无法自定义这个属性。不过可以通过覆盖属性描述对象，绕过这个限制。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> proto = <span class="built_in">Object</span>.defineProperty(&#123;&#125;, <span class="string">'foo'</span>, &#123;</span><br><span class="line">  value: <span class="string">'a'</span>,</span><br><span class="line">  writable: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(proto);</span><br><span class="line">obj.foo = <span class="string">'b'</span>;</span><br><span class="line">obj.foo <span class="comment">// "a" 子对象无法修改 foo 值，因为 foo 值在 proto 对象里面设置了 writable 为 false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'foo'</span>, &#123;</span><br><span class="line">  value: <span class="string">'b'</span></span><br><span class="line">&#125;);</span><br><span class="line">obj.foo <span class="comment">// "b" 再定义一个子对象 obj 的属性描述对象把 proto 的属性描述对象覆盖了，又可以修改 foo 值了...</span></span><br></pre></td></tr></table></figure>
+<h3 id="enumrable"><a href="#enumrable" class="headerlink" title="enumrable"></a>enumrable</h3><p>enumerable 是指 value 是否可遍历的，返回一个布尔值。</p>
+<p>早期版本的 JavaScript，for…in 是基于 in 运算符的。我们知道，in 运算符不管某个属性是对象自身的还是继承的，都会返回 true。后来引入可遍历性这个概念，只有可以遍历的属性才能被 for…in 循环遍历到，同时还规定了 toString 这一类实例对象继承的原生属性都是不可遍历的。</p>
+<p>如果一个属性的 enumrable 为 false，for…in 循环，Object.keys 方法，JSON.stringify 方法都不会渠道该属性。</p>
+<p>可以用 enumrable 来设置秘密属性。不是真正的私有属性，还是可以直接获取到它的值的。</p>
+<p> for…in 循环包括继承来的属性，Object.keys 方法不包括继承来的属性。如果需要获取对象自身的所有属性，包括不可遍历的属性，可以使用 Object.getOwnPropertyNames 方法。</p>
+<p>JSON.stringify 方法会排除 enumrable 为 false 的属性，有时可以利用这一点。如果对象的 JSON 格式输出要排除某些属性，就可以直接设置 enumerable 为 false。</p>
+<h3 id="configurable"><a href="#configurable" class="headerlink" title="configurable"></a>configurable</h3><p>configurable 是指属性描述对象是否可以修改。也就是说 configurable 为 false时，value、writable、enumrable 和 configurable 就都不可以修改啦。修改时会报错。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.defineProperty(&#123;&#125;, <span class="string">'p'</span>, &#123;</span><br><span class="line">  value: <span class="number">1</span>,</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">  enumerable: <span class="literal">false</span>,</span><br><span class="line">  configurable: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'p'</span>, &#123;<span class="attr">value</span>: <span class="number">2</span>&#125;)</span><br><span class="line"><span class="comment">// TypeError: Cannot redefine property: p</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'p'</span>, &#123;<span class="attr">writable</span>: <span class="literal">true</span>&#125;)</span><br><span class="line"><span class="comment">// TypeError: Cannot redefine property: p</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'p'</span>, &#123;<span class="attr">enumerable</span>: <span class="literal">true</span>&#125;)</span><br><span class="line"><span class="comment">// TypeError: Cannot redefine property: p</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'p'</span>, &#123;<span class="attr">configurable</span>: <span class="literal">true</span>&#125;)</span><br><span class="line"><span class="comment">// TypeError: Cannot redefine property: p</span></span><br></pre></td></tr></table></figure>
+<p>writable 如果是 false，就不能改为 true 了。</p>
+<p>writable 和 configurable 只要有一个为 true，就可以修改 value。</p>
+<p>writable 为 false，configurable 为 true，直接赋值属性值不成功但也不报错。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.defineProperty(&#123;&#125;, <span class="string">'p'</span>, &#123;</span><br><span class="line">  value: <span class="number">1</span>,</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">  configurable: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o2, <span class="string">'p'</span>, &#123;<span class="attr">value</span>: <span class="number">2</span>&#125;)</span><br><span class="line">o2.p <span class="comment">// 2</span></span><br><span class="line">o2.p = <span class="number">5</span>;</span><br><span class="line">o2.p <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>configurable 控制属性是否可以被删除。</p>
+<h2 id="存取器"><a href="#存取器" class="headerlink" title="存取器"></a>存取器</h2><p>除了直接定义外，属性还可以用存取器 accessor 定义。其中存取函数称为 setter，使用属性描述对象的 set 属性；取值函数称为 getter，使用属性描述对象的 get 属性。</p>
+<p>一旦对目标属性定义了存取器，那么存取的时候，都将执行对应的函数。利用这个功能，可以实现许多高级特性，比如某个属性禁止赋值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  get p() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'getter'</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  set p(value) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setter: '</span> + value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>get 函数不接受任何参数，而 set 函数只接受一个参数，即属性的值。</p>
+<h2 id="对象的拷贝"><a href="#对象的拷贝" class="headerlink" title="对象的拷贝"></a>对象的拷贝</h2><p>传统的拷贝，如果遇到存取器定义的属性，会只拷贝值，可以通过 Object.defineProperty 方法来拷贝属性</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> extend = <span class="function"><span class="keyword">function</span>(<span class="params">to, from</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> property <span class="keyword">in</span> <span class="keyword">from</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">from</span>.hasOwnProperty(property)) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(</span><br><span class="line">    	to,</span><br><span class="line">      property,</span><br><span class="line">      <span class="built_in">Object</span>.getOwnPropertyDescriptor(<span class="keyword">from</span>, property)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> to;</span><br><span class="line">&#125; </span><br><span class="line">extend(&#123;&#125;, &#123; get a()&#123; <span class="keyword">return</span> <span class="number">1</span> &#125; &#125;)</span><br><span class="line"><span class="comment">// &#123; get a()&#123; return 1 &#125; &#125;)</span></span><br><span class="line"><span class="comment">// 🤔 看来 Vue 会这么来拷贝吧？</span></span><br></pre></td></tr></table></figure>
+<h2 id="控制对象的状态"><a href="#控制对象的状态" class="headerlink" title="控制对象的状态"></a>控制对象的状态</h2><p>有时需要冻结对象的读写状态，防止对象被改变。JavaScript 提供三种冻结方法，最弱的一种是 Object.preventExtensions，其次是 Object.seal，最强的是 Object.freeze。</p>
+<p>Object.preventExtensions 方法可以使得一个对象无法再添加新的属性。Object.isExtensible 方法可以检测一个对象是否使用了 Object.preventExtensions 方法。也就是检查一个对象是否可以添加对象。</p>
+<p>Object.seal 方法使得一个对象既无法添加新属性，也无法删除旧的属性。实质是把属性描述对象的 configurable 属性设置为了 false。但是修改对象的某个属性值，则是由属性的 writable 决定的。Object.isSealed 方法则是检查一个对象是否使用了 Object.sealed。如果 Object.isSealed 是返回 true，则 Object.isExtensible 是 false 的。</p>
+<p>Object.freeze 方法可以使得一个对象无法添加新属性、无法删除旧属性、也无法改变属性的值，使得对象变成一个常量了。正常模式下，修改、删除、添加可以操作但是不会成功也不会报错，而严格模式下会报错。Object.isFrozen 方法是验证对象是否被冻结，如果 Object.isFrozen 方法返回 true，则 Object.isSealed 也是返回 true，Object.isExtensible 返回 false。</p>
+<p>但是这三个方法锁定对象的可写性有一个漏洞：可以通过改变原型对象来为对象增加属性。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(obj);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proto = <span class="built_in">Object</span>.getPrototypeOf(obj);</span><br><span class="line">proto.t = <span class="string">'hello'</span>;</span><br><span class="line">obj.t</span><br><span class="line"><span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+<p>一种解决方案是把原型也冻结，不过如果属性值是对象，上面这些方法只能冻结属性指向的对象，而不能冻结对象本身的内容。const 声明一个对象为常量后，虽然不能修改它引用的位置，但是它的值你是可以修改的，也就是这个理了。</p>
+
   </div>
   
 </article>
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/57/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="extend next" rel="next" href="/page/59/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/57/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="extend next" rel="next" href="/page/59/">下一页&raquo;</a>
   </nav>
 
     </main>

@@ -38,101 +38,57 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">DOM 知识点总结篇</h2>
+    <h2 class="title">HTTP 强缓存与协商缓存</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-28 19:23:45</span>
+    <span class="post-time">2019-01-07 14:11:54</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h2 id="什么是-DOM"><a href="#什么是-DOM" class="headerlink" title="什么是 DOM"></a>什么是 DOM</h2><p>一个 HTML 文档，初始代码：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> <span class="comment">&lt;!-- 告诉浏览器请用 HTML5 来解析以下代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-Hans"</span>&gt;</span> <span class="comment">&lt;!-- zh-Hans, s 是 simple 表示中文简体 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>🤔 如果 DOCTYPE 是 XML 了？</p>
-<p>我记得 RSS 就是 XML 格式的，<a href="https://www.xml.com/pub/a/2002/12/18/dive-into-xml.html" target="_blank" rel="noopener">What Is RSS</a></p>
-<p><a href="https://www.xml.com/pub/a/w3j/s3.walsh.html" target="_blank" rel="noopener">A Guide to XML</a> / What Do XML Documents Look Like?<br>所以 XML 文档大概长这样，它的 DOCTYPE 是 <code>&lt;?XML version=xxx..?&gt;</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">&gt; &lt;?XML version="1.0"?&gt;</span><br><span class="line">&gt; <span class="tag">&lt;<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">burns</span>&gt;</span>Say <span class="tag">&lt;<span class="name">quote</span>&gt;</span>goodnight</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span>, Gracie.<span class="tag">&lt;/<span class="name">burns</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">allen</span>&gt;</span><span class="tag">&lt;<span class="name">quote</span>&gt;</span>Goodnight, Gracie.</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span><span class="tag">&lt;/<span class="name">allen</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">applause</span>/&gt;</span></span><br><span class="line">&gt; <span class="tag">&lt;/<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>HTML5 规范里，html、head、body 三个标签都是可以省略的，属性值无所谓单双引号。</p>
-<p>HTML 文档，在 DOM 中对应字母 D，即 Document。<br>然后它在内存中存储的 HTML 文档的数据，对应 DOM 中的 O，即  Object，这个 Object 存在堆中，按照一个树型结构，通过构造函数构造出对象，将 DOM 存储在内存中。<br>Document 和 Object 之间的对应关系是用一个树型结构的模型来表示，这个模型叫做 Model。<br>它们三者组成了 Document Object Model 简称 DOM，读作 [dʌm]。</p>
-<p>以下 DOM 树</p>
-<p><img src="/images/dom/tree.png" alt="DOM tree"></p>
-<p>DOM 树中的每个节点都是 Node 类型。<br>节点类型主要有：document节点、标签节点、文本节点、注释节点</p>
+    <h3 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a>HTTP 报文</h3><p>HTTP 缓存机制是根据 HTTP 报文的缓存标识定义的。而HTTP 报文分为 HTTP 请求报文 和 HTTP 响应报文。</p>
+<p>HTTP 请求报文格式为：</p>
+<p>1 请求行<br>2 通用头信息<br>2 请求头<br>2 实体头<br>3<br>4 请求报文体</p>
+<p>HTTP 响应报文对应为：</p>
+<p>1 状态行<br>2 通用信息头<br>2 响应头<br>2 实体头<br>3<br>4 响应报文体</p>
+<p>通用信息头一般包含：Cache-Control、Connection、Date<br>实体头是实体信息的实体头域常见的有：Connection、Keep-Alive、Contect-Type、Etag、Expires、Last-Modified、extension-header、Content-Encoding、Content-Range</p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>强缓存：向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程。</p>
+<p>强缓存是根据客户的保留的服务器端的 response header 中的字段：expires、cache-control 来控制的。</p>
 <ul>
-<li>标签节点是由 Element 构造函数构造</li>
-<li>文本节点是由 Text 构造函数构造</li>
-<li>document 节点是由 Document 构造函数构造，它代表了整个文档。<code>document</code> 可以获取整个文档，<code>document.documentElement</code> 则获取是 html 节点，即根节点。</li>
-<li>所有节点构造函数（Element、Text、Comment、Document构造函数）都继承自 Node 构造函数，而 Node 构造函数又继承自 JavaScript 里的 Object.prototype。节点们都有 Node 的实例属性和方法，比如 Node.prototype.nodeName。节点们都有 Object 的实例属性和方法，比如 Object.prototype.toString 方法。</li>
+<li>cache-control 是过期的一个时间长度，expires 是过期的时间点。cache-control 的优先级高于 expires。在无法确定客户端时间是否与服务器端时间同步的情况下，cache-control 相比 expires 是更好的选择，所以如果同时存在时，只有 cache-control 会生效。</li>
+<li>Expires 是 HTTP/1.0 控制网页缓存的字段，其值为服务器返回请求结果缓存的到期时间，即再次发起该请求时，如果客户端的时间小于 expires 值，则直接返回缓存结果。</li>
 </ul>
-<p><img src="/images/dom/node-tree.jpg" alt="Node constructor tree"></p>
-<h2 id="DOM-操作"><a href="#DOM-操作" class="headerlink" title="DOM 操作"></a>DOM 操作</h2><p>DOM 将 HTML 页面与 JavaScript 连接起来，它提供了一系列 API 来操作 HTML 代码，操作 DOM 节点。DOM 最开始设计不是给 HTML 用的，而是给 XML 用的，所以有很多 API 用起来就是很奇怪。</p>
+<p>Cache-Control 是在 HTTP/1.1 用于控制网页缓存的字段，常见值：</p>
 <ul>
-<li>获取节点：node.querySelector、node.querySelectorAll。通过节点关系获取节点：parentNode、children、nextSibling、nextElemntSibling 等</li>
-<li>修改节点的属性：节点类型 标签/文本，节点名称 div/#text，节点内部文本 textContent，标签节点的样式 className、classList 等</li>
-<li>删除节点：removeChild、删除标签节点 remove</li>
-<li>创建节点：创建标签节点 document.createElement(‘div’)、创建文本节点 document.createTextNode(‘xx’)。</li>
+<li>public：所有内容都缓存 客户端和代理服务器都可缓存（一般都是设置为这个）</li>
+<li>private：所有内容都缓存 客户端可缓存，默认值</li>
+<li>no-cache：客户端缓存内容，但是是否使用缓存则需要经过协商缓存来验证决定</li>
+<li>no-store：所有内容都不缓存，既不强制缓存也不协商缓存</li>
+<li>max-age=xxx：缓存在 xxx 秒后失效</li>
 </ul>
-<h2 id="常用-Node-类型的属性及方法"><a href="#常用-Node-类型的属性及方法" class="headerlink" title="常用 Node 类型的属性及方法"></a>常用 Node 类型的属性及方法</h2><p>所有节点都继承自 Node 类型，也就是所有节点都有以下这些属性和方法：</p>
-<ul>
-<li><p>确定一个节点的类型</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.querySelector(<span class="string">'p'</span>)</span><br><span class="line">p.nodeName <span class="comment">// "P"</span></span><br><span class="line">p.nodeType <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">document</span>.nodeName <span class="comment">// "#document"</span></span><br></pre></td></tr></table></figure>
-<p>nodeName 返回节点的名字。如果是文本节点返回的是 <code>#text</code>、如果是文档节点返回的是 <code>#document</code>、而如果是标签节点则返回这个标签的大写，比如 p 标签则返回 <code>P</code>，有一个元素标签例外，那就是 SVG 标签，它返回的是小写的 svg。</p>
-</li>
-</ul>
-<p>  nodeType 返回的节点类型对应的数值。1 表示的是标签节点，即 Element 类型的节点；3 则表示是文本节点； 9 表示文档节点；11 表示 DocumentFragment。当时设计 nodeType 用数值表示，是为了省内存。</p>
-<ul>
-<li><p>获取节点内的文本 textContext</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>)</span><br><span class="line"><span class="keyword">const</span> tn = <span class="built_in">document</span>.createTextNode(<span class="string">'panda'</span>)</span><br><span class="line">p.appendChild(tn)</span><br><span class="line"><span class="built_in">document</span>.body.append(p)</span><br><span class="line">tn.innerText <span class="comment">// undefined</span></span><br><span class="line">tn.innerHTML <span class="comment">// undefined</span></span><br><span class="line">tn.textContent <span class="comment">// "panda"</span></span><br><span class="line">p.innerText <span class="comment">// "panda"</span></span><br><span class="line">p.innerHTML <span class="comment">// "panda"</span></span><br><span class="line">p.textContent <span class="comment">// "panda"</span></span><br></pre></td></tr></table></figure>
-<p>标签节点有个 innerHTML 和 innerText，如果文本节点访问 innerHTML、innerText 会返回 undefined。innerText 返回节点下所有的文本包括其后代节点。IE 发布 innerText ~ ，FF、opera 发布的 textContent，会获取 script、style 的文本。innerText 会触发重排。</p>
-</li>
-<li><p>获取兄弟节点、子节点、父节点</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="built_in">document</span>.querySelector(<span class="string">'main'</span>)</span><br><span class="line">main.nextSibling</span><br><span class="line">main.nextElementSibling</span><br><span class="line">main.previousSibling</span><br><span class="line">main.childNodes <span class="comment">// 返回一个动态的 NodeList 伪数组</span></span><br><span class="line">main.children <span class="comment">// 返回一个动态的 HTMLCollection 标签集合伪数组</span></span><br><span class="line">main.firstChild</span><br><span class="line">main.lastChild</span><br><span class="line">main.parentNode</span><br><span class="line">main.parentElement</span><br></pre></td></tr></table></figure>
-<p>注意 NodeList 伪数组只能使用数字索引节点，而 HTMLCollection 对象则可以用 id 属性或者 name 属性来索引标签节点。</p>
-</li>
-<li><p>node.hasChildNodes() 返回是否有子节点，也可以用 node.firstChild 为空来判断，也可以用 node.childNodes &amp;&amp; node.childNodes.length 为否来判断。</p>
-</li>
-<li><p>node.cloneNode(deep) 默认 deep 为 true，表示深度克隆，会克隆该 node 的所有后代节点，否则浅克隆只克隆当前 node。</p>
-</li>
-<li><p>node.contains(otherNode) 返回 node 是否包含 otherNode。</p>
-</li>
-<li><p>node.isEqualNode(otherNode) 如果 node 和 otherNode 的 nodeType、子节点、属性等一致返回 true，否则 false</p>
-</li>
-<li><p>node.normalize() 规范化 node 和 node 后代节点。规范化后不存在空的文本节点，或者两个相邻的文本节点。</p>
-</li>
-<li><p>输入 id 的值可以快速获取 id 为这个值的节点。比如有一段 HTML：<code>&lt;div id=&quot;myHoneyPanda&quot;&gt;balabala...&lt;/div&gt;</code> 然后可以在 JavaScript 里面输入 <code>myHoneyPanda</code> 获取这个节点。</p>
-</li>
-</ul>
-<h2 id="常见的-document-属性和方法"><a href="#常见的-document-属性和方法" class="headerlink" title="常见的 document 属性和方法"></a>常见的 document 属性和方法</h2><p>document 继承自 Document 类型。表示一个 HTML 的文档。</p>
-<ul>
-<li>document.documentElement 返回 html 节点</li>
-<li>document.activeElment 指向获得焦点的那个节点，相当于 Chrome devtool 里面的 <code>$0-$9</code> ？ </li>
-<li>获取文档下的指定标签的集合，可以抓包下载美图~<ul>
-<li>document.images </li>
-<li>document.links</li>
-</ul>
-</li>
-<li>获取文档信息<ul>
-<li>document.location 返回 Location 对象，document.documentURI 返回当前文档的路径，document.URL 返回当前文档的 URL</li>
-<li>document.readyState 返回当前文档加载状态</li>
-<li>document.cookie cookie 设置/获取</li>
-<li>document.domain 域名</li>
-<li>document.defaultView 返回一个 window 对象</li>
-</ul>
-</li>
-<li>document.querySelectorAll 获取到的标签伪数组不是动态的。</li>
-</ul>
-<h2 id="常见-Element-节点的属性和方法"><a href="#常见-Element-节点的属性和方法" class="headerlink" title="常见 Element 节点的属性和方法"></a>常见 Element 节点的属性和方法</h2><ul>
-<li>document.documentElement.scrollHeight 获取整个页面的高度</li>
-<li>document.documentElement.clientHeight 获取整个浏览器视口的高度</li>
-<li>Element.clientHeight/clientLeft 返回节点的不包括 border、margin 的高度/左边框的宽度</li>
-<li>Element.scrollHeight/scrollLeft 经过浏览器视口变化，返回节点的不包括 border、margin 的高度/滚动条离视口左边的距离</li>
-<li>Element.offsetHeight/offsetLeft 经过浏览器视口变化，返回节点所占的整个页面左上角 距离 右下角的宽度和高度，并且左上角是包括 padding 和 border 的 / 距离父节点的左侧的距离。</li>
-<li>Element.getBoundingClientRect().left、Element.getBoundingClientRect().top</li>
+<p>缓存失效时间计算公式：expirationTime = responseTime + freshnessLifetime - currentAge</p>
+<h3 id="强缓存下的内存缓存与硬盘缓存"><a href="#强缓存下的内存缓存与硬盘缓存" class="headerlink" title="强缓存下的内存缓存与硬盘缓存"></a>强缓存下的内存缓存与硬盘缓存</h3><p>内存缓存：内存缓存会将变异解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取，但一旦关闭该进程，该缓存就没有了。</p>
+<p>硬盘缓存：是直接写入硬盘文件中的，读取缓存需要对该缓存存放的硬盘文件进行 I/O 操作，然后重新解析该缓存内容，读取复杂，速度显然会比内存缓存慢</p>
+<p>在浏览器中，浏览器会在 JS 和图片等文件解析执行后直接存入内存缓存中，当刷新页面时只需直接从内存缓存中读取，而 CSS 文件则会存入硬盘文件中，所以每次渲染页面都需要从硬盘缓存中读取。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存：在强制缓存失效后，浏览器携带缓存标识向服务器发送请求，由服务器根据缓存标识决定是否使用缓存的过程。</p>
+<p>协商缓存的标识 response header 中的字段：Last-Modified / If-Modified-Since、Etag / If-None-Match 来控制的。</p>
+<p>Etag / If-None-Match 的优先级高于 Last-Modified / If-Modified-Since。</p>
+<p>Last-Modifed 是服务器响应请求时，返回该资源文件在服务器最后被修改的时间</p>
+<p>Etag 是服务器响应请求时，返回当前资源文件的一个唯一标识（有服务器生成），客服端再次发起请求时，If-None-Match 携带上次请求返回的唯一标识 Etag 值，If-None-Match 与该资源在服务器的 Etag 值做比较，一致则返回 304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码 200</p>
+<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><p>协商缓存需要配合强缓存使用，你看前面这个截图中，除了Last-Modified这个header，还有强缓存的相关header，因为如果不启用强缓存的话，协商缓存根本没有意义。</p>
+<p>强制缓存不会发请求到服务器，而协商缓存会发请求到服务器，所以说它两都不会从服务器加载资源数据。</p>
+<h3 id="浏览器缓存过程"><a href="#浏览器缓存过程" class="headerlink" title="浏览器缓存过程"></a>浏览器缓存过程</h3><p>浏览器第一次加载资源，服务器返回 200，浏览器将资源文件从服务器上请求下载下来，并把 response header 及该请求的资源一并缓存；也就是说缓存命中的请求返回的 response header 并不是来自服务器，而是来自之前的缓存的 response header；</p>
+<p>浏览器再次请求这个资源的时候，会先从缓存中旋转这个资源的 response header，比较当前时间和上一次返回 200 的时间差，如果没有超过 cache-control 设置的 max-age，则没有过期，命中强制缓存，不发请求直接从本地缓存读取该文件（如果浏览器不支持 HTTP 1.1，则用 expires 设置的时间点判断是否过期）；如果过期，则向服务器发送 header 带有 If-None-Match 和 If-Modified-Since 的请求；</p>
+<p>服务器收到请求后，优先根据 Etag 的值判断被请求的文件有没有被修改，Etag 与 If-None-Match 的值一致则表示没有修改，命中协商缓存，返回 304。如果不一致则有改动，直接返回新的资源文件带上新的 Etag 的 response header 并返回 500。</p>
+<p>如果服务器收到的请求没有 Etag 值，则将 If-Modified-Since 和被请求文件的最后修改时间进行比较，一致则命中协商缓存，返回 304；不一致则返回新的 last-Modified 的 response header 和文件并返回 200</p>
+<h3 id="用户行为对浏览器缓存的控制"><a href="#用户行为对浏览器缓存的控制" class="headerlink" title="用户行为对浏览器缓存的控制"></a>用户行为对浏览器缓存的控制</h3><ul>
+<li>地址栏访问，链接跳转是正常的用户行为，都会触发浏览器缓存机制</li>
+<li>F5 刷新，浏览器会设置 max-age=0，跳过强缓存判断，进行协商缓存判断</li>
+<li>ctrl + F5 刷新，跳过强缓存和协商缓存，直接从服务器下载资源</li>
 </ul>
 
   </div>
@@ -141,7 +97,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/23/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/104/">104</a><a class="extend next" rel="next" href="/page/25/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/23/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="extend next" rel="next" href="/page/25/">下一页&raquo;</a>
   </nav>
 
     </main>
