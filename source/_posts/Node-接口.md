@@ -78,7 +78,7 @@ replaceChild：第一个参数节点替换第二个参数节点，返回第二�
 
 contains()：返回节点是否在当前文档中。确定参数节点为当前节点，参数节点是否为当前节点的子节点，参数节点是否为当前节点的后代节点。
 
-compareDocumentPosition()：用法和 contains 一样，返回一个 7 bit 位的二进制值，表示参数节点与当前节点的关系
+compareDocumentPosition()：用法和 contains 一样，返回一个 6 bit 位的二进制值，表示参数节点与当前节点的关系
 
 | 二进制值 | 十进制值 | 含义                                               |
 | -------- | -------- | -------------------------------------------------- |
@@ -108,4 +108,4 @@ isSameNode() 节点与参数节点是否为同一个节点
 
 normalize() 去除节点文本节点之间的多余空格
 
-getRootNode() 返回所在文档的根节点
+getRootNode() 返回所在文档的根节点 `document`，与 `ownerDocument` 属性的作用相同。它可以在 document 节点自身，这一点与 document.ownerDocument 不同。

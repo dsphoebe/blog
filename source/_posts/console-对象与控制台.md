@@ -162,7 +162,7 @@ greet('pandada')
 // "Hi, pandada"
 ```
 
- 可以接受一个字符串作为参数作为标签，对执行次数进行分类。
+可以接受一个字符串作为参数作为标签，对执行次数进行分类。
 
 ```js
 function greet(user) {
