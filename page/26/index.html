@@ -38,89 +38,295 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">什么是 AJAX</h2>
+    <h2 class="title">为什么 0.1 + 0.2 === 0.30000000000000004</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-01-15 16:29:55</span>
+    <span class="post-time">2018-11-19 16:13:29</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/">AJAX</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IEE-754/">IEE 754</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/二进制/">二进制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/双精度浮点数/">双精度浮点数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浮点数/">浮点数</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <h3 id="如何发请求"><a href="#如何发请求" class="headerlink" title="如何发请求"></a>如何发请求</h3><ul>
-<li>form 通过 action 发请求，不过会新开一个页面</li>
-<li>a 标签可以通过 href 发请求，不过会刷新页面或者新开一个页面</li>
-<li>img 标签可以通过 src 发请求，不过会返回一个图片</li>
-<li>link 标签可以通过 href 发请求，不过只能以 CSS 展示结果</li>
-<li>script 标签可以通过 src 发请求，通过 SRJ （Server Render JavaScript）的方式实现 JSONP，不过会返回一个 script。</li>
+    <h2 id="双精度浮点数的概念"><a href="#双精度浮点数的概念" class="headerlink" title="双精度浮点数的概念"></a>双精度浮点数的概念</h2><p>双精度浮点数是JavaScript 的数值使用的数值形式，又称 64 位浮点数，由 IEE 754 （电气和电子工程师协会）制定的标准。</p>
+<p>64 位浮点数的二进制位是由三个部分组成：</p>
+<p><img src="/images/float/float.png" alt="64 位浮点数的二进制位组成部分"></p>
+<p>从左到右：</p>
+<ul>
+<li>第 1 位 为 Sign 位，即符号位，表示浮点数是否是负数，所以说 1 就表示浮点数是负数，0 则表示是正数</li>
+<li>从第 2 位到到 12 位，共 11 位，是指数部分。<br>类似于科学计数法中的 <code>M*10^N</code>中的 N，只是这里的 10 替换成了 2 。<br>这部分中以<code>2^10-1</code>即<code>1023</code>，也即 1111111111<code>代表 2^0</code>，转换时需要根据 1023 作偏移调整。</li>
+<li>从第 13 位到第 64 位，共 52 位，是小数部分，是浮点数具体数值的实际表示。</li>
 </ul>
-<h3 id="AJAX-是异步的-JavaScript-和-XML"><a href="#AJAX-是异步的-JavaScript-和-XML" class="headerlink" title="AJAX 是异步的 JavaScript 和 XML"></a>AJAX 是异步的 JavaScript 和 XML</h3><p>使用 XMLHttpRequest 发请求，服务器返回 XML 格式的字符串，JavaScript 解析 XML 并更新局部页面。</p>
-<p>XMLHttpRequest 的 onreadystatechange 方法，readyState、status、responseText 属性</p>
-<h3 id="从-XML-到-JSON"><a href="#从-XML-到-JSON" class="headerlink" title="从 XML 到 JSON"></a>从 XML 到 JSON</h3><p>从 XML 到 道格拉斯·克罗克福特（出书《JavaScript 语言精粹》）发明的数据交换语言 JSON。JSON 是抄袭 JS，但是是一门新语言，而它的作者还出了一本书专门说 JS 的不好的地方，😂 他与 JS 之父从没一起出场过。</p>
-<p>JSON vs JS</p>
-<ol>
-<li>JSON 没有抄袭 function 和 undefined</li>
-<li>JSON 字符首尾必须是双引号</li>
-</ol>
+<h2 id="浮点数转换到二进制"><a href="#浮点数转换到二进制" class="headerlink" title="浮点数转换到二进制"></a>浮点数转换到二进制</h2><p><strong>第一步：改写整数部分</strong></p>
+<p>以 <code>5.2</code>为例。先不考虑指数部分，单纯的将十进制转换成二进制。整数部分很简单，十进制 <code>5</code> 转换成二进制为 <code>101</code>。</p>
+<p><strong>第二步：改写小数部分</strong></p>
+<p>0.2 的二进制转换，数值乘以 2，如果乘法计算的结果（&gt; = 1.0）也就是有整数部分，则该位的值为 1，然后将剩余的小数部分用于下一次计算。直到结果为 1.0，转换结束。</p>
 <table>
 <thead>
 <tr>
-<th>JS</th>
-<th>JSON</th>
+<th>位置</th>
+<th>计算</th>
+<th>结果</th>
+<th>整数</th>
+<th>位值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>undefined</td>
-<td>没有</td>
+<td>1</td>
+<td>.2 x 2</td>
+<td>.4</td>
+<td>no</td>
+<td>0</td>
 </tr>
 <tr>
-<td>null</td>
-<td>null</td>
+<td>2</td>
+<td>.4 x 2</td>
+<td>.8</td>
+<td>no</td>
+<td>0</td>
 </tr>
 <tr>
-<td>[‘a’, ‘b’]</td>
-<td>[“a”,”b”]</td>
+<td>3</td>
+<td>.8 x 2</td>
+<td>1.6</td>
+<td>yes</td>
+<td>1</td>
 </tr>
 <tr>
-<td>function fn() {}</td>
-<td>没有</td>
+<td>4</td>
+<td>.6 x 2</td>
+<td>1.2</td>
+<td>yes</td>
+<td>1</td>
 </tr>
 <tr>
-<td>‘frank’</td>
-<td>“frank”</td>
+<td>5 同第 1 位</td>
+<td>.2 x 2</td>
+<td>.4</td>
+<td>no</td>
+<td>0</td>
 </tr>
 <tr>
-<td>var a = {}; a.self = a;</td>
-<td>搞不定，JSON 没有变量，无法实现引用</td>
+<td>6 同第 2 位</td>
+<td>.4 x 2</td>
+<td>.8</td>
+<td>no</td>
+<td>0</td>
 </tr>
 <tr>
-<td><code>{__proto__}</code></td>
-<td>没有原型</td>
+<td>7 同第 3 位</td>
+<td>.8 x 2</td>
+<td>1.6</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8 同第 4 位</td>
+<td>.6 x 2</td>
+<td>1.2</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9 同第 1 位</td>
+<td>.2 x 2</td>
+<td>.4</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>10 同第 2 位</td>
+<td>.4 x 2</td>
+<td>.8</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>11 同第 3 位</td>
+<td>.8 x 2</td>
+<td>1.6</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>12 同第 4 位</td>
+<td>.6 x 2</td>
+<td>1.2</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>HTTP response 第 4 部分永远都是字符串，AJAX 一般返回符合 JSON 对象语法的字符串。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">			<span class="keyword">var</span> data = xhr.responseText</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.parse(data))</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'成功'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (xhr.status &gt;= <span class="number">400</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'失败'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 一个异步的 GET 请求</span></span><br><span class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'/xxx'</span>)</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure>
-<h3 id="AJAX-的同源策略与-CORS-跨域"><a href="#AJAX-的同源策略与-CORS-跨域" class="headerlink" title="AJAX 的同源策略与 CORS 跨域"></a>AJAX 的同源策略与 CORS 跨域</h3><p>form 发请求可以跨域，因为是跳转到其他页面，它是不会修改页面里面的内容。但是 AJAX 不可以！因为 AJAX 不会跳转，它是可以修改页面里面的元素的。</p>
-<p>同源策略：协议 + 域名 + 端口 一模一样才允许发 AJAX 请求</p>
-<p>设置 Access-Cross-Allow-Origin 为其他域名，就可以让其他域名访问当前服务器的数据。</p>
-<p>Cross Origin Resource Sharing 跨站资源共享 CORS</p>
-<h3 id="JS-操作请求与响应"><a href="#JS-操作请求与响应" class="headerlink" title="JS 操作请求与响应"></a>JS 操作请求与响应</h3><p>JS 可以设置任意请求的 header</p>
-<ul>
-<li>设置请求 header 的第一部分 xhr.open(‘GET’, ‘/xxx’)</li>
-<li>设置请求 header 的第二部分 xhr.setHeader(‘content-type’, ‘x-www-form-urlencoded’)</li>
-<li>设置请求 header 的第四部分 xhr.send(‘a=1&amp;b=2’)</li>
+<p>可以看出 0.2 的二进制值无法达到结果为 1.0 的情况，而是 .4，.8，1.6，1.2 一直循环，也就是二进制位值 0011 四位无限循环。二进制表示为：<code>0.001100110011....</code></p>
+<p><strong>第三步：规格化</strong></p>
+<p>现在我们有了这么一串二进制 <code>101.0011001100110011....</code>。然后我们要将它规格化，也叫 Normalize。</p>
+<p>其实原理很简单就是包装小数点前只有一个 bit。</p>
+<p>于是我们就得到了一下表示：<code>1.0100110011001100110011*2^2</code>。到此我们已经把改写工作完成，接下来要把 bit 填充到三个组成部分中去了。</p>
+<p><strong>第四步：填充</strong></p>
+<p>指数部分 Exponent：需要以 1023 作为偏移量调整。因此 2 的 2 次方，指数部分偏移成 2 + 1023 即 1025，表示成<code>10000000001</code>填入。</p>
+<p>尾数部分 Mantissa：除了简单的填入外，需要特别解释的地方是 <code>1.010011</code> 中的整数部分 1 在填充时被舍去了。因为规格化后的数值整数部分总为 1。对于任何科学记数法，小数点始终移动到最左侧位置，以便没有前导零。例如，0.234 x 10<sup>2</sup> 或 0.365 x 10<sup>5</sup>。这些数字将写成 2.34 x 10<sup>1</sup> 和 3.65 x 10<sup>4</sup>。同样的规则用于二进制科学记数法，这意味着任何标准化的科学二进制数都以 1 开头。既然确认知道是 1，所以为了节省空间，这一位的 1 就被省略了。</p>
+<p>具体填充后的结果见下图：</p>
+<p><img src="/images/float/float2.png" alt="64 位浮点数的二进制位组成部分"></p>
+<h2 id="为什么-0-1-0-2-0-30000000000000004"><a href="#为什么-0-1-0-2-0-30000000000000004" class="headerlink" title="为什么 0.1 + 0.2 === 0.30000000000000004"></a>为什么 0.1 + 0.2 === 0.30000000000000004</h2><p>现在我们按照上面的分析来分析下 0.1 + 0.2 为什么等于 0.30000000000000004</p>
+<h3 id="0-1-转换为二进制"><a href="#0-1-转换为二进制" class="headerlink" title="0.1 转换为二进制"></a><code>0.1</code> 转换为二进制</h3><table>
+<thead>
+<tr>
+<th>计算次数</th>
+<th>计算</th>
+<th>结果</th>
+<th>整数</th>
+<th>位值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>.1 x 2</td>
+<td>.2</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>.2 x 2</td>
+<td>.4</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>.4 x 2</td>
+<td>.8</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>.8 x 2</td>
+<td>1.6</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>.6 x 2</td>
+<td>1.2</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6 同第 2 位</td>
+<td>.2 x 2</td>
+<td>.4</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>7 同第 3 位</td>
+<td>.4 x 2</td>
+<td>.8</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>8 同第 4 位</td>
+<td>.8 x 2</td>
+<td>1.6</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9 同第 5 位</td>
+<td>.6 x 2</td>
+<td>1.2</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>10 同第 2 位</td>
+<td>.2 x 2</td>
+<td>.4</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>11 同第 3 位</td>
+<td>.4 x 2</td>
+<td>.8</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<td>12 同第 4 位</td>
+<td>.8 x 2</td>
+<td>1.6</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>13 同第 5 位</td>
+<td>.6 x 2</td>
+<td>1.2</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>可以看出 0.1 的二进制值也是无法达到结果为 1.0 的情况的，而是 .4，.8，1.6，1.2 一直循环，也就是二进制位值 0011 四位无限循环。二进制表示为：0.0001100110011….</p>
+<h3 id="0-1-二进制规格化："><a href="#0-1-二进制规格化：" class="headerlink" title="0.1 二进制规格化："></a>0.1 二进制规格化：</h3><ul>
+<li>符号位<ul>
+<li>不是负数 所以符号位为 0</li>
 </ul>
-<p>JS 可以获取任意响应 header</p>
-<ul>
-<li>获取响应 header 的第一部分 xhr.status / xhr.statusText</li>
-<li>获取响应 header 的第二部分 xhr.getResponseHeader() / xhr.getAllResponseHeaders()</li>
-<li>获取响应 header 的第四部分 xhr.responseText</li>
+</li>
+<li>指数位<ul>
+<li>科学计数法，浮点数的小数点往后移动 4 位，表示为 1.100110011….x2^-4，方便计算计数部分就不再规格化为二进制。</li>
 </ul>
+</li>
+<li>尾数位<ul>
+<li>无限循环的最大值为 64 位浮点数制定的最大尾数位 52 位，所以表示为1001100110011001100110011001100110011001100110011010</li>
+</ul>
+</li>
+</ul>
+<p>方便后续计算表示为：<br>0.1 = 1.1001100110011001100110011001100110011001100110011010 x 2^-4</p>
+<h3 id="0-2-转换为二进制"><a href="#0-2-转换为二进制" class="headerlink" title="0.2 转换为二进制"></a>0.2 转换为二进制</h3><p>从上面的案例我们已经得到了 0.2 的二进制数为：.001100110011….</p>
+<h3 id="0-2-二进制规格化"><a href="#0-2-二进制规格化" class="headerlink" title="0.2 二进制规格化"></a>0.2 二进制规格化</h3><ul>
+<li>符号位<ul>
+<li>不是负数，所以是 0</li>
+</ul>
+</li>
+<li>指数位<ul>
+<li>.001100110011…. 小数点往后挪 3 位，表示为 1.100110011….x2^-3，方便计算计数部分就不再规格化为二进制。</li>
+</ul>
+</li>
+<li>尾数位<ul>
+<li>同 0.1 的尾数，0.2 的尾数也是 1001100110011001100110011001100110011001100110011010</li>
+</ul>
+</li>
+</ul>
+<p>方便后续计算表示为：<br>0.2 = 1.1001100110011001100110011001100110011001100110011010 x 2^-3</p>
+<h3 id="0-1-的-64-位二进制-0-2-的-64-位二进制"><a href="#0-1-的-64-位二进制-0-2-的-64-位二进制" class="headerlink" title="0.1 的 64 位二进制 + 0.2 的 64 位二进制"></a>0.1 的 64 位二进制 + 0.2 的 64 位二进制</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">0.1</span> = <span class="number">2</span>^<span class="number">-3</span> *  <span class="number">0.1100110011001100110011001100110011001100110011001101</span>(<span class="number">0</span>)</span><br><span class="line"><span class="number">0.2</span> = <span class="number">2</span>^<span class="number">-3</span> *  <span class="number">1.1001100110011001100110011001100110011001100110011010</span></span><br><span class="line">sum = <span class="number">2</span>^<span class="number">-3</span> * <span class="number">10.0110011001100110011001100110011001100110011001100111</span></span><br></pre></td></tr></table></figure>
+<p>即</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">sum = <span class="number">2</span>^<span class="number">-2</span> * <span class="number">1.0011001100110011001100110011001100110011001100110011</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>sum 转换为十进制为 0.3000000000004</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>转换为整数计算，计算完后返回小数点的位置</p>
+<p>0.1 + 0.2 转换为 1 + 2 等于 3，再转换为小数 0.3</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> plus = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> num1DotPos = num1.toString().split(<span class="string">'.'</span>)[<span class="number">1</span>].length</span><br><span class="line">  <span class="keyword">const</span> num1Int = num1 * (<span class="number">10</span> ** num1DotPos)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> num2DotPos = num2.toString().split(<span class="string">'.'</span>)[<span class="number">1</span>].length</span><br><span class="line">  <span class="keyword">const</span> num2Int = num2 * (<span class="number">10</span> ** num2DotPos)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> numDotPos = <span class="built_in">Math</span>.max(num1DotPos, num2DotPos)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (num1Int + num2Int) / (<span class="number">10</span> ** numDotPos)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">plus(<span class="number">0.1</span>, <span class="number">0.2</span>) <span class="comment">// 0.3</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://cenalulu.github.io/linux/about-denormalized-float-number/" target="_blank" rel="noopener">你应该知道的浮点数基础知识</a><br><a href="/2018/11/19/二进制数与浮点数的转换/">译文：二进制数与浮点数的转换</a><br><a href="https://www.cnblogs.com/fsjohnhuang/p/5115672.html" target="_blank" rel="noopener">JS魔法堂：彻底理解0.1 + 0.2 === 0.30000000000000004的背后</a><br><a href="https://stackoverflow.com/questions/588004/is-floating-point-math-broken/588014#answer-28679423" target="_blank" rel="noopener">Is floating point math broken?</a><br><a href="http://0.30000000000000004.com/" target="_blank" rel="noopener">http://0.30000000000000004.com/</a><br><a href="https://github.com/camsong/blog/issues/9" target="_blank" rel="noopener">JavaScript 浮点数陷阱及解法</a></p>
 
   </div>
   
@@ -128,7 +334,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/25/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/27/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/25/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/27/">下一页&raquo;</a>
   </nav>
 
     </main>

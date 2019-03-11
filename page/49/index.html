@@ -38,29 +38,39 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">数组的本质</h2>
+    <h2 class="title">比较 cookie，localStorage 和 sessionStorage</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2018-12-18 18:53:22</span>
+    <span class="post-time">2017-12-17 00:00:00</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arguments/">arguments</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie/">cookie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html5/">html5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/localStroage/">localStroage</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sessionStorage/">sessionStorage</a></li></ul>
       
     </span>
     
-      <div class="article-category">分类：
-        <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-      </div>
-    
   </div>
   <div class="post-content">
-    <h2 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组"></a>什么是数组</h2><ul>
-<li>数组是一个有序的有 length 的 hash，它的 <code>__proto__</code> 指向 Array.prototype。</li>
+    <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>cookie, sessionStorage, localStroage都是存储在客户端本地机器上的数据。设置完后，可整站调用，是真正意义上的“全局变量”。</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>由于HTTP无法记录状态，服务器端用cookie来记录用户状态的，由服务器端生成。<br>通过HTTP把值存储在用户本地机器上，下次服务器端再访问的时候，通过HTTP的请求头带着cookie来确认是不是同一个用户。  </p>
+<p>最初是服务器端动态开发web的时候，是服务器端操作。  </p>
+<p>有了AJAX后，AJAX请求接口的时候，AJAX通过xhrFields.withCredentials: true，在request.header里带cookie值给服务器端已确认是同一个用户。  </p>
+<p>cookie也可以在前端生成，直接document.cookie=”key=value;key2=value2;….domain=..path=..expired=…”，是键值对组成的字符串。cookie的设置，读取都是操作字符串，一般大家操作都会自己再重新定义setcookie，getcookie，removecookie等基础方法来操作document.cookie字符串。或者找类似的小框架比如 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework" target="_blank" rel="noopener">cookie操作简易库</a>。  </p>
+<p>cookie的存储量最多只能4kb，最多存储的键值对各个浏览器不同，最多的也只有50个。</p>
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>sessionStorage和localStorage都是H5新出来的，用来替换document.cookie的，与HTTP头无关系。<br>能存储5mb的数据。<br>有对应的webapi操作数据：</p>
+<ul>
+<li>storge.setItem(key, value) // 设置storage</li>
+<li>storage.getItem(key) // 获取storage</li>
+<li>storage.removeItem(key) // 删除key的storage</li>
+<li>storage.clear() // 清除storage</li>
 </ul>
-<h2 id="数组与对象"><a href="#数组与对象" class="headerlink" title="数组与对象"></a>数组与对象</h2><p>Array 与 Object 的差别，Array 的共有属性 <code>__proto__</code> 里面有 push 等方法，而且还包含 Object 的 <code>__proto__</code>。如果一个对象没有 Array 的共有属性 <code>__proto__</code> 里面的方法比如 push 方法，那么它就不是一个 Array。</p>
-<p>比如<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="number">3</span>,</span><br><span class="line">  length: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">obj.push <span class="comment">// undefined.</span></span><br></pre></td></tr></table></figure></p>
-<p>这个 obj 就不是一个数组，它只是一个对象。</p>
-<h2 id="JavaScript-里面的伪数组"><a href="#JavaScript-里面的伪数组" class="headerlink" title="JavaScript 里面的伪数组"></a>JavaScript 里面的伪数组</h2><p>JavaScript 里面只有一个伪数组 arguments。arguments 表示传给函数的参数。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line">f()</span><br></pre></td></tr></table></figure></p>
+<h4 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h4><p>localStorage是永久保存的，除非覆盖/清除</p>
+<h4 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h4><p>sessionStorage，session这个词，大概就能知道它的时效性了。它在关闭会话或者浏览器就会被清除</p>
+<h5 id="sessionStorage场景？"><a href="#sessionStorage场景？" class="headerlink" title="sessionStorage场景？"></a>sessionStorage场景？</h5><p>调查问卷</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="http://blog.csdn.net/lijing198997/article/details/9378047" target="_blank" rel="noopener">HTTP cookies 详解</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie" target="_blank" rel="noopener">Document.cookie</a></li>
+<li><a href="http://jerryzou.com/posts/cookie-and-web-storage/" target="_blank" rel="noopener">详说 cookie, LocalStorage 与 SessionStorage</a></li>
+</ul>
 
   </div>
   
@@ -68,7 +78,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/48/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="page-number" href="/page/48/">48</a><span class="page-number current">49</span><a class="page-number" href="/page/50/">50</a><a class="page-number" href="/page/51/">51</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/50/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/48/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="page-number" href="/page/48/">48</a><span class="page-number current">49</span><a class="page-number" href="/page/50/">50</a><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/50/">下一页&raquo;</a>
   </nav>
 
     </main>

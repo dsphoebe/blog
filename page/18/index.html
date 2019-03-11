@@ -38,43 +38,29 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">进度事件</h2>
+    <h2 class="title">数组的本质</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-02-19 12:56:49</span>
+    <span class="post-time">2018-12-18 18:53:22</span>
     <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arguments/">arguments</a></li></ul>
       
     </span>
     
+      <div class="article-category">分类：
+        <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+      </div>
+    
   </div>
   <div class="post-content">
-    <blockquote>
-<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
-</blockquote>
-<p>进度事件用来描述资源加载的进度，主要由 AJAX 请求、img、audio、video、style、link 等外部资源的加载触发，继承自 ProgressEvent 接口。</p>
-<ul>
-<li>abort：外部资源中止加载时触发，如果发生错误导致中止，不会触发该事件</li>
-<li>error：由于错误导致外部资源无法加载时触发</li>
-<li>load：外部资源加载时触发</li>
-<li>loadstart：外部资源开始加载时触发</li>
-<li>loadend：外部资源停止加载时触发，发生顺序 error、abort、load 等事件的后面</li>
-<li>progress：外部资源加载过程中不断触发</li>
-<li>timeout：加载超时时触发</li>
+    <h2 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组"></a>什么是数组</h2><ul>
+<li>数组是一个有序的有 length 的 hash，它的 <code>__proto__</code> 指向 Array.prototype。</li>
 </ul>
-<p>除了资源下载，文件上传也有这些事件。</p>
-<p>有时候，图片加载会在脚本运行之前就完成，尤其是当脚本放置在网页底部的时候，因此有可能 load 和 error 事件的监听函数根本不会执行。所以，比较可靠的方式，是用 complete 属性先判断一下是否加载完成。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loaded</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">// ... </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (image.complete) &#123;</span><br><span class="line">  loaded();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  image.addEventListener(<span class="string">'load'</span>, loaded)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于 DOM 的元素节点没有提供是否加载错误的属性，所以 error 事件的监听函数最好放在 <code>&lt;img&gt;</code> 元素的 HTML 代码中，这样才能保证发生加载错误时百分之百执行。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/wrong/url"</span> <span class="attr">onerror</span>=<span class="string">"this.style.display='none';"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>loaded 事件本身不提供关于进度结束的原因，但可以用它来做所有加载结束场景都需要做一些操作。</p>
-<p>error 事件有一个特殊的性质，就是不会冒泡。所以，子元素的 error 事件时不会触发父元素的 error 事件监听函数的。</p>
-<h3 id="ProgressEvent-接口"><a href="#ProgressEvent-接口" class="headerlink" title="ProgressEvent 接口"></a>ProgressEvent 接口</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> evt = <span class="keyword">new</span> ProgressEvent(type, options)</span><br></pre></td></tr></table></figure>
-<p>ProgressEvent 的 options 配置项除了继承自 Event 接口的配置属性外，还有：</p>
-<ul>
-<li>lengthComputable：表示加载的总量是否可以计算</li>
-<li>loaded：表示已经加载的量</li>
-<li>total：表示需要加载的总量</li>
-</ul>
+<h2 id="数组与对象"><a href="#数组与对象" class="headerlink" title="数组与对象"></a>数组与对象</h2><p>Array 与 Object 的差别，Array 的共有属性 <code>__proto__</code> 里面有 push 等方法，而且还包含 Object 的 <code>__proto__</code>。如果一个对象没有 Array 的共有属性 <code>__proto__</code> 里面的方法比如 push 方法，那么它就不是一个 Array。</p>
+<p>比如<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="number">3</span>,</span><br><span class="line">  length: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">obj.push <span class="comment">// undefined.</span></span><br></pre></td></tr></table></figure></p>
+<p>这个 obj 就不是一个数组，它只是一个对象。</p>
+<h2 id="JavaScript-里面的伪数组"><a href="#JavaScript-里面的伪数组" class="headerlink" title="JavaScript 里面的伪数组"></a>JavaScript 里面的伪数组</h2><p>JavaScript 里面只有一个伪数组 arguments。arguments 表示传给函数的参数。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line">f()</span><br></pre></td></tr></table></figure></p>
 
   </div>
   
@@ -82,7 +68,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/17/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/19/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/17/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/19/">下一页&raquo;</a>
   </nav>
 
     </main>

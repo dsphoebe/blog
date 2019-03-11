@@ -38,50 +38,36 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">Object 对象的相关方法</h2>
+    <h2 class="title">JSONP 理解</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-03-06 14:31:34</span>
+    <span class="post-time">2019-01-08 11:35:35</span>
     <span class="post-tags">
       
     </span>
     
   </div>
   <div class="post-content">
-    <blockquote>
-<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
-</blockquote>
-<h3 id="Object-getPrototypeOf"><a href="#Object-getPrototypeOf" class="headerlink" title="Object.getPrototypeOf()"></a>Object.getPrototypeOf()</h3><p>返回参数对象的原型。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F()</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(f) === F.prototype <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(&#123;&#125;) === <span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="built_in">Object</span>.prototype) === <span class="literal">null</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(f) === <span class="built_in">Function</span>.prototype</span><br></pre></td></tr></table></figure>
-<h3 id="Object-setPrototypeOf"><a href="#Object-setPrototypeOf" class="headerlink" title="Object.setPrototypeOf()"></a>Object.setPrototypeOf()</h3><p>为参数对象设置原型，返回该参数对象。接受两个参数，第一个是现有对象，第二个是原型对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> b = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(a, b)</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === b <span class="comment">// true</span></span><br><span class="line">a.x <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>用 Object.setPrototypeOf 方法模拟 new 命令：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.foo = <span class="string">'bar'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="comment">// 等同于 ⬇️</span></span><br><span class="line"><span class="comment">// 将一个空对象的原型设为构造函数的 prototype 属性</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="built_in">Object</span>.setPrototypeOf(&#123;&#125;, F.prototype)</span><br><span class="line"><span class="comment">// 将构造函数内部的 this 绑定到这个空对象</span></span><br><span class="line">F.call(f)</span><br></pre></td></tr></table></figure>
-<h3 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h3><p>返回以参数对象为原型的一个实例对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'F'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F()</span><br><span class="line"><span class="keyword">var</span> ff = <span class="built_in">Object</span>.create(f)</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">var</span> ee = <span class="built_in">Object</span>.setPrototypeOf(&#123;&#125;, f)</span><br><span class="line">ff.constructor === F <span class="comment">// true</span></span><br><span class="line">ff <span class="keyword">instanceof</span> F <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>Object.create 可以用下面的代码代替</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.create !== <span class="string">'function'</span>) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    F.prototype = obj</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下面三种方式生成的新对象是等价的：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = <span class="built_in">Object</span>.create(&#123;&#125;)</span><br><span class="line"><span class="keyword">var</span> obj2 = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype)</span><br><span class="line"><span class="keyword">var</span> obj3 = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br></pre></td></tr></table></figure>
-<p>如果想要生成一个不具备定义在 Object.prototype 上属性（比如没有 toString 和 valueOf 方法）的对象，可以将 Object.create 的参数设为 null。</p>
-<p>Object.create 第二个参数是一个属性描写对象，它所描述的对象属性，会添加到实例对象，作为该对象自身的属性。</p>
-<h3 id="Object-prototype-isPrototypeOf"><a href="#Object-prototype-isPrototypeOf" class="headerlink" title="Object.prototype.isPrototypeOf()"></a>Object.prototype.isPrototypeOf()</h3><p>判断该对象是否为参数对象的原型</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.create(o1)</span><br><span class="line"><span class="keyword">var</span> o3 = <span class="built_in">Object</span>.create(o2)</span><br><span class="line"></span><br><span class="line">o2.isPrototypeOf(o3)</span><br></pre></td></tr></table></figure>
-<p>o1 和 o2 都是 o3 的原型。这表明只要实例对象处在参数对象的原型链上，isPrototypeOf 方法都返回 true。</p>
-<h3 id="Object-prototype-proto"><a href="#Object-prototype-proto" class="headerlink" title="Object.prototype.__proto__"></a><code>Object.prototype.__proto__</code></h3><p>实例对象的 <code>__proto__</code> 属性返回该对象的原型。只有浏览器才需要部署，其他环境没有这个属性。它是一个内部属性，要尽量少用，而用 Object.getPrototypeOf() 和 Object.setPrototypeOf() 进行原型对象的读写操作。</p>
-<h3 id="Object-getOwnPropertyNames"><a href="#Object-getOwnPropertyNames" class="headerlink" title="Object.getOwnPropertyNames()"></a>Object.getOwnPropertyNames()</h3><p>返回对象非继承的自身的属性的键名们</p>
-<p>Object.keys 只获取可以遍历的键名们</p>
-<h3 id="Object-prototype-hasOwnProperty"><a href="#Object-prototype-hasOwnProperty" class="headerlink" title="Object.prototype.hasOwnProperty()"></a>Object.prototype.hasOwnProperty()</h3><p>唯一一个处理对象属性时，不会遍历原型链的方法</p>
-<h3 id="in-运算符和-for…in-循环"><a href="#in-运算符和-for…in-循环" class="headerlink" title="in 运算符和 for…in 循环"></a>in 运算符和 for…in 循环</h3><p>in 对象是否有某个属性，不区分是否时在原型链上</p>
-<p>for…in 获得对象的所有可遍历属性，自身和继承的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritedPropertyNames</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> props = &#123;&#125;</span><br><span class="line">  <span class="keyword">while</span>(obj) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.getOwnPropertyNames(obj).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">p</span>) </span>&#123;</span><br><span class="line">      props[p] = <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">    obj = <span class="built_in">Object</span>.getPrototypeOf(obj)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.getOwnPropertyNames(props)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="对象的拷贝"><a href="#对象的拷贝" class="headerlink" title="对象的拷贝"></a>对象的拷贝</h3><ul>
-<li>确保拷贝后的对象，与原对象具有相同的原型</li>
-<li>确保拷贝后的对象，与原对象具有同样的实例属性</li>
+    <h2 id="什么是JSONP"><a href="#什么是JSONP" class="headerlink" title="什么是JSONP"></a>什么是JSONP</h2><ul>
+<li>请求方：前端程序员（浏览器）</li>
+<li>响应方：后端程序员（服务器）</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyObject</span>(<span class="params">orig</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> copy = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(orig))</span><br><span class="line">  copyOwnPropertiesFrom(copy, orig)</span><br><span class="line">  <span class="keyword">return</span> copy</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyOwnPropertiesFrom</span>(<span class="params">target, source</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Object</span></span><br><span class="line">  	.getOwnPropertyNames(source)</span><br><span class="line">    .forEach(<span class="function"><span class="keyword">function</span>(<span class="params">propKey</span>) </span>&#123;</span><br><span class="line">    	<span class="keyword">var</span> desc = <span class="built_in">Object</span>.getOwnPropertyDescriptor(source, propKey);</span><br><span class="line">    	<span class="built_in">Object</span>.defineProperty(target, propKey, desc)</span><br><span class="line">  	&#125;)</span><br><span class="line">  <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或者 ES2017 Object.getOwnPropertyDescriptors</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyObject</span>(<span class="params">orig</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.create(</span><br><span class="line">    <span class="built_in">Object</span>.getPrototypeOf(orig),</span><br><span class="line">    <span class="built_in">Object</span>.getOwnPropertyDescriptors(orig)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这就是 JSONP 的整个过程：</p>
+<ul>
+<li>请求方创建 script，src 指向响应方，同时传一个查询参数 ?callbackName=xxx</li>
+<li>响应方根据查询参数 callbackName，构造一个函数调用 xxx.call(undefined, ‘请求方需要的数据’) 这样的响应</li>
+<li>请求方浏览器收到响应，就会执行 xxx.call(undefined, ‘请求方需要的数据’)</li>
+</ul>
+<p>行业约定：</p>
+<ol>
+<li>callbackName -&gt; callback</li>
+<li>xxx -&gt; 名字+随机数</li>
+</ol>
+<h2 id="JSONP-请求方代码"><a href="#JSONP-请求方代码" class="headerlink" title="JSONP 请求方代码"></a>JSONP 请求方代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 请求方创建 script</span></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line"><span class="comment">// functionName 是名字加随机数</span></span><br><span class="line"><span class="keyword">var</span> functionName = jsonpCallback + <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">100000</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">// script 的 src 指向响应方，同时传一个查询参数 ?callback=functionName</span></span><br><span class="line">script.src = <span class="string">'http://example.com?callback='</span> + functionName</span><br><span class="line"><span class="comment">// 浏览器收到响应，就会执行 xxx.call(undefined, '请求方需要的数据')</span></span><br><span class="line"><span class="built_in">window</span>[functionName] = <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// result 是请求方需要的数据</span></span><br><span class="line">  <span class="comment">// 这里可以对数据进行处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">script.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 移除动态加入的 script</span></span><br><span class="line">  e.currentTarget.remove()</span><br><span class="line">  <span class="comment">// 删除内存中的 functionName 函数</span></span><br><span class="line">  <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">&#125;</span><br><span class="line">script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.currentTarget.remove()</span><br><span class="line">  <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JSONP-为什么无法支持-POST"><a href="#JSONP-为什么无法支持-POST" class="headerlink" title="JSONP 为什么无法支持 POST"></a>JSONP 为什么无法支持 POST</h2><ul>
+<li>JSONP 是通过动态创建的 script 实现的</li>
+<li>动态创建的 script 只能用 GET 没法用 POST</li>
+</ul>
 
   </div>
   
@@ -89,7 +75,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/8/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/8/">下一页&raquo;</a>
   </nav>
 
     </main>

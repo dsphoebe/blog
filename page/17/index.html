@@ -38,53 +38,68 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">表单事件</h2>
+    <h2 class="title">数组 API 之 forEach、reduce</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-02-19 13:24:08</span>
+    <span class="post-time">2018-12-18 23:31:15</span>
     <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forEach/">forEach</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reduce/">reduce</a></li></ul>
       
     </span>
     
+      <div class="article-category">分类：
+        <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+      </div>
+    
   </div>
   <div class="post-content">
-    <blockquote>
-<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
-</blockquote>
-<h3 id="input-事件"><a href="#input-事件" class="headerlink" title="input 事件"></a>input 事件</h3><p>input 事件是当 input 元素、select 元素、textarea 元素的值发生变化时触发。对于复选框<code>&lt;input type=&quot;checkbox&quot;&gt;</code>或者<code>&lt;input type=&quot;radio&quot;&gt;</code> 单选框，用户改变选项时，也会触发这个事件。</p>
-<p>另外对于打开了 contenteditable 属性的元素，只要值发生变化，也会触发 input 事件。</p>
-<p>input 事件的一个特点，就是会连续触发，比如用户没按下一次按键，就会触发一次 input 事件。</p>
-<p>input 事件继承自 InputEvent 接口</p>
-<p>input 事件跟 change 事件很像，不同之处在于 iput 事件在元素的值发生变化后立即发生，而 change 事件时在元素失去焦点的时候触发，此时内容可能已经发生了多次变化了。也就是说，如果有连续变化，input 事件会触发多次，而 change 事件只在失去焦点时触发一次。</p>
-<h3 id="select-事件"><a href="#select-事件" class="headerlink" title="select 事件"></a>select 事件</h3><p>当 input 元素、textarea 元素里面选中文本时触发。选中的文本可以通过 event.target 元素的 selectDirection、selectionEnd、selectionStart 和 value 属性拿到。</p>
-<h3 id="change-事件"><a href="#change-事件" class="headerlink" title="change 事件"></a>change 事件</h3><p>当 input 元素、textarea 元素、select 元素的值发生变化时触发。它与 input 事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，另一个方面 input 事件必然伴随 change 事件：</p>
-<ul>
-<li>激活单选框或者复选框时触发</li>
-<li>用户提交时触发。比如，从下拉列表 select 完成选择，在日期或文件输入框完成选择</li>
-<li>当文本框或者 textarea 元素的值发生改变，并且丧失焦点时触发</li>
-</ul>
-<p>对 select 元素来说，input 和 change 事件基本是等价的。</p>
-<h3 id="invalid-事件"><a href="#invalid-事件" class="headerlink" title="invalid 事件"></a>invalid 事件</h3><p>用户提交表单时，如果表单元素的值不满足校验条件，就会触发 invalid 事件。</p>
-<h3 id="reset-事件、submit-事件"><a href="#reset-事件、submit-事件" class="headerlink" title="reset 事件、submit 事件"></a>reset 事件、submit 事件</h3><p>这两个事件发生在 form 表单元素上，而不是发生在表单成员上。</p>
-<p>reset 事件当表单重置（所有表单成员变回默认值）时触发</p>
-<p>submit 事件当表单数据向服务器提交时触发。注意，submit 事件的发生对象时 form 元素，而不是 button 元素。</p>
-<h3 id="InputEvent-接口"><a href="#InputEvent-接口" class="headerlink" title="InputEvent 接口"></a>InputEvent 接口</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> evt = <span class="keyword">new</span> InputEvent(type, options)</span><br></pre></td></tr></table></figure>
-<p>options 配置项：</p>
-<ul>
-<li>inputType：表示发生变更的类型</li>
-<li>data：表示插入的字符串。如果没有插入的字符串（比如删除操作），则返回 null 或空字符串</li>
-<li>dataTransfer：返回一个 DataTransfer 对象实例，该属性通常只在输入框接受富文本输入时有效。</li>
-</ul>
-<h4 id="InputEvent-data"><a href="#InputEvent-data" class="headerlink" title="InputEvent.data"></a>InputEvent.data</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// HTML 代码如下</span></span><br><span class="line"><span class="comment">// &lt;input type="text" id="myInput"&gt;</span></span><br><span class="line"><span class="keyword">var</span> input = <span class="built_in">document</span>.getElementById(<span class="string">'myInput'</span>);</span><br><span class="line">input.addEventListener(<span class="string">'input'</span>, myFunction, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果在输入框内输入 abc，控制台会先输出 a，再在下一行输出 b，再在下一行输出 c，然后选中 abc，一次性将它们删除，控制台会输出 null 或一个空字符串。</p>
-<h4 id="InputEvent-inputType"><a href="#InputEvent-inputType" class="headerlink" title="InputEvent.inputType"></a>InputEvent.inputType</h4><p>常见字符串变更类型如下，完整查看<a href="https://w3c.github.io/input-events/index.html#dom-inputevent-inputtype" target="_blank" rel="noopener">文档</a></p>
-<ul>
-<li>手动插入文本：insertText</li>
-<li>粘贴插入文本：insertFromPaste</li>
-<li>向后删除：deleteContentBackward</li>
-<li>向前删除：deleteContentForward</li>
-</ul>
-<h4 id="InputEvent-dataTransfer"><a href="#InputEvent-dataTransfer" class="headerlink" title="InputEvent.dataTransfer"></a>InputEvent.dataTransfer</h4><p>返回一个 DataTransfer 实例，只在文本框接受粘贴内容 insertFromPaste 或拖拽内容 insertFromDrop 时才有效</p>
+    <h2 id="forEach-的实现"><a href="#forEach-的实现" class="headerlink" title="forEach 的实现"></a>forEach 的实现</h2><p>一个数组 arr 调用 forEach 方法，并传入 callback 方法：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, index</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, index)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 0</span></span><br><span class="line"><span class="comment">// 2 1</span></span><br><span class="line"><span class="comment">// 3 2</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到 callback 里面并没有传入 arr，那 callback 是怎么获取到数组 arr 的 value 和 index 的了。</p>
+<p>它是通过 this 关键字来传入的。JavaScript 已经帮我们把 arr 传入了，类似调用了函数的 call 方法，并把 call 方法的第一个参数 this 指向 arr。如下：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line">arr.forEach.call(arr, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>我们的 forEach 的实现<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 我们的 forEach 实现</span></span><br><span class="line">obj.forEach = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">    x(obj[i], i)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 有个 obj</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="number">2</span>,</span><br><span class="line">  length: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用 forEach 方法：</span></span><br><span class="line">obj.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, key</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, key)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 1 0</span></span><br><span class="line"><span class="comment">// 2 1</span></span><br></pre></td></tr></table></figure></p>
+<p>所以从数据结构来看，数组和对象其实没有差别。</p>
+<h2 id="arr-sort"><a href="#arr-sort" class="headerlink" title="arr.sort"></a>arr.sort</h2><p>arr.sort 原地排序自身，可以省空间。数组的其他 API 都不会修改原数组。</p>
+<p>数组的 API 返回一个数组，所以可以操作成链式操作。</p>
+<h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>举个列子，范伟火车上打劫 “IC、IP、IQ 卡通通告诉我密码。” 😂，火车上有 10 个人。</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>200</td>
+<td>30</td>
+<td>10</td>
+<td>20</td>
+<td>200</td>
+<td>100</td>
+<td>30</td>
+<td>10</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>范伟手里最开始是么有钱的，钱数为 0，即初始值为 0<br>当打劫完第 1 个人，钱数变为了 0 + 100 = 100<br>打劫完第 2 个人，钱数变成了 100 + 200 = 300<br>打劫完第 3 个人，钱数就变成了 300 + 30 = 330<br>…<br>就是也就是累加。把之前打劫的钱加上新的打劫的钱。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">30</span>]</span><br><span class="line">arr.reduce(<span class="function">(<span class="params">preValue, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> preValue + currentValue</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="comment">// 730</span></span><br></pre></td></tr></table></figure>
+<p>map 和 filter 都可以用 reduce 表示。</p>
+<h3 id="map-用-reduce-表示"><a href="#map-用-reduce-表示" class="headerlink" title="map 用 reduce 表示"></a>map 用 reduce 表示</h3><p>数组所有值乘以 2</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">30</span>]</span><br><span class="line">arr.reduce(<span class="function">(<span class="params">prevValue, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  prevValue.push(currentValue * <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">return</span> prevValue</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+<h3 id="filter-用-reduce-表示"><a href="#filter-用-reduce-表示" class="headerlink" title="filter 用 reduce 表示"></a>filter 用 reduce 表示</h3><p>比如过滤大于 100 的数值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">100</span>, <span class="number">200</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">30</span>]</span><br><span class="line">arr.reduce(<span class="function">(<span class="params">prevValue, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (currentValue &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    prevValue.push(currentValue)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> prevValue</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+<p>所以说，map 和 filter 其实这是 reduce 的一个实现。</p>
 
   </div>
   
@@ -92,7 +107,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/16/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/18/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/16/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/18/">下一页&raquo;</a>
   </nav>
 
     </main>

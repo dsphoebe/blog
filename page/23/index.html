@@ -38,55 +38,41 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">EventTarget 接口</h2>
+    <h2 class="title">清空数组的几个方法</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-02-03 11:28:29</span>
+    <span class="post-time">2018-11-28 14:52:23</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/发布订阅/">发布订阅</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <blockquote>
-<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
-</blockquote>
-<p>事件本质是程序各个组成部分之间的一种通信方式，也是异步编程的一种实现。</p>
-<p>DOM 的事件操作（监听和触发）都定义在 EventTarget 接口。所有节点对象都部署了这个接口 比如一个 div 节点元素：</p>
-<p>HTMLDivElement 继承自 HTMLElement<br>  =&gt; HTMLElement 继承自 Element<br>    =&gt; Element 继承自 Node<br>      =&gt; Node 继承自 EventTarget<br>        =&gt; EventTarget 继承自 Object 原型链终点</p>
-<p>还有其他一些需要事件通信的浏览器内置对象 比如 XMLHttpRequest 也部署了这个接口：</p>
-<p>XMLHttpRequest 继承自 XMLHttpRequestEventTarget<br>  =&gt; XMLHttpRequest 继承自 EventTarget<br>    =&gt; EventTarget 继承自 Object 原型链终点</p>
-<p>EventTarget 接口的三个实例方法：</p>
+    <p>数组的相关教程已经看完，总结一下清空数组的几个方法</p>
 <ul>
-<li>addEventListener 添加事件侦听器</li>
-<li>removeEventListener 移除事件侦听器</li>
-<li>dispatchEvent （IE 的 fireEvent，jQuery 的 trigger() 方法）触发指定事件</li>
+<li>length = 0</li>
+<li>shift</li>
+<li>pop</li>
+<li>filter</li>
+<li>slice</li>
+<li>splice</li>
 </ul>
-<h3 id="addEventListener-添加事件侦听器"><a href="#addEventListener-添加事件侦听器" class="headerlink" title="addEventListener 添加事件侦听器"></a>addEventListener 添加事件侦听器</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">target.addEventListener(eventType, listener[, useCapture])</span><br><span class="line">target.addEventListener(eventType, listener[, options])</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>useCapture：true 表示捕获，false 表示冒泡，默认为 false 冒泡<br><img src="https://www.w3.org/TR/DOM-Level-3-Events/images/eventflow.svg" alt="Graphical representation of an event dispatched in a DOM tree using the DOM event flow"></p>
-</li>
-<li><p>listener：是指实现了 EventListener 接口的对象或者说一个函数</p>
-<ul>
-<li><p>一个 EventListener 接口对象的例子：EventListener 下须有且只有 handleEvent() 函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">buttonElement.addEventListener(<span class="string">'click'</span>, &#123;</span><br><span class="line">  handleEvent: <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'Element clicked through handleEvent property!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>options：是一个属性配置对象，<code>{capture: true, once: true, passive: true}</code>。capture 是否在捕获阶段触发事件；once 表示监听事件只会触发一次，然后自动移除；passive 表示 listener 不会调用事件的 preventDefault 方法，如果 listener 调用了这个函数，客户端将会忽略它并抛出一个控制台警告。</p>
-</li>
-</ul>
-<h3 id="removeEventListener-移除事件侦听器"><a href="#removeEventListener-移除事件侦听器" class="headerlink" title="removeEventListener 移除事件侦听器"></a>removeEventListener 移除事件侦听器</h3><p>移除 addEventListener 方法添加的事件侦听器，参数必须与 addEventListener 完全一致，节点也必须是同一个。</p>
-<h3 id="dispathEvent-触发事件"><a href="#dispathEvent-触发事件" class="headerlink" title="dispathEvent 触发事件"></a>dispathEvent 触发事件</h3><p>在节点上触发指定事件（事件必须是 Event 对象实例），从而触发 listener 的执行。返回一个布尔值，如果 listener 调用了 event.preventDefault()，返回 false，否则 true。</p>
-<p>可以根据返回值判断事件是否被取消了：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> canceled = !cb.dispatchEvent(event);</span><br><span class="line"><span class="keyword">if</span> (canceled) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'事件取消'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'事件未取消'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="事件侦听器-vs-事件处理器"><a href="#事件侦听器-vs-事件处理器" class="headerlink" title="事件侦听器 vs 事件处理器"></a>事件侦听器 vs 事件处理器</h3><ul>
-<li>事件侦听器是通过 EventTarget.addEventListener 注册的函数，一个事件可以注册多个，在 eventloop 时候，会先后执行。</li>
-<li>事件处理器是通过 on… 属性注册的函数，一个事件只能注册一个，后注册的会覆盖先注册的函数。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">div.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;alert(<span class="number">1</span>)&#125;, <span class="literal">false</span>)</span><br><span class="line">div.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;alert(<span class="number">2</span>)&#125;, <span class="literal">false</span>)</span><br><span class="line">div.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;alert(<span class="number">3</span>)&#125;</span><br><span class="line">div.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;alert(<span class="number">4</span>)&#125;</span><br><span class="line"><span class="keyword">const</span> e = <span class="keyword">new</span> Event(<span class="string">'click'</span>)</span><br><span class="line">div.dispatchEvent(e) <span class="comment">// 依次 alert 1，2，4</span></span><br></pre></td></tr></table></figure>
+<h3 id="length-0"><a href="#length-0" class="headerlink" title="length = 0"></a>length = 0</h3><p>这个最快，直接把数组的长度设置为 0，数组里面就没有东西了</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.length = <span class="number">0</span></span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+<h3 id="shift"><a href="#shift" class="headerlink" title="shift"></a>shift</h3><p>shift 用于删除数组第一项，这里清空数组就是用的 for 循环遍历数组长度次，每次都运行一次 shift 方法，最后就把数组清空啦。注意的是数组的长度，因为每次 shift 之后，数组的长度就会少 1，所以这里 for 开始的时候，需要定义一个 l 缓存住最开始数组的长度。看下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = arr.length; i &lt; l; i++) &#123;</span><br><span class="line">  arr.shift()</span><br><span class="line">&#125;</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+<h3 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h3><p>pop 清空数组原理同上面操作，只是 pop 是用来删除数组最后一项。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = arr.length; i &lt; l; i++) &#123;</span><br><span class="line">  arr.pop()</span><br><span class="line">&#125;</span><br><span class="line">arr.length <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h3 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h3><p>splice 可以删除元素也可以插入元素，这里用的删除元素。删除从 0 开始的长度为数组长度的元素个数，这个时候删除后返回的就是原来的数组的一个拷贝。是不是可以用于浅拷贝 🤔</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.splice(<span class="number">0</span>)</span><br><span class="line"><span class="comment">// 这里返回的是 [1,2,3]</span></span><br><span class="line"><span class="comment">// arr.splice(0, arr.length) 是一样的</span></span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>过滤一个数组的元素，找出符合过滤 callback 的元素组成一个新的数组。所以我们这里就是找出一个都不会符合的条件，最后生成一个空的数组。这里其实也不能说是清空了数组，而只是把一个生成的空数组赋值给了原来的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr = arr.filter(<span class="function"><span class="params">e</span> =&gt;</span> e === <span class="literal">undefined</span>)</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h3><p>slice 是提取数组中的一部分，生成一个新的数组，不会修改原来的数组。同上面 filter，把一个空数组赋值给了原来的数组，有点犯规啊。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr = arr.slice(arr.length)</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+<p>这么说来，直接赋值为空数组也是清空数组的意思了。😂</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr = []</span><br><span class="line">arr <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -94,7 +80,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/22/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/24/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/22/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/24/">下一页&raquo;</a>
   </nav>
 
     </main>

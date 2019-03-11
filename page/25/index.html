@@ -38,53 +38,86 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">简易 MVC 实践</h2>
+    <h2 class="title">按位运算</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-01-16 10:35:11</span>
+    <span class="post-time">2018-11-20 15:09:19</span>
     <span class="post-tags">
       
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/位运算/">位运算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机科学/">计算机科学</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <p>MVC = Model （操作数据）、View （表示视图）、Controller （控制器） 是代码组织形式，只是一种思想。就是把一坨代码转成 MVC 结构的代码。</p>
-<ol>
-<li><p>功能转换为模块</p>
-</li>
-<li><p>模块对应的能看到的部分 HTML 指定给 view</p>
-</li>
-<li><p>操作 view 的逻辑指定为 controller，所以可以转换为函数 controller，controller(view)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>controller 作为对象，把 controller 函数作为这个对象的 init 函数，controller(view) 转换为 controller.init(view)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>controller 对象下再加上一个 bindEvents 函数，也就是操作 view</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.bindEvents()		</span><br><span class="line">  &#125;,</span><br><span class="line">  bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> view = <span class="keyword">this</span>.view</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; view.classList.add(<span class="string">'class'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>bindEvents 只进行 bind 事件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> view = <span class="built_in">document</span>.querySelector(<span class="string">'#wrapper'</span>)</span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.bindEvents()		</span><br><span class="line">  &#125;,</span><br><span class="line">  bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'click'</span>, e =&gt; <span class="keyword">this</span>.clickWrapper)</span><br><span class="line">  &#125;,</span><br><span class="line">  clickWrapper: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view.classList.add(<span class="string">'class'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">controller.init(view)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>整个代码都变得很有条理了：</p>
+    <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>按位运算是把操作数当作 32 位的 bit 序列（0 和 1 组成的序列），而不是十进制、十六进制或者八进制数值。返回标准的 JavaScript 数值。</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>按位与</td>
+<td>a &amp; b</td>
+<td>a，b 都是 1 时，返回 1 否则 0</td>
+</tr>
+<tr>
+<td>按位或</td>
+<td>a &#124; b</td>
+<td>a 或者 b 是 1 时，返回 1 否则 0</td>
+</tr>
+<tr>
+<td>按位异或</td>
+<td>a ^ b</td>
+<td>a 和 b 有且只有一个是 1，返回 1 否则 0</td>
+</tr>
+<tr>
+<td>按位非</td>
+<td>~a</td>
+<td>反转 a，如果 a 是 0 返回 1， 如果 a 是 1 则返回 0</td>
+</tr>
+<tr>
+<td>左移</td>
+<td>a &lt;&lt; b</td>
+<td>a 向左移动 b 位，右边用 0 填充，b &lt; 32</td>
+</tr>
+<tr>
+<td>有符号右移</td>
+<td>a &gt;&gt; b</td>
+<td>a 向右移动 b 位，丢弃被移出的位，b &lt; 32</td>
+</tr>
+<tr>
+<td>无符号右移</td>
+<td>a &gt;&gt;&gt; b</td>
+<td>a 向右移动 b 位，丢弃被移出的位，并使用 0 在左侧填充，b &lt; 32</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1010</span> &amp; <span class="number">1011</span> <span class="comment">// 1010</span></span><br><span class="line"><span class="number">1010</span> | <span class="number">1011</span> <span class="comment">// 1011</span></span><br><span class="line"><span class="number">1010</span> ^ <span class="number">1011</span> <span class="comment">// 1</span></span><br><span class="line">~<span class="number">1010</span> <span class="comment">// 101</span></span><br><span class="line"><span class="number">1110</span> &lt;&lt; <span class="number">2</span> <span class="comment">// 111000</span></span><br></pre></td></tr></table></figure>
+<h3 id="计算机中存储的有符号-32-位整数"><a href="#计算机中存储的有符号-32-位整数" class="headerlink" title="计算机中存储的有符号 32 位整数"></a>计算机中存储的有符号 32 位整数</h3><p>所有的按位操作数都会被转成补码形式的有符号 32 位整数。</p>
 <ul>
-<li>一个 view；</li>
-<li>一个 controller，<ul>
-<li>controller.init(view)，</li>
-<li>controller 里有一个 bindEvents，</li>
-<li>以及在 controller 里定义操作 view 的函数</li>
-<li>再到 bindEvents 里面执行这些操作 view 的函数们。</li>
+<li>原码表示法是在数值前面增加一位符号位，正数是 0，负数是 1。比如 十进制 3 的 8 位二进制表示为 0000 0011，而 -3 表示为 1000 0011。</li>
+<li>反码表示法，正数的反码就是自身；负数的反码是在原码上，符号位不变，其他位各位取反。-3 的反码是 1111 1100</li>
+<li>补码表示法，正数的补码就是自身；负数的补码是在反码上，符号位不变，加 1。-3 的补码是 1111 1101。</li>
 </ul>
-</li>
+<p>可以看出补码保证了当一个数是正数时，最左边的比特位是 0，当是一个负数时，最左边的比特位是 1。最左边的比特位被称为符号位。</p>
+<p>原码容易被人脑直接识别并用于计算，但是对与计算机来说并不友好。所以计算机系统中，数值一律用补码来表示、运算和存储。使用补码，可以将符号位和数值域同意处理，将加法和减法统一处理。</p>
+<h2 id="按位运算"><a href="#按位运算" class="headerlink" title="按位运算"></a>按位运算</h2><p>计算机中存储数字都是补码形式，运算也是用的补码，得到的结果也是补码</p>
+<p><img src="/images/bit-calc.png" alt=""></p>
+<h2 id="开发中的使用场景"><a href="#开发中的使用场景" class="headerlink" title="开发中的使用场景"></a>开发中的使用场景</h2><h3 id="交换两个数"><a href="#交换两个数" class="headerlink" title="交换两个数"></a>交换两个数</h3><p>原理是用位运算的异或运算</p>
+<ul>
+<li>0^a = a</li>
+<li>a^a = 0</li>
+<li>a^b^c = (a^b)^c = a^(b^c)</li>
 </ul>
-<p>最后一个 Model 与数据库交互</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> model = &#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 数据初始化逻辑</span></span><br><span class="line">  &#125;</span><br><span class="line">  fetch: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取数据</span></span><br><span class="line">  &#125;,</span><br><span class="line">  save: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// return promise 对象</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> controller = &#123;</span><br><span class="line">  view: <span class="literal">null</span>,</span><br><span class="line">  model: <span class="literal">null</span>,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">view, model</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.view = view</span><br><span class="line">    <span class="keyword">this</span>.model = model</span><br><span class="line">    model.init()</span><br><span class="line">  &#125;,</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">controller.init(view, model)</span><br></pre></td></tr></table></figure>
-<p>Model 和服务器交互，Model 将得到的数据交给 Controller，Controller 把数据填入 View，并监听 View。用户操作 View，比如点击按钮，Controller 就会接受到点击时间，Controller 这时会去调用 Model，Model 会与服务器交互，得到数据后返回给 Controller，Controller 得到数据就去更新 View。</p>
-<p>MVC ：职责分明，模块清晰，代码简单！😄</p>
-<p><img src="/images/mvc/1.png" alt="Model、View、Controller"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> swap = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> &#123;</span><br><span class="line">  num1 ^= num2 <span class="comment">// num1 = num1 ^ num2 </span></span><br><span class="line">  num2 ^= num1 <span class="comment">// num2 = num2 ^ num1 即 num2 = num2 ^ (num1 ^ num2) 结果是 num1</span></span><br><span class="line">  num1 ^= num2 <span class="comment">// num1 = num1 ^ num2 即 num1 = (num1 ^ num2) ^ num2 结果是 num2</span></span><br><span class="line">  <span class="keyword">return</span> &#123;num1, num2&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果 num1 和 num2 值一样时候，num1 ^ num2 的值是 0，这个时候就不能用这种方案互换了。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://segmentfault.com/a/1190000003789802" target="_blank" rel="noopener">你不知道的按位运算</a></p>
+<h2 id="深入阅读"><a href="#深入阅读" class="headerlink" title="深入阅读"></a>深入阅读</h2><p><a href="https://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html" target="_blank" rel="noopener">原码, 反码, 补码 详解</a></p>
 
   </div>
   
@@ -92,7 +125,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/24/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/26/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/24/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/26/">下一页&raquo;</a>
   </nav>
 
     </main>

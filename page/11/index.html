@@ -38,73 +38,102 @@
       
   <article class="post">
   <div class="post-title">
-    <h2 class="title">实例对象与 new 命令</h2>
+    <h2 class="title">DOM 知识点总结篇</h2>
   </div>
   <div class="post-meta">
-    <span class="post-time">2019-02-28 11:34:39</span>
+    <span class="post-time">2018-12-28 19:23:45</span>
     <span class="post-tags">
+      
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
       
     </span>
     
   </div>
   <div class="post-content">
-    <blockquote>
-<p><sup>这里是我读<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener">《阮一峰 JavaScript 教程》</a>做的笔记。</sup></p>
+    <h2 id="什么是-DOM"><a href="#什么是-DOM" class="headerlink" title="什么是 DOM"></a>什么是 DOM</h2><p>一个 HTML 文档，初始代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> <span class="comment">&lt;!-- 告诉浏览器请用 HTML5 来解析以下代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-Hans"</span>&gt;</span> <span class="comment">&lt;!-- zh-Hans, s 是 simple 表示中文简体 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>🤔 如果 DOCTYPE 是 XML 了？</p>
+<p>我记得 RSS 就是 XML 格式的，<a href="https://www.xml.com/pub/a/2002/12/18/dive-into-xml.html" target="_blank" rel="noopener">What Is RSS</a></p>
+<p><a href="https://www.xml.com/pub/a/w3j/s3.walsh.html" target="_blank" rel="noopener">A Guide to XML</a> / What Do XML Documents Look Like?<br>所以 XML 文档大概长这样，它的 DOCTYPE 是 <code>&lt;?XML version=xxx..?&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">&gt; &lt;?XML version="1.0"?&gt;</span><br><span class="line">&gt; <span class="tag">&lt;<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">burns</span>&gt;</span>Say <span class="tag">&lt;<span class="name">quote</span>&gt;</span>goodnight</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span>, Gracie.<span class="tag">&lt;/<span class="name">burns</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">allen</span>&gt;</span><span class="tag">&lt;<span class="name">quote</span>&gt;</span>Goodnight, Gracie.</span><br><span class="line">&gt;     <span class="tag">&lt;/<span class="name">quote</span>&gt;</span><span class="tag">&lt;/<span class="name">allen</span>&gt;</span></span><br><span class="line">&gt;   <span class="tag">&lt;<span class="name">applause</span>/&gt;</span></span><br><span class="line">&gt; <span class="tag">&lt;/<span class="name">oldjoke</span>&gt;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>面向对象编程（Object Oritented Programming，缩写 OOP）是目前主流的编程范式。它将真实世界各种复杂的关系，抽象为一个个对象，然后由对象之间的分工与合作，完成对真实世界的模拟。</p>
-<p>每个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务。对象可以复用，通过继承机制还可以定制。因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发，比起由一系列函数或指令组成的传统的过程式编程（procedural programming），更适合多人合作的大型软件项目。</p>
-<p>那么，“对象”（object）到底是什么？我们从两个层次来理解。</p>
-<p>（1）对象是单个实物的抽象。</p>
-<p>一本书、一辆汽车、一个人都可以是对象，一个数据库、一张网页、一个与远程服务器的连接也可以是对象。当实物被抽象成对象，实物之间的关系就变成了对象之间的关系，从而就可以模拟现实情况，针对对象进行编程。</p>
-<p>（2）对象是一个容器，封装了属性（property）和方法（method）。</p>
-<p>属性是对象的状态，方法是对象的行为（完成某项任务）。比如，我们可以把动物抽象成 animal 对象，使用属性记录具体是哪一种动物，使用方法表示动物的某种行为（奔跑、捕猎、休息等等）。</p>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>面向对象编程的第一步，就是要生成对象。前面说过，对象是单个实物的抽象。通常需要一个模板，表示某一个类实物的共同特征，然后对象根据这个模板生成。</p>
-<p>典型的面向对象编程语言（比如 C++ 和 Java），都有类（class）这个概念。所谓类就是对象的模板，对象就是类的实例。但是 JavaScript 语言的对象体系，不是基于类的，而是基于构造函数和原型链的。</p>
-<p>JavaScript 语言使用构造函数作为对象的模板。所谓构造函数，就是专门用来生成实例对象的函数。它就是对象的模板，描述实例对象的基本结构。一个构造函数，可以生成多个实例对象，这些实例对象都有相同的结构。</p>
-<p>构造函数就是一个普通函数，但是有它自己的特征和用法</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Vehicle 就是构造函数。为了与普通函数区别，构造函数名字的第一个字母要大写。</p>
-<p>构造函数的特点有两个：</p>
+<p>HTML5 规范里，html、head、body 三个标签都是可以省略的，属性值无所谓单双引号。</p>
+<p>HTML 文档，在 DOM 中对应字母 D，即 Document。<br>然后它在内存中存储的 HTML 文档的数据，对应 DOM 中的 O，即  Object，这个 Object 存在堆中，按照一个树型结构，通过构造函数构造出对象，将 DOM 存储在内存中。<br>Document 和 Object 之间的对应关系是用一个树型结构的模型来表示，这个模型叫做 Model。<br>它们三者组成了 Document Object Model 简称 DOM，读作 [dʌm]。</p>
+<p>以下 DOM 树</p>
+<p><img src="/images/dom/tree.png" alt="DOM tree"></p>
+<p>DOM 树中的每个节点都是 Node 类型。<br>节点类型主要有：document节点、标签节点、文本节点、注释节点</p>
 <ul>
-<li>函数体内部使用了 this 关键字，代表了所要生成的对象实例</li>
-<li>生成对象的时候，必须使用 new 命令。</li>
+<li>标签节点是由 Element 构造函数构造</li>
+<li>文本节点是由 Text 构造函数构造</li>
+<li>document 节点是由 Document 构造函数构造，它代表了整个文档。<code>document</code> 可以获取整个文档，<code>document.documentElement</code> 则获取是 html 节点，即根节点。</li>
+<li>所有节点构造函数（Element、Text、Comment、Document构造函数）都继承自 Node 构造函数，而 Node 构造函数又继承自 JavaScript 里的 Object.prototype。节点们都有 Node 的实例属性和方法，比如 Node.prototype.nodeName。节点们都有 Object 的实例属性和方法，比如 Object.prototype.toString 方法。</li>
 </ul>
-<h3 id="new-命令"><a href="#new-命令" class="headerlink" title="new 命令"></a>new 命令</h3><p>new 命令的作用，就是执行构造函数，返回一个实例对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle();</span><br><span class="line">v.price = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
-<p>通过 new 命令，让构造函数 Vehicle 生成一个实例对象，保存在变量 v 中。这个新生成的实例对象，从构造函数 Vehicle 得到了 price 属性。new 命令执行时，构造函数内部 this，就代表了新生成的实例对象，this.price 表示实例对象有一个 price 属性，值为 1000。</p>
-<p>使用 new 命令时，根据需要，构造函数也可以接受参数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.price = p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle(<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
-<p>new 命令本身就可以执行构造函数，所以后面的构造函数可以带括号，也可以不带括号。下面两行代码是等价的，但是为了表示这里是函数调用，推荐使用括号。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle()</span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle <span class="comment">// 不推荐</span></span><br></pre></td></tr></table></figure>
-<p>如果忘记了 new 命令，直接调用构造函数，构造函数会变成普通函数，并不会生成实例对象。如下代码，this 这时代表全局对象，将造成一些意想不到的结果。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> v = Vehicle()</span><br><span class="line">v <span class="comment">// undefined</span></span><br><span class="line">price <span class="comment">// 1000 此时 Vehicle 的 this 指向的是全局对象</span></span><br></pre></td></tr></table></figure>
-<p>可以在构造函数体内第一行加上 use strict 给构造函数使用严格模式，这个时候如果忘记了 new，引擎会报错。</p>
-<p>或者… 在构造函数内部判断是否使用 new 命令，如果发现没有使用，则直接返回一个实例对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fubar</span>(<span class="params">foo, bar</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> instance <span class="keyword">of</span> Fubar)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Fubar(foo, bar);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>._foo = foo;</span><br><span class="line">  <span class="keyword">this</span>._bar = bar;</span><br><span class="line">&#125;</span><br><span class="line">Fubar(<span class="number">1</span>, <span class="number">2</span>)._foo <span class="comment">// 1</span></span><br><span class="line">(<span class="keyword">new</span> Fubar(<span class="number">1</span>, <span class="number">2</span>))._foo <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>这样就不管加没加 new 命令，都会得到同样的结果了。</p>
-<h4 id="new-命令的原理"><a href="#new-命令的原理" class="headerlink" title="new 命令的原理"></a>new 命令的原理</h4><p>使用 new 命令时，它后面的函数依次执行下面的步骤：</p>
-<ol>
-<li>创建一个空对象，作为将要返回的对象实例</li>
-<li>将这个空对象的原型，指向构造函数的 prototype 属性</li>
-<li>将这个空对象赋值给函数内部的 this 关键字</li>
-<li>开始执行构造函数内部的代码</li>
-</ol>
-<p>也就是说，构造函数内部，this 指的是一个新生成的空对象，所有针对 this 的操作，都会发生在这个空对象上。构造函数之所以叫“构造函数”，就是说这个函数的目的，就是操作一个空对象（this 对象），将其“构造”为需要的样子。</p>
-<p>如果构造函数内部有 return 语句，而且 return 后面跟着一个对象，new 命令会返回 return 语句指定的对象；否则不管 return 语句，返回 this 对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">new</span> Vehicle()) === <span class="number">1000</span></span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>return 返回 1000，new 命令直接忽略掉了这个 return 语句，返回构造后的 this 对象。</p>
-<p>但是，如果是 return 语句返回的是一个跟 this 无关的新对象，new 命令会返回这个新对象，而不是 this 对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">price</span>: <span class="number">2000</span> &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">new</span> Vehicle()).price</span><br><span class="line"><span class="comment">// 2000</span></span><br></pre></td></tr></table></figure>
-<p>如果是普通函数（内部没有 this 关键字的函数）使用 new 命令，则会返回一个空对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">functino a() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'a'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> aa = <span class="keyword">new</span> a()</span><br><span class="line">aa <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="keyword">typeof</span> aa <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
-<p>new 命令简化的内部流程，可以用下面的代码表示：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_new</span>(<span class="params">constructor, params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="keyword">var</span> <span class="keyword">constructor</span> = args.shift();</span><br><span class="line">  var context = Object.create(<span class="keyword">constructor</span>.prototype);</span><br><span class="line">  var result = <span class="keyword">constructor</span>.apply(context, args);</span><br><span class="line">	return (typeof result === 'object' &amp;&amp; result !== null) ? result : context;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例</span><br><span class="line">var actor = _new(Person, '张三', 28)</span><br></pre></td></tr></table></figure>
-<h4 id="new-target"><a href="#new-target" class="headerlink" title="new.target"></a>new.target</h4><p>函数内部可以使用 new.target 属性。如果当前函数是 new 命令调用，new.target 指向当前函数，否则为 undefined。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span>.target ==== f)</span><br><span class="line">&#125;</span><br><span class="line">f() <span class="comment">// false</span></span><br><span class="line"><span class="keyword">new</span> f() <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>使用这个属性，可以判断函数调用的时候，是否使用 new 命令</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">new</span>.target) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请使用 new 命令调用！'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line">f() <span class="comment">// Uncaught Error: 请使用 new 命令调用！</span></span><br></pre></td></tr></table></figure>
-<h3 id="Object-create-创建实例对象"><a href="#Object-create-创建实例对象" class="headerlink" title="Object.create() 创建实例对象"></a>Object.create() 创建实例对象</h3><p>构造函数作为模板，可以生成实例对象。但是，有时拿不到构造函数，知恩感拿到一个现有的对象。我们希望以这个现有的对象作为模板，生成新的实例丢下，这时就可以使用 Object.create 方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  age: <span class="number">38</span>,</span><br><span class="line">  greeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hi! I\'m'</span> + <span class="keyword">this</span>.name + <span class="string">'.'</span>)</span><br><span class="line">  &#125; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="built_in">Object</span>.create(person1)</span><br><span class="line">person2.name <span class="comment">// 张三</span></span><br><span class="line">person2.greeting() <span class="comment">// Hi! I'm 张三</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/dom/node-tree.jpg" alt="Node constructor tree"></p>
+<h2 id="DOM-操作"><a href="#DOM-操作" class="headerlink" title="DOM 操作"></a>DOM 操作</h2><p>DOM 将 HTML 页面与 JavaScript 连接起来，它提供了一系列 API 来操作 HTML 代码，操作 DOM 节点。DOM 最开始设计不是给 HTML 用的，而是给 XML 用的，所以有很多 API 用起来就是很奇怪。</p>
+<ul>
+<li>获取节点：node.querySelector、node.querySelectorAll。通过节点关系获取节点：parentNode、children、nextSibling、nextElemntSibling 等</li>
+<li>修改节点的属性：节点类型 标签/文本，节点名称 div/#text，节点内部文本 textContent，标签节点的样式 className、classList 等</li>
+<li>删除节点：removeChild、删除标签节点 remove</li>
+<li>创建节点：创建标签节点 document.createElement(‘div’)、创建文本节点 document.createTextNode(‘xx’)。</li>
+</ul>
+<h2 id="常用-Node-类型的属性及方法"><a href="#常用-Node-类型的属性及方法" class="headerlink" title="常用 Node 类型的属性及方法"></a>常用 Node 类型的属性及方法</h2><p>所有节点都继承自 Node 类型，也就是所有节点都有以下这些属性和方法：</p>
+<ul>
+<li><p>确定一个节点的类型</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.querySelector(<span class="string">'p'</span>)</span><br><span class="line">p.nodeName <span class="comment">// "P"</span></span><br><span class="line">p.nodeType <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">document</span>.nodeName <span class="comment">// "#document"</span></span><br></pre></td></tr></table></figure>
+<p>nodeName 返回节点的名字。如果是文本节点返回的是 <code>#text</code>、如果是文档节点返回的是 <code>#document</code>、而如果是标签节点则返回这个标签的大写，比如 p 标签则返回 <code>P</code>，有一个元素标签例外，那就是 SVG 标签，它返回的是小写的 svg。</p>
+</li>
+</ul>
+<p>  nodeType 返回的节点类型对应的数值。1 表示的是标签节点，即 Element 类型的节点；3 则表示是文本节点； 9 表示文档节点；11 表示 DocumentFragment。当时设计 nodeType 用数值表示，是为了省内存。</p>
+<ul>
+<li><p>获取节点内的文本 textContext</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>)</span><br><span class="line"><span class="keyword">const</span> tn = <span class="built_in">document</span>.createTextNode(<span class="string">'panda'</span>)</span><br><span class="line">p.appendChild(tn)</span><br><span class="line"><span class="built_in">document</span>.body.append(p)</span><br><span class="line">tn.innerText <span class="comment">// undefined</span></span><br><span class="line">tn.innerHTML <span class="comment">// undefined</span></span><br><span class="line">tn.textContent <span class="comment">// "panda"</span></span><br><span class="line">p.innerText <span class="comment">// "panda"</span></span><br><span class="line">p.innerHTML <span class="comment">// "panda"</span></span><br><span class="line">p.textContent <span class="comment">// "panda"</span></span><br></pre></td></tr></table></figure>
+<p>标签节点有个 innerHTML 和 innerText，如果文本节点访问 innerHTML、innerText 会返回 undefined。innerText 返回节点下所有的文本包括其后代节点。IE 发布 innerText ~ ，FF、opera 发布的 textContent，会获取 script、style 的文本。innerText 会触发重排。</p>
+</li>
+<li><p>获取兄弟节点、子节点、父节点</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="built_in">document</span>.querySelector(<span class="string">'main'</span>)</span><br><span class="line">main.nextSibling</span><br><span class="line">main.nextElementSibling</span><br><span class="line">main.previousSibling</span><br><span class="line">main.childNodes <span class="comment">// 返回一个动态的 NodeList 伪数组</span></span><br><span class="line">main.children <span class="comment">// 返回一个动态的 HTMLCollection 标签集合伪数组</span></span><br><span class="line">main.firstChild</span><br><span class="line">main.lastChild</span><br><span class="line">main.parentNode</span><br><span class="line">main.parentElement</span><br></pre></td></tr></table></figure>
+<p>注意 NodeList 伪数组只能使用数字索引节点，而 HTMLCollection 对象则可以用 id 属性或者 name 属性来索引标签节点。</p>
+</li>
+<li><p>node.hasChildNodes() 返回是否有子节点，也可以用 node.firstChild 为空来判断，也可以用 node.childNodes &amp;&amp; node.childNodes.length 为否来判断。</p>
+</li>
+<li><p>node.cloneNode(deep) 默认 deep 为 true，表示深度克隆，会克隆该 node 的所有后代节点，否则浅克隆只克隆当前 node。</p>
+</li>
+<li><p>node.contains(otherNode) 返回 node 是否包含 otherNode。</p>
+</li>
+<li><p>node.isEqualNode(otherNode) 如果 node 和 otherNode 的 nodeType、子节点、属性等一致返回 true，否则 false</p>
+</li>
+<li><p>node.normalize() 规范化 node 和 node 后代节点。规范化后不存在空的文本节点，或者两个相邻的文本节点。</p>
+</li>
+<li><p>输入 id 的值可以快速获取 id 为这个值的节点。比如有一段 HTML：<code>&lt;div id=&quot;myHoneyPanda&quot;&gt;balabala...&lt;/div&gt;</code> 然后可以在 JavaScript 里面输入 <code>myHoneyPanda</code> 获取这个节点。</p>
+</li>
+</ul>
+<h2 id="常见的-document-属性和方法"><a href="#常见的-document-属性和方法" class="headerlink" title="常见的 document 属性和方法"></a>常见的 document 属性和方法</h2><p>document 继承自 Document 类型。表示一个 HTML 的文档。</p>
+<ul>
+<li>document.documentElement 返回 html 节点</li>
+<li>document.activeElment 指向获得焦点的那个节点，相当于 Chrome devtool 里面的 <code>$0-$9</code> ？ </li>
+<li>获取文档下的指定标签的集合，可以抓包下载美图~<ul>
+<li>document.images </li>
+<li>document.links</li>
+</ul>
+</li>
+<li>获取文档信息<ul>
+<li>document.location 返回 Location 对象，document.documentURI 返回当前文档的路径，document.URL 返回当前文档的 URL</li>
+<li>document.readyState 返回当前文档加载状态</li>
+<li>document.cookie cookie 设置/获取</li>
+<li>document.domain 域名</li>
+<li>document.defaultView 返回一个 window 对象</li>
+</ul>
+</li>
+<li>document.querySelectorAll 获取到的标签伪数组不是动态的。</li>
+</ul>
+<h2 id="常见-Element-节点的属性和方法"><a href="#常见-Element-节点的属性和方法" class="headerlink" title="常见 Element 节点的属性和方法"></a>常见 Element 节点的属性和方法</h2><ul>
+<li>document.documentElement.scrollHeight 获取整个页面的高度</li>
+<li>document.documentElement.clientHeight 获取整个浏览器视口的高度</li>
+<li>Element.clientHeight/clientLeft 返回节点的不包括 border、margin 的高度/左边框的宽度</li>
+<li>Element.scrollHeight/scrollLeft 经过浏览器视口变化，返回节点的不包括 border、margin 的高度/滚动条离视口左边的距离</li>
+<li>Element.offsetHeight/offsetLeft 经过浏览器视口变化，返回节点所占的整个页面左上角 距离 右下角的宽度和高度，并且左上角是包括 padding 和 border 的 / 距离父节点的左侧的距离。</li>
+<li>Element.getBoundingClientRect().left、Element.getBoundingClientRect().top</li>
+</ul>
 
   </div>
   
@@ -112,7 +141,7 @@
 
 
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/10/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/111/">111</a><a class="extend next" rel="next" href="/page/12/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/10/">&laquo;上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><a class="extend next" rel="next" href="/page/12/">下一页&raquo;</a>
   </nav>
 
     </main>
