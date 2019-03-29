@@ -1,5 +1,5 @@
 ---
-title: 译：EventTarget 到 PubSub
+title: 译文：从 EventTarget 来实现 PubSub
 date: 2019-03-30 01:27:42
 tags:
 ---
