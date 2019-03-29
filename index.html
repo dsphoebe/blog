@@ -52,7 +52,7 @@
 <p>原文链接：<a href="https://paul.kinlan.me/building-a-pubsub-api-in-javascript/" target="_blank" rel="noopener">Building a simple PubSub system in JavaScript</a></p>
 </blockquote>
 <p>最近在开发一个 Web push 服务项目，需要让 UI 响应应用程序级别的事件。因为有几个组件需要来自系统的信息，又不互相依赖。我希望他们能独立于”业务逻辑”管理自己。</p>
-<p>我查看了很多工具，但是我是一个严重的 NIH 综合症患者，最后我决定写一个简单的发布订阅模式来完成我的需求，嗯，我发现它非常符合我的需求。</p>
+<p>我查看了很多工具，但是我是一个严重的 <a href="https://baike.baidu.com/item/NIH%E7%BB%BC%E5%90%88%E7%97%87" target="_blank" rel="noopener">NIH 综合症</a>患者，最后我决定写一个简单的发布订阅模式来完成我的需求，嗯，我发现它非常符合我的需求。</p>
 <p>我在想我是否应该使用 DOM 事件，这个DOM 已经提供给开发这的基本属性：用 addEventListener 来监听事件。<br>但是有一个问题是：必须把事件绑定到 DOM 元素或者 window 上。因为 JavaScript 没有提供给你其他继承自 EventTarget 的模型。</p>
 <p>思考：将 EventTarget 作为一个对象可以不用创建自定义 PubSub 系统。🤔</p>
 <p>跟着这个思路，一个初略大致的代码如下（ps：先不考虑代码的可执行性）</p>
