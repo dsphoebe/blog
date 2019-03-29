@@ -1,17 +1,20 @@
 ---
-title: 译文：从 EventTarget 来实现 PubSub
+title: 译文：用 EventTarget 逻辑来实现 PubSub
 date: 2019-03-30 01:27:42
 tags:
 ---
 
 > 原文链接：[Building a simple PubSub system in JavaScript](https://paul.kinlan.me/building-a-pubsub-api-in-javascript/)
 
-最近在开发一个 Web push 服务项目，需要让 UI 响应应用程序级别的事件。因为有几个组件需要来自系统的信息，又不互相依赖。我希望他们能独立于"业务逻辑"管理自己。
+我最近在开发一个 Web push 项目，需要让 UI 响应应用程序级别的事件。
+因为有几个组件需要来自系统的信息，但是它们又不互相依赖。
+我想让它们能独立于"业务逻辑"来维护自己。
 
-我查看了很多工具，但是我是一个严重的 [NIH 综合症](https://baike.baidu.com/item/NIH%E7%BB%BC%E5%90%88%E7%97%87)患者，最后我决定写一个简单的发布订阅模式来完成我的需求，嗯，我发现它非常符合我的需求。
+我在网上看了很多库，但是我是一个严重的 [NIH 综合症](https://baike.baidu.com/item/NIH%E7%BB%BC%E5%90%88%E7%97%87)患者，
+最后我决定写一个简单的发布订阅模式来完成我的需求。
 
-我在想我是否应该使用 DOM 事件，这个DOM 已经提供给开发这的基本属性：用 addEventListener 来监听事件。
-但是有一个问题是：必须把事件绑定到 DOM 元素或者 window 上。因为 JavaScript 没有提供给你其他继承自 EventTarget 的模型。
+我在考虑我是否应该使用 DOM 事件。它已经提供给开发者一个基本发布订阅功能：用 addEventListener 来监听事件，然后触发事件。
+但是有一个问题是：事件是必须绑定到 DOM 元素或者 window 上。JavaScript 没有提供给你其他继承自 EventTarget 的模型。
 
 思考：将 EventTarget 作为一个对象可以不用创建自定义 PubSub 系统。🤔
 
