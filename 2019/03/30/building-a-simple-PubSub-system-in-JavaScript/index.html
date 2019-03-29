@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <title>译文：从 EventTarget 来实现 PubSub | FE NOTEBOOK 🚀</title>
+  <title>译文：用 EventTarget 逻辑来实现 PubSub | FE NOTEBOOK 🚀</title>
   
     <link rel="icon" href="/images/favico.png">
   
@@ -37,7 +37,7 @@
     <main class="main">
       <article class="post">
   <div class="post-title">
-    <h2 class="title">译文：从 EventTarget 来实现 PubSub</h2>
+    <h2 class="title">译文：用 EventTarget 逻辑来实现 PubSub</h2>
   </div>
   <div class="post-meta">
     <span class="post-time">2019-03-30 01:27:42</span>
@@ -50,9 +50,9 @@
     <blockquote>
 <p>原文链接：<a href="https://paul.kinlan.me/building-a-pubsub-api-in-javascript/" target="_blank" rel="noopener">Building a simple PubSub system in JavaScript</a></p>
 </blockquote>
-<p>最近在开发一个 Web push 服务项目，需要让 UI 响应应用程序级别的事件。因为有几个组件需要来自系统的信息，又不互相依赖。我希望他们能独立于”业务逻辑”管理自己。</p>
-<p>我查看了很多工具，但是我是一个严重的 <a href="https://baike.baidu.com/item/NIH%E7%BB%BC%E5%90%88%E7%97%87" target="_blank" rel="noopener">NIH 综合症</a>患者，最后我决定写一个简单的发布订阅模式来完成我的需求，嗯，我发现它非常符合我的需求。</p>
-<p>我在想我是否应该使用 DOM 事件，这个DOM 已经提供给开发这的基本属性：用 addEventListener 来监听事件。<br>但是有一个问题是：必须把事件绑定到 DOM 元素或者 window 上。因为 JavaScript 没有提供给你其他继承自 EventTarget 的模型。</p>
+<p>我最近在开发一个 Web push 项目，需要让 UI 响应应用程序级别的事件。<br>因为有几个组件需要来自系统的信息，但是它们又不互相依赖。<br>我想让它们能独立于”业务逻辑”来维护自己。</p>
+<p>我在网上看了很多库，但是我是一个严重的 <a href="https://baike.baidu.com/item/NIH%E7%BB%BC%E5%90%88%E7%97%87" target="_blank" rel="noopener">NIH 综合症</a>患者，<br>最后我决定写一个简单的发布订阅模式来完成我的需求。</p>
+<p>我在考虑我是否应该使用 DOM 事件。它已经提供给开发者一个基本发布订阅功能：用 addEventListener 来监听事件，然后触发事件。<br>但是有一个问题是：事件是必须绑定到 DOM 元素或者 window 上。JavaScript 没有提供给你其他继承自 EventTarget 的模型。</p>
 <p>思考：将 EventTarget 作为一个对象可以不用创建自定义 PubSub 系统。🤔</p>
 <p>跟着这个思路，一个初略大致的代码如下（ps：先不考虑代码的可执行性）</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* When a user added, do something useful like update UI */</span></span><br><span class="line">EventManager.subsribe(<span class="string">'useradd'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(user);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* The UI submits the data, lets publish the event. */</span></span><br><span class="line">form.onsubmit(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// do something with user fields.</span></span><br><span class="line">    </span><br><span class="line">    EventManager.publish(<span class="string">'useradd'</span>, user);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
